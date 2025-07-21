@@ -1,0 +1,15 @@
+C:\Users\safalam\source\repos\WPF\WpfApp3\MusicPlayer.Utility\bin\Debug\net8.0-windows\MusicPlayer.Utility.deps.json
+C:\Users\safalam\source\repos\WPF\WpfApp3\MusicPlayer.Utility\bin\Debug\net8.0-windows\MusicPlayer.Utility.dll
+C:\Users\safalam\source\repos\WPF\WpfApp3\MusicPlayer.Utility\bin\Debug\net8.0-windows\MusicPlayer.Utility.pdb
+C:\Users\safalam\source\repos\WPF\WpfApp3\MusicPlayer.Utility\bin\Debug\net8.0-windows\MusicPlayer.Data.dll
+C:\Users\safalam\source\repos\WPF\WpfApp3\MusicPlayer.Utility\bin\Debug\net8.0-windows\MusicPlayer.Data.pdb
+C:\Users\safalam\source\repos\WPF\WpfApp3\MusicPlayer.Utility\obj\Debug\net8.0-windows\MusicPlayer.Utility.csproj.AssemblyReference.cache
+C:\Users\safalam\source\repos\WPF\WpfApp3\MusicPlayer.Utility\obj\Debug\net8.0-windows\MusicPlayer.Utility.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\safalam\source\repos\WPF\WpfApp3\MusicPlayer.Utility\obj\Debug\net8.0-windows\MusicPlayer.Utility.AssemblyInfoInputs.cache
+C:\Users\safalam\source\repos\WPF\WpfApp3\MusicPlayer.Utility\obj\Debug\net8.0-windows\MusicPlayer.Utility.AssemblyInfo.cs
+C:\Users\safalam\source\repos\WPF\WpfApp3\MusicPlayer.Utility\obj\Debug\net8.0-windows\MusicPlayer.Utility.csproj.CoreCompileInputs.cache
+C:\Users\safalam\source\repos\WPF\WpfApp3\MusicPlayer.Utility\obj\Debug\net8.0-windows\MusicPla.0D6C6BA8.Up2Date
+C:\Users\safalam\source\repos\WPF\WpfApp3\MusicPlayer.Utility\obj\Debug\net8.0-windows\MusicPlayer.Utility.dll
+C:\Users\safalam\source\repos\WPF\WpfApp3\MusicPlayer.Utility\obj\Debug\net8.0-windows\refint\MusicPlayer.Utility.dll
+C:\Users\safalam\source\repos\WPF\WpfApp3\MusicPlayer.Utility\obj\Debug\net8.0-windows\MusicPlayer.Utility.pdb
+C:\Users\safalam\source\repos\WPF\WpfApp3\MusicPlayer.Utility\obj\Debug\net8.0-windows\ref\MusicPlayer.Utility.dll

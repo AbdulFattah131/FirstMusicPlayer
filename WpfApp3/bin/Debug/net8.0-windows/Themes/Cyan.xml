@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Theme xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Name>Cyan</Name>
+  <WindowAccent>
+    <Hex>#FF00FFFF</Hex>
+  </WindowAccent>
+  <WindowContentBackground>
+    <Hex>#FF101010</Hex>
+  </WindowContentBackground>
+  <WindowTitleForeground>
+    <Hex>#FFFFFFFF</Hex>
+  </WindowTitleForeground>
+  <ListBoxItemForeground>
+    <Hex>#FFFFFFFF</Hex>
+  </ListBoxItemForeground>
+  <CurrentSongTitleForeground>
+    <Hex>#FFFFFFFF</Hex>
+  </CurrentSongTitleForeground>
+  <CurrentSongArtistForeground>
+    <Hex>#FF808080</Hex>
+  </CurrentSongArtistForeground>
+  <MusicControlBackground>
+    <Hex>#FF00CCD3</Hex>
+  </MusicControlBackground>
+  <TitleBarBackground>
+    <Hex>#FF000000</Hex>
+  </TitleBarBackground>
+</Theme>

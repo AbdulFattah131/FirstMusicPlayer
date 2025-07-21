@@ -1,0 +1,123 @@
+﻿<Window x:Class="WpfApp3.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp3"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" MinWidth="360" MinHeight="240"
+        WindowStyle="None" ResizeMode="CanResize" Background="White"
+        Closed="Window_Closed">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0"/>
+    </WindowChrome.WindowChrome>
+
+    <Grid Name="grdMain" Background="{Binding CurrentTheme.WindowContentBackground.Brush}">
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"/> <!-- Title Bar Height -->
+            <RowDefinition Height="6*"/> <!-- Content Page Height-->
+            <RowDefinition Height="*"/> <!-- Music Control Bar-->
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="80"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Width="Auto" Height="Auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <!--<Rectangle>
+                <Rectangle.Fill>
+                    <RadialGradientBrush GradientOrigin="0.5,0.5" Center="0.5,0.5" RadiusX="0.7" RadiusY="0.7">
+                        <GradientStop Color="#B0FFFF" Offset="0.0"/>
+                        <GradientStop Color="Transparent" Offset="0.3"/>
+                    </RadialGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>-->
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock x:Name="tbCurrentSongTitle" Text="{Binding Cache.CurrentSong.Title}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="{Binding CurrentTheme.CurrentSongTitleForeground.Brush}"/>
+                <TextBlock x:Name="tbCurrentSongArtist" Text="{Binding Cache.CurrentSong.Artist}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" Foreground="{Binding CurrentTheme.CurrentSongArtistForeground.Brush}"/>
+                <Grid Background="Transparent">
+                    <Image Source="{Binding Cache.CurrentSong.AlbumArt}" Width="150" Height="150"/>
+                </Grid>
+            </StackPanel>
+        </Grid>
+     
+
+        <GridSplitter Background="{Binding CurrentTheme.WindowAccent.Brush}" Grid.Row="1" Grid.Column="0" Width="2" HorizontalAlignment="Right"
+                      Panel.ZIndex="3">
+            
+        </GridSplitter>
+
+        <Grid Grid.Row="1">
+            <ListBox Grid.Row="1" Grid.Column="0" Background="Transparent" Foreground="{Binding CurrentTheme.ListBoxItemForeground.Brush}"
+            ItemsSource="{Binding Cache.Songs}" 
+            SelectedItem="{Binding Cache.CurrentSong, Mode=TwoWay}"
+            DisplayMemberPath="Title" Width="200"
+            HorizontalAlignment="Stretch"/>
+        </Grid>
+
+
+        <Border Background="{Binding CurrentTheme.MusicControlBackground.Brush}" CornerRadius="1" Grid.Row="2" Grid.ColumnSpan="3">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="1">
+                    <Viewbox Stretch="Uniform" MaxWidth="350">
+                        <Grid Width="200">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Slider Grid.Row="0" Grid.ColumnSpan="3" Background="Transparent"/>
+                            <Button Grid.Row="1" Grid.Column="0" Content="⏮" Background="Transparent" MaxWidth="200" BorderBrush="Transparent"/>
+                            <Button Grid.Row="1" Grid.Column="1" Content="▶" Background="Transparent" MaxWidth="200" BorderBrush="Transparent"/>
+                            <Button Grid.Row="1" Grid.Column="2" Content="⏭"  Background="Transparent" MaxWidth="200" BorderBrush="Transparent"/>
+                        </Grid>
+                    </Viewbox>
+                </Grid>
+            </Grid>
+        </Border>
+
+
+        <Grid x:Name="grdTitle" Background="Black"
+              Grid.Column="0" Grid.Row="0"
+              Grid.ColumnSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="96"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Border Background="{Binding Path=CurrentTheme.WindowAccent.Brush}" Margin="-8,7,8,7" CornerRadius="1" Grid.Row="0" Grid.Column="0"/>
+            <TextBlock Name="tbWindowTitle" Text="{Binding Path=WindowTitle}" Foreground="{Binding Path=CurrentTheme.WindowTitleForeground.Brush}" VerticalAlignment="Center" HorizontalAlignment="Center"
+                       Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
+            <Border Name="borderWindowMove" Grid.Row="0" Grid.Column="1" Background="Transparent" MouseDown="borderWindowMove_MouseDown"/>
+
+            <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Grid Name="grdMinimize" VerticalAlignment="Stretch" MouseEnter="grdMinimize_MouseEnter" MouseLeave="grdMinimize_MouseLeave" MouseLeftButtonUp="grdMinimize_MouseLeftButtonUp">
+                    <TextBlock Name="tbMinimize" Text="─" Foreground="White" Width="32" TextAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+                <Grid Name="grdResize" VerticalAlignment="Stretch" MouseEnter="grdResize_MouseEnter" MouseLeave="grdResize_MouseLeave" MouseLeftButtonUp="grdResize_MouseLeftButtonUp">
+                    <TextBlock Name="tbResize" Text="🗗" Foreground="White" Width="32" TextAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+                <Grid Name="grdClose" VerticalAlignment="Stretch" MouseLeftButtonUp="grdClose_MouseLeftButtonUp" MouseEnter="grdClose_MouseEnter" MouseLeave="grdClose_MouseLeave">
+                    <TextBlock Name="tbClose" Text="✕" Foreground="White" Width="32" TextAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+            </StackPanel>
+        </Grid>
+    
+    </Grid>
+</Window>

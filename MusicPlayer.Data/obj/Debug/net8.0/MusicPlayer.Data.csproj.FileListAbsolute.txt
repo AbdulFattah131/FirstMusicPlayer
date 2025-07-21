@@ -1,0 +1,4 @@
+C:\Users\safalam\source\repos\WPF\WpfApp3\MusicPlayer.Data\obj\Debug\net8.0\MusicPlayer.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\safalam\source\repos\WPF\WpfApp3\MusicPlayer.Data\obj\Debug\net8.0\MusicPlayer.Data.AssemblyInfoInputs.cache
+C:\Users\safalam\source\repos\WPF\WpfApp3\MusicPlayer.Data\obj\Debug\net8.0\MusicPlayer.Data.AssemblyInfo.cs
+C:\Users\safalam\source\repos\WPF\WpfApp3\MusicPlayer.Data\obj\Debug\net8.0\MusicPlayer.Data.csproj.CoreCompileInputs.cache

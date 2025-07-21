@@ -1,0 +1,39 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "MusicPlayer.Utility/1.0.0": {
+        "dependencies": {
+          "MusicPlayer.Data": "1.0.0"
+        },
+        "runtime": {
+          "MusicPlayer.Utility.dll": {}
+        }
+      },
+      "MusicPlayer.Data/1.0.0": {
+        "runtime": {
+          "MusicPlayer.Data.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "MusicPlayer.Utility/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MusicPlayer.Data/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
