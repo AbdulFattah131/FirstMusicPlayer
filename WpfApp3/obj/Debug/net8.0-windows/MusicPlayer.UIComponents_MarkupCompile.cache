@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 C:\Users\safalam\source\repos\WPF\WpfApp3\WpfApp3\App.xaml
-11407045341
+3-140464165
 6181585956
-61608668000
+9-545862964
 200-255236313
-MainWindow.xaml;
+MainWindow.xaml;SettingsWindow.xaml;ThemeDesigner.xaml;
 
 False
 

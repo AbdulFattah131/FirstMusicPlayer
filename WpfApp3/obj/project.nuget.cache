@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "wgu8KODCn2U=",
+  "dgSpecHash": "0rk4lrS9Chw=",
   "success": true,
   "projectFilePath": "C:\\Users\\safalam\\source\\repos\\WPF\\WpfApp3\\WpfApp3\\MusicPlayer.UIComponents.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\safalam\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
   "logs": []
 }

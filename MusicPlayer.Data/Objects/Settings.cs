@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using System.Windows;
 
 namespace MusicPlayer.Data.Objects
 {
@@ -12,6 +9,17 @@ namespace MusicPlayer.Data.Objects
         {
             get;
             set;
-        } 
+        }
+        public Point LastWindowCoordinates 
+        { 
+            get; 
+            set; 
+        }
+
+        public Point LastWindowDimensions
+        {
+            get;
+            set;
+        }
     }
 }

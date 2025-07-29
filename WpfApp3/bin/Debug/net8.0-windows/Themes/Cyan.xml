@@ -2,27 +2,35 @@
 <Theme xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Name>Cyan</Name>
   <WindowAccent>
+    <IsGradient>false</IsGradient>
     <Hex>#FF00FFFF</Hex>
   </WindowAccent>
   <WindowContentBackground>
+    <IsGradient>false</IsGradient>
     <Hex>#FF101010</Hex>
   </WindowContentBackground>
   <WindowTitleForeground>
+    <IsGradient>false</IsGradient>
     <Hex>#FFFFFFFF</Hex>
   </WindowTitleForeground>
   <ListBoxItemForeground>
+    <IsGradient>false</IsGradient>
     <Hex>#FFFFFFFF</Hex>
   </ListBoxItemForeground>
   <CurrentSongTitleForeground>
+    <IsGradient>false</IsGradient>
     <Hex>#FFFFFFFF</Hex>
   </CurrentSongTitleForeground>
   <CurrentSongArtistForeground>
+    <IsGradient>false</IsGradient>
     <Hex>#FF808080</Hex>
   </CurrentSongArtistForeground>
   <MusicControlBackground>
+    <IsGradient>false</IsGradient>
     <Hex>#FF00CCD3</Hex>
   </MusicControlBackground>
   <TitleBarBackground>
+    <IsGradient>false</IsGradient>
     <Hex>#FF000000</Hex>
   </TitleBarBackground>
 </Theme>

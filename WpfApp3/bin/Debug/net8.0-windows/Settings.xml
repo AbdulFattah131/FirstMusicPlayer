@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <CurrentThemeName>Cyan</CurrentThemeName>
+  <LastWindowCoordinates>
+    <X>138</X>
+    <Y>289</Y>
+  </LastWindowCoordinates>
+  <LastWindowDimensions>
+    <X>838</X>
+    <Y>432</Y>
+  </LastWindowDimensions>
 </Settings>

@@ -9,3 +9,4 @@ C:\Users\safalam\source\repos\WPF\WpfApp3\MusicPlayer.Data\obj\Debug\net8.0-wind
 C:\Users\safalam\source\repos\WPF\WpfApp3\MusicPlayer.Data\obj\Debug\net8.0-windows\refint\MusicPlayer.Data.dll
 C:\Users\safalam\source\repos\WPF\WpfApp3\MusicPlayer.Data\obj\Debug\net8.0-windows\MusicPlayer.Data.pdb
 C:\Users\safalam\source\repos\WPF\WpfApp3\MusicPlayer.Data\obj\Debug\net8.0-windows\ref\MusicPlayer.Data.dll
+C:\Users\safalam\source\repos\WPF\WpfApp3\MusicPlayer.Data\obj\Debug\net8.0-windows\MusicPlayer.Data.sourcelink.json

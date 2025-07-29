@@ -12,6 +12,9 @@ using System.Windows.Shapes;
 using System.ComponentModel;
 using MusicPlayer.Data.Objects;
 using MusicPlayer.Utility;
+using System.Configuration;
+using MusicPlayer.UIComponents;
+using MusicPlayer.UIComponents.ViewModels;
 
 namespace WpfApp3
 {
@@ -27,6 +30,14 @@ namespace WpfApp3
             m_vm = new MainWindowViewModel();
 
             this.DataContext = m_vm;
+
+            m_vm.Settings = SettingsReader.Instance.ReadFromFile("./Settings.xml");
+
+            this.Left = m_vm.Settings.LastWindowCoordinates.X;
+            this.Top = m_vm.Settings.LastWindowCoordinates.Y;
+            this.Width = m_vm.Settings.LastWindowDimensions.X;
+            this.Height = m_vm.Settings.LastWindowDimensions.Y;
+
         }
         private void borderWindowMove_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -91,8 +102,33 @@ namespace WpfApp3
         private void Window_Closed(object sender, EventArgs e)
         {
             m_vm.Settings.CurrentThemeName = m_vm.CurrentTheme.Name;
-
+            m_vm.Settings.LastWindowCoordinates = new Point(this.Left, this.Top);
+            m_vm.Settings.LastWindowDimensions = new Point(this.Width, this.Height);
             SettingsWriter.Instance.WriteToFile(m_vm.Settings);
+
+        }
+
+        private void grdSettings_MouseEnter(object sender, MouseEventArgs e)
+        {
+            grdSettings.Background = Brushes.DarkGray;
+        }
+
+        private void grdSettings_MouseLeave(object sender, MouseEventArgs e)
+        {
+            grdSettings.Background = null;
+        }
+
+        private void grdSettings_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            var window = new ThemeDesigner();
+            window.Show();
+            //var settingsWindow = new SettingsWindow();
+            //settingsWindow.ShowDialog();
+        }
+        private void SwitchButton_Click(object sender, RoutedEventArgs e)
+        {
+            var m_vm = (MainWindowViewModel)this.DataContext;
+            m_vm.ToggleFullTheme();
         }
     }
 }

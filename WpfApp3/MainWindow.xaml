@@ -90,6 +90,9 @@
                 </Grid>
             </Grid>
         </Border>
+        <Grid Grid.Row="2" Grid.Column="2">
+            <Button Content="Switch Theme" Click="SwitchButton_Click"/>
+        </Grid>
 
 
         <Grid x:Name="grdTitle" Background="Black"
@@ -98,22 +101,26 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="20"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition Width="96"></ColumnDefinition>
+                <ColumnDefinition Width="130"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
             <Border Background="{Binding Path=CurrentTheme.WindowAccent.Brush}" Margin="-8,7,8,7" CornerRadius="1" Grid.Row="0" Grid.Column="0"/>
             <TextBlock Name="tbWindowTitle" Text="{Binding Path=WindowTitle}" Foreground="{Binding Path=CurrentTheme.WindowTitleForeground.Brush}" VerticalAlignment="Center" HorizontalAlignment="Center"
-                       Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
+                       Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="1"/>
             <Border Name="borderWindowMove" Grid.Row="0" Grid.Column="1" Background="Transparent" MouseDown="borderWindowMove_MouseDown"/>
 
-            <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <StackPanel x:Name="spHeaderItems" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                
+                <Grid Name="grdSettings" VerticalAlignment="Stretch" MouseEnter="grdSettings_MouseEnter" MouseLeave="grdSettings_MouseLeave" MouseLeftButtonUp="grdSettings_MouseLeftButtonUp">
+                    <TextBlock Name="tbSettings" Text="⚙" Foreground="White" Width="32" FontSize="11" TextAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
                 <Grid Name="grdMinimize" VerticalAlignment="Stretch" MouseEnter="grdMinimize_MouseEnter" MouseLeave="grdMinimize_MouseLeave" MouseLeftButtonUp="grdMinimize_MouseLeftButtonUp">
-                    <TextBlock Name="tbMinimize" Text="─" Foreground="White" Width="32" TextAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Name="tbMinimize" Text="─" Foreground="White" Width="32" TextAlignment="Center" VerticalAlignment="Center" />
                 </Grid>
                 <Grid Name="grdResize" VerticalAlignment="Stretch" MouseEnter="grdResize_MouseEnter" MouseLeave="grdResize_MouseLeave" MouseLeftButtonUp="grdResize_MouseLeftButtonUp">
                     <TextBlock Name="tbResize" Text="🗗" Foreground="White" Width="32" TextAlignment="Center" VerticalAlignment="Center"/>
                 </Grid>
-                <Grid Name="grdClose" VerticalAlignment="Stretch" MouseLeftButtonUp="grdClose_MouseLeftButtonUp" MouseEnter="grdClose_MouseEnter" MouseLeave="grdClose_MouseLeave">
+                <Grid Name="grdClose" VerticalAlignment="Stretch"  MouseEnter="grdClose_MouseEnter" MouseLeftButtonUp="grdClose_MouseLeftButtonUp" MouseLeave="grdClose_MouseLeave">
                     <TextBlock Name="tbClose" Text="✕" Foreground="White" Width="32" TextAlignment="Center" VerticalAlignment="Center"/>
                 </Grid>
             </StackPanel>
