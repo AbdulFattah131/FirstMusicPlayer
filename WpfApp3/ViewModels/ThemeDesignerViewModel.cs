@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using MusicPlayer.Data.Objects;
+using MusicPlayer.Utility;
+using WpfApp3;
 
 namespace MusicPlayer.UIComponents.ViewModels
 {
-    public class ThemeDesignerViewModel
+    public class ThemeDesignerViewModel : INotifyPropertyChanged
     {
-        public ThemeDesignerViewModel() 
+        public MainWindowViewModel _mainWindowVM;
+        public ThemeDesignerViewModel(MainWindowViewModel Instance)
         {
+
             CustomTheme = new Theme()
             {
                 WindowAccent = new ThemeColor(),
@@ -24,7 +24,39 @@ namespace MusicPlayer.UIComponents.ViewModels
             };
         }
 
-        public Theme CustomTheme { get; set; }  
+        public void ApplyTheme(Theme theme)
+        {
+            MainWindowViewModel.Instance.CurrentTheme = CustomTheme;
+        }
+
+        private Theme m_customTheme;
+
+        public Theme CustomTheme
+        {
+            get { return m_customTheme; }
+            set
+            {
+                m_customTheme = value;
+                OnPropertyChanged(new PropertyChangedEventArgs(""));
+            }
+        }  
+
+        public List<Theme> LoadedThemes
+        {
+            get
+            {
+                return ThemeReader.Instance.GetThemes();
+            }
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        public void OnPropertyChanged(PropertyChangedEventArgs e)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, e);
+            }
+        }
+
     }
-    
-    }
+}

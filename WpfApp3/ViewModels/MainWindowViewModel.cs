@@ -4,13 +4,24 @@ using System.Runtime.CompilerServices;
 using System.Windows.Media;
 using MusicPlayer.Data.Objects;
 using MusicPlayer.Utility;
-using Newtonsoft.Json;
 using System.IO;
+using System.Xml.Serialization;
 
 namespace WpfApp3
 {
     public class MainWindowViewModel : INotifyPropertyChanged
     {
+        private static MainWindowViewModel _instance;
+        public static MainWindowViewModel Instance
+        {
+            get
+            {
+                if (_instance == null)
+                    _instance = new MainWindowViewModel();
+                return _instance;
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(string propertyName)
@@ -31,17 +42,21 @@ namespace WpfApp3
             get => _currentTheme;
             set
             {
-                _currentTheme = value;
-                OnPropertyChanged(nameof(CurrentTheme));
+                if (_currentTheme != value)
+                {
+                    _currentTheme = value;
+                    OnPropertyChanged(nameof(CurrentTheme));
+                }
             }
         }
         public Settings Settings
         {
             get; set;
         }
+
         private Theme solidTheme;
-        private Theme gradientTheme;
-        private bool useGradient = false;
+        private Theme solidTheme2;
+
         public MainWindowViewModel()
         {
             WindowTitle = "Music Player";
@@ -51,7 +66,7 @@ namespace WpfApp3
                 Name = "Cyan",
                 WindowAccent = new ThemeColor(Brushes.Cyan),
                 WindowTitleForeground = new ThemeColor(Brushes.White),
-                WindowContentBackground = new ThemeColor(16, 16, 16),
+                WindowContentBackground = new ThemeColor(255, 255, 255),
                 ListBoxItemForeground = new ThemeColor(Brushes.White),
                 CurrentSongTitleForeground = new ThemeColor(Brushes.White),
                 CurrentSongArtistForeground = new ThemeColor(Brushes.Gray),
@@ -59,28 +74,20 @@ namespace WpfApp3
                 TitleBarBackground = new ThemeColor(Brushes.Black)
 
             };
-            gradientTheme = new Theme()
+
+            solidTheme2 = new Theme()
             {
-                Name = "Gradient Blue Theme",
-                WindowAccent = ThemeColor.CreateGradient(
-                    Color.FromRgb(0, 99, 90),
-                    Color.FromRgb(0, 80, 60)
-                ),
-                WindowTitleForeground = new ThemeColor(Brushes.White),
-                WindowContentBackground = new ThemeColor(16, 16, 16),
-                ListBoxItemForeground = new ThemeColor(Brushes.White),
-                CurrentSongTitleForeground = new ThemeColor(Brushes.White),
-                CurrentSongArtistForeground = ThemeColor.CreateGradient(
-                    Color.FromRgb(90, 60, 99),
-                    Color.FromRgb(70, 40, 85)
-                    ),
-                MusicControlBackground = ThemeColor.CreateGradient(
-                    Color.FromRgb(99, 20, 80),
-                    Color.FromRgb(85, 30, 65)
-                    ),
-                TitleBarBackground = ThemeColor.CreateGradient(
-                    Color.FromRgb(255, 0, 128),
-                    Color.FromRgb(0, 255, 255))
+
+                Name = "Red",
+                WindowAccent = new ThemeColor(Brushes.Red),
+                WindowTitleForeground = new ThemeColor(255, 235, 235),
+                WindowContentBackground = new ThemeColor(255, 255, 255),
+                ListBoxItemForeground = new ThemeColor(255, 235, 235),
+                CurrentSongTitleForeground = new ThemeColor(255, 235, 235),
+                CurrentSongArtistForeground = new ThemeColor(255, 185, 185),
+                MusicControlBackground = new ThemeColor(228, 57, 57),
+                TitleBarBackground = new ThemeColor(255, 162, 162)
+
             };
 
             CurrentTheme = solidTheme;
@@ -90,30 +97,31 @@ namespace WpfApp3
             Settings = new Settings();
         }
 
-        public void ToggleFullTheme()
+        public void SwitchTheme()
         {
-            useGradient = !useGradient;
-            CurrentTheme = useGradient ? gradientTheme : solidTheme;
+            CurrentTheme = CurrentTheme == solidTheme ? solidTheme2 : solidTheme;
         }
-
 
         public void SaveTheme(string path)
         {
-            var json = JsonConvert.SerializeObject(CurrentTheme,
-                new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All });
-            File.WriteAllText(path, json);
+            var serializer = new XmlSerializer(typeof(Theme));
+            using (var writer = new StreamWriter(path))
+            {
+                serializer.Serialize(writer, CurrentTheme);
+            }
         }
 
         public void LoadTheme(string path)
         {
             if (!File.Exists(path)) return;
 
-            var json = File.ReadAllText(path);
-            var theme = JsonConvert.DeserializeObject<Theme>(json,
-                new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All });
-
-            if (theme != null)
-                CurrentTheme = theme;
+            var serializer = new XmlSerializer(typeof(Theme));
+            using (var reader = new StreamReader(path))
+            {
+                var theme = (Theme)serializer.Deserialize(reader);
+                if (theme != null)
+                    CurrentTheme = theme;
+            }
         }
     }
 }

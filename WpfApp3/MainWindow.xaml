@@ -6,37 +6,36 @@
         xmlns:local="clr-namespace:WpfApp3"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" MinWidth="360" MinHeight="240"
-        WindowStyle="None" ResizeMode="CanResize" Background="White"
-        Closed="Window_Closed">
+        WindowStyle="None" ResizeMode="CanResize"
+        Closed="Window_Closed"
+        AllowsTransparency="True" Background="Transparent">
 
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0"/>
     </WindowChrome.WindowChrome>
 
-    <Grid Name="grdMain" Background="{Binding CurrentTheme.WindowContentBackground.Brush}">
+    <Border CornerRadius="15"
+        Background="White"
+        BorderBrush="White"
+        BorderThickness="1"
+        ClipToBounds="True">
+       
+        <Grid Name="grdMain" Background="Transparent">
         
         <Grid.RowDefinitions>
             <RowDefinition Height="32"/> <!-- Title Bar Height -->
-            <RowDefinition Height="6*"/> <!-- Content Page Height-->
-            <RowDefinition Height="*"/> <!-- Music Control Bar-->
+            <RowDefinition Height="6*"/> <!-- Content Page Height -->
+            <RowDefinition Height="1*"/> <!-- Music Control Bar -->
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition/>
-            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="120"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Width="Auto" Height="Auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-            <!--<Rectangle>
-                <Rectangle.Fill>
-                    <RadialGradientBrush GradientOrigin="0.5,0.5" Center="0.5,0.5" RadiusX="0.7" RadiusY="0.7">
-                        <GradientStop Color="#B0FFFF" Offset="0.0"/>
-                        <GradientStop Color="Transparent" Offset="0.3"/>
-                    </RadialGradientBrush>
-                </Rectangle.Fill>
-            </Rectangle>-->
-            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Width="Auto" Height="Auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <TextBlock x:Name="tbCurrentSongTitle" Text="{Binding Cache.CurrentSong.Title}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="{Binding CurrentTheme.CurrentSongTitleForeground.Brush}"/>
                 <TextBlock x:Name="tbCurrentSongArtist" Text="{Binding Cache.CurrentSong.Artist}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" Foreground="{Binding CurrentTheme.CurrentSongArtistForeground.Brush}"/>
                 <Grid Background="Transparent">
@@ -44,11 +43,8 @@
                 </Grid>
             </StackPanel>
         </Grid>
-     
 
-        <GridSplitter Background="{Binding CurrentTheme.WindowAccent.Brush}" Grid.Row="1" Grid.Column="0" Width="2" HorizontalAlignment="Right"
-                      Panel.ZIndex="3">
-            
+        <GridSplitter Background="{Binding CurrentTheme.WindowAccent.Brush}" Grid.Row="1" Grid.Column="0" Width="2" HorizontalAlignment="Right" Panel.ZIndex="3">
         </GridSplitter>
 
         <Grid Grid.Row="1">
@@ -59,43 +55,45 @@
             HorizontalAlignment="Stretch"/>
         </Grid>
 
+            <Border x:Name="MusicControlBar" Background="{Binding CurrentTheme.MusicControlBackground.Brush}" CornerRadius="15" Grid.Row="2" Grid.ColumnSpan="3" BorderBrush="{Binding CurrentTheme.MusicControlBackground.Brush}" BorderThickness="1"
+                    HorizontalAlignment="Stretch" MaxHeight="80">
+                <Grid HorizontalAlignment="Right">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="250"/>
+                        <ColumnDefinition Width="120"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="5"/>
+                    </Grid.RowDefinitions>
+                    <Grid Width="500" Height="50" Grid.Row="1">
+                        <Viewbox Stretch="Uniform" MaxWidth="350" HorizontalAlignment="Center">
+                            <Grid Width="200">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="20"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
 
-        <Border Background="{Binding CurrentTheme.MusicControlBackground.Brush}" CornerRadius="1" Grid.Row="2" Grid.ColumnSpan="3">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Grid Grid.Column="1">
-                    <Viewbox Stretch="Uniform" MaxWidth="350">
-                        <Grid Width="200">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-
-                            <Slider Grid.Row="0" Grid.ColumnSpan="3" Background="Transparent"/>
-                            <Button Grid.Row="1" Grid.Column="0" Content="⏮" Background="Transparent" MaxWidth="200" BorderBrush="Transparent"/>
-                            <Button Grid.Row="1" Grid.Column="1" Content="▶" Background="Transparent" MaxWidth="200" BorderBrush="Transparent"/>
-                            <Button Grid.Row="1" Grid.Column="2" Content="⏭"  Background="Transparent" MaxWidth="200" BorderBrush="Transparent"/>
-                        </Grid>
-                    </Viewbox>
+                                <Button Grid.Row="1" Grid.Column="0" Content="⏮" Background="Transparent" MaxWidth="200" BorderBrush="Transparent"/>
+                                <Button Grid.Row="1" Grid.Column="1" Content="▶" Background="Transparent" MaxWidth="200" BorderBrush="Transparent"/>
+                                <Button Grid.Row="1" Grid.Column="2" Content="⏭" Background="Transparent" MaxWidth="200" BorderBrush="Transparent"/>
+                            </Grid>
+                        </Viewbox>
+                    </Grid>
+                    <Grid Grid.Column="1" Grid.Row="1">
+                        <Button Content="Switch Theme" Click="SwitchButton_Click"/>
+                    </Grid>
                 </Grid>
-            </Grid>
-        </Border>
-        <Grid Grid.Row="2" Grid.Column="2">
-            <Button Content="Switch Theme" Click="SwitchButton_Click"/>
-        </Grid>
+            </Border>
 
 
-        <Grid x:Name="grdTitle" Background="Black"
+            <Grid x:Name="grdTitle" Background="Black"
               Grid.Column="0" Grid.Row="0"
               Grid.ColumnSpan="3">
             <Grid.ColumnDefinitions>
@@ -127,4 +125,5 @@
         </Grid>
     
     </Grid>
+    </Border>
 </Window>

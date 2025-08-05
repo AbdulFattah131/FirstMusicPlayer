@@ -4,12 +4,11 @@ using System.Xml.Serialization;
 
 namespace MusicPlayer.Data.Objects
 {
-    public class ThemeColor : INotifyPropertyChanged
+    public class ThemeColor : IThemeColor
     {
-        [XmlIgnore]
-        public Brush Brush { get; set; }
-        public bool IsGradient { get; set; } = false;
-        public string Hex
+        [XmlIgnore] // Ignore below
+        public Brush Brush { get; set; } // Brush Property
+        public string Hex // Brush to/from String Convertor
         {
             get
             {
@@ -29,37 +28,33 @@ namespace MusicPlayer.Data.Objects
             }
         }
 
-        public ThemeColor() {
+        public ThemeColor() { // Constructor Solid Color
             Brush = Brushes.Black;
         }
+        public ThemeColor(string hex = "#FF00000") // Constructor Hex Checker
+        {
+            Hex = hex;
+        }
 
-        public ThemeColor (Brush brush)
+        public ThemeColor (Brush brush) // Constructor Brush Checker
         {
             this.Brush = brush;
             if (brush is SolidColorBrush solid)
             {
                 Hex = solid.Color.ToString();
-                IsGradient = false;
             }
             else
             {
                 Hex = null;
-                IsGradient = true;
             }
         }
-        public static ThemeColor CreateGradient(Color startColor, Color endColor)
-        {
-            var gradient = new LinearGradientBrush();
-            gradient.GradientStops.Add(new GradientStop(startColor, 0.0));
-            gradient.GradientStops.Add(new GradientStop(endColor, 1.0));
-            return new ThemeColor(gradient) { IsGradient = true };
-        }
-        public ThemeColor(byte r, byte g, byte b)
+        
+        public ThemeColor(byte r, byte g, byte b) // Constructor RGB
         {
             this.Brush = new SolidColorBrush(Color.FromRgb(r, g, b));
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged; // Event Declaration
 
         public void OnPropertyChanged(PropertyChangedEventArgs e)
         {

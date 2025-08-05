@@ -23,12 +23,14 @@ namespace WpfApp3
     /// </summary>
     public partial class MainWindow : Window
     {
-        private MainWindowViewModel m_vm;
+        private ThemeDesignerViewModel themeDesignerVM;
+
+        public MainWindowViewModel m_vm;
         public MainWindow()
         {
             InitializeComponent();
-            m_vm = new MainWindowViewModel();
 
+            m_vm = MainWindowViewModel.Instance;
             this.DataContext = m_vm;
 
             m_vm.Settings = SettingsReader.Instance.ReadFromFile("./Settings.xml");
@@ -128,7 +130,8 @@ namespace WpfApp3
         private void SwitchButton_Click(object sender, RoutedEventArgs e)
         {
             var m_vm = (MainWindowViewModel)this.DataContext;
-            m_vm.ToggleFullTheme();
+            m_vm.SwitchTheme();
         }
     }
 }
+

@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using MusicPlayer.Data.Objects;
 using MusicPlayer.UIComponents.ViewModels;
 using MusicPlayer.Utility;
 using WpfApp3;
@@ -28,8 +29,8 @@ namespace MusicPlayer.UIComponents
         public ThemeDesigner()
         {
             InitializeComponent();
-
-            m_vm = new ThemeDesignerViewModel();
+            var mainWindowVM = new MainWindowViewModel();
+            m_vm = new ThemeDesignerViewModel(mainWindowVM);
             this.DataContext = m_vm;
         }
 
@@ -59,11 +60,11 @@ namespace MusicPlayer.UIComponents
 
             if (itbQueryTextBox.Name == "itbName")
             {
-              m_vm.CustomTheme.Name = stQueryText;
+                m_vm.CustomTheme.Name = stQueryText;
             }
             if (itbQueryTextBox.Name == "itbWindowAccentHex")
             {
-              m_vm.CustomTheme.WindowAccent.Hex = stQueryText;
+                m_vm.CustomTheme.WindowAccent.Hex = stQueryText;
             }
             if (itbQueryTextBox.Name == "itbWindowContentBackgroundHex")
             {
@@ -103,15 +104,23 @@ namespace MusicPlayer.UIComponents
             MessageBox.Show("Theme saved!");
         }
 
-        private void Rectangle_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            m_vm.LoadTheme("mytheme.json");
-            MessageBox.Show("Theme loaded!");
-        }
-
         private void btnLoad_Click(object sender, RoutedEventArgs e)
         {
+            m_vm.CustomTheme = (Theme)(cbThemes.SelectedItem);
+        }
 
+        private void btnApply_Click(object sender, RoutedEventArgs e)
+        {
+            var m_vm = (ThemeDesignerViewModel)this.DataContext;
+
+            if (cbThemes.SelectedItem is Theme selectedTheme)
+            {
+                MainWindowViewModel.Instance.CurrentTheme = selectedTheme;
+            }
+            else
+            {
+                MainWindowViewModel.Instance.CurrentTheme = m_vm.CustomTheme;
+            }
         }
     }
-}             
+}

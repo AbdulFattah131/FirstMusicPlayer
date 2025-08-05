@@ -32,7 +32,6 @@ C:\Users\safalam\source\repos\WPF\WpfApp3\WpfApp3\bin\Debug\net8.0-windows\Image
 C:\Users\safalam\source\repos\WPF\WpfApp3\WpfApp3\bin\Debug\net8.0-windows\Images\ImagineCover.jpg
 C:\Users\safalam\source\repos\WPF\WpfApp3\WpfApp3\obj\Debug\net8.0-windows\MusicPlayer.UIComponents_Content.g.cs
 C:\Users\safalam\source\repos\WPF\WpfApp3\WpfApp3\obj\Debug\net8.0-windows\MusicPlayer.UIComponents.sourcelink.json
-C:\Users\safalam\source\repos\WPF\WpfApp3\WpfApp3\obj\Debug\net8.0-windows\SettingsWindow.g.cs
-C:\Users\safalam\source\repos\WPF\WpfApp3\WpfApp3\obj\Debug\net8.0-windows\SettingsWindow.baml
 C:\Users\safalam\source\repos\WPF\WpfApp3\WpfApp3\obj\Debug\net8.0-windows\ThemeDesigner.g.cs
 C:\Users\safalam\source\repos\WPF\WpfApp3\WpfApp3\obj\Debug\net8.0-windows\ThemeDesigner.baml
+C:\Users\safalam\source\repos\WPF\WpfApp3\WpfApp3\bin\Debug\net8.0-windows\Newtonsoft.Json.dll

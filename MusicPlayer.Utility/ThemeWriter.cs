@@ -18,12 +18,12 @@ namespace MusicPlayer.Utility
             }
         }
 
-        private ThemeWriter()
+        private ThemeWriter() // Constructor
         {
 
         }
 
-        public void WriteToFile(Theme theme)
+        public void WriteToFile(Theme theme) // Serializer
         {
             using (MemoryStream ms = new MemoryStream())
             {

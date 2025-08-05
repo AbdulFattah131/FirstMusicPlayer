@@ -1,8 +1,9 @@
-﻿using System.Windows.Media;
+﻿using System.ComponentModel;
+using System.Windows;
 
 namespace MusicPlayer.Data.Objects
 {
-    public class Theme
+    public class Theme : INotifyPropertyChanged
     {
         public string Name
         {
@@ -55,9 +56,14 @@ namespace MusicPlayer.Data.Objects
             get;
             set;
         }
+
         public Theme ()
         {
             
         }
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string propertyName) =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
+
 }
