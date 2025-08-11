@@ -5,22 +5,22 @@
     <Hex>#FF00FFFF</Hex>
   </WindowAccent>
   <WindowContentBackground>
-    <Hex>#FFFFFFFF</Hex>
+    <Hex>#FFDDDCED</Hex>
   </WindowContentBackground>
   <WindowTitleForeground>
     <Hex>#FFFFFFFF</Hex>
   </WindowTitleForeground>
   <ListBoxItemForeground>
-    <Hex>#FFFFFFFF</Hex>
+    <Hex>#FF000000</Hex>
   </ListBoxItemForeground>
   <CurrentSongTitleForeground>
-    <Hex>#FFFFFFFF</Hex>
+    <Hex>#FF000000</Hex>
   </CurrentSongTitleForeground>
   <CurrentSongArtistForeground>
     <Hex>#FF808080</Hex>
   </CurrentSongArtistForeground>
   <MusicControlBackground>
-    <Hex>#FF00CCD3</Hex>
+    <Hex>#FFFFFFFF</Hex>
   </MusicControlBackground>
   <TitleBarBackground>
     <Hex>#FF000000</Hex>

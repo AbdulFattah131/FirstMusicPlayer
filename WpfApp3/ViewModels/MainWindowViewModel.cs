@@ -34,7 +34,7 @@ namespace WpfApp3
             set;
         }
 
-        public MusicPlayerCache Cache { get; set; }
+        public MusicPlayerCache MusicPlayerCache { get; set; }
 
         private Theme _currentTheme;
         public Theme CurrentTheme
@@ -66,11 +66,13 @@ namespace WpfApp3
                 Name = "Cyan",
                 WindowAccent = new ThemeColor(Brushes.Cyan),
                 WindowTitleForeground = new ThemeColor(Brushes.White),
-                WindowContentBackground = new ThemeColor(255, 255, 255),
-                ListBoxItemForeground = new ThemeColor(Brushes.White),
-                CurrentSongTitleForeground = new ThemeColor(Brushes.White),
+                WindowContentBackground = new ThemeColor(221, 220, 237),
+                ListBoxItemForeground = new ThemeColor(Brushes.Black),
+
+
+                CurrentSongTitleForeground = new ThemeColor(Brushes.Black),
                 CurrentSongArtistForeground = new ThemeColor(Brushes.Gray),
-                MusicControlBackground = new ThemeColor(00, 204, 211),
+                MusicControlBackground = new ThemeColor(Brushes.White),
                 TitleBarBackground = new ThemeColor(Brushes.Black)
 
             };
@@ -93,7 +95,7 @@ namespace WpfApp3
             CurrentTheme = solidTheme;
             ThemeWriter.Instance.WriteToFile(CurrentTheme);
 
-            Cache = new MusicPlayerCache();
+            MusicPlayerCache = new MusicPlayerCache();
             Settings = new Settings();
         }
 

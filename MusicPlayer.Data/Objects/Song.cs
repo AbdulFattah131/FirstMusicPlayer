@@ -8,9 +8,12 @@ namespace MusicPlayer.Data.Objects
 {
     public class Song
     {
+        public int Index { get; set; }
         public string Title { get; set; }
         public string Artist { get; set; }
-        public string AlbumArt { get; set; }  // Path to image
-        public string FilePath { get; set; }  // Path to audio file
+        public string AlbumArt { get; set; }  
+        public string FilePath { get; set; }
+        public string Liked { get; set; }
+        public int Duration { get; set; }
     }
 }

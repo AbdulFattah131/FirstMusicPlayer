@@ -15,6 +15,7 @@ using MusicPlayer.Utility;
 using System.Configuration;
 using MusicPlayer.UIComponents;
 using MusicPlayer.UIComponents.ViewModels;
+using System.Globalization;
 
 namespace WpfApp3
 {
@@ -131,6 +132,11 @@ namespace WpfApp3
         {
             var m_vm = (MainWindowViewModel)this.DataContext;
             m_vm.SwitchTheme();
+        }
+
+        private void HoverZone_MouseEnter(object sender, MouseEventArgs e)
+        {
+
         }
     }
 }

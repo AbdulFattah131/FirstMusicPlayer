@@ -29,36 +29,51 @@ namespace WpfApp3
         {
             var song1 = new Song
             {
+                Index = 1,
                 Title = "Beat It",
                 Artist = "Michael Jackson",
-                AlbumArt = "Images/Beat_It.jpg"
+                AlbumArt = "Images/Beat_It.jpg",
+                Liked = "♡",
+                Duration = 180,
             };
             var song2 = new Song
             {
+                Index = 2,
                 Title = "Sweet Home Alabama",
                 Artist = "Lynyrd Skynyrd",
-                AlbumArt = "Images/Skynyrd-Sweet-Home-Alabama.jpg"
+                AlbumArt = "Images/Skynyrd-Sweet-Home-Alabama.jpg",
+                Liked = "♡",
+                Duration = 230,
             };
 
             var song3 = new Song
             {
+                Index = 3,
                 Title = "Better Off Alone",
                 Artist = "Alice Deejay",
-                AlbumArt = "Images/Image-ALice_Deejay_Better_Off_Alone.jpg"
+                AlbumArt = "Images/Image-Alice_Deejay_Better_Off_Alone.jpg",
+                Liked = "♡",
+                Duration = 156,
             };
 
             var song4 = new Song
             {
+                Index = 4,
                 Title = "Immigrant Song",
                 Artist = "Led Zeppelin",
-                AlbumArt = "Images/images.jpg"
+                AlbumArt = "Images/images.jpg",
+                Liked = "♡",
+                Duration = 220,
             };
 
             var song5 = new Song
             {
+                Index = 5,
                 Title = "Any Way You Want It",
                 Artist = "Journey",
-                AlbumArt = "Images/Journey_-_Any_Way_You_Want_It_single_cover.jpg"
+                AlbumArt = "Images/Journey_-_Any_Way_You_Want_It_single_cover.jpg",
+                Liked = "♡",
+                Duration = 200,
             };
 
             Songs = new List<Song>();
