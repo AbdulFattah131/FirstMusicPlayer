@@ -51,105 +51,142 @@
                     </Grid.ColumnDefinitions>
 
                     <Grid.RowDefinitions>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="3*"></RowDefinition>
+                        <RowDefinition Height="2*"></RowDefinition>
                     </Grid.RowDefinitions>
+
                     
-                    <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Margin="50" Grid.Column="0" Grid.Row="0">
-                        <TextBlock x:Name="tbCurrentSongTitle" 
-                           Text="{Binding MusicPlayerCache.CurrentSong.Title}" 
-                           FontSize="18" FontWeight="Bold" 
-                           Foreground="{Binding CurrentTheme.CurrentSongTitleForeground.Brush}" 
-                           HorizontalAlignment="Center"/>
-                        <TextBlock x:Name="tbCurrentSongArtist" 
-                           Text="{Binding MusicPlayerCache.CurrentSong.Artist}" 
-                           FontSize="14" 
-                           Foreground="{Binding CurrentTheme.CurrentSongArtistForeground.Brush}" 
-                           HorizontalAlignment="Center"/>
-                        <Image Source="{Binding MusicPlayerCache.CurrentSong.AlbumArt}" 
-                       Width="150" Height="150"/>
-                    </StackPanel>
-
-                    <ListBox Grid.Column="1" Margin="50" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                    Background="Transparent" Foreground="{Binding CurrentTheme.ListBoxItemForeground.Brush}" ItemsSource="{Binding MusicPlayerCache.Songs}" SelectedItem="{Binding MusicPlayerCache.CurrentSong, Mode=TwoWay}"
-                    HorizontalAlignment="Stretch">
-
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Grid Margin="0, 8">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-
-                                    <TextBlock Grid.Column="0" Text="{Binding Index}" FontSize="14" Foreground="Gray" VerticalAlignment="Center" Margin="0, 0, 20, 0"/>
-                                    <StackPanel Grid.Column="1" Orientation="Vertical">
-                                    <TextBlock Text="{Binding Title}" FontWeight="SemiBold" FontSize="14" Foreground="Black"/>
-                                    <TextBlock Text="{Binding Artist}" FontSize="12" Foreground="Gray"/>
-                                    </StackPanel>
-                                    <TextBlock Grid.Column="2" Text="{Binding Duration}" FontSize="12" Foreground="Gray" VerticalAlignment="Center"/>
-                                </Grid>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-
-                        <ListBox.ItemContainerStyle>
-                            <Style TargetType="ListBoxItem">
-                                <Setter Property="Background" Value="Transparent"/>
-                                <Setter Property="BorderThickness" Value="0"/>
-                                <Setter Property="Padding" Value="5"/>
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="ListBoxItem">
-                                            <Border Background="{TemplateBinding Background}">
-                                                <ContentPresenter/>
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#F0F0F0"/>
-                                    </Trigger>
-                                    <Trigger Property="IsSelected" Value="True">
-                                        <Setter Property="Background" Value="#E6E6E6"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </ListBox.ItemContainerStyle>
-
-                    </ListBox>
+                    <TextBox Text="Search" Margin="50"></TextBox>
+                    
+                    
 
                     <Grid Grid.Row="1" Grid.ColumnSpan="2">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                            <ColumnDefinition Width="7*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
 
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="20"></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        
+                        <TextBlock Margin="50, 0, 0, 0" x:Name="tbYourPlaylist" Text="Your Playlist" FontSize="18" FontWeight="Bold" 
+                        Foreground="{Binding CurrentTheme.CurrentSongTitleForeground.Brush}" HorizontalAlignment="Left"/>
+                        
+                        <StackPanel Grid.Column="0" HorizontalAlignment="Left" Margin="50" Grid.Row="1">
+                            <Image Source="{Binding MusicPlayerCache.CurrentSong.AlbumArt}" 
+                       Width="150" Height="150"/>
+                        </StackPanel>
+
+                        <ListBox Grid.Column="1" Grid.Row="1" Margin="0, 0, 50, 0" HorizontalAlignment="Stretch" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                        Background="Transparent" Foreground="{Binding CurrentTheme.ListBoxItemForeground.Brush}" ItemsSource="{Binding MusicPlayerCache.Songs}" SelectedItem="{Binding MusicPlayerCache.CurrentSong, Mode=TwoWay}">
+
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0, 8">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Grid.Column="0" Text="{Binding Index}" FontSize="14" Foreground="Gray" VerticalAlignment="Center" Margin="0, 0, 20, 0"/>
+                                        <StackPanel Grid.Column="1" Orientation="Vertical">
+                                            <TextBlock Text="{Binding Title}" FontWeight="SemiBold" FontSize="14" Foreground="Black"/>
+                                            <TextBlock Text="{Binding Artist}" FontSize="12" Foreground="Gray"/>
+                                        </StackPanel>
+                                        <TextBlock Grid.Column="2" Text="{Binding Duration}" FontSize="12" Foreground="Gray" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="Padding" Value="5"/>
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="ListBoxItem">
+                                                <Border Background="{TemplateBinding Background}">
+                                                    <ContentPresenter/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#F0F0F0"/>
+                                        </Trigger>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="#E6E6E6"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                        </ListBox>
+                    </Grid>
+
+                    <Grid Grid.Row="2" Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="35"></RowDefinition>
                             <RowDefinition Height="Auto"></RowDefinition>
                         </Grid.RowDefinitions>
 
-                        <TextBlock Text="Similar Songs" Margin="50, 0, 0, 0" FontSize="18" FontWeight="Bold"></TextBlock>
-                    <WrapPanel Grid.Row="1" Grid.Column="0" Background="Transparent" Margin="50, 0, 0, 0">
+                        <TextBlock Grid.Row="0" Text="Similar Songs" Margin="50, 0, 0, 0" FontSize="18" FontWeight="Bold"></TextBlock>
+                        <StackPanel Grid.Row="1" Grid.Column="0" Background="Transparent" Margin="50, 0, 0, 0">
+                        <Image x:Name="SimilarSong1Image" Source="{Binding MusicPlayerCache.CurrentSong.AlbumArt}" Width="150" Height="150"/>
                         <TextBlock x:Name="tbSimilarSong1" 
-                         Text="{Binding MusicPlayerCache.CurrentSong.Title}" 
-                         FontSize="18" FontWeight="Bold" 
-                         Foreground="{Binding CurrentTheme.CurrentSongTitleForeground.Brush}" 
-                         HorizontalAlignment="Center"/>
-                         <TextBlock x:Name="tbSimilarSong1Artist" 
-                         Text="{Binding MusicPlayerCache.CurrentSong.Artist}" 
-                         FontSize="14"
-                         Foreground="{Binding CurrentTheme.CurrentSongArtistForeground.Brush}" 
-                         HorizontalAlignment="Center"/>
-                        <Image x:Name="SimilarSong1Image" Source="{Binding MusicPlayerCache.CurrentSong.AlbumArt}" 
-                         Width="150" Height="150"/>
-                    </WrapPanel>
+                        Text="{Binding MusicPlayerCache.CurrentSong.Title}" 
+                        FontSize="18" FontWeight="Bold" 
+                        Foreground="{Binding CurrentTheme.CurrentSongTitleForeground.Brush}" 
+                        HorizontalAlignment="Center"/>
+                        <TextBlock x:Name="tbSimilarSong1Artist" 
+                        Text="{Binding MusicPlayerCache.CurrentSong.Artist}" 
+                        FontSize="14"
+                        Foreground="{Binding CurrentTheme.CurrentSongArtistForeground.Brush}" 
+                        HorizontalAlignment="Center"/>
+                        </StackPanel>
+                        
+                        <StackPanel Grid.Row="1" Grid.Column="1" Background="Transparent" Margin="50, 0, 0, 0">
+                        <Image x:Name="SimilarSong2Image" Source="{Binding MusicPlayerCache.CurrentSong.AlbumArt}" Width="150" Height="150"/>
+                        <TextBlock x:Name="tbSimilarSong2" 
+                        Text="{Binding MusicPlayerCache.CurrentSong.Title}" 
+                        FontSize="18" FontWeight="Bold" 
+                        Foreground="{Binding CurrentTheme.CurrentSongTitleForeground.Brush}" 
+                        HorizontalAlignment="Center"/>
+                        <TextBlock x:Name="tbSimilarSong2Artist" 
+                        Text="{Binding MusicPlayerCache.CurrentSong.Artist}" 
+                        FontSize="14"
+                        Foreground="{Binding CurrentTheme.CurrentSongArtistForeground.Brush}" 
+                        HorizontalAlignment="Center"/>
+                        </StackPanel>
+                        
+                        <StackPanel Grid.Row="1" Grid.Column="2" Background="Transparent" Margin="50, 0, 0, 0">
+                        <Image x:Name="SimilarSong3Image" Source="{Binding MusicPlayerCache.CurrentSong.AlbumArt}" Width="150" Height="150"/>
+                        <TextBlock x:Name="tbSimilarSong3" 
+                        Text="{Binding MusicPlayerCache.CurrentSong.Title}" 
+                        FontSize="18" FontWeight="Bold" 
+                        Foreground="{Binding CurrentTheme.CurrentSongTitleForeground.Brush}" 
+                        HorizontalAlignment="Center"/>
+                        <TextBlock x:Name="tbSimilarSong3Artist" 
+                        Text="{Binding MusicPlayerCache.CurrentSong.Artist}" 
+                        FontSize="14"
+                        Foreground="{Binding CurrentTheme.CurrentSongArtistForeground.Brush}" 
+                        HorizontalAlignment="Center"/>
+                        </StackPanel>
+                        
                     </Grid>
                 </Grid>
             </Border>
