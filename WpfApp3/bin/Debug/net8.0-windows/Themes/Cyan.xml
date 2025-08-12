@@ -5,7 +5,7 @@
     <Hex>#FF00FFFF</Hex>
   </WindowAccent>
   <WindowContentBackground>
-    <Hex>#FFDDDCED</Hex>
+    <Hex>#FFDBDAEA</Hex>
   </WindowContentBackground>
   <WindowTitleForeground>
     <Hex>#FFFFFFFF</Hex>
@@ -20,7 +20,7 @@
     <Hex>#FF808080</Hex>
   </CurrentSongArtistForeground>
   <MusicControlBackground>
-    <Hex>#FFFFFFFF</Hex>
+    <Hex>#FFEFEDFF</Hex>
   </MusicControlBackground>
   <TitleBarBackground>
     <Hex>#FF000000</Hex>

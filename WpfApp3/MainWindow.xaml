@@ -14,6 +14,8 @@
         <WindowChrome CaptionHeight="0"/>
     </WindowChrome.WindowChrome>
 
+    <!-- Main Grid -->
+    
     <Grid Name="grdMain" Background="Transparent">
 
         <Grid.RowDefinitions>
@@ -29,6 +31,8 @@
                 Background="{Binding CurrentTheme.WindowContentBackground.Brush}" 
                 CornerRadius="15"/>
 
+        <!-- Row 1 Grid -->
+        
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="140"/>
@@ -40,8 +44,53 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
-           
+            <!-- Column 0 Left Side Bar -->
+            
+            <DockPanel LastChildFill="True" Grid.Column="0" Grid.Row="1"  Margin="15, 30">
+                <StackPanel DockPanel.Dock="Top">
+                    <TextBlock Text="Spice &amp; Co"></TextBlock>
+                    <TextBlock Text="Curation" Margin="0, 35, 0, 0"></TextBlock>
+                    <Button Margin="0, 25, 0, 25"></Button>
+                    <Button Margin="0, 25, 0, 25"></Button>
+                    <Button Margin="0, 25, 0, 25"></Button>
+                    <Button Margin="0, 25, 0, 25"></Button>
 
+                    <TextBlock Text="My Music" Margin="0, 30, 0, 0"></TextBlock>
+                    <Button Margin="0, 25, 0, 25"></Button>
+                    <Button Margin="0, 25, 0, 25"></Button>
+                    <Button Margin="0, 25, 0, 25"></Button>
+                    <Button Margin="0, 25, 0, 25"></Button>
+
+                    <TextBlock Text="Playlist" Margin="0, 30, 0, 0"></TextBlock>
+                    <Button Margin="0, 25, 0, 25"></Button>
+                    <Button Margin="0, 25, 0, 25"></Button>
+                </StackPanel>
+                <Button VerticalAlignment="Bottom" Foreground="{Binding CurrentTheme.WindowAccent.Brush}" Height="4"></Button>
+            </DockPanel>
+            
+            <!-- Column 2 Right Side Bar -->
+            
+            <StackPanel DockPanel.Dock="Top" Grid.Column="2"  Grid.Row="1"  Margin="15, 30">
+               
+                <TextBlock Text="Nearby Activity" Margin="0, 35, 0, 0"></TextBlock>
+                <Button Margin="0, 25, 0, 25"></Button>
+                <Button Margin="0, 25, 0, 25"></Button>
+                <Button Margin="0, 25, 0, 25"></Button>
+                <Button Margin="0, 25, 0, 25"></Button>
+
+                <TextBlock Text="Your Activity" Margin="0, 30, 0, 0"></TextBlock>
+                <Button Margin="0, 25, 0, 25"></Button>
+                <Button Margin="0, 25, 0, 25"></Button>
+                <Button Margin="0, 25, 0, 25"></Button>
+                <Button Margin="0, 25, 0, 25"></Button>
+
+                <TextBlock Text="Genre" Margin="0, 30, 0, 0"></TextBlock>
+                <Button Margin="0, 25, 0, 25"></Button>
+                <Button Margin="0, 25, 0, 25"></Button>
+            </StackPanel>
+
+            <!-- Column 1 Center Bar -->
+            
             <Border CornerRadius="13" Background="{Binding CurrentTheme.MusicControlBackground.Brush}" Margin="10,10" Grid.Column="1">
 
                 <Grid>
@@ -56,15 +105,16 @@
                         <RowDefinition Height="2*"></RowDefinition>
                     </Grid.RowDefinitions>
 
-                    
-                    <TextBox Text="Search" Margin="50"></TextBox>
-                    
-                    
+                    <Border Height="40" CornerRadius="13" BorderThickness="0" BorderBrush="{Binding CurrentTheme.WindowContentBackground.Brush}" Background="White" Grid.Row="0" Margin="50, 50, 0, 50" Width="200" HorizontalAlignment="Left">
+                    <TextBox Text="Search" Margin="10" VerticalAlignment="Center" Background="Transparent" BorderBrush="Transparent"></TextBox>
+                    </Border>
 
+                    <!-- Your Playlist Grid -->
+                    
                     <Grid Grid.Row="1" Grid.ColumnSpan="2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="3*"></ColumnDefinition>
-                            <ColumnDefinition Width="7*"></ColumnDefinition>
+                            <ColumnDefinition Width="5*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
 
                         <Grid.RowDefinitions>
@@ -75,9 +125,9 @@
                         <TextBlock Margin="50, 0, 0, 0" x:Name="tbYourPlaylist" Text="Your Playlist" FontSize="18" FontWeight="Bold" 
                         Foreground="{Binding CurrentTheme.CurrentSongTitleForeground.Brush}" HorizontalAlignment="Left"/>
                         
-                        <StackPanel Grid.Column="0" HorizontalAlignment="Left" Margin="50" Grid.Row="1">
+                        <StackPanel Grid.Column="0" HorizontalAlignment="Left" Margin="50, 15 ,15, 0" Grid.Row="1">
                             <Image Source="{Binding MusicPlayerCache.CurrentSong.AlbumArt}" 
-                       Width="150" Height="150"/>
+                        Width="200" Height="200"/>
                         </StackPanel>
 
                         <ListBox Grid.Column="1" Grid.Row="1" Margin="0, 0, 50, 0" HorizontalAlignment="Stretch" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
@@ -129,8 +179,10 @@
                             </ListBox.ItemContainerStyle>
                         </ListBox>
                     </Grid>
-
-                    <Grid Grid.Row="2" Grid.ColumnSpan="2">
+                    
+                    <!-- Similar Songs Grid -->
+                    
+                    <Grid Grid.Row="2" Grid.ColumnSpan="2" Margin="0, -100, 0, 0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"></ColumnDefinition>
                             <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -145,10 +197,11 @@
                         </Grid.RowDefinitions>
 
                         <TextBlock Grid.Row="0" Text="Similar Songs" Margin="50, 0, 0, 0" FontSize="18" FontWeight="Bold"></TextBlock>
+                        
                         <StackPanel Grid.Row="1" Grid.Column="0" Background="Transparent" Margin="50, 0, 0, 0">
-                        <Image x:Name="SimilarSong1Image" Source="{Binding MusicPlayerCache.CurrentSong.AlbumArt}" Width="150" Height="150"/>
+                        <Image x:Name="SimilarSong1Image" Source="{Binding MusicPlayerCache.SimilarSongs.AlbumArt}" Width="150" Height="150"/>
                         <TextBlock x:Name="tbSimilarSong1" 
-                        Text="{Binding MusicPlayerCache.CurrentSong.Title}" 
+                        Text="{Binding MusicPlayerCache.SimilarSongs.Title}" 
                         FontSize="18" FontWeight="Bold" 
                         Foreground="{Binding CurrentTheme.CurrentSongTitleForeground.Brush}" 
                         HorizontalAlignment="Center"/>
@@ -192,6 +245,8 @@
             </Border>
         </Grid>
 
+        <!-- Row 2 Music Control Grid -->
+        
         <Grid Grid.Row="2" Grid.ColumnSpan="3" VerticalAlignment="Bottom">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.25*"/>

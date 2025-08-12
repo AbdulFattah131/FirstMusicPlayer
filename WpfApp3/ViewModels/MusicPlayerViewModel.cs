@@ -23,8 +23,30 @@ namespace WpfApp3
             {
                 _currentSong = value;
                 OnPropertyChanged(nameof(CurrentSong));
+
             }
         }
+
+        private List<Song> _similarSongs;
+        public List<Song> SimilarSongs
+        {
+            get => _similarSongs;
+            set
+            {
+                _similarSongs = value;
+                OnPropertyChanged(nameof(SimilarSongs));
+
+                //LoadSimilarSongs(_currentSong);
+            }
+        }
+        //private void LoadSimilarSongs(Song selectedSong)
+        //{
+        //    SimilarSongs = Songs
+        //        .Where(s => s.Artist == selectedSong.Artist && s.Title != selectedSong.Title)
+        //        .Take(2)
+        //        .ToList();
+        //}
+
         public MusicPlayerCache()
         {
             var song1 = new Song
@@ -83,7 +105,30 @@ namespace WpfApp3
             Songs.Add(song4);
             Songs.Add(song5);
 
+            //SimilarSongs = new List<Song>
+            //{
+            //    new Song
+            //    {
+            //        Index = 6,
+            //        Title = "Billie Jean",
+            //        Artist = "Michael Jackson",
+            //        AlbumArt = "Images/BillieJean.jpg",
+            //        Liked = "♡",
+            //        Duration = 294,
+            //    },
+            //    new Song
+            //    {
+            //        Index = 7,
+            //        Title = "Thriller",
+            //        Artist = "Michael Jackson",
+            //        AlbumArt = "Images/Thriller.jpg",
+            //        Liked = "♡",
+            //        Duration = 357
+            //    }
+            //};
+;
         }
+          
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(string propertyName) =>

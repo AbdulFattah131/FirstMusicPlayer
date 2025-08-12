@@ -63,16 +63,14 @@ namespace WpfApp3
             solidTheme = new Theme()
             {
 
-                Name = "Cyan",
-                WindowAccent = new ThemeColor(Brushes.Cyan),
+                Name = "Lavender Gray",
+                WindowAccent = new ThemeColor(197, 178, 239),
                 WindowTitleForeground = new ThemeColor(Brushes.White),
-                WindowContentBackground = new ThemeColor(221, 220, 237),
+                WindowContentBackground = new ThemeColor(219, 218, 234),
                 ListBoxItemForeground = new ThemeColor(Brushes.Black),
-
-
                 CurrentSongTitleForeground = new ThemeColor(Brushes.Black),
                 CurrentSongArtistForeground = new ThemeColor(Brushes.Gray),
-                MusicControlBackground = new ThemeColor(Brushes.White),
+                MusicControlBackground = new ThemeColor(231, 234, 240),
                 TitleBarBackground = new ThemeColor(Brushes.Black)
 
             };
