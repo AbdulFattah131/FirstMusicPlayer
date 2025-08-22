@@ -12,6 +12,7 @@ namespace MusicPlayer.Data.Objects
         public string Title { get; set; }
         public string Artist { get; set; }
         public string AlbumArt { get; set; }  
+        public string Genre { get; set; }
         public string FilePath { get; set; }
         public string Liked { get; set; }
         public int Duration { get; set; }

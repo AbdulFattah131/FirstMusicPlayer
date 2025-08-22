@@ -105,28 +105,28 @@ namespace WpfApp3
             Songs.Add(song4);
             Songs.Add(song5);
 
-            //SimilarSongs = new List<Song>
-            //{
-            //    new Song
-            //    {
-            //        Index = 6,
-            //        Title = "Billie Jean",
-            //        Artist = "Michael Jackson",
-            //        AlbumArt = "Images/BillieJean.jpg",
-            //        Liked = "♡",
-            //        Duration = 294,
-            //    },
-            //    new Song
-            //    {
-            //        Index = 7,
-            //        Title = "Thriller",
-            //        Artist = "Michael Jackson",
-            //        AlbumArt = "Images/Thriller.jpg",
-            //        Liked = "♡",
-            //        Duration = 357
-            //    }
-            //};
-;
+            SimilarSongs = new List<Song>
+            {
+                new Song
+                {
+                    Index = 6,
+                    Title = "Billie Jean",
+                    Artist = "Michael Jackson",
+                    AlbumArt = "Images/BillieJean.jpg",
+                    Liked = "♡",
+                    Duration = 294,
+                },
+                new Song
+                {
+                    Index = 7,
+                    Title = "Thriller",
+                    Artist = "Michael Jackson",
+                    AlbumArt = "Images/Thriller.jpg",
+                    Liked = "♡",
+                    Duration = 357
+                }
+            };
+            ;
         }
           
         public event PropertyChangedEventHandler PropertyChanged;

@@ -9,6 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\icons8-circled-play-button-50.png" />
+    <None Remove="Assets\icons8-ellipsis-30.png" />
+    <None Remove="Assets\icons8-end-50 %281%29.png" />
+    <None Remove="Assets\icons8-end-50.png" />
+    <None Remove="Assets\icons8-pause-button-50.png" />
+    <None Remove="Assets\icons8-refresh-50.png" />
+    <None Remove="Assets\icons8-restart-50.png" />
     <None Remove="Images\Beat_It.jpg" />
     <None Remove="Images\Image-Alice_Deejay_Better_Off_Alone.jpg" />
     <None Remove="Images\images.jpg" />
@@ -48,6 +55,30 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\icons8-circled-play-button-50.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\icons8-ellipsis-30.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\icons8-end-50 (1).png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\icons8-end-50.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\icons8-pause-button-50.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\icons8-refresh-50.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\icons8-restart-50.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

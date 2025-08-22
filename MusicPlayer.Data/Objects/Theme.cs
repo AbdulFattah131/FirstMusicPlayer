@@ -56,6 +56,11 @@ namespace MusicPlayer.Data.Objects
             get;
             set;
         }
+        public ThemeColor ComplementGray
+        {
+            get;
+            set;
+        }
 
         public Theme ()
         {

@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:MusicPlayer.UIComponents"
         mc:Ignorable="d"
         Title="ThemeDesigner" Height="450" Width="400" MaxHeight="450" MaxWidth="400">
-    <Grid Name="grdMain" Margin="8,8,0,0">
+
+
+    <Grid Name="grdMain" Margin="8,8,0,0" Background="{Binding CurrentTheme.WindowAccent.Brush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="32"></RowDefinition>
             <RowDefinition Height="9*"></RowDefinition>
@@ -17,6 +19,8 @@
                 <ColumnDefinition Width="3*"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
+
+            <Border Grid.RowSpan="2" Grid.ColumnSpan="2"></Border>
             <ComboBox Name="cbThemes" Grid.Column="0" Height="24" Margin="4" ItemsSource="{Binding Path=LoadedThemes}" DisplayMemberPath="Name"/>
             <Button Name="btnLoad" Content="Load" Click="btnLoad_Click" Height="24" Grid.Column="1"></Button>
         </Grid>
