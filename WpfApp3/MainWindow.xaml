@@ -211,16 +211,11 @@
 
             <StackPanel Grid.Column="2" Grid.Row="1">
 
-                <Border Height="250" VerticalAlignment="Top" Margin="15, 10, 25, 10" CornerRadius="15">
-                    <Border.Background>
-                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                            <GradientStop Color="Lavender" Offset="0"/>
-                            <GradientStop Color="Transparent" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Border.Background>
-
+                <Border Height="250" VerticalAlignment="Top" Margin="15, 10, 25, 10" CornerRadius="15" Background="{Binding CurrentTheme.MusicControlBackground.Brush}">
+                    
                     <StackPanel>
-                        <TextBlock Text="About the Album" Margin="10, 15, 0, 0" FontWeight="Bold" Foreground="Black"></TextBlock>
+                        <TextBlock Text="About the Album" Margin="10, 15, 0, 0" FontWeight="Bold" Foreground="{Binding CurrentTheme.CurrentSongTitleForeground.Brush}"></TextBlock>
+                        <TextBlock Text="{Binding AlbumDescription}" Margin="10, 15, 0, 0" FontWeight="SemiBold" Foreground="{Binding CurrentTheme.CurrentSongTitleForeground.Brush}"></TextBlock>
                     </StackPanel>
 
                 </Border>
@@ -278,7 +273,7 @@
 
             <!-- Column 1 Center Bar -->
             
-            <Border CornerRadius="13" Background="Lavender" Margin="10, 10, 10, 20" Grid.Column="1">
+            <Border CornerRadius="13" Background="{Binding CurrentTheme.MusicControlBackground.Brush}" Margin="10, 10, 10, 20" Grid.Column="1">
 
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -486,7 +481,7 @@
                                     </Button.ContentTemplate>
                                 </Button>
                                 
-                                <Button Grid.Row="0" Grid.Column="1" Background="Transparent" BorderBrush="Transparent">
+                                <Button Grid.Row="0" Grid.Column="1" Width="60" Background="Transparent" BorderBrush="Transparent">
                                     <Button.ContentTemplate>
                                         <DataTemplate>
                                             <Image Source="/Assets/icons8-end-50 (1).png"></Image>
@@ -523,7 +518,7 @@
                                     </ToggleButton.Style>
                                 </ToggleButton>
 
-                                <Button Grid.Row="0" Grid.Column="3" Background="Transparent" BorderBrush="Transparent">
+                                <Button Grid.Row="0" Grid.Column="3" Width="60"  Background="Transparent" BorderBrush="Transparent">
                                     <Button.ContentTemplate>
                                         <DataTemplate>
                                             <Image Source="/Assets/icons8-end-50.png"></Image>
@@ -540,10 +535,13 @@
                             </Grid>
                         </Viewbox>
                     </Grid>
-                    <Button Content="---" FontSize="20" Foreground="{Binding CurrentTheme.ComplementGray.Brush}" Margin="0, 0, 20, 0" Click="SwitchButton_Click" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Column="2" Grid.RowSpan="2">
-                       
-                                <!--<Image Source="/Assets/icons8-ellipsis-30.png"></Image>-->
-                       
+                    <Button Margin="0, 0, 20, 0" Click="SwitchButton_Click" Width="20" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Column="2" Grid.RowSpan="2">
+                        <Button.ContentTemplate>
+                            <DataTemplate>
+                                <Image Source="/Assets/icons8-ellipsis-30.png"></Image>
+                            </DataTemplate>
+                        </Button.ContentTemplate>
+
                     </Button>
                     <Slider Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" Height="30">
                         <Slider.Template>
@@ -567,7 +565,7 @@
 
                                         <!-- Thumb -->
                                         <Track.Thumb>
-                                            <Thumb Width="17" Height="17" Background="White" BorderBrush="Gray" BorderThickness="1"/>
+                                            <Thumb Width="10" Height="10" Background="White" BorderBrush="Gray" BorderThickness="1"/>
                                         </Track.Thumb>
 
                                         <!-- Increase RepeatButton (right of thumb) -->
