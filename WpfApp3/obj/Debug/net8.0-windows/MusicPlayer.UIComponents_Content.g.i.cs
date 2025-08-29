@@ -8,11 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/beat_it.jpg")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/image-alice_deejay_better_off_alone.jpg")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/images.jpg")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/journey_-_any_way_you_want_it_single_cover.jpg")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/skynyrd-sweet-home-alabama.jpg")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/imaginecover.jpg")]
 
 

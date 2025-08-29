@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace MusicPlayer.Data.Objects
 {
-    internal class Album
+    public class Album
     {
         public string Title { get; set; }
         public string Artist { get; set; }
-        public string CoverImage { get; set; }
-        public ObservableCollection<Song> Songs { get; set; } = new();
+        public string ImagePath { get; set; }
+        public int ReleaseDate { get; set; }  
+        public ObservableCollection<Song> Songs { get; set; } = new ObservableCollection<Song>();
     }
 }

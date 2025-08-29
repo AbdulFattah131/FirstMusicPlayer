@@ -84,6 +84,7 @@ namespace WpfApp3
                 WindowTitleForeground = new ThemeColor(255, 235, 235),
                 WindowContentBackground = new ThemeColor(255, 255, 255),
                 ListBoxItemForeground = new ThemeColor(255, 235, 235),
+                ComplementGray = new ThemeColor(169, 168, 204),
                 CurrentSongTitleForeground = new ThemeColor(255, 235, 235),
                 CurrentSongArtistForeground = new ThemeColor(255, 185, 185),
                 MusicControlBackground = new ThemeColor(228, 57, 57),
