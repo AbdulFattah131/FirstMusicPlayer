@@ -30,3 +30,4 @@ C:\Users\safalam\source\repos\WPF\WpfApp3\WpfApp3\obj\Debug\net8.0-windows\Theme
 C:\Users\safalam\source\repos\WPF\WpfApp3\WpfApp3\bin\Debug\net8.0-windows\Newtonsoft.Json.dll
 C:\Users\safalam\source\repos\WPF\WpfApp3\WpfApp3\obj\Debug\net8.0-windows\Controls\List.g.cs
 C:\Users\safalam\source\repos\WPF\WpfApp3\WpfApp3\obj\Debug\net8.0-windows\Controls\List.baml
+C:\Users\safalam\source\repos\WPF\WpfApp3\WpfApp3\obj\Debug\net8.0-windows\GeneratedInternalTypeHelper.g.cs

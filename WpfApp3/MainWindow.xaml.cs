@@ -16,6 +16,7 @@ using System.Configuration;
 using MusicPlayer.UIComponents;
 using MusicPlayer.UIComponents.ViewModels;
 using System.Globalization;
+using System.IO;
 
 namespace WpfApp3
 {
@@ -42,6 +43,7 @@ namespace WpfApp3
             this.Height = m_vm.Settings.LastWindowDimensions.Y;
 
         }
+
         private void borderWindowMove_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ButtonState == e.LeftButton)
@@ -137,6 +139,34 @@ namespace WpfApp3
         private void HoverZone_MouseEnter(object sender, MouseEventArgs e)
         {
 
+        }
+
+        private void AlbumsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selectedAlbum = AlbumsListBox.SelectedItem as Album;
+            if (selectedAlbum != null)
+            {
+                tbAlbumInfo.Text = selectedAlbum.AlbumInfo;
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ToggleButton_Checked(object sender, RoutedEventArgs e)
+        {
+            foreach (var child in ToggleGroup.Children.OfType<ToggleButton>())
+            {
+                if (child != sender)
+                    child.IsChecked = false;
+            }
         }
     }
 }
