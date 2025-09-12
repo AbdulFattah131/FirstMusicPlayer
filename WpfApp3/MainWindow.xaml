@@ -41,7 +41,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="220"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="220" MinWidth="220" MaxWidth="300"/>
+                <ColumnDefinition Width="220"/>
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
@@ -50,11 +50,14 @@
 
             <!-- Column 0 Left Side Bar -->
             
-            <DockPanel LastChildFill="True" Grid.Column="0" Grid.Row="1" Margin="15, 20, 15, 15">
+            <DockPanel LastChildFill="True" Grid.Column="0" Grid.Row="1" Margin="20, 30, 15, 15">
                 <StackPanel x:Name="ToggleGroup" DockPanel.Dock="Top">
 
-                    <TextBlock Text="Spice &amp; Co" FontSize="18" FontWeight="Bold" Foreground="#322657"></TextBlock>
-
+                    <StackPanel Orientation="Horizontal">
+                    <Image Margin="0, 0, 10, 0" Source="/Assets/icons8-synthesizer-100.png" Width="25" Height="25" VerticalAlignment="Center"/>
+                    <TextBlock Text="Spice &amp; Co" FontSize="18" FontWeight="Bold" Foreground="Black"></TextBlock>
+                    </StackPanel>
+                    
                     <TextBlock Text="Curation" Margin="0, 35, 0, 0" FontWeight="Bold" FontSize="15" Foreground="#494454"></TextBlock>
 
                     <ToggleButton x:Name="tbLibrary"
@@ -296,32 +299,45 @@
             
             <!-- Column 2 Right Side Bar -->
 
-            <StackPanel Grid.Column="2" Grid.Row="1">
+            <Grid Grid.Column="2" Grid.Row="1">
 
-                <Border Height="350" VerticalAlignment="Top" Margin="15, 10, 25, 10" CornerRadius="15" Background="{Binding CurrentTheme.MusicControlBackground.Brush}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.5*"></RowDefinition>
+                    <RowDefinition Height="0.4*"></RowDefinition>
+
+                </Grid.RowDefinitions>
+
+                <StackPanel>
+                <Border Grid.Row="0" Margin="15, 10, 25, 10" CornerRadius="15" Background="{Binding CurrentTheme.MusicControlBackground.Brush}">
                     <Border.Effect>
-                        <DropShadowEffect Color="Black"
-                          Direction="270"
-                          ShadowDepth="2"
-                          Opacity="0.15"
-                          BlurRadius="8"/>
+                        <DropShadowEffect
+                            Color="#494454"
+                            BlurRadius="0"
+                            ShadowDepth="3"
+                            Direction="-45"
+                            Opacity="0.4">
+                        </DropShadowEffect>
                     </Border.Effect>
-                    <StackPanel>
-                        <TextBlock Text="About the Album" FontSize="13" Foreground="#494454" Margin="15, 15, 0, 0" FontWeight="Bold"></TextBlock>
-                        <TextBlock x:Name="tbAlbumInfo" Margin="15, 15, 15, 0" TextAlignment="Justify" TextWrapping="Wrap" Text="{Binding AlbumInfo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontWeight="SemiBold" Foreground="#000000"></TextBlock>
-                    </StackPanel>
+                    <StackPanel Orientation="Vertical">
+                            <TextBlock VerticalAlignment="Top" Text="Album Info" FontSize="13" Foreground="#494454" Margin="15, 17, 0, 0" FontWeight="Bold"></TextBlock>
+                            <TextBlock Height="350" x:Name="tbAlbumInfo" VerticalAlignment="Top" Margin="15, 10, 15, 0" TextAlignment="Justify" TextWrapping="Wrap" Text="{Binding AlbumInfo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontWeight="SemiBold" Foreground="#000000"></TextBlock>
+                            <Border Height="115" VerticalAlignment="Bottom" CornerRadius="15" Background="#322657">
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="Album Genre" FontSize="13" Foreground="{Binding WindowContentBackground.Brush}" Margin="15, 17, 0, 0" FontWeight="Bold"></TextBlock>
+                                    <Border Width="20" Background="White"></Border>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
                 </Border>
 
-                <Border Height="350" VerticalAlignment="Top" Margin="15, 10, 25, 10" CornerRadius="15" Background="{Binding CurrentTheme.MusicControlBackground.Brush}">
-                    <Border.Effect>
-                        <DropShadowEffect Color="Black"
-                          Direction="270"
-                          ShadowDepth="2"
-                          Opacity="0.15"
-                          BlurRadius="8"/>
-                    </Border.Effect>
-                    <StackPanel>
-                <TextBlock Text="Most Played" FontWeight="Bold" Margin="15, 15, 0, 0" FontSize="14" Foreground="#494454"></TextBlock>
+                </StackPanel>
+                <Border Grid.Row="1" VerticalAlignment="Top" Margin="15, 0, 25, 10" CornerRadius="15" Background="{Binding CurrentTheme.MusicControlBackground.Brush}">
+                <StackPanel>
+                <TextBlock Text="Most Played" FontWeight="Bold" Margin="15, 17, 0, 0" FontSize="13" Foreground="#494454"></TextBlock>
                 <ListBox Height="200" Grid.Column="1" Grid.Row="1" Margin="15, 10, 25, 10" VerticalAlignment="Center" HorizontalAlignment="Stretch" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                  Background="Transparent" Foreground="{Binding CurrentTheme.ListBoxItemForeground.Brush}">
 
@@ -371,14 +387,14 @@
                 </ListBox>
                 </StackPanel>
                 </Border>
-            </StackPanel>
+            </Grid>
                 
 
             <!-- Column 1 Center Bar -->
             
             <Border CornerRadius="13" Background="{Binding CurrentTheme.MusicControlBackground.Brush}" Margin="10, 10, 10, 15" Grid.Column="1">
                 <Border.Effect>
-                    <DropShadowEffect Color="Black"
+                    <DropShadowEffect Color="#322657"
                           Direction="270"
                           ShadowDepth="2"
                           Opacity="0.15"
@@ -598,9 +614,11 @@
             </Border>
         </Grid>
 
+        <!-- Row 2 Bottom Bar -->
+
         <Border Grid.Row="2" Grid.ColumnSpan="3" VerticalAlignment="Bottom">
             <Border.Effect>
-                <DropShadowEffect Color="Black"
+                <DropShadowEffect Color="#322657"
                  Direction="270"
                  ShadowDepth="3"
                  Opacity="0.15"
@@ -611,9 +629,7 @@
 
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.25*"/>
                 <ColumnDefinition Width="15*"/>
-                <ColumnDefinition Width="0.25*"/>
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
@@ -625,8 +641,8 @@
             <Border x:Name="MusicControlBar" 
                 Background="{Binding CurrentTheme.MusicControlBackground.Brush}"
                 CornerRadius="13"
-                Margin="10, 10, 10, 20"
-                Grid.Column="1"    
+                Margin="30, 5, 30, 30"
+                Grid.Column="0"    
                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                
 
@@ -985,17 +1001,14 @@
         </Border>
 
         <!-- Title Bar Grid -->
-        
-        <Border Background="Black" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" CornerRadius="10">
+
+        <Border Background="#2e2c36" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" CornerRadius="10">
             <Grid x:Name="grdTitle">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="20"/>
                     <ColumnDefinition/>
                     <ColumnDefinition Width="130"/>
                 </Grid.ColumnDefinitions>
-
-                <Border Background="{Binding Path=CurrentTheme.WindowAccent.Brush}" 
-                        Margin="-8,7,8,7" CornerRadius="1" Grid.Row="0" Grid.Column="0"/>
 
                 <TextBlock Name="tbWindowTitle" Text="{Binding Path=WindowTitle}" 
                            Foreground="{Binding Path=CurrentTheme.WindowTitleForeground.Brush}" 

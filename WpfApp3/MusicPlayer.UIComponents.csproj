@@ -24,6 +24,7 @@
     <None Remove="Assets\icons8-refresh-50.png" />
     <None Remove="Assets\icons8-restart-50.png" />
     <None Remove="Assets\icons8-search-50.png" />
+    <None Remove="Assets\icons8-synthesizer-100.png" />
     <None Remove="Assets\icons8-volume-64.png" />
     <None Remove="Assets\userphoto.png" />
     <None Remove="Images\Adele_-_21.png" />
@@ -98,6 +99,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\icons8-search-50.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\icons8-synthesizer-100.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\icons8-volume-64.png">

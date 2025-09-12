@@ -16,7 +16,8 @@ namespace MusicPlayer.Data.Objects
         public string ImagePath { get; set; }
         public int ReleaseDate { get; set; }
         public string Genre { get; set; }
-
+        public string CoverPath { get; set; }
+        public long Id { get; set; }
         public ObservableCollection<Song> Songs { get; set; } = new ObservableCollection<Song>();
 
         private string albumInfo;
