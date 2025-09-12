@@ -79,7 +79,7 @@ namespace WpfApp3
             solidTheme2 = new Theme()
             {
 
-                Name = "Red",
+                Name = "High Contrast Variant - Lavender Gray",
                 WindowAccent = new ThemeColor(Brushes.Red),
                 WindowTitleForeground = new ThemeColor(255, 235, 235),
                 WindowContentBackground = new ThemeColor(255, 255, 255),

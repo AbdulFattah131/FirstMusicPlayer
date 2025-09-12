@@ -54,7 +54,7 @@
                 <StackPanel x:Name="ToggleGroup" DockPanel.Dock="Top">
 
                     <StackPanel Orientation="Horizontal">
-                    <Image Margin="0, 0, 10, 0" Source="/Assets/icons8-synthesizer-100.png" Width="25" Height="25" VerticalAlignment="Center"/>
+                    <Image Margin="0, 0, 10, 0" Source="/Assets/icons8-synthesizer-100.png" Width="25" Height="25" VerticalAlignment="Center" RenderOptions.BitmapScalingMode="HighQuality"/>
                     <TextBlock Text="Spice &amp; Co" FontSize="18" FontWeight="Bold" Foreground="Black"></TextBlock>
                     </StackPanel>
                     
@@ -69,7 +69,7 @@
                       BorderBrush="Transparent"
                       Foreground="Black">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                            <Image Margin="0, 0, 10, 0" Source="/Assets/icons8-music-library-30.png" Width="17" Height="17" VerticalAlignment="Center"/>
+                            <Image Margin="0, 0, 10, 0" Source="/Assets/icons8-music-library-30.png" Width="17" Height="17" VerticalAlignment="Center" RenderOptions.BitmapScalingMode="HighQuality"/>
                             <TextBlock Text="Your Library" VerticalAlignment="Center"/>
                         </StackPanel>
                         <ToggleButton.Style>
@@ -114,7 +114,7 @@
                       FontSize="14"
                       BorderBrush="Transparent">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                            <Image Margin="0, 0, 14, 0" Source="/Assets/icons8-browse-64.png" Width="13.5" Height="13.5" VerticalAlignment="Center"/>
+                            <Image Margin="0, 0, 14, 0" Source="/Assets/icons8-browse-64.png" Width="13.5" Height="13.5" VerticalAlignment="Center" RenderOptions.BitmapScalingMode="HighQuality"/>
                             <TextBlock Text="Browse" VerticalAlignment="Center"/>
                         </StackPanel>
                         <ToggleButton.Style>
@@ -162,7 +162,7 @@
                        FontSize="14"
                        BorderBrush="Transparent">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                            <Image Margin="0, 0, 11, 0" Source="/Assets/icons8-albums-30.png" Width="17" Height="17" VerticalAlignment="Center"/>
+                            <Image Margin="0, 0, 11, 0" Source="/Assets/icons8-albums-30.png" Width="17" Height="17" VerticalAlignment="Center" RenderOptions.BitmapScalingMode="HighQuality"/>
                             <TextBlock Text="Albums" VerticalAlignment="Center"/>
                         </StackPanel>
                         <ToggleButton.Style>
@@ -208,7 +208,7 @@
                            FontSize="14"
                            BorderBrush="Transparent">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                            <Image Margin="0, 0, 11, 0" Source="/Assets/icons8-mic-30.png" Width="17" Height="17" VerticalAlignment="Center"/>
+                            <Image Margin="0, 0, 11, 0" Source="/Assets/icons8-mic-30.png" Width="17" Height="17" VerticalAlignment="Center" RenderOptions.BitmapScalingMode="HighQuality"/>
                             <TextBlock Text="Artists"/>
                         </StackPanel>
                         <ToggleButton.Style>
@@ -253,7 +253,7 @@
                        BorderBrush="Transparent"
                        VerticalAlignment="Bottom">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                        <Image Margin="0, 0, 11, 0" Source="/Assets/icons8-playlist-50.png" Width="17" Height="17" VerticalAlignment="Center"/>
+                        <Image Margin="0, 0, 11, 0" Source="/Assets/icons8-playlist-50.png" Width="17" Height="17" VerticalAlignment="Center" RenderOptions.BitmapScalingMode="HighQuality"/>
                         <TextBlock Text="New Playlist"/>
                     </StackPanel>
                     <ToggleButton.Style>
@@ -313,79 +313,95 @@
 
                 <StackPanel>
                 <Border Grid.Row="0" Margin="15, 10, 25, 10" CornerRadius="15" Background="{Binding CurrentTheme.MusicControlBackground.Brush}">
-                    <Border.Effect>
-                        <DropShadowEffect
-                            Color="#494454"
-                            BlurRadius="0"
-                            ShadowDepth="3"
-                            Direction="-45"
-                            Opacity="0.4">
-                        </DropShadowEffect>
-                    </Border.Effect>
-                    <StackPanel Orientation="Vertical">
+                        <Border.Effect>
+                            <DropShadowEffect Color="#322657"
+                             Direction="270"
+                             ShadowDepth="3"
+                             Opacity="0.15"
+                             BlurRadius="8"/>
+                        </Border.Effect>
+
+                        <StackPanel Orientation="Vertical">
                             <TextBlock VerticalAlignment="Top" Text="Album Info" FontSize="13" Foreground="#494454" Margin="15, 17, 0, 0" FontWeight="Bold"></TextBlock>
                             <TextBlock Height="350" x:Name="tbAlbumInfo" VerticalAlignment="Top" Margin="15, 10, 15, 0" TextAlignment="Justify" TextWrapping="Wrap" Text="{Binding AlbumInfo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontWeight="SemiBold" Foreground="#000000"></TextBlock>
-                            <Border Height="115" VerticalAlignment="Bottom" CornerRadius="15" Background="#322657">
-                                <StackPanel Orientation="Vertical">
-                                    <TextBlock Text="Album Genre" FontSize="13" Foreground="{Binding WindowContentBackground.Brush}" Margin="15, 17, 0, 0" FontWeight="Bold"></TextBlock>
-                                    <Border Width="20" Background="White"></Border>
+                            <Border Height="115" VerticalAlignment="Bottom" CornerRadius="15" Background="#c5b2ef">
+                                <StackPanel Orientation="Vertical" Margin="15, 17, 0, 0">
+                                    <TextBlock Text="Album Genre" FontSize="13" Foreground="#494454" FontWeight="Bold"></TextBlock>
+                                    <WrapPanel Margin="0, 10, 0, 0">
+                                    <Border Width="70" Height="20" Background="#f8ebff" CornerRadius="7">
+                                    <TextBlock Text="{Binding Genre}"></TextBlock>
+                                    </Border>
+                                    <Border Width="70" Height="20" Background="#f8ebff" Margin="7, 0, 0, 0" CornerRadius="7">
+                                    <TextBlock Text="{Binding Genre}"></TextBlock>
+                                    </Border>
+                                    <Border Width="70" Height="20" Background="#f8ebff" Margin="0, 10, 0, 0" CornerRadius="7">
+                                    <TextBlock Text="{Binding Genre}"></TextBlock>
+                                    </Border>
+                                    </WrapPanel>
                                 </StackPanel>
                             </Border>
                         </StackPanel>
                 </Border>
-
                 </StackPanel>
-                <Border Grid.Row="1" VerticalAlignment="Top" Margin="15, 0, 25, 10" CornerRadius="15" Background="{Binding CurrentTheme.MusicControlBackground.Brush}">
-                <StackPanel>
-                <TextBlock Text="Most Played" FontWeight="Bold" Margin="15, 17, 0, 0" FontSize="13" Foreground="#494454"></TextBlock>
-                <ListBox Height="200" Grid.Column="1" Grid.Row="1" Margin="15, 10, 25, 10" VerticalAlignment="Center" HorizontalAlignment="Stretch" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+
+                <Border Grid.Row="1" Margin="15, 20, 25, 10" Height="300" VerticalAlignment="Top" CornerRadius="15" Background="{Binding CurrentTheme.MusicControlBackground.Brush}">
+                    <Border.Effect>
+                        <DropShadowEffect Color="#322657"
+                         Direction="270"
+                         ShadowDepth="3"
+                         Opacity="0.15"
+                         BlurRadius="8"/>
+                    </Border.Effect>
+                    <StackPanel>
+                        <TextBlock Text="Most Played" FontWeight="Bold" Margin="15, 17, 0, 0" FontSize="13" Foreground="#494454"></TextBlock>
+                        <ListBox Height="200" Grid.Column="1" Grid.Row="1" Margin="15, 10, 25, 10" VerticalAlignment="Center" HorizontalAlignment="Stretch" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                  Background="Transparent" Foreground="{Binding CurrentTheme.ListBoxItemForeground.Brush}">
 
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Margin="0, 4">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0, 4">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
 
-                                <StackPanel Grid.Column="1" Orientation="Vertical">
-                                    <TextBlock Text="{Binding Title}" FontWeight="SemiBold" FontSize="14" Foreground="Black"/>
-                                    <TextBlock Text="{Binding Artist}" FontSize="12" Foreground="Gray"/>
-                                </StackPanel>
-                            </Grid>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
+                                        <StackPanel Grid.Column="1" Orientation="Vertical">
+                                            <TextBlock Text="{Binding Title}" FontWeight="SemiBold" FontSize="14" Foreground="Black"/>
+                                            <TextBlock Text="{Binding Artist}" FontSize="12" Foreground="Gray"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
 
-                    <ListBox.ItemContainerStyle>
-                        <Style TargetType="ListBoxItem">
-                            <Setter Property="Background" Value="Transparent"/>
-                            <Setter Property="BorderThickness" Value="0"/>
-                            <Setter Property="Padding" Value="5"/>
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="ListBoxItem">
-                                        <Border Background="{TemplateBinding Background}">
-                                            <ContentPresenter/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#F0F0F0"/>
-                                </Trigger>
-                                <Trigger Property="IsSelected" Value="True">
-                                    <Setter Property="Background" Value="#E6E6E6"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </ListBox.ItemContainerStyle>
-                </ListBox>
-                </StackPanel>
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="Padding" Value="5"/>
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="ListBoxItem">
+                                                <Border Background="{TemplateBinding Background}">
+                                                    <ContentPresenter/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#F0F0F0"/>
+                                        </Trigger>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="#E6E6E6"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                        </ListBox>
+                    </StackPanel>
                 </Border>
             </Grid>
                 
@@ -669,7 +685,7 @@
                         </Grid.ColumnDefinitions>
 
 
-                        <Image Width="40" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20, 0, 0, 0" Grid.Column="0" Source="{Binding MusicPlayerCache.SelectedAlbum.ImagePath}"></Image>
+                        <Image Width="40" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20, 0, 0, 0" Grid.Column="0" Source="{Binding MusicPlayerCache.CurrentSong.ImagePath}"></Image>
                         <StackPanel Orientation="Vertical" VerticalAlignment="Center" Grid.Column="1" Margin="13, 0, 0, 0">
                             <TextBlock FontSize="13" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding MusicPlayerCache.CurrentSong.Title}"></TextBlock>
                             <TextBlock Foreground="#494454" Text="{Binding MusicPlayerCache.CurrentSong.Artist}"></TextBlock>

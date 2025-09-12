@@ -14,6 +14,7 @@ namespace MusicPlayer.Data.Objects
         public Album Album { get; set; }
         public string FilePath { get; set; }
         public string Liked { get; set; }
+        public string ImagePath => Album?.ImagePath;
         public int Duration { get; set; }
         public int PlayCount { get; set; }
     }
