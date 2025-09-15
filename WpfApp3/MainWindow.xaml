@@ -27,7 +27,7 @@
             <!-- Title Bar -->
             <RowDefinition Height="*"/>
             <!-- Content -->
-            <RowDefinition Height="110"/>
+            <RowDefinition Height="130"/>
             <!-- Music Control Bar -->
         </Grid.RowDefinitions>
 
@@ -401,6 +401,16 @@
                                 </Style>
                             </ListBox.ItemContainerStyle>
                         </ListBox>
+                        <Border CornerRadius="7" Width="35" Height="35" Background="#c5b2ef" HorizontalAlignment="Right" Margin="0, 0, 17, 50" VerticalAlignment="Bottom">
+                            <Border.Effect>
+                                <DropShadowEffect Color="#322657"
+                                 Direction="270"
+                                 ShadowDepth="3"
+                                 Opacity="0.15"
+                                 BlurRadius="5"/>
+                            </Border.Effect>
+                            <Image Source="/Assets/icons8-play-50.png" Width="20" Height="20"></Image>
+                        </Border>
                     </StackPanel>
                 </Border>
             </Grid>
@@ -649,7 +659,7 @@
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="115"></RowDefinition>
+                <RowDefinition Height="120"></RowDefinition>
             </Grid.RowDefinitions>
             
             <!-- Main Container for Music Control Bar-->
@@ -657,7 +667,7 @@
             <Border x:Name="MusicControlBar" 
                 Background="{Binding CurrentTheme.MusicControlBackground.Brush}"
                 CornerRadius="13"
-                Margin="30, 5, 30, 30"
+                Margin="30, 0, 30, 25"
                 Grid.Column="0"    
                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                
@@ -694,7 +704,7 @@
                     
                     <!-- Center Main Controls-->
                     
-                    <Grid Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Height="40">
+                    <Grid Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Height="42">
                         <Viewbox Stretch="Uniform">
                             <Grid>
                                 
@@ -909,7 +919,7 @@
 
                     <Slider Grid.Row="1" Grid.Column="1" x:Name="MainSlider"
                                 Minimum="0" Maximum="100" Value="50"
-                                Orientation="Horizontal" Margin="0, 6, 0, 0">
+                                Orientation="Horizontal" Margin="0, 10, 0, 0">
                         
                         <Slider.Resources>
                             <!-- Style -->

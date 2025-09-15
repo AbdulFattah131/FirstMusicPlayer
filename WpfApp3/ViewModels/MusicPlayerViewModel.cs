@@ -29,6 +29,7 @@ namespace WpfApp3
 
             }
         }
+
         private Album _selectedAlbum;
         public Album SelectedAlbum
         {
@@ -41,23 +42,8 @@ namespace WpfApp3
             }
         }
 
-        private readonly MusicRepository repository;
+        //create all the loading and playing functionality of the songs
 
-        public MusicPlayerCache(MusicRepository repository)
-        {
-            this.repository = repository;
-            LoadAlbums();
-        }
-
-        private void LoadAlbums()
-        {
-            var albumList = repository.GetAlbums();
-            Albums.Clear();
-            foreach (var album in albumList)
-            {
-                Albums.Add(album);
-            }
-        }
         public MusicPlayerCache()
         {
             var album1 = new Album { Title = "Thriller", Artist = "Michael Jackson", ReleaseDate = 1982, ImagePath= "/Images/Michael_Jackson_-_Thriller.png", AlbumInfo= "Released in 1982, Thriller is the best-selling album of all time, produced by Quincy Jones and featuring a mix of pop, rock, and R&B. It spawned hit singles like \"Billie Jean\" and \"Beat It,\" and its innovative music videos transformed the medium into an art form, cementing Jackson's \"King of Pop\" status." };
@@ -177,7 +163,5 @@ namespace WpfApp3
         protected void OnPropertyChanged(string propertyName) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
-
-    
 }
 

@@ -4,10 +4,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicPlayer.UIComponents", "WpfApp3\MusicPlayer.UIComponents.csproj", "{C410D6A8-8837-4744-8053-5C67A29F332C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{128EF67C-F299-4780-A650-CFCA7B2ECBDD} = {128EF67C-F299-4780-A650-CFCA7B2ECBDD}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicPlayer.Data", "MusicPlayer.Data\MusicPlayer.Data.csproj", "{27C4725B-B6BF-4384-AD17-DC9612393306}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicPlayer.Utility", "MusicPlayer.Utility\MusicPlayer.Utility.csproj", "{632538D9-B1AB-4F69-83AF-1AE37933BB18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{128EF67C-F299-4780-A650-CFCA7B2ECBDD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +32,10 @@ Global
 		{632538D9-B1AB-4F69-83AF-1AE37933BB18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{632538D9-B1AB-4F69-83AF-1AE37933BB18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{632538D9-B1AB-4F69-83AF-1AE37933BB18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{128EF67C-F299-4780-A650-CFCA7B2ECBDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{128EF67C-F299-4780-A650-CFCA7B2ECBDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{128EF67C-F299-4780-A650-CFCA7B2ECBDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{128EF67C-F299-4780-A650-CFCA7B2ECBDD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

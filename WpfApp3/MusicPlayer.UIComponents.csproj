@@ -20,6 +20,7 @@
     <None Remove="Assets\icons8-mic-30.png" />
     <None Remove="Assets\icons8-music-library-30.png" />
     <None Remove="Assets\icons8-pause-button-50.png" />
+    <None Remove="Assets\icons8-play-50.png" />
     <None Remove="Assets\icons8-playlist-50.png" />
     <None Remove="Assets\icons8-refresh-50.png" />
     <None Remove="Assets\icons8-restart-50.png" />
@@ -87,6 +88,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\icons8-pause-button-50.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\icons8-play-50.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\icons8-playlist-50.png">
