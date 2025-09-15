@@ -1,15 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
+﻿using System;                
+using System.Collections.Generic; 
+using System.IO;            
+using System.Linq; 
 
-namespace Services
+namespace MusicPlayer
 {
-    public class FileScanner
+    public static class FileScanner
     {
-        //load all the song files from the songs folder
-        //connect them with the project to be usable
+        public static List<string> ScanSongs(string folderPath)
+        {
+            if (!Directory.Exists(folderPath))
+                throw new DirectoryNotFoundException($"The folder '{folderPath}' was not found.");
+
+            var files = Directory.GetFiles(folderPath, "*.mp3");
+
+            return files.ToList();
+        }
     }
 }

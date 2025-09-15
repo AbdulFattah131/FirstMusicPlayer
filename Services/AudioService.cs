@@ -1,88 +1,114 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Windows.Media; // WPF MediaPlayer
+using NAudio.Wave;
 
-namespace MusicPlayer.Services
+public class AudioService
 {
-    public class AudioService
+    private IWavePlayer waveOut;               // Audio playback device
+    private AudioFileReader audioFile;         // Current audio file
+    private List<string> playlist;             // List of audio file paths
+    private int currentIndex;                  // Index of currently playing track
+
+    public AudioService()
     {
-        private MediaPlayer mediaPlayer; // WPF built-in media player
-        private List<string> playlist;   // list of audio file paths
-        private int currentIndex;
+        playlist = new List<string>();
+        currentIndex = 0;
+    }
 
-        public AudioService()
+    public void LoadPlaylist(List<string> files)
+    {
+        playlist.Clear();
+        foreach (var file in files)
         {
-            mediaPlayer = new MediaPlayer();
-            playlist = new List<string>();
-            currentIndex = 0;
+            if (File.Exists(file))
+                playlist.Add(file);
+        }
+        currentIndex = 0;
+    }
 
-            // Optional: handle media ended event
-            mediaPlayer.MediaEnded += (s, e) => PlayNext();
+    public void Play()
+    {
+        if (playlist.Count == 0) return;
+
+        Stop(); // Stop current audio if any
+
+        string filePath = playlist[currentIndex];
+        if (File.Exists(filePath))
+        {
+            audioFile = new AudioFileReader(filePath);
+            waveOut = new WaveOutEvent();
+            waveOut.Init(audioFile);
+            waveOut.PlaybackStopped += OnPlaybackStopped;
+            waveOut.Play();
+        }
+    }
+
+    public void Play(string filePath)
+    {
+        if (!File.Exists(filePath)) return;
+
+        Stop();
+
+        audioFile = new AudioFileReader(filePath);
+        waveOut = new WaveOutEvent();
+        waveOut.Init(audioFile);
+        waveOut.PlaybackStopped += OnPlaybackStopped;
+        waveOut.Play();
+    }
+
+    public void Pause()
+    {
+        waveOut?.Pause();
+    }
+
+    public void Resume()
+    {
+        waveOut?.Play();
+    }
+
+    public void Stop()
+    {
+        if (waveOut != null)
+        {
+            waveOut.Stop();
+            waveOut.Dispose();
+            waveOut = null;
         }
 
-        // Load files into playlist
-        public void LoadPlaylist(List<string> audioFiles)
+        if (audioFile != null)
         {
-            playlist.Clear();
-            foreach (var file in audioFiles)
-            {
-                if (File.Exists(file))
-                    playlist.Add(file);
-            }
-            currentIndex = 0;
+            audioFile.Dispose();
+            audioFile = null;
         }
+    }
 
-        // Play current track
-        public void Play()
-        {
-            if (playlist.Count == 0) return;
+    public void Next()
+    {
+        if (playlist.Count == 0) return;
 
-            mediaPlayer.Open(new Uri(playlist[currentIndex], UriKind.Absolute));
-            mediaPlayer.Play();
-        }
+        currentIndex++;
+        if (currentIndex >= playlist.Count) currentIndex = 0;
+        Play();
+    }
 
-        // Pause
-        public void Pause()
-        {
-            mediaPlayer.Pause();
-        }
+    public void Previous()
+    {
+        if (playlist.Count == 0) return;
 
-        // Stop
-        public void Stop()
-        {
-            mediaPlayer.Stop();
-        }
+        currentIndex--;
+        if (currentIndex < 0) currentIndex = playlist.Count - 1;
+        Play();
+    }
 
-        // Play next track
-        public void PlayNext()
-        {
-            if (playlist.Count == 0) return;
+    private void OnPlaybackStopped(object sender, StoppedEventArgs e)
+    {
+        Next();
+    }
 
-            currentIndex = (currentIndex + 1) % playlist.Count;
-            Play();
-        }
-
-        // Play previous track
-        public void PlayPrevious()
-        {
-            if (playlist.Count == 0) return;
-
-            currentIndex = (currentIndex - 1 + playlist.Count) % playlist.Count;
-            Play();
-        }
-
-        // Set volume (0.0 to 1.0)
-        public void SetVolume(double volume)
-        {
-            mediaPlayer.Volume = Math.Clamp(volume, 0.0, 1.0);
-        }
-
-        // Get current track path
-        public string GetCurrentTrack()
-        {
-            if (playlist.Count == 0) return null;
-            return playlist[currentIndex];
-        }
+    public string CurrentTrackName()
+    {
+        if (playlist.Count == 0) return null;
+        return Path.GetFileName(playlist[currentIndex]);
     }
 }
