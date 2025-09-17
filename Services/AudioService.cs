@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
+using MusicPlayer;
 using NAudio.Wave;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -140,7 +142,7 @@ public class AudioService
 //          ▼                         ▼
 //               ┌───────────────┐
 //               │ State         │
-//               │ Management    │  (where) : time, space, code
+//               │ Management    │  (where) : time, space
 //               │ (current song,│
 //               │  index, flags)│
 //               └───────▲───────┘
@@ -155,27 +157,84 @@ public class AudioService
 
 //         | Algorithms(A) |            | Flow Control(F) |        |  Data Structures(D) |    | State Management(S) |
 //---------| ----------------------     | -------------------------| -------------------------| ----------------------
-//A        | Self - contained logic     | Algorithms drive flow;   | Algorithms rely on       | Algorithms update or
+//Al       | Self - contained logic     | Algorithms drive flow;   | Algorithms rely on       | Algorithms update or
 //         | / clarity                  | flow controls execution  | proper structures for    | consume state; state
 //         |                            | order and repetition     | efficiency               | affects algorithm outcomes
 //---------|---------------------      -|--------------------------|--------------------------|----------------------
-//F        | Flow directs algs;         | Self - control; loops and| Flow determines how      | Flow triggers state
+//Fc       | Flow directs algs;         | Self - control; loops and| Flow determines how      | Flow triggers state
 //         | conditional steps          | conditions manage flow   | data is accessed in time | transitions; state can
 //         |                            |                          | and sequence             | change control paths
 //---------|----------------------      |--------------------------|--------------------------|----------------------
-//D        | Structures enable          | Flow uses structures to  | Self-contained storage;  | Data structures hold
+//Ds       | Structures enable          | Flow uses structures to  | Self-contained storage;  | Data structures hold
 //         | algorithms efficiently     | iterate/access data      | structure defines access | state and track history
 //         |                            |                          |                          |
 //---------|---------------------      -|--------------------------|--------------------------|----------------------
-//S        | State tracks algorithm     | State affects flow;      | State is stored in       | Self - tracking; updates
+//Sm       | State tracks algorithm     | State affects flow;      | State is stored in       | Self - tracking; updates
 //         | progress and results       | triggers loops/conditions| structures               | over time
 
 
 
 //Algorithms are the core driver — they rely on data structures and state, and flow control ensures their proper execution.                                   
-
 //Flow control adapts behavior based on algorithms, state, and data organization.
 
 //Data structures are the backbone — they influence and support all other components.
 
 //State management ties everything together across time and operations.
+
+
+//Music Player App (MVVM) – Core Logic Hierarchy
+//│
+//├── Layer 1: Architecture & Concurrency
+//│   ├── Structure
+//│   │   ├── MVVM layers → Model, ViewModel, View
+//│   │   ├── Utility & Services → FileScanner, TagReader, SettingsReader
+//│   │   └── Project organization → Namespaces, folders
+//│   │
+//│   ├── Responsibilities
+//│   │   ├── Model → Data objects (Track, Playlist, Settings)
+//│   │   ├── ViewModel → Commands, data-binding logic, state
+//│   │   ├── View → XAML UI definitions
+//│   │   └── Services/Utilities → File handling, metadata extraction, persistence
+//│   │
+//│   ├── Patterns
+//│   │   ├── Singleton → SettingsReader (configuration)
+//│   │   ├── Observer → INotifyPropertyChanged for data binding
+//│   │   ├── Command → RelayCommand for button actions
+//│   │   ├── Factory/Builder → Creating Track objects from file scans
+//│   │   └── Repository (optional) → For managing playlists or library
+//│   │
+//│   └── Interactions
+//│       ├── View ↔ ViewModel → Data binding, commands
+//│       ├── ViewModel ↔ Model → Track/Playlist updates
+//│       ├── Services ↔ ViewModel → File scanning, metadata load
+//│       └── Async/Threading → Background file scanning, playback
+//│
+//├── Layer 2: Abstraction & Modeling
+//│   └── Types & Abstraction
+//│       ├── Track → { Title, Artist, Album, Path, Duration }
+//│       ├── Playlist → { Name, Collection<Track> }
+//│       ├── FileScanner → abstracts filesystem traversal
+//│       ├── TagReader → abstracts audio metadata extraction
+//│       └── Settings → user preferences/config
+//│
+//└── Layer 3: Computational Runtime
+//    ├── Sequence
+//    │   ├── App startup → Load settings → Scan library → Bind to UI
+//    │   ├── User clicks Play → Load file → Stream to audio engine
+//    │
+//    ├── Selection / Branching
+//    │   ├── If file is supported → process metadata
+//    │   └── Else → skip / error handling
+//    │
+//    ├── Iteration / Looping
+//    │   ├── For each file in directory → create Track object
+//    │   └── For each Track in Playlist → enqueue for playback
+//    │
+//    ├── Recursion
+//    │   └── Recursive folder traversal in FileScanner
+//    │
+//    └── Termination
+//        ├── Closing app → save Settings, release resources
+//        └── Stopping playback → dispose audio stream
+
+

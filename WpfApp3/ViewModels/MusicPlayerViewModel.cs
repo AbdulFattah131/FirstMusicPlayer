@@ -112,7 +112,7 @@ namespace WpfApp3
             album5.Songs.Add(new Song { Title = "One and Only", TrackNumber = 10, Album = album5, Liked = "♡", Duration = 348, Artist = "Adele", });
             album5.Songs.Add(new Song { Title = "Lovesong", TrackNumber = 11, Album = album5, Liked = "♡", Duration = 316, Artist = "Adele", });
 
-            var album6 = new Album { Title = "Uptown Special", Artist = "Mark Ronson", ReleaseDate = 2015, ImagePath = "/Images/Mark_Ronson_-_Uptown_Special_(Official_Album_Cover).png", AlbumInfo = "Uptown Special is the fourth studio album by British DJ and producer Mark Ronson. The album was released on 13 January 2015 in the US and 19 January 2015 in the UK. Ronson dedicated the album to the late Amy Winehouse." };
+            var album6 = new Album { Title = "Uptown Special", Artist = "Mark Ronson", ReleaseDate = 2015, ImagePath = "/Images/Mark_Ronson_-_Uptown_Special_(Official_Album_Cover).png", AlbumInfo = "Uptown Special is the fourth studio album by British DJ and producer Mark Ronson.  The album was released on 13 January 2015 in the US and 19 January 2015 in the UK. Ronson dedicated the album to the late Amy Winehouse." };
 
             album6.Songs.Add(new Song { Title = "Uptown's First Finale", TrackNumber = 1, Album = album6, Liked = "♡", Duration = 57, Artist = "Mark Ronson" });
             album6.Songs.Add(new Song { Title = "Uptown Funk", TrackNumber = 2, Album = album6, Liked = "♡", Duration = 270, Artist = "Mark Ronson", });
@@ -120,7 +120,7 @@ namespace WpfApp3
             album6.Songs.Add(new Song { Title = "Crack In The Pearl", TrackNumber = 4, Album = album6, Liked = "♡", Duration = 129, Artist = "Mark Ronson", });
             album6.Songs.Add(new Song { Title = "Leaving Los Feliz", TrackNumber = 5, Album = album6, Liked = "♡", Duration = 280, Artist = "Mark Ronson", });
             album6.Songs.Add(new Song { Title = "Heavy And Rolling", TrackNumber = 6, Album = album6, Liked = "♡", Duration = 204, Artist = "Mark Ronson", });
-            album6.Songs.Add(new Song { Title = "Crack In The Pearl Pt. II", TrackNumber = 7, Album = album6, Liked = "♡", Duration = 138, Artist = "Mark Ronson    ", });
+            album6.Songs.Add(new Song { Title = "Crack In The Pearl Pt. II", TrackNumber = 7, Album = album6, Liked = "♡", Duration = 138, Artist = "Mark Ronson", });
             album6.Songs.Add(new Song { Title = "Summer Breaking", TrackNumber = 8, Album = album6, Liked = "♡", Duration = 246, Artist =   "Mark Ronson", });
             album6.Songs.Add(new Song { Title = "Feel Right", TrackNumber = 9, Album = album6, Liked = "♡", Duration = 223, Artist = "Mark Ronson", });
             album6.Songs.Add(new Song { Title = "Daffodils", TrackNumber = 10, Album = album6, Liked = "♡", Duration = 298, Artist = "Mark Ronson", });
