@@ -48,9 +48,9 @@ namespace WpfApp3
         {
             var album1 = new Album { Title = "Thriller", Artist = "Michael Jackson", ReleaseDate = 1982, ImagePath= "/Images/Michael_Jackson_-_Thriller.png", AlbumInfo= "Released in 1982, Thriller is the best-selling album of all time, produced by Quincy Jones and featuring a mix of pop, rock, and R&B. It spawned hit singles like \"Billie Jean\" and \"Beat It,\" and its innovative music videos transformed the medium into an art form, cementing Jackson's \"King of Pop\" status." };
 
-            album1.Songs.Add(new Song { Title = "Beat It", TrackNumber = 1, Album = album1, Liked = "♡", Duration = 258, Artist = "Michael Jackson" });
-            album1.Songs.Add(new Song { Title = "Wanna Be Startin' Somethin'", TrackNumber = 2, Album = album1, Liked = "♡", Duration = 363, Artist = "Michael Jackson", });
-            album1.Songs.Add(new Song { Title = "Baby Be Mine", TrackNumber = 3, Album = album1, Liked = "♡", Duration = 260, Artist = "Michael Jackson", });
+            album1.Songs.Add(new Song {Title = "Beat It", TrackNumber = 1, Album = album1, Liked = "♡", Duration = 258, Artist = "Michael Jackson" });
+            album1.Songs.Add(new Song {Title = "Wanna Be Startin' Somethin'", TrackNumber = 2, Album = album1, Liked = "♡", Duration = 363, Artist = "Michael Jackson", });
+            album1.Songs.Add(new Song {Title = "Baby Be Mine", TrackNumber = 3, Album = album1, Liked = "♡", Duration = 260, Artist = "Michael Jackson", });
             album1.Songs.Add(new Song {Title = "The Girl Is Mine", TrackNumber = 4, Album = album1, Liked = "♡", Duration = 222, Artist = "Michael Jackson, Paul McCartney", });
             album1.Songs.Add(new Song {Title = "Thriller", TrackNumber = 5, Album = album1, Liked = "♡", Duration = 357, Artist = "Michael Jackson", });
             album1.Songs.Add(new Song {Title = "Billie Jean", TrackNumber = 6, Album = album1, Liked = "♡", Duration = 294, Artist = "Michael Jackson", });
