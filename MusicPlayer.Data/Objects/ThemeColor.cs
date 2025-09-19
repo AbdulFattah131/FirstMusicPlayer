@@ -6,7 +6,7 @@ namespace MusicPlayer.Data.Objects
 {
     public class ThemeColor : IThemeColor
     {
-        [XmlIgnore] // Ignore below
+        [XmlIgnore] // "Ignore" below
         public Brush Brush { get; set; } // Brush Property
         public string Hex // Brush to/from String Convertor
         {
