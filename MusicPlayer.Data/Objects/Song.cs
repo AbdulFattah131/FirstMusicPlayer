@@ -17,5 +17,6 @@ namespace MusicPlayer.Data.Objects
         public string ImagePath => Album?.ImagePath;
         public int Duration { get; set; }
         public int PlayCount { get; set; }
+
     }
 }
