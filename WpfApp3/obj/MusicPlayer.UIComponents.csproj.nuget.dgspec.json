@@ -127,6 +127,10 @@
             "NAudio": {
               "target": "Package",
               "version": "[2.2.1, )"
+            },
+            "TagLibSharp": {
+              "target": "Package",
+              "version": "[2.3.0, )"
             }
           },
           "imports": [

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "q5acIVNTg6s=",
+  "dgSpecHash": "9ttEeLscHUs=",
   "success": true,
   "projectFilePath": "C:\\Users\\safalam\\source\\repos\\WPF\\WpfApp3\\WpfApp3\\MusicPlayer.UIComponents.csproj",
   "expectedPackageFiles": [
@@ -14,7 +14,8 @@
     "C:\\Users\\safalam\\.nuget\\packages\\naudio.winforms\\2.2.1\\naudio.winforms.2.2.1.nupkg.sha512",
     "C:\\Users\\safalam\\.nuget\\packages\\naudio.winmm\\2.2.1\\naudio.winmm.2.2.1.nupkg.sha512",
     "C:\\Users\\safalam\\.nuget\\packages\\system.security.accesscontrol\\4.7.0\\system.security.accesscontrol.4.7.0.nupkg.sha512",
-    "C:\\Users\\safalam\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512"
+    "C:\\Users\\safalam\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512",
+    "C:\\Users\\safalam\\.nuget\\packages\\taglibsharp\\2.3.0\\taglibsharp.2.3.0.nupkg.sha512"
   ],
   "logs": []
 }

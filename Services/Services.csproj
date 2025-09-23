@@ -11,4 +11,10 @@
     <PackageReference Include="TagLibSharp" Version="2.3.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="MusicPlayer.Data">
+      <HintPath>..\MusicPlayer.Data\bin\Debug\net8.0-windows\MusicPlayer.Data.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

@@ -27,7 +27,14 @@ C:\Users\safalam\source\repos\WPF\WpfApp3\WpfApp3\bin\Debug\net8.0-windows\Music
 C:\Users\safalam\source\repos\WPF\WpfApp3\WpfApp3\obj\Debug\net8.0-windows\MusicPlayer.UIComponents.sourcelink.json
 C:\Users\safalam\source\repos\WPF\WpfApp3\WpfApp3\obj\Debug\net8.0-windows\ThemeDesigner.g.cs
 C:\Users\safalam\source\repos\WPF\WpfApp3\WpfApp3\obj\Debug\net8.0-windows\ThemeDesigner.baml
-C:\Users\safalam\source\repos\WPF\WpfApp3\WpfApp3\bin\Debug\net8.0-windows\Newtonsoft.Json.dll
 C:\Users\safalam\source\repos\WPF\WpfApp3\WpfApp3\obj\Debug\net8.0-windows\Controls\List.g.cs
 C:\Users\safalam\source\repos\WPF\WpfApp3\WpfApp3\obj\Debug\net8.0-windows\Controls\List.baml
 C:\Users\safalam\source\repos\WPF\WpfApp3\WpfApp3\obj\Debug\net8.0-windows\GeneratedInternalTypeHelper.g.cs
+C:\Users\safalam\source\repos\WPF\WpfApp3\WpfApp3\bin\Debug\net8.0-windows\NAudio.dll
+C:\Users\safalam\source\repos\WPF\WpfApp3\WpfApp3\bin\Debug\net8.0-windows\NAudio.Asio.dll
+C:\Users\safalam\source\repos\WPF\WpfApp3\WpfApp3\bin\Debug\net8.0-windows\NAudio.Core.dll
+C:\Users\safalam\source\repos\WPF\WpfApp3\WpfApp3\bin\Debug\net8.0-windows\NAudio.Midi.dll
+C:\Users\safalam\source\repos\WPF\WpfApp3\WpfApp3\bin\Debug\net8.0-windows\NAudio.Wasapi.dll
+C:\Users\safalam\source\repos\WPF\WpfApp3\WpfApp3\bin\Debug\net8.0-windows\NAudio.WinForms.dll
+C:\Users\safalam\source\repos\WPF\WpfApp3\WpfApp3\bin\Debug\net8.0-windows\NAudio.WinMM.dll
+C:\Users\safalam\source\repos\WPF\WpfApp3\WpfApp3\bin\Debug\net8.0-windows\TagLibSharp.dll

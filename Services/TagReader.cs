@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
+using MusicPlayer.Data.Objects;
 
-namespace Services
+namespace MusicPlayer.Utility
 {
     public class TagReader
     {
-        //utilize the tags provided with the songs to show them in the UI
+        //public ObservableCollection<Song> ReadTags(ObservableCollection<string> filePath)
+        //{
+        //    FileScanner
+        //}
     }
 }
