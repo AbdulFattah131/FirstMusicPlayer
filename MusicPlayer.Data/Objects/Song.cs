@@ -13,6 +13,7 @@ namespace MusicPlayer.Data.Objects
         public string Title { get; set; }
         public string Artist { get; set; }
         public Album Album { get; set; }
+        public string Genre { get; set; }
         
         private string filePath;
         public string FilePath
@@ -21,9 +22,9 @@ namespace MusicPlayer.Data.Objects
             set => filePath = value;
         }
 
-        public string isLiked { get; set; }
+        public bool isLiked { get; set; }
         public string ImagePath => Album?.ImagePath;
-        public int Duration { get; set; }
+        public string Length { get; set; }
         public int PlayCount { get; set; }
 
     }

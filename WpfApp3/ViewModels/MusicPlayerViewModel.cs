@@ -11,7 +11,7 @@ namespace WpfApp3
     public class MusicPlayerCache : INotifyPropertyChanged
     {
         private ObservableCollection<Song> _lstSongs;
-        public ObservableCollection<Song> GetSongs
+        public ObservableCollection<Song> Songs
         {
             get => _lstSongs;
             set => _lstSongs = value;

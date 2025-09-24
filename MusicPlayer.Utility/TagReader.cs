@@ -1,33 +1,80 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Drawing.Text;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using MusicPlayer.Data.Objects;
-using MusicPlayer.Utility;
-using TagLib;
 
 namespace MusicPlayer.Utility
 {
     public class TagReader
     {
-        public TagReader() 
+        private static TagReader _instance;
+        public static TagReader Instance
         {
-            var a = FileScanner.Instance.ScanSongs();
-
-            foreach (var path in a)
+            get
             {
-                using (TagLib.File file = TagLib.File.Create(path))
-                {
-                    string title = file.Tag.Title;
-                    string artist = string.Join(", ", file.Tag.Performers);
-                    string album = file.Tag.Album;
+                if(_instance == null)
+                    _instance = new TagReader();
 
-                }
+                return _instance;
             }
         }
-        
+
+        private Dictionary<string, Album> m_dictAlbums = new Dictionary<string, Album>();
+
+        public Song ReadSongFromFilePath(string stfilePath)
+        {
+            Song song = null;
+
+            using (TagLib.File file = TagLib.File.Create(stfilePath))
+            {
+                if (!m_dictAlbums.ContainsKey(file.Tag.Album))
+                {
+                    Album album = new Album()
+                    {
+                        Title = file.Tag.Album,
+                        Artist = string.Join(", ", file.Tag.AlbumArtists),
+                        Year = (int)file.Tag.Year,
+                    };
+
+                    m_dictAlbums.Add(file.Tag.Album, album);
+                }
+
+                var a = file.Tag.Pictures;
+
+                song = new Song
+                {
+                    Title = file.Tag.Title,
+                    Artist = string.Join(", ", file.Tag.Performers),
+                    Album = m_dictAlbums[file.Tag.Album],
+                    Genre = string.Join(", ", file.Tag.Genres),
+                    Length = file.Tag.Length,
+
+                    FilePath = stfilePath
+                };
+            }
+
+            return song;
+        }
+
+        public ObservableCollection<Song> ReadSongsFromFilePaths(IList<string> lstFilePaths)
+        {
+            ObservableCollection<Song> lstSongs = new ObservableCollection<Song>();
+
+            // add each song
+            foreach (string stFilePath in lstFilePaths)
+            {
+                Song temp = ReadSongFromFilePath(stFilePath);
+
+                if (temp != null)
+                {
+                    lstSongs.Add(temp);
+                    //
+                }
+            }
+         
+            return lstSongs;
+        }
+
+        private TagReader()
+        {
+        }
     }
 }

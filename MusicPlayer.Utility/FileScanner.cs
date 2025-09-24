@@ -19,9 +19,9 @@ namespace MusicPlayer.Utility
             }
         }
 
-        private FileScanner()
+        FileScanner()
         {
-
+           
         }
 
         public ObservableCollection<string> ScanSongs()
@@ -32,7 +32,7 @@ namespace MusicPlayer.Utility
                                  .Where(file => allowedExtensions.Any(ext => file.EndsWith(ext, StringComparison.OrdinalIgnoreCase)))
                                  .ToList();
 
-            ObservableCollection<string>  songsCollection = new ObservableCollection<string>(files);
+            ObservableCollection<string>  lstSongFilePaths = new ObservableCollection<string>(files);
 
             try
             {
@@ -41,7 +41,7 @@ namespace MusicPlayer.Utility
 
                 foreach (var path in filePaths)
                 {
-                    songsCollection.Add(path);
+                    lstSongFilePaths.Add(path);
                 }
             }
             catch (Exception ex)
@@ -49,7 +49,7 @@ namespace MusicPlayer.Utility
                 Console.WriteLine($"Error reading files: {ex.Message}");
             }
 
-            return songsCollection;
+            return lstSongFilePaths;
         }
     }
 }

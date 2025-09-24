@@ -9,14 +9,10 @@
         WindowStyle="None" ResizeMode="CanResize"
         Closed="Window_Closed"
         AllowsTransparency="True" Background="Transparent">
-    
+
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0"/>
     </WindowChrome.WindowChrome>
-
-    <Window.Resources>
-        <convertor:DurationToDisplayTimeConvertor x:Key="DurationToDisplayTimeConvertor"/>
-    </Window.Resources>
 
     <!-- Main Grid -->
     
@@ -57,8 +53,8 @@
                     <Image Margin="0, 0, 10, 0" Source="/Assets/icons8-synthesizer-100.png" Width="25" Height="25" VerticalAlignment="Center" RenderOptions.BitmapScalingMode="HighQuality"/>
                     <TextBlock Text="Spice &amp; Co" FontSize="18" FontWeight="Bold" Foreground="Black"></TextBlock>
                     </StackPanel>
-                    
-                    <TextBlock Text="Curation" Margin="0, 35, 0, 0" FontWeight="Bold" FontSize="15" Foreground="#494454"></TextBlock>
+
+                    <TextBlock Text="Curation" Margin="0, 35, 0, 0" FontWeight="Bold" FontSize="15" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"></TextBlock>
 
                     <ToggleButton x:Name="tbLibrary"
                       Height="40"
@@ -152,7 +148,7 @@
                         </ToggleButton.Style>
                     </ToggleButton>
 
-                    <TextBlock Text="My Music" Margin="0, 40, 0, 0" FontWeight="Bold" FontSize="15" Foreground="#494454"></TextBlock>
+                    <TextBlock Text="My Music" Margin="0, 40, 0, 0" FontWeight="Bold" FontSize="15" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"></TextBlock>
 
                     <ToggleButton
                        Height="40"
@@ -414,7 +410,6 @@
                     </StackPanel>
                 </Border>
             </Grid>
-                
 
             <!-- Column 1 Center Bar -->
             
@@ -470,7 +465,7 @@
                         </Grid.RowDefinitions>
                         
                         <TextBlock Grid.Row="0" x:Name="tbYourLibrary" Text="Your Library" FontSize="18" FontWeight="Bold" 
-                        Foreground="#1e1e1e" HorizontalAlignment="Left"/>
+                        Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}" HorizontalAlignment="Left"/>
 
                         <!-- Albums List Box -->
                         
@@ -587,7 +582,7 @@
                                             </ContentControl.Style>
                                         </ContentControl>
                                         <TextBlock Grid.Column="1" Margin="15, 0, 15, 0" Text="{Binding Title}" FontWeight="SemiBold" FontSize="14" Foreground="Black"/>
-                                        <TextBlock Grid.Column="2" Margin="0, 0, 80, 0" Text="{Binding Duration, Converter={StaticResource DurationToDisplayTimeConvertor}}" HorizontalAlignment="Right" FontWeight="Regular" FontSize="14" Foreground="Black"/>
+                                        <TextBlock Grid.Column="2" Margin="0, 0, 80, 0" Text="{Binding Length}" HorizontalAlignment="Right" FontWeight="Regular" FontSize="14" Foreground="Black"/>
                                         <Button Grid.Column="3" HorizontalAlignment="Right" Background="Transparent" BorderBrush="Transparent" Width="15" Margin="0, 0, 30, 0">
                                             <Button.ContentTemplate>
                                                 <DataTemplate>

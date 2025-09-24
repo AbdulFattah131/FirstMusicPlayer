@@ -63,6 +63,7 @@ namespace WpfApp3
             {
 
                 Name = "Lavender",
+                WindowTextForeground = new ThemeColor(30, 30, 30),
                 WindowAccent = new ThemeColor(197, 178, 239),
                 WindowTitleForeground = new ThemeColor(Brushes.White),
                 WindowContentBackground = new ThemeColor(219, 218, 234),
@@ -93,6 +94,8 @@ namespace WpfApp3
 
             CurrentTheme = solidTheme;
             ThemeWriter.Instance.WriteToFile(CurrentTheme);
+
+            TagReader.Instance.ReadSongsFromFilePaths(FileScanner.Instance.ScanSongs());
 
             MusicPlayerCache = new MusicPlayerCache();
             Settings = new Settings();

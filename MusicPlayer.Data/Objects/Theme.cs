@@ -11,6 +11,12 @@ namespace MusicPlayer.Data.Objects
             set;
         }
 
+        public ThemeColor WindowTextForeground
+        {
+            get;
+            set;
+        }
+
         public ThemeColor WindowAccent
         {
             get;
