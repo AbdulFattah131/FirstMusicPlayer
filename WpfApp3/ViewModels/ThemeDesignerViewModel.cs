@@ -13,13 +13,13 @@ namespace MusicPlayer.UIComponents.ViewModels
 
             CustomTheme = new Theme()
             {
-                WindowAccent = new ThemeColor(),
+                WindowPrimary = new ThemeColor(),
                 WindowContentBackground = new ThemeColor(),
                 WindowTitleForeground = new ThemeColor(),
                 ListBoxItemForeground = new ThemeColor(),
                 CurrentSongTitleForeground = new ThemeColor(),
                 CurrentSongArtistForeground = new ThemeColor(),
-                MusicControlBackground = new ThemeColor(),
+                PlayerControlBackground = new ThemeColor(),
                 TitleBarBackground = new ThemeColor(),
             };
         }

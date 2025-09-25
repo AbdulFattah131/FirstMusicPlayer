@@ -64,7 +64,7 @@ namespace MusicPlayer.UIComponents
             }
             if (itbQueryTextBox.Name == "itbWindowAccentHex")
             {
-                m_vm.CustomTheme.WindowAccent.Hex = stQueryText;
+                m_vm.CustomTheme.WindowPrimary.Hex = stQueryText;
             }
             if (itbQueryTextBox.Name == "itbWindowContentBackgroundHex")
             {
@@ -88,7 +88,7 @@ namespace MusicPlayer.UIComponents
             }
             if (itbQueryTextBox.Name == "itbMusicControlBackgroundHex")
             {
-                m_vm.CustomTheme.MusicControlBackground.Hex = stQueryText;
+                m_vm.CustomTheme.PlayerControlBackground.Hex = stQueryText;
             }
             if (itbQueryTextBox.Name == "itbTitleBarBackgroundHex")
             {

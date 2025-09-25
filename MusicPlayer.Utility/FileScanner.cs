@@ -6,6 +6,7 @@ namespace MusicPlayer.Utility
     public class FileScanner
     {
         // Scan and load all song FilePaths into our project.
+
         private static FileScanner _instance;
 
         public static FileScanner Instance
@@ -32,7 +33,7 @@ namespace MusicPlayer.Utility
                                  .Where(file => allowedExtensions.Any(ext => file.EndsWith(ext, StringComparison.OrdinalIgnoreCase)))
                                  .ToList();
 
-            ObservableCollection<string>  lstSongFilePaths = new ObservableCollection<string>(files);
+            ObservableCollection<string> lstSongFilePaths = new ObservableCollection<string>(files);
 
             try
             {

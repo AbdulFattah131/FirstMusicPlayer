@@ -57,7 +57,7 @@ namespace WpfApp3
 
         private void grdClose_MouseEnter(object sender, MouseEventArgs e)
         {
-            grdClose.Background = (m_vm.CurrentTheme.WindowAccent.Brush);
+            grdClose.Background = (m_vm.CurrentTheme.WindowPrimary.Brush);
         }
 
         private void grdClose_MouseLeave(object sender, MouseEventArgs e)

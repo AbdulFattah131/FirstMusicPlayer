@@ -46,9 +46,11 @@ namespace MusicPlayer.Utility
                     Album = m_dictAlbums[file.Tag.Album],
                     Genre = string.Join(", ", file.Tag.Genres),
                     Length = file.Tag.Length,
+                    TrackNumber = (int)file.Tag.Track,
 
                     FilePath = stfilePath
                 };
+                m_dictAlbums[file.Tag.Album].Songs.Add(song);
             }
 
             return song;
@@ -66,13 +68,15 @@ namespace MusicPlayer.Utility
                 if (temp != null)
                 {
                     lstSongs.Add(temp);
-                    //
                 }
             }
          
             return lstSongs;
         }
-
+        public IEnumerable<Album> GetAlbums()
+        {
+            return m_dictAlbums.Values;
+        }
         private TagReader()
         {
         }
