@@ -64,14 +64,13 @@ namespace WpfApp3
 
                 Name = "Lavender",
                 WindowTextForeground = new ThemeColor(30, 30, 30),
-                WindowSecondary = new ThemeColor(142, 125, 183),
-                ListBoxItemHover = new ThemeColor(242, 242, 242),
-                WindowPrimaryDark = new ThemeColor(50, 38, 87),
-                ListBoxSongSelect = new ThemeColor(209, 197, 255),
+                WindowPrimaryAnchor = new ThemeColor(142, 125, 183),
+                AlternateTextForeground = new ThemeColor(30, 30, 30),
                 WindowPrimary = new ThemeColor(197, 178, 239),
                 WindowTitleForeground = new ThemeColor(Brushes.White),
                 WindowContentBackground = new ThemeColor(219, 218, 234),
-                ComplementGray = new ThemeColor(169, 168, 204),
+                ComplementGray = new ThemeColor(73, 68, 84),
+                WindowPrimaryLight = new ThemeColor(203, 186, 241),
                 CurrentSongTitleForeground = new ThemeColor(Brushes.Black),
                 CurrentSongArtistForeground = new ThemeColor(Brushes.Gray),
                 PlayerControlBackground = new ThemeColor(231, 234, 240),
@@ -83,19 +82,18 @@ namespace WpfApp3
             {
 
                 Name = "High Contrast - Lavender",
-                WindowTextForeground = new ThemeColor(30, 30, 30),
-                WindowSecondary = new ThemeColor(142, 125, 183),
-                ListBoxItemHover = new ThemeColor(242, 242, 242),
-                WindowPrimaryDark = new ThemeColor(50, 38, 87),
-                ListBoxSongSelect = new ThemeColor(209, 197, 255),
-                WindowPrimary = new ThemeColor(197, 178, 239),
+                WindowTextForeground = new ThemeColor(Brushes.Black),
+                WindowPrimaryAnchor = new ThemeColor(142, 125, 183),
+                AlternateTextForeground = new ThemeColor(30, 30, 30),
+                WindowPrimary = new ThemeColor(205, 166, 255),
                 WindowTitleForeground = new ThemeColor(Brushes.White),
-                WindowContentBackground = new ThemeColor(219, 218, 234),
+                WindowContentBackground = new ThemeColor(209, 205, 238),
                 ComplementGray = new ThemeColor(169, 168, 204),
+                WindowPrimaryLight = new ThemeColor(203, 186, 241),
                 CurrentSongTitleForeground = new ThemeColor(Brushes.Black),
-                CurrentSongArtistForeground = new ThemeColor(Brushes.Gray),
-                PlayerControlBackground = new ThemeColor(231, 234, 240),
-                TitleBarBackground = new ThemeColor(46, 44, 54)
+                CurrentSongArtistForeground = new ThemeColor(Brushes.Black),
+                PlayerControlBackground = new ThemeColor(237, 235, 250),
+                TitleBarBackground = new ThemeColor(26, 26, 26)
 
             };
 

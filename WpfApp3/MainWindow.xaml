@@ -322,15 +322,15 @@
                             <TextBlock Height="350" x:Name="tbAlbumInfo" VerticalAlignment="Top" Margin="15, 10, 15, 0" TextAlignment="Justify" TextWrapping="Wrap" Text="{Binding AlbumInfo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontWeight="SemiBold" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"></TextBlock>
                             <Border Height="115" VerticalAlignment="Bottom" CornerRadius="15" Background="{Binding CurrentTheme.WindowPrimary.Brush}">
                                 <StackPanel Orientation="Vertical" Margin="15, 17, 0, 0">
-                                    <TextBlock Text="Album Genre" FontSize="13" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}" FontWeight="Bold"></TextBlock>
+                                    <TextBlock Text="Album Genre" FontSize="13" Foreground="{Binding CurrentTheme.AlternateTextForeground.Brush}" FontWeight="Bold"></TextBlock>
                                     <WrapPanel Margin="0, 10, 0, 0">
-                                    <Border Width="70" Height="20" Background="#f8ebff" CornerRadius="7">
+                                    <Border Width="70" Height="20" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}" CornerRadius="7">
                                     <TextBlock Text="{Binding Genre}"></TextBlock>
                                     </Border>
-                                    <Border Width="70" Height="20" Background="#f8ebff" Margin="7, 0, 0, 0" CornerRadius="7">
+                                        <Border Width="70" Height="20" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}" Margin="7, 0, 0, 0" CornerRadius="7">
                                     <TextBlock Text="{Binding Genre}"></TextBlock>
                                     </Border>
-                                    <Border Width="70" Height="20" Background="#f8ebff" Margin="0, 10, 0, 0" CornerRadius="7">
+                                        <Border Width="70" Height="20" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}" Margin="0, 10, 0, 0" CornerRadius="7">
                                     <TextBlock Text="{Binding Genre}"></TextBlock>
                                     </Border>
                                     </WrapPanel>
@@ -340,7 +340,7 @@
                 </Border>
                 </StackPanel>
 
-                <Border Grid.Row="1" Margin="15, 0, 25, 10" Height="250" VerticalAlignment="Top" CornerRadius="15" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}">
+                <Border Grid.Row="1" Margin="15, 0, 25, 40" Height="250" VerticalAlignment="Center" CornerRadius="15" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}">
                     <Border.Effect>
                         <DropShadowEffect Color="#322657"
                          Direction="270"
@@ -348,9 +348,9 @@
                          Opacity="0.15"
                          BlurRadius="8"/>
                     </Border.Effect>
-                    <StackPanel>
+                    <StackPanel Orientation="Vertical">
                         <TextBlock Text="Lyrics" FontWeight="Bold" Margin="15, 17, 0, 0" FontSize="14" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"></TextBlock>
-                        <TextBlock Text="Lyrics" VerticalAlignment="Center" FontWeight="UltraBlack" Margin="15, 17, 0, 0" FontSize="13" Foreground="{Binding CurrentTheme.WindowPrimaryDark.Brush}"></TextBlock>
+                        <TextBlock Text="Lyrics" VerticalAlignment="Top" FontWeight="UltraBlack" Margin="15, 17, 0, 0" FontSize="13" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"></TextBlock>
                     </StackPanel>
                 </Border>
             </Grid>
@@ -463,7 +463,7 @@
                                     </Setter>
                                     <Style.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="{Binding CurrentTheme.ListBoxItemHover.Brush}"/>
+                                            <Setter Property="Background" Value="#f8f8ff"/>
                                             <Setter Property="Cursor" Value="Hand"/>
                                         </Trigger>
                                         <Trigger Property="IsSelected" Value="True">
@@ -499,7 +499,6 @@
                                             <ColumnDefinition Width="*"></ColumnDefinition>
                                             <ColumnDefinition Width="*"></ColumnDefinition>
                                             <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                            <ColumnDefinition Width="Auto"></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
 
                                         <ContentControl Grid.Column="0" Width="20" Height="20">
@@ -526,13 +525,6 @@
                                         <TextBlock Grid.Column="1" Margin="15, 0, 15, 0" Text="{Binding Title}" FontWeight="SemiBold" FontSize="14" Foreground="Black"/>
                                         <TextBlock Grid.Column="2" Margin="0, 0, 80, 0" Text="{Binding Length}" HorizontalAlignment="Right" FontWeight="Regular" FontSize="14" Foreground="Black"/>
                                         <Button Grid.Column="3" HorizontalAlignment="Right" Background="Transparent" BorderBrush="Transparent" Width="15" Margin="0, 0, 30, 0">
-                                            <Button.ContentTemplate>
-                                                <DataTemplate>
-                                                    <Image Source="/Assets/icons8-heart-50.png"></Image>
-                                                </DataTemplate>
-                                            </Button.ContentTemplate>
-                                        </Button>
-                                        <Button Grid.Column="4" HorizontalAlignment="Right" Background="Transparent" BorderBrush="Transparent" Width="15" Margin="0, 0, 30, 0">
                                             <Button.ContentTemplate>
                                                 <DataTemplate>
                                                     <Image Source="/Assets/icons8-ellipsis-30.png"></Image>
@@ -562,10 +554,10 @@
                                     <Style.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">
                                             <Setter Property="Cursor" Value="Hand"/>
-                                            <Setter Property="Background" Value="#F0F0F0"/>
+                                            <Setter Property="Background" Value="#f8f8ff"/>
                                         </Trigger>
                                         <Trigger Property="IsSelected" Value="True">
-                                            <Setter Property="Background" Value="{Binding CurrentTheme.WindowPrimary.Brush}"/>
+                                            <Setter Property="Background" Value="White"/>
                                         </Trigger>
                                     </Style.Triggers>
                                 </Style>
@@ -607,7 +599,6 @@
                 Margin="30, 0, 30, 25"
                 Grid.Column="0"    
                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-               
 
                 <!-- Music Control Grid -->
 
@@ -622,7 +613,6 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-
                     <!-- Left Side Current Song View -->
 
                     <Grid Grid.Column="0" Grid.RowSpan="2" Margin="10, 0, 0, 0">
@@ -630,7 +620,6 @@
                             <ColumnDefinition Width="Auto"></ColumnDefinition>
                             <ColumnDefinition Width="Auto"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-
 
                         <Image Width="40" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20, 0, 0, 0" Grid.Column="0" Source="{Binding MusicPlayerCache.CurrentSong.ImagePath}"></Image>
                         <StackPanel Orientation="Vertical" VerticalAlignment="Center" Grid.Column="1" Margin="13, 0, 0, 0">
@@ -661,7 +650,12 @@
                                 <Button Grid.Row="0" Grid.Column="0" Background="Transparent" BorderBrush="Transparent" Width="40" Margin="0, 0, 30, 0">
                                     <Button.ContentTemplate>
                                         <DataTemplate>
-                                            <Image Source="/Assets/icons8-refresh-50.png"></Image>
+                                                <Path x:Name="Repeat"
+                                                        Data ="M17,17H7V14L3,18L7,22V19H19V13H17M7,7H17V10L21,6L17,2V5H5V11H7V7Z"
+                                                        Fill="{Binding DataContext.CurrentTheme.ComplementGray.Brush, RelativeSource={RelativeSource AncestorType=Button}}"
+                                                        Stretch="Uniform" Width="35" Height="35"
+                                                        Stroke="{Binding DataContext.CurrentTheme.ComplementGray.Brush, RelativeSource={RelativeSource AncestorType=Button}}"
+                                                        StrokeThickness="1.5" />
                                         </DataTemplate>
                                     </Button.ContentTemplate>
                                 </Button>
@@ -669,12 +663,14 @@
                                 <Button Grid.Row="0" Grid.Column="1" Width="60" Background="Transparent" BorderBrush="Transparent">
                                     <Button.ContentTemplate>
                                         <DataTemplate>
-                                            <Image Source="/Assets/icons8-end-50 (1).png"></Image>
-                                        </DataTemplate>
+                                                    <Path x:Name="Previous" Data="M6,6H8V18H6M9.5,12L18,18V6M16,14.14L12.97,12L16,9.86V14.14Z"
+                                                          Fill="{Binding DataContext.CurrentTheme.ComplementGray.Brush, RelativeSource={RelativeSource AncestorType=Button}}"
+                                                          Stretch="Uniform" Width="35" Height="35"/>
+                                            </DataTemplate>
                                     </Button.ContentTemplate>
                                 </Button>
 
-                                <ToggleButton Grid.Row="0" Grid.Column="2"
+                                <ToggleButton Grid.Row="0" Grid.Column="2" 
                                   Background="Transparent" BorderBrush="Transparent">
                                     <ToggleButton.Style>
                                         <Style TargetType="ToggleButton">
@@ -682,7 +678,9 @@
                                                 <Setter.Value>
                                                     <DataTemplate>
                                                         <!-- Play icon -->
-                                                        <Image Source="/Assets/icons8-circled-play-button-50.png"/>
+                                                            <Path x:Name="Play" Data="M10,16.5V7.5L16,12M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"
+                                                                  Fill="#4A2C7C"
+                                                                  Stretch="Uniform" Width="60" Height="60"/>
                                                     </DataTemplate>
                                                 </Setter.Value>
                                             </Setter>
@@ -693,8 +691,10 @@
                                                         <Setter.Value>
                                                             <DataTemplate>
                                                                 <!-- Pause icon -->
-                                                                <Image Source="/Assets/icons8-pause-button-50.png"/>
-                                                            </DataTemplate>
+                                                                        <Path x:Name="Pause" Data="M15,16H13V8H15M11,16H9V8H11M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"
+                                                                             Fill="#4A2C7C"
+                                                                             Stretch="Uniform" Width="60" Height="60"/>
+                                                                </DataTemplate>
                                                         </Setter.Value>
                                                     </Setter>
                                                 </Trigger>
@@ -703,18 +703,22 @@
                                     </ToggleButton.Style>
                                 </ToggleButton>
 
-                                <Button Grid.Row="0" Grid.Column="3" Width="60"  Background="Transparent" BorderBrush="Transparent">
+                                <Button Grid.Row="0" Grid.Column="3" Width="60" Background="Transparent" BorderBrush="Transparent">
                                     <Button.ContentTemplate>
                                         <DataTemplate>
-                                            <Image Source="/Assets/icons8-end-50.png"></Image>
-                                        </DataTemplate>
+                                                    <Path x:Name="Next" Data="M6,18L14.5,12L6,6M8,9.86L11.03,12L8,14.14M16,6H18V18H16"
+                                                          Fill="{Binding DataContext.CurrentTheme.ComplementGray.Brush, RelativeSource={RelativeSource AncestorType=Button}}"
+                                                          Stretch="Uniform" Width="35" Height="35"/>
+                                            </DataTemplate>
                                     </Button.ContentTemplate>
                                 </Button>
                                 <Button Grid.Row="0" Grid.Column="4" Background="Transparent" BorderBrush="Transparent" Width="40" Margin="30, 0, 0, 0">
                                     <Button.ContentTemplate>
                                         <DataTemplate>
-                                            <Image Source="/Assets/icons8-restart-50.png"></Image>
-                                        </DataTemplate>
+                                                <Path x:Name="Shuffle" Data="M17,3L22.25,7.5L17,12L22.25,16.5L17,21V18H14.26L11.44,15.18L13.56,13.06L15.5,15H17V12L17,9H15.5L6.5,18H2V15H5.26L14.26,6H17V3M2,6H6.5L9.32,8.82L7.2,10.94L5.26,9H2V6Z"
+                                                          Fill="{Binding DataContext.CurrentTheme.ComplementGray.Brush, RelativeSource={RelativeSource AncestorType=Button}}"
+                                                          Stretch="Uniform" Width="35" Height="35"/>
+                                            </DataTemplate>
                                     </Button.ContentTemplate>
                                 </Button>
                             </Grid>
@@ -725,11 +729,13 @@
                     
                     <StackPanel Grid.Column="2" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal">
                         
-                        <Button Margin="0, 0, 7, 0" Width="20" Background="Transparent" BorderBrush="Transparent">
+                        <Button Margin="0, 0, 7, 0" Background="Transparent" BorderBrush="Transparent">
                             <Button.ContentTemplate>
                                 <DataTemplate>
-                                    <Image Source="/Assets/icons8-volume-64.png"></Image>
-                                </DataTemplate>
+                                            <Path x:Name="Volume" Data="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.84 14,18.7V20.77C18,19.86 21,16.28 21,12C21,7.72 18,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.76 16.5,12M3,9V15H7L12,20V4L7,9H3Z"
+                                                 Fill="{Binding DataContext.CurrentTheme.WindowTextForeground.Brush, RelativeSource={RelativeSource AncestorType=Button}}"
+                                                 Stretch="Uniform" Width="15" Height="15" />
+                                    </DataTemplate>
                             </Button.ContentTemplate>
                         </Button>
 
@@ -835,13 +841,6 @@
                             </Slider.Template>
                         </Slider>
 
-                        <Button Margin="0, 0, 8, 0" Width="20" Background="Transparent" BorderBrush="Transparent">
-                            <Button.ContentTemplate>
-                                <DataTemplate>
-                                    <Image Source="/Assets/icons8-heart-50.png"></Image>
-                                </DataTemplate>
-                            </Button.ContentTemplate>
-                        </Button>
                         
                         <Button Margin="0, 0, 20, 0" Click="SwitchButton_Click" Width="13" Background="Transparent" BorderBrush="Transparent">
                         <Button.ContentTemplate>

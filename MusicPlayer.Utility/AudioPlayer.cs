@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace MusicPlayer.Utility
 {
-    internal class AudioPlayer
+    public class AudioPlayer
     {
+
     }
 }

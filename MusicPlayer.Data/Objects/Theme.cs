@@ -22,7 +22,7 @@ namespace MusicPlayer.Data.Objects
             get;
             set;
         }
-        public ThemeColor WindowSecondary
+        public ThemeColor WindowPrimaryAnchor
         {
             get;
             set;
@@ -50,7 +50,7 @@ namespace MusicPlayer.Data.Objects
             get;
             set;
         }
-        public ThemeColor WindowPrimaryDark
+        public ThemeColor AlternateTextForeground
         {
             get;
             set;
@@ -61,7 +61,7 @@ namespace MusicPlayer.Data.Objects
             set;
         }
 
-        public ThemeColor ListBoxSongSelect
+        public ThemeColor WindowPrimaryLight
         {
             get;
             set;
