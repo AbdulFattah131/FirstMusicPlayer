@@ -70,7 +70,7 @@ namespace WpfApp3
                 WindowTitleForeground = new ThemeColor(Brushes.White),
                 WindowContentBackground = new ThemeColor(219, 218, 234),
                 ComplementGray = new ThemeColor(73, 68, 84),
-                WindowPrimaryLight = new ThemeColor(203, 186, 241),
+                WindowPrimaryLight = new ThemeColor(214, 201, 243),
                 CurrentSongTitleForeground = new ThemeColor(Brushes.Black),
                 CurrentSongArtistForeground = new ThemeColor(Brushes.Gray),
                 PlayerControlBackground = new ThemeColor(231, 234, 240),

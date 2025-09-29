@@ -56,7 +56,7 @@
 
                     <TextBlock Text="Curation" Margin="0, 35, 0, 0" FontWeight="Bold" FontSize="15" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"></TextBlock>
 
-                    <ToggleButton x:Name="tbLibrary"
+                      <ToggleButton x:Name="tbLibrary"
                       Height="40"
                       Width="180"
                       Checked="ToggleButton_Checked"
@@ -101,7 +101,7 @@
                             </Style>
                         </ToggleButton.Style>
                     </ToggleButton>
-
+                                
                     <ToggleButton
                       Height="40"
                       Width="180"
@@ -309,18 +309,18 @@
 
                 <StackPanel>
                 <Border Grid.Row="0" Margin="15, 10, 25, 10" CornerRadius="15" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}">
-                        <Border.Effect>
+                        <!--<Border.Effect>
                             <DropShadowEffect Color="#322657"
                              Direction="270"
                              ShadowDepth="3"
                              Opacity="0.15"
                              BlurRadius="8"/>
-                        </Border.Effect>
+                        </Border.Effect>-->
 
                         <StackPanel Orientation="Vertical">
                             <TextBlock VerticalAlignment="Top" Text="Album Info" FontSize="13" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}" Margin="15, 17, 0, 0" FontWeight="Bold"></TextBlock>
                             <TextBlock Height="350" x:Name="tbAlbumInfo" VerticalAlignment="Top" Margin="15, 10, 15, 0" TextAlignment="Justify" TextWrapping="Wrap" Text="{Binding AlbumInfo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontWeight="SemiBold" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"></TextBlock>
-                            <Border Height="115" VerticalAlignment="Bottom" CornerRadius="15" Background="{Binding CurrentTheme.WindowPrimary.Brush}">
+                            <Border Height="115" VerticalAlignment="Bottom" CornerRadius="15" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}">
                                 <StackPanel Orientation="Vertical" Margin="15, 17, 0, 0">
                                     <TextBlock Text="Album Genre" FontSize="13" Foreground="{Binding CurrentTheme.AlternateTextForeground.Brush}" FontWeight="Bold"></TextBlock>
                                     <WrapPanel Margin="0, 10, 0, 0">
@@ -341,13 +341,13 @@
                 </StackPanel>
 
                 <Border Grid.Row="1" Margin="15, 0, 25, 40" Height="250" VerticalAlignment="Center" CornerRadius="15" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}">
-                    <Border.Effect>
+                    <!--<Border.Effect>
                         <DropShadowEffect Color="#322657"
                          Direction="270"
                          ShadowDepth="3"
                          Opacity="0.15"
                          BlurRadius="8"/>
-                    </Border.Effect>
+                    </Border.Effect>-->
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="Lyrics" FontWeight="Bold" Margin="15, 17, 0, 0" FontSize="14" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"></TextBlock>
                         <TextBlock Text="Lyrics" VerticalAlignment="Top" FontWeight="UltraBlack" Margin="15, 17, 0, 0" FontSize="13" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"></TextBlock>
@@ -358,13 +358,13 @@
             <!-- Column 1 Center Bar -->
             
             <Border CornerRadius="13" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}" Margin="10, 10, 10, 15" Grid.Column="1">
-                <Border.Effect>
+                <!--<Border.Effect>
                     <DropShadowEffect Color="#322657"
                           Direction="270"
                           ShadowDepth="2"
                           Opacity="0.15"
                           BlurRadius="8"/>
-                </Border.Effect>
+                </Border.Effect>-->
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -572,13 +572,13 @@
         <!-- Row 2 Bottom Bar -->
 
         <Border Grid.Row="2" Grid.ColumnSpan="3" VerticalAlignment="Bottom">
-            <Border.Effect>
+            <!--<Border.Effect>
                 <DropShadowEffect Color="#322657"
                  Direction="270"
                  ShadowDepth="3"
                  Opacity="0.15"
                  BlurRadius="8"/>
-            </Border.Effect>
+            </Border.Effect>-->
 
             <!-- Row 2 Music Control Grid -->
 
@@ -842,13 +842,42 @@
                         </Slider>
 
                         
-                        <Button Margin="0, 0, 20, 0" Click="SwitchButton_Click" Width="13" Background="Transparent" BorderBrush="Transparent">
-                        <Button.ContentTemplate>
-                            <DataTemplate>
-                                <Image Source="/Assets/icons8-ellipsis-30.png"></Image>
-                            </DataTemplate>
-                        </Button.ContentTemplate>
-                    </Button>
+                        <ToggleButton Margin="0, 0, 20, 0" Click="SwitchButton_Click" Width="30" Background="Transparent" BorderBrush="Transparent">
+                                <ToggleButton.Template>
+                                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                                        <Border x:Name="TemplateRoot"
+                                        CornerRadius="5"
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}">
+                                            <Grid>
+                                                <Border x:Name="Track"
+                                                CornerRadius="6"
+                                                Background="LightGray"
+                                                Margin="2" />
+                                                <Border x:Name="Thumb"
+                                                CornerRadius="7"
+                                                Background="White"
+                                                Width="12" Height="12"
+                                                HorizontalAlignment="Left"
+                                                Margin="2" />
+                                            </Grid>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsChecked" Value="True">
+                                                <Setter TargetName="Track" Property="Background" Value="#4A2C7C" />
+                                                <Setter TargetName="Thumb" Property="HorizontalAlignment" Value="Right" />
+                                            </Trigger>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="TemplateRoot" Property="BorderBrush" Value="DarkGray" />
+                                            </Trigger>
+                                            <Trigger Property="IsEnabled" Value="False">
+                                                <Setter TargetName="TemplateRoot" Property="Opacity" Value="0.5" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </ToggleButton.Template>
+                            </ToggleButton>
                     </StackPanel>
 
                     <!-- Current Song Slider-->
