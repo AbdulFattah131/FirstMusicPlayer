@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\PC01\Source\Repos\FirstMusicPlayer\WpfApp3\obj\Debug\net8.0-windows\
+C:\Users\safalam\source\repos\WPF\WpfApp3\WpfApp3\obj\Debug\net8.0-windows\
 MusicPlayer.UIComponents
 none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
-C:\Users\PC01\Source\Repos\FirstMusicPlayer\WpfApp3\App.xaml
+C:\Users\safalam\source\repos\WPF\WpfApp3\WpfApp3\App.xaml
 31236997827
 
 12-1743813500
-216-647386166
+216409759545
 Controls\List.xaml;MainWindow.xaml;ThemeDesigner.xaml;
 
 True

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows.Input;
 using System.IO;
 using MusicPlayer.Data.Objects;
 using MusicPlayer.UIComponents.ViewModels;
@@ -27,9 +28,10 @@ namespace WpfApp3
             {
                 _currentSong = value;
                 OnPropertyChanged(nameof(CurrentSong));
-
             }
         }
+
+        private readonly AudioPlayer _player;
 
         private Album _selectedAlbum;
         public Album SelectedAlbum
@@ -39,17 +41,19 @@ namespace WpfApp3
             {
                 _selectedAlbum = value;
                 OnPropertyChanged(nameof(SelectedAlbum));
-
             }
         }
 
-
         public MusicPlayerCache()
         {
-            var songFilePaths = FileScanner.Instance.ScanSongs();
-            var songs = TagReader.Instance.ReadSongsFromFilePaths(songFilePaths);
+            var songFilePaths = FileScanner.Instance.ScanSongs(); // song file paths
 
-            Albums = new ObservableCollection<Album>(TagReader.Instance.GetAlbums());
+            var songs = TagReader.Instance.ReadSongsFromFilePaths(songFilePaths); // song objects
+
+            Albums = new ObservableCollection<Album>(TagReader.Instance.GetAlbums()); // albums
+
+            _player = new AudioPlayer(); // playback tool initialization
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
