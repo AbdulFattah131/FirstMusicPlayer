@@ -9,24 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Assets\icons8-albums-30.png" />
-    <None Remove="Assets\icons8-audio-wave-30.png" />
-    <None Remove="Assets\icons8-browse-64.png" />
-    <None Remove="Assets\icons8-circled-play-button-50.png" />
-    <None Remove="Assets\icons8-ellipsis-30.png" />
-    <None Remove="Assets\icons8-end-50 %281%29.png" />
-    <None Remove="Assets\icons8-end-50.png" />
-    <None Remove="Assets\icons8-heart-50.png" />
-    <None Remove="Assets\icons8-mic-30.png" />
-    <None Remove="Assets\icons8-music-library-30.png" />
-    <None Remove="Assets\icons8-pause-button-50.png" />
-    <None Remove="Assets\icons8-play-50.png" />
-    <None Remove="Assets\icons8-playlist-50.png" />
-    <None Remove="Assets\icons8-refresh-50.png" />
-    <None Remove="Assets\icons8-restart-50.png" />
-    <None Remove="Assets\icons8-search-50.png" />
-    <None Remove="Assets\icons8-synthesizer-100.png" />
-    <None Remove="Assets\icons8-volume-64.png" />
     <None Remove="Assets\userphoto.png" />
     <None Remove="Images\Adele_-_21.png" />
     <None Remove="Images\Beat_It.jpg" />
@@ -53,60 +35,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Assets\icons8-albums-30.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\icons8-audio-wave-30.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\icons8-browse-64.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\icons8-circled-play-button-50.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\icons8-ellipsis-30.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\icons8-end-50 (1).png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\icons8-end-50.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\icons8-heart-50.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\icons8-mic-30.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\icons8-music-library-30.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\icons8-pause-button-50.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\icons8-play-50.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\icons8-playlist-50.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\icons8-refresh-50.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\icons8-restart-50.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\icons8-search-50.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\icons8-synthesizer-100.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\icons8-volume-64.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
     <Resource Include="Assets\userphoto.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>

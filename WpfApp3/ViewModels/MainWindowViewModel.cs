@@ -63,37 +63,51 @@ namespace WpfApp3
             {
 
                 Name = "Lavender",
-                WindowTextForeground = new ThemeColor(30, 30, 30),
+                WindowTextForeground = new ThemeColor(38, 38, 38),
+                WindowHeadingForeground = new ThemeColor(57, 59, 64),
                 WindowPrimaryAnchor = new ThemeColor(114, 91, 164),
-                AlternateTextForeground = new ThemeColor(30, 30, 30),
+                SearchBoxBackground = new ThemeColor(Brushes.White),
+                WindowPrimarySlider = new ThemeColor(142, 125, 183),
+                AlternateTextForeground = new ThemeColor(Brushes.Gray),
                 WindowPrimary = new ThemeColor(197, 178, 239),
                 WindowTitleForeground = new ThemeColor(Brushes.White),
                 WindowContentBackground = new ThemeColor(219, 218, 234),
                 ComplementGray = new ThemeColor(101, 97, 107),
-                WindowPrimaryLight = new ThemeColor(214, 201, 243),
                 CurrentSongTitleForeground = new ThemeColor(Brushes.Black),
                 CurrentSongArtistForeground = new ThemeColor(Brushes.Gray),
                 PlayerControlBackground = new ThemeColor(231, 234, 240),
-                TitleBarBackground = new ThemeColor(46, 44, 54)
+                TitleBarBackground = new ThemeColor(46, 44, 54),
+                ListBoxHover = new ThemeColor(248, 248, 255),
+                ListBoxSelected = new ThemeColor(Brushes.White),
+                LeftToggleHover = new ThemeColor(239, 241, 245),
+                LeftToggleSelected = new ThemeColor(197, 178, 239),
+                PlayPauseBackground = new ThemeColor(114, 91, 164)
 
             };
 
             solidTheme2 = new Theme()
             {
 
-                Name = "High Contrast - Lavender",
-                WindowTextForeground = new ThemeColor(Brushes.Black),
-                WindowPrimaryAnchor = new ThemeColor(142, 125, 183),
-                AlternateTextForeground = new ThemeColor(30, 30, 30),
-                WindowPrimary = new ThemeColor(205, 166, 255),
+                Name = "Lavender Dark",
+                WindowTextForeground = new ThemeColor(238, 238, 247),
+                WindowHeadingForeground = new ThemeColor(227, 227, 242),
+                WindowPrimaryAnchor = new ThemeColor(197, 178, 239),
+                SearchBoxBackground = new ThemeColor(106, 103, 131),
+                WindowPrimarySlider = new ThemeColor(197, 178, 239),
+                AlternateTextForeground = new ThemeColor(204, 204, 204),
+                WindowPrimary = new ThemeColor(197, 178, 239),
                 WindowTitleForeground = new ThemeColor(Brushes.White),
-                WindowContentBackground = new ThemeColor(209, 205, 238),
-                ComplementGray = new ThemeColor(169, 168, 204),
-                WindowPrimaryLight = new ThemeColor(203, 186, 241),
+                WindowContentBackground = new ThemeColor(68, 67, 90),
+                ComplementGray = new ThemeColor(237, 235, 250),
                 CurrentSongTitleForeground = new ThemeColor(Brushes.Black),
-                CurrentSongArtistForeground = new ThemeColor(Brushes.Black),
-                PlayerControlBackground = new ThemeColor(237, 235, 250),
-                TitleBarBackground = new ThemeColor(26, 26, 26)
+                CurrentSongArtistForeground = new ThemeColor(Brushes.Gray),
+                PlayerControlBackground = new ThemeColor(77, 78, 101),
+                TitleBarBackground = new ThemeColor(46, 44, 54),
+                ListBoxHover = new ThemeColor(92, 90, 114),
+                ListBoxSelected = new ThemeColor(106, 103, 131),
+                LeftToggleHover = new ThemeColor(92, 90, 114),
+                LeftToggleSelected = new ThemeColor(106, 103, 131),
+                PlayPauseBackground = new ThemeColor(197, 178, 239)
 
             };
 

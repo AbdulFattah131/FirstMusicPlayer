@@ -27,6 +27,41 @@ namespace MusicPlayer.Data.Objects
             get;
             set;
         }
+        public ThemeColor WindowPrimarySlider
+        {
+            get;
+            set;
+        }
+        public ThemeColor SearchBoxBackground
+        {
+            get;
+            set;
+        }
+        public ThemeColor ListBoxHover
+        {
+            get;
+            set;
+        }
+        public ThemeColor ListBoxSelected
+        {
+            get;
+            set;
+        }
+        public ThemeColor LeftToggleHover
+        {
+            get;
+            set;
+        }
+        public ThemeColor LeftToggleSelected
+        {
+            get;
+            set;
+        }
+        public ThemeColor PlayPauseBackground
+        {
+            get;
+            set;
+        }
         public ThemeColor WindowContentBackground
         {
             get;
@@ -39,7 +74,7 @@ namespace MusicPlayer.Data.Objects
             set;
         }
 
-        public ThemeColor ListBoxItemHover
+        public ThemeColor WindowHeadingForeground
         {
             get;
             set;
@@ -61,12 +96,7 @@ namespace MusicPlayer.Data.Objects
             set;
         }
 
-        public ThemeColor WindowPrimaryLight
-        {
-            get;
-            set;
-        }
-
+      
         public ThemeColor CurrentSongTitleForeground
         {
             get;
