@@ -13,14 +13,23 @@ namespace MusicPlayer.UIComponents.ViewModels
 
             CustomTheme = new Theme()
             {
-                WindowPrimary = new ThemeColor(),
-                WindowContentBackground = new ThemeColor(),
-                WindowTitleForeground = new ThemeColor(),
-                ListBoxItemForeground = new ThemeColor(),
-                CurrentSongTitleForeground = new ThemeColor(),
-                CurrentSongArtistForeground = new ThemeColor(),
-                PlayerControlBackground = new ThemeColor(),
-                TitleBarBackground = new ThemeColor(),
+                WindowTextForeground = new ThemeColor(), // Text
+                WindowHeadingForeground = new ThemeColor(), // Center Text Titles
+                WindowPrimaryAnchor = new ThemeColor(), // Icons for the Toggle Buttons
+                SearchBoxBackground = new ThemeColor(), // Search Box
+                WindowPrimarySlider = new ThemeColor(), // Sliders
+                WindowPrimary = new ThemeColor(), // New Playlist Button
+                WindowTitleForeground = new ThemeColor(), // Title Bar Text
+                WindowContentBackground = new ThemeColor(), // Window Background
+                ComplementGray = new ThemeColor(), // Playback Controls : Repeat, Previous, Next, Shuffle
+                CurrentSongArtistForeground = new ThemeColor(), // Artist Names
+                PlayerControlBackground = new ThemeColor(), // Panels
+                TitleBarBackground = new ThemeColor(), // Title Bar Background
+                ListBoxHover = new ThemeColor(), // List Box Hover
+                ListBoxSelected = new ThemeColor(), // List Box Selected
+                LeftToggleHover = new ThemeColor(), // Toggle Buttons Hover
+                LeftToggleSelected = new ThemeColor(), // Toggle Buttons Selected
+                PlayPauseBackground = new ThemeColor() // Playback Controls : Play, Pause
             };
         }
 
@@ -48,6 +57,7 @@ namespace MusicPlayer.UIComponents.ViewModels
                 return ThemeReader.Instance.GetThemes();
             }
         }
+
 
         public event PropertyChangedEventHandler? PropertyChanged;
         public void OnPropertyChanged(PropertyChangedEventArgs e)

@@ -63,25 +63,23 @@ namespace WpfApp3
             {
 
                 Name = "Lavender",
-                WindowTextForeground = new ThemeColor(38, 38, 38),
-                WindowHeadingForeground = new ThemeColor(57, 59, 64),
-                WindowPrimaryAnchor = new ThemeColor(114, 91, 164),
-                SearchBoxBackground = new ThemeColor(Brushes.White),
-                WindowPrimarySlider = new ThemeColor(142, 125, 183),
-                AlternateTextForeground = new ThemeColor(Brushes.Gray),
-                WindowPrimary = new ThemeColor(197, 178, 239),
-                WindowTitleForeground = new ThemeColor(Brushes.White),
-                WindowContentBackground = new ThemeColor(219, 218, 234),
-                ComplementGray = new ThemeColor(101, 97, 107),
-                CurrentSongTitleForeground = new ThemeColor(Brushes.Black),
-                CurrentSongArtistForeground = new ThemeColor(Brushes.Gray),
-                PlayerControlBackground = new ThemeColor(231, 234, 240),
-                TitleBarBackground = new ThemeColor(46, 44, 54),
-                ListBoxHover = new ThemeColor(248, 248, 255),
-                ListBoxSelected = new ThemeColor(Brushes.White),
-                LeftToggleHover = new ThemeColor(239, 241, 245),
-                LeftToggleSelected = new ThemeColor(197, 178, 239),
-                PlayPauseBackground = new ThemeColor(114, 91, 164)
+                WindowTextForeground = new ThemeColor(38, 38, 38), // Overall Text
+                WindowHeadingForeground = new ThemeColor(57, 59, 64), // Center Text Titles
+                WindowPrimaryAnchor = new ThemeColor(114, 91, 164), // Icons for the Toggle Buttons
+                SearchBoxBackground = new ThemeColor(Brushes.White), // Search Box
+                WindowPrimarySlider = new ThemeColor(142, 125, 183), // Sliders
+                WindowPrimary = new ThemeColor(197, 178, 239), // New Playlist Button
+                WindowTitleForeground = new ThemeColor(Brushes.White), // Title Bar Text
+                WindowContentBackground = new ThemeColor(219, 218, 234), // Music Player Background
+                ComplementGray = new ThemeColor(101, 97, 107), // Playback Controls : Repeat, Previous, Next, Shuffle
+                CurrentSongArtistForeground = new ThemeColor(Brushes.Gray), // Artist Names
+                PlayerControlBackground = new ThemeColor(231, 234, 240), // Panels
+                TitleBarBackground = new ThemeColor(46, 44, 54), // Title Bar Background
+                ListBoxHover = new ThemeColor(248, 248, 255), // List Box Hover
+                ListBoxSelected = new ThemeColor(Brushes.White), // List Box Selected
+                LeftToggleHover = new ThemeColor(239, 241, 245), // Toggle Buttons Hover
+                LeftToggleSelected = new ThemeColor(197, 178, 239), // Toggle Buttons Selected
+                PlayPauseBackground = new ThemeColor(114, 91, 164) // Playback Controls : Play, Pause
 
             };
 
@@ -94,14 +92,12 @@ namespace WpfApp3
                 WindowPrimaryAnchor = new ThemeColor(197, 178, 239),
                 SearchBoxBackground = new ThemeColor(106, 103, 131),
                 WindowPrimarySlider = new ThemeColor(197, 178, 239),
-                AlternateTextForeground = new ThemeColor(204, 204, 204),
                 WindowPrimary = new ThemeColor(197, 178, 239),
                 WindowTitleForeground = new ThemeColor(Brushes.White),
-                WindowContentBackground = new ThemeColor(68, 67, 90),
+                WindowContentBackground = new ThemeColor(31, 31, 45),
                 ComplementGray = new ThemeColor(237, 235, 250),
-                CurrentSongTitleForeground = new ThemeColor(Brushes.Black),
                 CurrentSongArtistForeground = new ThemeColor(Brushes.Gray),
-                PlayerControlBackground = new ThemeColor(77, 78, 101),
+                PlayerControlBackground = new ThemeColor(42, 42, 56),
                 TitleBarBackground = new ThemeColor(46, 44, 54),
                 ListBoxHover = new ThemeColor(92, 90, 114),
                 ListBoxSelected = new ThemeColor(106, 103, 131),

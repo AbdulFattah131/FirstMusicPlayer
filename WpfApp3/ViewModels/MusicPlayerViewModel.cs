@@ -18,7 +18,6 @@ namespace WpfApp3
             get => _lstSongs;
             set => _lstSongs = value;
         }
-        public ObservableCollection<Album> Albums { get; set; }
 
         private Song _currentSong;
         public Song CurrentSong
@@ -27,11 +26,15 @@ namespace WpfApp3
             set
             {
                 _currentSong = value;
+                if (_currentSong != null)
+                {
+                    // I am telling my AudioPlayer to load the new song's file
+                    _player.Load(_currentSong.FilePath);
+                }
                 OnPropertyChanged(nameof(CurrentSong));
             }
         }
-
-        private readonly AudioPlayer _player;
+        public ObservableCollection<Album> Albums { get; set; }
 
         private Album _selectedAlbum;
         public Album SelectedAlbum
@@ -44,6 +47,19 @@ namespace WpfApp3
             }
         }
 
+        // Audio Player 
+
+        private readonly AudioPlayer _player;
+
+        public RelayCommand PlayPauseCommand;
+        public RelayCommand ShuffleCommand;
+        public RelayCommand RepeatCommand;
+        public RelayCommand PreviousCommand;
+        public RelayCommand NextCommand;
+        public RelayCommand VolumeCommand;
+
+        
+     
         public MusicPlayerCache()
         {
             var songFilePaths = FileScanner.Instance.ScanSongs(); // song file paths

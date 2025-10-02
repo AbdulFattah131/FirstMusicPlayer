@@ -33,20 +33,20 @@
 
         <!-- Row 1 Grid -->
         
-        <Grid Grid.Row="1" Margin="10, 0, 10, 0">
+        <Grid Name="grdMainView" Grid.Row="1" Margin="10, 0, 10, 0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="220"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="255"/>
+                <ColumnDefinition Width="275"/>
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <!-- Column 0 Left Side Bar -->
+            <!-- Column 0 Left Side Panel -->
             
-            <DockPanel LastChildFill="True" Grid.Column="0" Grid.Row="1" Margin="20, 30, 15, 15">
+            <DockPanel Name="dpLeftPanel" LastChildFill="True" Grid.Column="0" Grid.Row="1" Margin="20, 30, 15, 15">
                 <StackPanel x:Name="ToggleGroup" DockPanel.Dock="Top">
 
                     <StackPanel Orientation="Horizontal">
@@ -56,7 +56,14 @@
 
                     <TextBlock Text="Curation" Margin="0, 35, 0, 0" FontWeight="Bold" FontSize="15" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"></TextBlock>
 
-                      <ToggleButton x:Name="tbLibrary"
+                    <Border>
+                        <Border.Effect>
+                            <DropShadowEffect Color="#B0B8C0"
+                              BlurRadius="2"
+                              ShadowDepth="2"
+                              Opacity="0.2"/>
+                        </Border.Effect>
+                        <ToggleButton x:Name="tbLibrary"
                       Height="40"
                       Width="180"
                       Checked="ToggleButton_Checked"
@@ -85,6 +92,7 @@
                                                 <ContentPresenter Margin="25, 0, 0, 0" HorizontalAlignment="Left"
                                                   VerticalAlignment="Center"
                                                   Content="{TemplateBinding Content}"/>
+                                                
                                             </Border>
                                             <ControlTemplate.Triggers>
                                                 <Trigger Property="IsMouseOver" Value="True">
@@ -104,147 +112,232 @@
                             </Style>
                         </ToggleButton.Style>
                     </ToggleButton>
-                                
-                    <ToggleButton x:Name="tbExplore"
+                    </Border>
+
+                    <Border>
+                        <Border.Effect>
+                            <DropShadowEffect Color="#B0B8C0"
+                              BlurRadius="2"
+                              ShadowDepth="2"
+                              Opacity="0.2"/>
+                        </Border.Effect>
+                        <ToggleButton x:Name="tbExplore"
                       Height="40"
                       Width="180"
                       Checked="ToggleButton_Checked"
                       Margin="0,25,0,0"
                       FontSize="14"
                       BorderBrush="Transparent">
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                            <Path Margin="0, 0, 10, 0"
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                <Path Margin="0, 0, 10, 0"
                                 Data="M22 8V11H20V8H4V18H13.78C13.38 18.59 13.13 19.26 13.04 20H4C2.9 20 2 19.11 2 18V6C2 4.89 2.89 4 4 4H10L12 6H20C21.1 6 22 6.89 22 8M18.5 13V18.21C18.19 18.07 17.86 18 17.5 18C16.12 18 15 19.12 15 20.5S16.12 23 17.5 23 20 21.88 20 20.5V15H22V13H18.5Z"
                                 Width="15" Height="15" Stretch="Uniform"
                                 Fill="{Binding CurrentTheme.WindowPrimaryAnchor.Brush}"></Path>
 
-                            <TextBlock Text="Explore" VerticalAlignment="Center" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"/>
-                        </StackPanel>
-                        <ToggleButton.Style>
-                            <Style TargetType="ToggleButton">
-                                <Setter Property="Background" Value="{Binding CurrentTheme.PlayerControlBackground.Brush}"/>
-                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                <TextBlock Text="Explore" VerticalAlignment="Center" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"/>
+                            </StackPanel>
+                            <ToggleButton.Style>
+                                <Style TargetType="ToggleButton">
+                                    <Setter Property="Background" Value="{Binding CurrentTheme.PlayerControlBackground.Brush}"/>
+                                    <Setter Property="BorderBrush" Value="Transparent"/>
 
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="ToggleButton">
-                                            <Border x:Name="border"
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="ToggleButton">
+                                                <Border x:Name="border"
                                                 CornerRadius="13"
                                                 Background="{TemplateBinding Background}"
                                                 BorderBrush="{TemplateBinding BorderBrush}">
-                                                <ContentPresenter Margin="25, 0, 0, 0" HorizontalAlignment="Left"
+                                                    <ContentPresenter Margin="25, 0, 0, 0" HorizontalAlignment="Left"
                                                   VerticalAlignment="Center"
-                                                  Content="{TemplateBinding Content}"/>         
-                                            </Border>
-                                            <ControlTemplate.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter TargetName="border" Property="Background"
+                                                  Content="{TemplateBinding Content}"/>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter TargetName="border" Property="Background"
                                                         Value="{Binding CurrentTheme.LeftToggleHover.Brush}"/>
-                                                </Trigger>
-                                                <Trigger Property="IsPressed" Value="True">
-                                                    <Setter TargetName="border" Property="Background" Value="{Binding CurrentTheme.LeftToggleSelected.Brush}"/>
-                                                </Trigger>
-                                                <Trigger Property="IsChecked" Value="True">
-                                                    <Setter TargetName="border" Property="Background" Value="{Binding CurrentTheme.LeftToggleSelected.Brush}"/>
-                                                </Trigger>
-                                            </ControlTemplate.Triggers>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </ToggleButton.Style>
-                    </ToggleButton>
+                                                    </Trigger>
+                                                    <Trigger Property="IsPressed" Value="True">
+                                                        <Setter TargetName="border" Property="Background" Value="{Binding CurrentTheme.LeftToggleSelected.Brush}"/>
+                                                    </Trigger>
+                                                    <Trigger Property="IsChecked" Value="True">
+                                                        <Setter TargetName="border" Property="Background" Value="{Binding CurrentTheme.LeftToggleSelected.Brush}"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ToggleButton.Style>
+                        </ToggleButton>
+                    </Border>
 
                     <TextBlock Text="My Music" Margin="0, 40, 0, 0" FontWeight="Bold" FontSize="15" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"></TextBlock>
 
-                    <ToggleButton x:Name="Albums"
+                    <Border>
+                        <Border.Effect>
+                            <DropShadowEffect Color="#B0B8C0"
+                              BlurRadius="2"
+                              ShadowDepth="2"
+                              Opacity="0.2"/>
+                        </Border.Effect>
+                        <ToggleButton x:Name="Albums"
                        Height="40"
                        Width="180"
                        Checked="ToggleButton_Checked"
                        Margin="0,25,0,0"
                        FontSize="14"
                        BorderBrush="Transparent">
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                            <Path Margin="0, 0, 10, 0" Width="16.5" Height="16.5" Stretch="Uniform"
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                <Path Margin="0, 0, 10, 0" Width="16.5" Height="16.5" Stretch="Uniform"
                                   Fill="{Binding CurrentTheme.WindowPrimaryAnchor.Brush}"
                                   Data="M22,4A2,2 0 0,1 24,6V16A2,2 0 0,1 22,18H6A2,2 0 0,1 4,16V4A2,2 0 0,1 6,2H12L14,4H22M2,6V20H20V22H2A2,2 0 0,1 0,20V11H0V6H2M6,6V16H22V6H6Z"/>
-                            <TextBlock Text="Albums" VerticalAlignment="Center" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"/>
-                        </StackPanel>
-                        <ToggleButton.Style>
-                            <Style TargetType="ToggleButton">
-                                <Setter Property="Background" Value="{Binding CurrentTheme.PlayerControlBackground.Brush}"/>
-                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                <TextBlock Text="Albums" VerticalAlignment="Center" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"/>
+                            </StackPanel>
+                            <ToggleButton.Style>
+                                <Style TargetType="ToggleButton">
+                                    <Setter Property="Background" Value="{Binding CurrentTheme.PlayerControlBackground.Brush}"/>
+                                    <Setter Property="BorderBrush" Value="Transparent"/>
 
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="ToggleButton">
-                                            <Border x:Name="border"
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="ToggleButton">
+                                                <Border x:Name="border"
                                              CornerRadius="13"
                                              Background="{TemplateBinding Background}"
                                              BorderBrush="{TemplateBinding BorderBrush}">
-                                                <ContentPresenter Margin="25, 0, 0, 0" HorizontalAlignment="Left"
+                                                    <ContentPresenter Margin="25, 0, 0, 0" HorizontalAlignment="Left"
                                                    VerticalAlignment="Center"
                                                    Content="{TemplateBinding Content}"/>
-                                            </Border>
-                                            <ControlTemplate.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter TargetName="border" Property="Background"
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter TargetName="border" Property="Background"
                                                      Value="{Binding CurrentTheme.LeftToggleHover.Brush}"/>
-                                                </Trigger>
-                                                <Trigger Property="IsPressed" Value="True">
-                                                    <Setter TargetName="border" Property="Background" Value="{Binding CurrentTheme.LeftToggleSelected.Brush}"/>
-                                                </Trigger>
-                                                <Trigger Property="IsChecked" Value="True">
-                                                    <Setter TargetName="border" Property="Background" Value="{Binding CurrentTheme.LeftToggleSelected.Brush}"/>
-                                                </Trigger>
-                                            </ControlTemplate.Triggers>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </ToggleButton.Style>
-                    </ToggleButton>
+                                                    </Trigger>
+                                                    <Trigger Property="IsPressed" Value="True">
+                                                        <Setter TargetName="border" Property="Background" Value="{Binding CurrentTheme.LeftToggleSelected.Brush}"/>
+                                                    </Trigger>
+                                                    <Trigger Property="IsChecked" Value="True">
+                                                        <Setter TargetName="border" Property="Background" Value="{Binding CurrentTheme.LeftToggleSelected.Brush}"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ToggleButton.Style>
+                        </ToggleButton>
+                    </Border>
 
-                    <ToggleButton x:Name="Liked"
+                    <Border>
+                        <Border.Effect>
+                            <DropShadowEffect Color="#B0B8C0"
+                              BlurRadius="2"
+                              ShadowDepth="2"
+                              Opacity="0.2"/>
+                        </Border.Effect>
+                        <ToggleButton x:Name="Liked"
                            Height="40"
                            Width="180"
                            Checked="ToggleButton_Checked"
                            Margin="0,25,0,0"
                            FontSize="14"
                            BorderBrush="Transparent">
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                            <Path Margin="0, 0, 10, 0" Width="15" Height="15"
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                <Path Margin="0, 0, 10, 0" Width="15" Height="15"
                              Fill="{Binding CurrentTheme.WindowPrimaryAnchor.Brush}"
                              Stretch="Uniform"
                              Data="M12,17L11.28,16.34C8.7,14 7,12.46 7,10.57C7,9.03 8.21,7.82 9.75,7.82C10.62,7.82 11.45,8.23 12,8.87C12.55,8.23 13.38,7.82 14.25,7.82C15.79,7.82 17,9.03 17,10.57C17,12.46 15.3,14 12.72,16.34L12,17M5,3H19A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3M5,5V19H19V5H5Z"/>
-                            <TextBlock Text="Liked" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"/>
+                                <TextBlock Text="Liked" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"/>
+                            </StackPanel>
+                            <ToggleButton.Style>
+                                <Style TargetType="ToggleButton">
+                                    <Setter Property="Background" Value="{Binding CurrentTheme.PlayerControlBackground.Brush}"/>
+                                    <Setter Property="BorderBrush" Value="Transparent"/>
+
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="ToggleButton">
+                                                <Border x:Name="border"
+                                                 CornerRadius="13"
+                                                 Background="{TemplateBinding Background}"
+                                                 BorderBrush="{TemplateBinding BorderBrush}">
+                                                    <ContentPresenter Margin="25, 0, 0, 0" HorizontalAlignment="Left"
+                                                   VerticalAlignment="Center"
+                                                   Content="{TemplateBinding Content}"/>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter TargetName="border" Property="Background"
+                                                       Value="{Binding CurrentTheme.LeftToggleHover.Brush}"/>
+                                                    </Trigger>
+                                                    <Trigger Property="IsPressed" Value="True">
+                                                        <Setter TargetName="border" Property="Background" Value="{Binding CurrentTheme.LeftToggleSelected.Brush}"/>
+                                                    </Trigger>
+                                                    <Trigger Property="IsChecked" Value="True">
+                                                        <Setter TargetName="border" Property="Background" Value="{Binding CurrentTheme.LeftToggleSelected.Brush}"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ToggleButton.Style>
+                        </ToggleButton>
+                    </Border>
+                </StackPanel>
+
+                <Border>
+                    <Border.Effect>
+                        <DropShadowEffect Color="#B0B8C0"
+                           BlurRadius="2"
+                           ShadowDepth="2"
+                           Opacity="0.4"/>
+                    </Border.Effect>
+                    <ToggleButton x:Name="NewPlaylist"
+                       Height="35"
+                       Margin="0,25,0,0"
+                       BorderBrush="Transparent"
+                       VerticalAlignment="Bottom">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <Path Margin="0, 3, 10, 0" VerticalAlignment="Center" 
+                            Data ="M3 16H10V14H3M18 14V10H16V14H12V16H16V20H18V16H22V14M14 6H3V8H14M14 10H3V12H14V10Z"
+                            Fill="#1e1e1e" Stretch="Uniform"
+                            Width="16" Height="16"/>
+                            <TextBlock Text="New Playlist" VerticalAlignment="Center"/>
                         </StackPanel>
                         <ToggleButton.Style>
                             <Style TargetType="ToggleButton">
-                                <Setter Property="Background" Value="{Binding CurrentTheme.PlayerControlBackground.Brush}"/>
+                                <Setter Property="Background" Value="{Binding CurrentTheme.WindowPrimary.Brush}"/>
                                 <Setter Property="BorderBrush" Value="Transparent"/>
-
+                                <Setter Property="Foreground" Value="Black"/>
+                                <Setter Property="FontWeight" Value="Regular"/>
+                                <Setter Property="FontSize" Value="14"/>
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="ToggleButton">
                                             <Border x:Name="border"
-                                                 CornerRadius="13"
-                                                 Background="{TemplateBinding Background}"
-                                                 BorderBrush="{TemplateBinding BorderBrush}">
-                                                <ContentPresenter Margin="25, 0, 0, 0" HorizontalAlignment="Left"
-                                                   VerticalAlignment="Center"
-                                                   Content="{TemplateBinding Content}"/>
+                                         CornerRadius="13"
+                                         Background="{TemplateBinding Background}"
+                                         BorderBrush="{TemplateBinding BorderBrush}">
+                                                <ContentPresenter HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               Content="{TemplateBinding Content}"/>
                                             </Border>
                                             <ControlTemplate.Triggers>
                                                 <Trigger Property="IsMouseOver" Value="True">
                                                     <Setter TargetName="border" Property="Background"
-                                                       Value="{Binding CurrentTheme.LeftToggleHover.Brush}"/>
+                                                  Value="{Binding CurrentTheme.LeftToggleHover.Brush}"/>
                                                 </Trigger>
                                                 <Trigger Property="IsPressed" Value="True">
                                                     <Setter TargetName="border" Property="Background" Value="{Binding CurrentTheme.LeftToggleSelected.Brush}"/>
+                                                    <Setter Property="Foreground" Value="Black"/>
                                                 </Trigger>
                                                 <Trigger Property="IsChecked" Value="True">
                                                     <Setter TargetName="border" Property="Background" Value="{Binding CurrentTheme.LeftToggleSelected.Brush}"/>
+                                                    <Setter Property="FontWeight" Value="SemiBold"/>
+                                                    <Setter Property="FontSize" Value="13.5"/>
                                                 </Trigger>
                                             </ControlTemplate.Triggers>
                                         </ControlTemplate>
@@ -253,64 +346,12 @@
                             </Style>
                         </ToggleButton.Style>
                     </ToggleButton>
-                </StackPanel>
-
-                <ToggleButton x:Name="NewPlaylist"
-                       Height="35"
-                       Margin="0,25,0,0"
-                       BorderBrush="Transparent"
-                       VerticalAlignment="Bottom">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                        <Path Margin="0, 3, 10, 0" VerticalAlignment="Center" 
-                            Data ="M3 16H10V14H3M18 14V10H16V14H12V16H16V20H18V16H22V14M14 6H3V8H14M14 10H3V12H14V10Z"
-                            Fill="#1e1e1e" Stretch="Uniform"
-                            Width="16" Height="16"/>
-                        <TextBlock Text="New Playlist" VerticalAlignment="Center"/>
-                    </StackPanel>
-                    <ToggleButton.Style>
-                        <Style TargetType="ToggleButton">
-                            <Setter Property="Background" Value="{Binding CurrentTheme.WindowPrimary.Brush}"/>
-                            <Setter Property="BorderBrush" Value="Transparent"/>
-                            <Setter Property="Foreground" Value="Black"/>
-                            <Setter Property="FontWeight" Value="Regular"/>
-                            <Setter Property="FontSize" Value="14"/>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="ToggleButton">
-                                        <Border x:Name="border"
-                                         CornerRadius="13"
-                                         Background="{TemplateBinding Background}"
-                                         BorderBrush="{TemplateBinding BorderBrush}">
-                                            <ContentPresenter HorizontalAlignment="Center"
-                                               VerticalAlignment="Center"
-                                               Content="{TemplateBinding Content}"/>
-                                        </Border>
-                                        <ControlTemplate.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter TargetName="border" Property="Background"
-                                                  Value="{Binding CurrentTheme.LeftToggleHover.Brush}"/>
-                                            </Trigger>
-                                            <Trigger Property="IsPressed" Value="True">
-                                                <Setter TargetName="border" Property="Background" Value="{Binding CurrentTheme.LeftToggleSelected.Brush}"/>
-                                                <Setter Property="Foreground" Value="Black"/>
-                                            </Trigger>
-                                            <Trigger Property="IsChecked" Value="True">
-                                                <Setter TargetName="border" Property="Background" Value="{Binding CurrentTheme.LeftToggleSelected.Brush}"/>
-                                                <Setter Property="FontWeight" Value="SemiBold"/>
-                                                <Setter Property="FontSize" Value="13.5"/>
-                                            </Trigger>
-                                        </ControlTemplate.Triggers>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </ToggleButton.Style>
-                </ToggleButton>
+                </Border>
             </DockPanel>
             
-            <!-- Column 2 Right Side Bar -->
+            <!-- Column 2 Right Side Panel -->
 
-            <Grid Grid.Column="2" Grid.Row="1">
+            <Grid Name="grdRightPanel" Grid.Column="2" Grid.Row="1">
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
@@ -370,16 +411,16 @@
                 </Border>
             </Grid>
 
-            <!-- Column 1 Center Bar -->
+            <!-- Column 1 Center Main Bar -->
             
-            <Border CornerRadius="13" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}" Margin="10, 10, 10, 15" Grid.Column="1">
-                <!--<Border.Effect>
+            <Border Name="bdCenterPanel" CornerRadius="13" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}" Margin="10, 10, 10, 15" Grid.Column="1">
+                <Border.Effect>
                     <DropShadowEffect Color="#322657"
                           Direction="270"
                           ShadowDepth="2"
                           Opacity="0.15"
                           BlurRadius="8"/>
-                </Border.Effect>-->
+                </Border.Effect>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -443,8 +484,8 @@
 
                                         <Image Source="{Binding ImagePath}" Margin="15, 0, 0, 0" Grid.Column="0" Width="35"></Image>
                                         <StackPanel Grid.Column="1" Orientation="Vertical" Margin="7, 0, 0, 0">
-                                            <TextBlock Text="{Binding Title}" FontWeight="SemiBold" FontSize="14" Foreground="{Binding DataContext.CurrentTheme.WindowHeadingForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                            <TextBlock Text="{Binding Artist}" FontSize="12" Foreground="{Binding DataContext.CurrentTheme.AlternateTextForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
+                                            <TextBlock Text="{Binding Title}" FontWeight="Bold" FontSize="14" Foreground="{Binding DataContext.CurrentTheme.WindowHeadingForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
+                                            <TextBlock Text="{Binding Artist}" FontSize="12" Foreground="{Binding DataContext.CurrentTheme.CurrentSongArtistForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                         </StackPanel>
                                         
                                         <TextBlock x:Name="PlayIcon" Grid.Column="2" Text="▶" Foreground="{Binding CurrentTheme.WindowPrimary.Brush}" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Right" Visibility="Collapsed"/>
@@ -551,7 +592,7 @@
                                         </ContentControl>
 
 
-                                        <TextBlock Grid.Column="1" Margin="15, 0, 15, 0" Text="{Binding Title}" FontWeight="SemiBold" FontSize="14" Foreground="{Binding DataContext.CurrentTheme.WindowHeadingForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
+                                        <TextBlock Grid.Column="1" Margin="15, 0, 15, 0" Text="{Binding Title}" FontWeight="Bold" FontSize="14" Foreground="{Binding DataContext.CurrentTheme.WindowHeadingForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                         <TextBlock Grid.Column="2" Margin="0, 0, 80, 0" Text="{Binding Length}" HorizontalAlignment="Right" FontWeight="Regular" FontSize="14" Foreground="{Binding DataContext.CurrentTheme.WindowHeadingForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                         <Button Grid.Column="3" HorizontalAlignment="Right" Background="Transparent" BorderBrush="Transparent" Margin="0, 0, 30, 0">
                                             <Path Data="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z"
@@ -607,7 +648,7 @@
 
         <!-- Row 2 Bottom Bar -->
 
-        <Border Grid.Row="2" Grid.ColumnSpan="3" VerticalAlignment="Bottom">
+        <Border Name="bdPlaybackPanel" Grid.Row="2" Grid.ColumnSpan="3" VerticalAlignment="Bottom">
             <Border.Effect>
                 <DropShadowEffect Color="Black"
                  Direction="270"
@@ -706,7 +747,7 @@
                                     </Button.ContentTemplate>
                                 </Button>
 
-                                <ToggleButton Grid.Row="0" Grid.Column="2" 
+                                    <ToggleButton Grid.Row="0" Grid.Column="2" Command="{Binding PlayPauseCommand}"
                                   Background="Transparent" BorderBrush="Transparent">
                                     <ToggleButton.Style>
                                         <Style TargetType="ToggleButton">
@@ -728,8 +769,8 @@
                                                             <DataTemplate>
                                                                 <!-- Pause icon -->
                                                                         <Path x:Name="Pause" Data="M15,16H13V8H15M11,16H9V8H11M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"
-                                                                             Fill="{Binding DataContext.CurrentTheme.PlayPauseBackground.Brush, RelativeSource={RelativeSource AncestorType=ToggleButton}}"
-                                                                             Stretch="Uniform" Width="60" Height="60"/>
+                                                                              Fill="{Binding DataContext.CurrentTheme.PlayPauseBackground.Brush, RelativeSource={RelativeSource AncestorType=ToggleButton}}"
+                                                                              Stretch="Uniform" Width="60" Height="60"/>
                                                                 </DataTemplate>
                                                         </Setter.Value>
                                                     </Setter>
@@ -1022,7 +1063,7 @@
 
         <!-- Title Bar Grid -->
 
-        <Border Background="{Binding CurrentTheme.TitleBarBackground.Brush}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" CornerRadius="10">
+        <Border Name="bdTitleBar" Background="{Binding CurrentTheme.TitleBarBackground.Brush}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" CornerRadius="10">
             <Grid x:Name="grdTitle">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="20"/>
