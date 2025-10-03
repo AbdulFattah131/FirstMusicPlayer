@@ -162,10 +162,11 @@ namespace WpfApp3
 
         private void ToggleButton_Checked(object sender, RoutedEventArgs e)
         {
-            foreach (var child in ToggleGroup.Children.OfType<ToggleButton>())
+            var clickedToggle = sender as ToggleButton;
+            foreach (var child in ToggleGroup.Children)
             {
-                if (child != sender)
-                    child.IsChecked = false;
+                if (child is Border border && border.Child is ToggleButton toggle && toggle != clickedToggle)
+                    toggle.IsChecked = false;
             }
         }
     }

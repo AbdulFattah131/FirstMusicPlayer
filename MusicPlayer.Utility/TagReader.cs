@@ -34,6 +34,11 @@ namespace MusicPlayer.Utility
                         Year = (int)file.Tag.Year,
                     };
 
+                    foreach (string genre in file.Tag.Genres)
+                    {
+                        album.Genres.Add(genre);
+                    }
+
                     m_dictAlbums.Add(file.Tag.Album, album);
                 }
 

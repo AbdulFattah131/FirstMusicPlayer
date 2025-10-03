@@ -8,6 +8,7 @@
         Title="MainWindow" Height="450" Width="800" MinWidth="800" MinHeight="600"
         WindowStyle="None" ResizeMode="CanResize"
         Closed="Window_Closed"
+        d:DataContext="{d:DesignInstance local:MainWindowViewModel}"
         AllowsTransparency="True" Background="Transparent">
 
     <WindowChrome.WindowChrome>
@@ -56,7 +57,7 @@
 
                     <TextBlock Text="Curation" Margin="0, 35, 0, 0" FontWeight="Bold" FontSize="15" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"></TextBlock>
 
-                    <Border>
+                    <Border> 
                         <Border.Effect>
                             <DropShadowEffect Color="#B0B8C0"
                               BlurRadius="2"
@@ -66,8 +67,8 @@
                         <ToggleButton x:Name="tbLibrary"
                       Height="40"
                       Width="180"
-                      Checked="ToggleButton_Checked"
                       Margin="0,25,0,0"
+                      Checked="ToggleButton_Checked"
                       FontSize="14"
                       BorderBrush="Transparent"
                       Foreground="Black">
@@ -375,21 +376,26 @@
 
                         <StackPanel Orientation="Vertical">
                             <TextBlock VerticalAlignment="Top" Text="About the album" FontSize="13" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}" Margin="15, 17, 0, 0" FontWeight="Bold"></TextBlock>
-                            <TextBlock Height="350" x:Name="tbAlbumInfo" VerticalAlignment="Top" Margin="15, 10, 15, 0" TextAlignment="Justify" TextWrapping="Wrap" Text="{Binding AlbumInfo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontWeight="SemiBold" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"></TextBlock>
-                            <Border Height="115" VerticalAlignment="Bottom" CornerRadius="15" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}">
-                                <StackPanel Orientation="Vertical" Margin="15, 17, 0, 0">
-                                    <TextBlock Text="Genres" FontSize="13" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}" FontWeight="Bold"></TextBlock>
-                                    <WrapPanel Margin="0, 10, 0, 0">
-                                    <Border Width="70" Height="20" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}" CornerRadius="7">
-                                    <TextBlock Text="{Binding Genre}"></TextBlock>
-                                    </Border>
-                                        <Border Width="70" Height="20" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}" Margin="7, 0, 0, 0" CornerRadius="7">
-                                    <TextBlock Text="{Binding Genre}"></TextBlock>
-                                    </Border>
-                                        <Border Width="70" Height="20" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}" Margin="0, 10, 0, 0" CornerRadius="7">
-                                    <TextBlock Text="{Binding Genre}"></TextBlock>
-                                    </Border>
-                                    </WrapPanel>
+                            <TextBlock Height="300" x:Name="tbAlbumInfo" VerticalAlignment="Top" Margin="15, 10, 15, 0" TextAlignment="Justify" TextWrapping="Wrap" Text="{Binding AlbumInfo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontWeight="SemiBold" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"></TextBlock>
+                            
+                            <Border Height="150" VerticalAlignment="Bottom" CornerRadius="15" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}">
+                                <StackPanel Orientation="Vertical" Margin="15, 10, 15, 0">
+                                    <TextBlock Text="Genres" FontSize="13"  Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}" FontWeight="Bold"></TextBlock>
+                                    <ItemsControl ItemsSource="{Binding MusicPlayerCache.SelectedAlbum.Genres}" Margin="0, 20, 0, 0">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapPanel />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Border Margin="0, 0, 15, 15" Padding="8" CornerRadius="8" Background="{Binding DataContext.CurrentTheme.WindowPrimary.Brush, RelativeSource={RelativeSource AncestorType=Window}}">
+                                                    <TextBlock Text="{Binding}" FontWeight="ExtraBlack" Foreground="{Binding DataContext.CurrentTheme.WindowTextForeground.Brush, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                                                </Border>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+
                                 </StackPanel>
                             </Border>
                         </StackPanel>
@@ -412,7 +418,8 @@
             </Grid>
 
             <!-- Column 1 Center Main Bar -->
-            
+
+           
             <Border Name="bdCenterPanel" CornerRadius="13" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}" Margin="10, 10, 10, 15" Grid.Column="1">
                 <Border.Effect>
                     <DropShadowEffect Color="#322657"
@@ -469,7 +476,7 @@
 
                         <!-- Albums List Box -->
                         
-                        <ListBox x:Name="AlbumsListBox" SelectionChanged="AlbumsListBox_SelectionChanged" Height="300" Grid.Column="1" Grid.Row="1" Margin="0, 20, 16, 0" VerticalAlignment="Center" HorizontalAlignment="Stretch" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                        <ListBox x:Name="lbAlbums" SelectionChanged="AlbumsListBox_SelectionChanged" Height="300" Grid.Column="1" Grid.Row="1" Margin="0, 20, 16, 0" VerticalAlignment="Center" HorizontalAlignment="Stretch" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                         Background="Transparent" ItemsSource="{Binding MusicPlayerCache.Albums}" SelectedItem="{Binding MusicPlayerCache.SelectedAlbum, Mode=TwoWay}">
 
                             <ListBox.ItemTemplate>
@@ -547,13 +554,13 @@
                         </Grid.ColumnDefinitions>
 
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"></RowDefinition>
-                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
+                            <RowDefinition Height="9*"></RowDefinition>
                         </Grid.RowDefinitions>
 
                         <TextBlock Grid.Row="0" Text="Album Contents" FontSize="18" FontWeight="Black" Margin="0, 30, 0, 20" Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}"></TextBlock>
 
-                        <ListBox Margin="0, 0, 0, 0" Grid.Row="1" ItemsSource="{Binding MusicPlayerCache.SelectedAlbum.Songs}" SelectedItem="{Binding MusicPlayerCache.CurrentSong, Mode=TwoWay}"
+                        <ListBox x:Name="lbAlbumContents" Margin="0, 0, 0, 0" Grid.Row="1" Height="300" ItemsSource="{Binding MusicPlayerCache.SelectedAlbum.Songs}" SelectedItem="{Binding MusicPlayerCache.CurrentSong, Mode=TwoWay}"
                         Background="Transparent" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
@@ -574,7 +581,6 @@
                                                     <Setter Property="FontSize" Value="12"/>
 
                                                     <Style.Triggers>
-                                                        <!-- Swap template instead of raw content -->
                                                         <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ListBoxItem}}" Value="True">
                                                             <Setter Property="ContentTemplate">
                                                                 <Setter.Value>
@@ -644,6 +650,7 @@
                     </Grid>
                 </Grid>
             </Border>
+            
         </Grid>
 
         <!-- Row 2 Bottom Bar -->

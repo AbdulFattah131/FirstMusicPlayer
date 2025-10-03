@@ -57,8 +57,6 @@ namespace WpfApp3
         public RelayCommand PreviousCommand;
         public RelayCommand NextCommand;
         public RelayCommand VolumeCommand;
-
-        
      
         public MusicPlayerCache()
         {

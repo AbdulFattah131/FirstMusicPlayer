@@ -5,11 +5,14 @@ using MusicPlayer.Data.Objects;
 using MusicPlayer.Utility;
 using System.IO;
 using System.Xml.Serialization;
+using System.Windows.Controls;
 
 namespace WpfApp3
 {
     public class MainWindowViewModel : INotifyPropertyChanged
     {
+        public MusicPlayerCache MusicPlayerCache { get; set; }
+
         private static MainWindowViewModel _instance;
         public static MainWindowViewModel Instance
         {
@@ -33,7 +36,6 @@ namespace WpfApp3
             set;
         }
 
-        public MusicPlayerCache MusicPlayerCache { get; set; }
 
         private Theme _currentTheme;
         public Theme CurrentTheme
@@ -140,6 +142,21 @@ namespace WpfApp3
                 var theme = (Theme)serializer.Deserialize(reader);
                 if (theme != null)
                     CurrentTheme = theme;
+            }
+        }
+
+        // UserControls
+
+        private UserControl _currentView;
+
+        public UserControl CurrentView 
+        {
+
+            get => _currentView;
+            set
+            {
+                _currentView = value;
+                OnPropertyChanged(nameof(CurrentView));
             }
         }
     }

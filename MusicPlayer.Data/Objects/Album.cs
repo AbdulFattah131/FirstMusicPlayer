@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace MusicPlayer.Data.Objects
 {
@@ -15,7 +16,19 @@ namespace MusicPlayer.Data.Objects
         public string Artist { get; set; }
         public string ImagePath { get; set; }
         public int ReleaseDate { get; set; }
-        public string Genre { get; set; }
+
+
+        private HashSet<string> _hsGenres = new();
+        public HashSet<string> Genres
+        {
+                get => _hsGenres;
+        }
+        public string Genre
+        {
+                get => string.Join(" , ", Genres);
+        }
+        
+       
         public string CoverPath { get; set; }
         public int Year { get; set; }   
         public ObservableCollection<Song> Songs { get; set; } = new ObservableCollection<Song>();
