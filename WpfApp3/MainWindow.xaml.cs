@@ -141,15 +141,6 @@ namespace WpfApp3
 
         }
 
-        private void AlbumsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var selectedAlbum = lbAlbumsList.SelectedItem as Album;
-            if (selectedAlbum != null)
-            {
-                tbAlbumInfo.Text = selectedAlbum.AlbumInfo;
-            }
-        }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 

@@ -419,7 +419,7 @@
 
                         <!-- AlbumsListBox -->
 
-                            <ListBox x:Name="lbAlbumsList" SelectionChanged="AlbumsListBox_SelectionChanged" Height="300" Grid.Column="0" Grid.Row="1" Margin="0, 20, 0, 20" VerticalAlignment="Center" HorizontalAlignment="Stretch" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                            <ListBox x:Name="lbAlbumsList" Height="300" Grid.Column="0" Grid.Row="1" Margin="0, 20, 0, 20" VerticalAlignment="Center" HorizontalAlignment="Stretch" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                         Background="Transparent" BorderBrush="Black" ItemsSource="{Binding MusicPlayerCache.Albums}" SelectedItem="{Binding MusicPlayerCache.SelectedAlbum, Mode=TwoWay}">
 
                             <ListBox.ItemTemplate>
@@ -514,7 +514,6 @@
                                             <ColumnDefinition Width="Auto"></ColumnDefinition>
                                             <ColumnDefinition Width="*"></ColumnDefinition>
                                             <ColumnDefinition Width="*"></ColumnDefinition>
-                                            <ColumnDefinition Width="*"></ColumnDefinition>
                                             <ColumnDefinition Width="Auto"></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
 
@@ -547,9 +546,9 @@
                                         <TextBlock x:Name="tbTrackTitle" Text="{Binding Title}" FontWeight="Bold" FontSize="14" Foreground="{Binding DataContext.CurrentTheme.WindowHeadingForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                         <TextBlock x:Name="tbArtistNames" Text="{Binding Artist}" Foreground="{Binding DataContext.CurrentTheme.CurrentSongArtistForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"></TextBlock>
                                         </StackPanel>
-                                        <TextBlock x:Name="tbTrackLength" Grid.Column="2" Margin="0, 0, 80, 0" Text="{Binding Length}" HorizontalAlignment="Right" FontWeight="Regular" FontSize="14" Foreground="{Binding DataContext.CurrentTheme.WindowHeadingForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
+                                        <TextBlock x:Name="tbTrackLength" Grid.Column="2" Margin="0, 0, 0, 0" VerticalAlignment="Center" Text="{Binding Length}" HorizontalAlignment="Center" FontWeight="Regular" FontSize="14" Foreground="{Binding DataContext.CurrentTheme.WindowHeadingForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                         
-                                        <Button x:Name="bTrackDetails" Grid.Column="3" HorizontalAlignment="Right" Background="Transparent" BorderBrush="Transparent" Margin="0, 0, 30, 0">
+                                        <Button x:Name="bTrackDetails" Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Center" Background="Transparent" BorderBrush="Transparent" Margin="0, 0, 30, 0">
                                             <Path Data="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z"
                                              Fill="{Binding DataContext.CurrentTheme.ComplementGray.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"
                                              Stretch="Uniform" Width="10" Height="10"></Path>
@@ -755,7 +754,7 @@
                                                                 <!-- When checked -->
                                                                 <DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource AncestorType=ToggleButton}}" Value="True">
                                                                     <Setter Property="Fill"
-                                                 Value="{Binding DataContext.CurrentTheme.WindowPrimaryAnchor.Brush,
+                                                        Value="{Binding DataContext.CurrentTheme.WindowPrimaryAnchor.Brush,
                                                         RelativeSource={RelativeSource AncestorType=ToggleButton}}"/>
                                                                 </DataTrigger>
                                                             </Style.Triggers>

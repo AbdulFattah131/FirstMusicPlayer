@@ -33,16 +33,6 @@ namespace MusicPlayer.Data.Objects
         public int Year { get; set; }   
         public ObservableCollection<Song> Songs { get; set; } = new ObservableCollection<Song>();
 
-        private string albumInfo;
-        public string AlbumInfo
-        {
-            get => albumInfo;
-            set
-            {
-                albumInfo = value;
-                OnPropertyChanged(nameof(AlbumInfo));
-            }
-        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName) =>
