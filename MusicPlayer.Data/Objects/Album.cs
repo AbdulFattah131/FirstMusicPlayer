@@ -29,7 +29,6 @@ namespace MusicPlayer.Data.Objects
         }
         
        
-        public string CoverPath { get; set; }
         public int Year { get; set; }   
         public ObservableCollection<Song> Songs { get; set; } = new ObservableCollection<Song>();
 

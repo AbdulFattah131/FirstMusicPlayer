@@ -32,6 +32,7 @@ namespace MusicPlayer.Utility
                         Title = file.Tag.Album,
                         Artist = string.Join(", ", file.Tag.AlbumArtists),
                         Year = (int)file.Tag.Year,
+                        ImagePath = file.Tag.Pictures[0].Filename,
                     };
 
                     foreach (string genre in file.Tag.Genres)
