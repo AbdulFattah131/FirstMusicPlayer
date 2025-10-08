@@ -70,6 +70,22 @@ namespace WpfApp3
 
         }
 
+        public bool Flag { get; set; } = false;
+        public string DominantGenre
+        {
+            get
+            {
+                var genres = SelectedAlbum?.Genres;
+                if (genres == null || genres.Count == 0)
+                    return "No Genre";
+
+                // Show all genres joined, or just one depending on a flag
+                return Flag
+                    ? string.Join(", ", genres)
+                    : genres.FirstOrDefault();
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(string propertyName) =>

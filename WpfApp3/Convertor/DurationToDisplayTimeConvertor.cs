@@ -1,4 +1,6 @@
 ﻿using System.Globalization;
+using System.Runtime.InteropServices;
+using System.Text;
 using System.Windows.Data;
 
 namespace MusicPlayer.UIComponents.Convertor
@@ -8,16 +10,23 @@ namespace MusicPlayer.UIComponents.Convertor
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is not int)
+            if (value == null)
             {
                 return "--:--";
             }
 
-            int nDuration = (int)value;
-
-            if (nDuration is <= 0)
+            int nValue = 0;
+            if (value is not int)
             {
-                return string.Empty;
+                int.TryParse(value.ToString(), out nValue);
+            }
+
+            int nDurationMilliseconds = nValue;
+            int nDuration = nDurationMilliseconds / 1000;
+
+            if (nDuration is < 0)
+            {
+                return "--:--";
             }
 
             int nMinutes = nDuration / 60;
@@ -29,6 +38,34 @@ namespace MusicPlayer.UIComponents.Convertor
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
+        }
+
+        public static class SoundInfo
+        {
+            [DllImport("winmm.dll")]
+            private static extern uint mciSendString(string command, StringBuilder returnValue, int returnLength, IntPtr winHandle);
+
+            public static int GetSoundLength(string fileName) // gets the sound length
+            {
+                StringBuilder lengthBuf = new StringBuilder(32);
+
+                if (fileName.EndsWith(".mp3"))
+                {
+                    mciSendString(string.Format("open \"{fileName}\" type mpegvideo alias mp3", fileName), null, 0, IntPtr.Zero);
+                    mciSendString("status mp3 length", lengthBuf, lengthBuf.Capacity, IntPtr.Zero);
+                    mciSendString("close mp3", null, 0, IntPtr.Zero);
+                }
+                else if(fileName.EndsWith(".m4a"))
+                {
+                    mciSendString(string.Format("open \"{fileName}\" type mpegvideo alias m4a", fileName), null, 0, IntPtr.Zero);
+                    mciSendString("status m4a length", lengthBuf, lengthBuf.Capacity, IntPtr.Zero);
+                    mciSendString("close m4a", null, 0, IntPtr.Zero);
+                }
+                int length = 0;
+                int.TryParse(lengthBuf.ToString(), out length);
+
+                return length;
+            }
         }
     }
 }

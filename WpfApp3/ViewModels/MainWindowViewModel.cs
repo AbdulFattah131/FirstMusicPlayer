@@ -112,8 +112,6 @@ namespace WpfApp3
             CurrentTheme = solidTheme;
             ThemeWriter.Instance.WriteToFile(CurrentTheme);
 
-            TagReader.Instance.ReadSongsFromFilePaths(FileScanner.Instance.ScanSongs());
-
             MusicPlayerCache = new MusicPlayerCache();
             Settings = new Settings();
         }
@@ -159,5 +157,7 @@ namespace WpfApp3
                 OnPropertyChanged(nameof(CurrentView));
             }
         }
+
+        
     }
 }

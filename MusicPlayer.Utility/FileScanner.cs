@@ -27,23 +27,17 @@ namespace MusicPlayer.Utility
 
         public ObservableCollection<string> ScanSongs()
         {
-            string filePath = @"./Songs";
-            var allowedExtensions = new[] { ".mp3", ".m4a" };
-            var files = Directory.GetFiles(filePath)
-                                 .Where(file => allowedExtensions.Any(ext => file.EndsWith(ext, StringComparison.OrdinalIgnoreCase)))
-                                 .ToList();
-
-            ObservableCollection<string> lstSongFilePaths = new ObservableCollection<string>(files);
+            ObservableCollection<string> lstSongFilePaths = new ObservableCollection<string>();
 
             try
             {
-                var filePaths = Directory.EnumerateFiles(filePath, "*.*", SearchOption.AllDirectories)
-                                         .Where(file => allowedExtensions.Any(ext => file.EndsWith(ext, StringComparison.OrdinalIgnoreCase)));
+                string filePath = @"./Songs";
+                var allowedExtensions = new[] { ".mp3", ".m4a" };
+                List<string> files = Directory.GetFiles(filePath)
+                                     .Where(file => allowedExtensions.Any(ext => file.EndsWith(ext, StringComparison.OrdinalIgnoreCase)))
+                                     .ToList();
 
-                foreach (var path in filePaths)
-                {
-                    lstSongFilePaths.Add(path);
-                }
+                lstSongFilePaths = new ObservableCollection<string>(files);
             }
             catch (Exception ex)
             {

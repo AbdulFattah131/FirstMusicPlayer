@@ -5,7 +5,7 @@ namespace MusicPlayer.Utility
 {
     public class TagReader
     {
-        private static TagReader _instance;
+        private static TagReader _instance; // tagreader instance
         public static TagReader Instance
         {
             get
@@ -17,9 +17,9 @@ namespace MusicPlayer.Utility
             }
         }
 
-        private Dictionary<string, Album> m_dictAlbums = new Dictionary<string, Album>();
+        private Dictionary<string, Album> m_dictAlbums = new Dictionary<string, Album>(); // dictionary of albums
 
-        public Song ReadSongFromFilePath(string stfilePath)
+        public Song ReadSongFromFilePath(string stfilePath) // read song from file path
         {
             Song song = null;
 
@@ -32,7 +32,7 @@ namespace MusicPlayer.Utility
                         Title = file.Tag.Album,
                         Artist = string.Join(", ", file.Tag.AlbumArtists),
                         Year = (int)file.Tag.Year,
-                        ImagePath = file.Tag.Pictures[0].Filename,
+                        ImageData = file.Tag.Pictures[0].Data.Data,
                     };
 
                     foreach (string genre in file.Tag.Genres)
@@ -43,8 +43,6 @@ namespace MusicPlayer.Utility
                     m_dictAlbums.Add(file.Tag.Album, album);
                 }
 
-                var a = file.Tag.Pictures;
-
                 song = new Song
                 {
                     Title = file.Tag.Title,
@@ -53,7 +51,6 @@ namespace MusicPlayer.Utility
                     Genre = string.Join(", ", file.Tag.Genres),
                     Length = file.Tag.Length,
                     TrackNumber = (int)file.Tag.Track,
-
                     FilePath = stfilePath
                 };
                 m_dictAlbums[file.Tag.Album].Songs.Add(song);

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace MusicPlayer.Data.Objects
 {
@@ -14,7 +9,26 @@ namespace MusicPlayer.Data.Objects
     {
         public string Title { get; set; }
         public string Artist { get; set; }
-        public string ImagePath { get; set; }
+        public byte[] ImageData { get; set; }
+        public BitmapImage Image
+        {
+            get
+            {
+                if (ImageData == null)
+                    return null;
+
+                using (var stream = new MemoryStream(ImageData))
+                {
+                    var bitmap = new BitmapImage();
+                    bitmap.BeginInit();
+                    bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                    bitmap.StreamSource = stream;
+                    bitmap.EndInit();
+                    bitmap.Freeze(); // Freeze for thread safety
+                    return bitmap;
+                }
+            }
+        }
         public int ReleaseDate { get; set; }
 
 
@@ -23,12 +37,12 @@ namespace MusicPlayer.Data.Objects
         {
                 get => _hsGenres;
         }
-        public string Genre
-        {
-                get => string.Join(" , ", Genres);
-        }
-        
-       
+        //public string Genre
+        //{
+        //    get => string.Join(" ; ", Genres);
+        //}
+
+
         public int Year { get; set; }   
         public ObservableCollection<Song> Songs { get; set; } = new ObservableCollection<Song>();
 

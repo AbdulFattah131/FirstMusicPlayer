@@ -76,3 +76,4 @@ C:\Users\PC01\Source\Repos\FirstMusicPlayer\WpfApp3\obj\Debug\net8.0-windows\ref
 C:\Users\PC01\Source\Repos\FirstMusicPlayer\WpfApp3\obj\Debug\net8.0-windows\MusicPlayer.UIComponents.pdb
 C:\Users\PC01\Source\Repos\FirstMusicPlayer\WpfApp3\obj\Debug\net8.0-windows\MusicPlayer.UIComponents.genruntimeconfig.cache
 C:\Users\PC01\Source\Repos\FirstMusicPlayer\WpfApp3\obj\Debug\net8.0-windows\ref\MusicPlayer.UIComponents.dll
+C:\Users\safalam\source\repos\WPF\WpfApp3\WpfApp3\obj\Debug\net8.0-windows\GeneratedInternalTypeHelper.g.cs

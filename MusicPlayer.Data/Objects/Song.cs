@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Windows.Media.Imaging;
 
 namespace MusicPlayer.Data.Objects
 {
@@ -23,7 +18,7 @@ namespace MusicPlayer.Data.Objects
         }
 
         public bool isLiked { get; set; }
-        public string ImagePath => Album?.ImagePath;
+        public BitmapImage Image => Album?.Image;
         public string Length { get; set; }
         public int PlayCount { get; set; }
 
