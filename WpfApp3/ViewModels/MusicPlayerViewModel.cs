@@ -7,6 +7,7 @@ using System.IO;
 using MusicPlayer.Data.Objects;
 using MusicPlayer.UIComponents.ViewModels;
 using MusicPlayer.Utility;
+using System.Windows;
 
 namespace WpfApp3
 {
@@ -34,9 +35,11 @@ namespace WpfApp3
                 OnPropertyChanged(nameof(CurrentSong));
             }
         }
-        public ObservableCollection<Album> Albums { get; set; }
+        public ObservableCollection<Album> Albums { get; set; }  // albums collection
 
-        private Album _selectedAlbum;
+        //public ObservableCollection<Album> PopTagAlbums;
+
+        private Album _selectedAlbum; // album navigation
         public Album SelectedAlbum
         {
             get => _selectedAlbum;
@@ -51,12 +54,6 @@ namespace WpfApp3
 
         private readonly AudioPlayer _player;
 
-        public RelayCommand PlayPauseCommand;
-        public RelayCommand ShuffleCommand;
-        public RelayCommand RepeatCommand;
-        public RelayCommand PreviousCommand;
-        public RelayCommand NextCommand;
-        public RelayCommand VolumeCommand;
      
         public MusicPlayerCache()
         {
@@ -68,22 +65,8 @@ namespace WpfApp3
 
             _player = new AudioPlayer(); // playback tool initialization
 
-        }
+            //PopTagAlbums = new ObservableCollection<Album>(Albums.Where(a => a.Artist == "Michael Jackson" || a.Artist == "Tones and I"));
 
-        public bool Flag { get; set; } = false;
-        public string DominantGenre
-        {
-            get
-            {
-                var genres = SelectedAlbum?.Genres;
-                if (genres == null || genres.Count == 0)
-                    return "No Genre";
-
-                // Show all genres joined, or just one depending on a flag
-                return Flag
-                    ? string.Join(", ", genres)
-                    : genres.FirstOrDefault();
-            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -32,6 +32,33 @@ namespace WpfApp3
         {
             InitializeComponent();
 
+            ((CollectionViewSource)FindResource("PopTagAlbums")).Filter += (s, e) =>
+            {
+                var album = (Album)e.Item;
+                e.Accepted = album.Artist == "Michael Jackson" || album.Artist == "Tones and I";
+            };
+
+            ((CollectionViewSource)FindResource("FunkTagAlbums")).Filter += (s, e) =>
+            {
+                var album = (Album)e.Item;
+                e.Accepted = album.Artist == "Calvin Harris" || album.Artist == "Mark Ronson";
+            };
+
+            ((CollectionViewSource)FindResource("RockTagAlbums")).Filter += (s, e) =>
+            {
+                var album = (Album)e.Item;
+                e.Accepted = album.Artist == "AC, DC" || album.Artist == "Pink Floyd" || album.Artist == "Led Zeppelin";
+            };
+
+            ((CollectionViewSource)FindResource("RnB/SoulTagAlbums")).Filter += (s, e) =>
+            {
+                var album = (Album)e.Item;
+                e.Accepted = album.Artist == "Adele";
+            };
+
+
+
+
             m_vm = MainWindowViewModel.Instance;
             this.DataContext = m_vm;
 
