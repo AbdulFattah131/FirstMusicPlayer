@@ -85,11 +85,6 @@ namespace MusicPlayer.Data.Objects
             get;
             set;
         }
-        public ThemeColor AlternateTextForeground
-        {
-            get;
-            set;
-        }
         public ThemeColor TitleBarBackground
         {
             get;

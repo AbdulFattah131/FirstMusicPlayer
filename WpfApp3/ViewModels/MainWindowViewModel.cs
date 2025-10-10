@@ -81,7 +81,7 @@ namespace WpfApp3
                 ListBoxSelected = new ThemeColor(Brushes.White), // List Box Selected
                 LeftToggleHover = new ThemeColor(239, 241, 245), // Toggle Buttons Hover
                 LeftToggleSelected = new ThemeColor(197, 178, 239), // Toggle Buttons Selected
-                PlayPauseBackground = new ThemeColor(114, 91, 164) // Playback Controls : Play, Pause
+                PlayPauseBackground = new ThemeColor(114, 91, 164), // Playback Controls : Play, Pause
 
             };
 
@@ -105,7 +105,7 @@ namespace WpfApp3
                 ListBoxSelected = new ThemeColor(106, 103, 131),
                 LeftToggleHover = new ThemeColor(92, 90, 114),
                 LeftToggleSelected = new ThemeColor(106, 103, 131),
-                PlayPauseBackground = new ThemeColor(197, 178, 239)
+                PlayPauseBackground = new ThemeColor(197, 178, 239),
 
             };
 

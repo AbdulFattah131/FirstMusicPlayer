@@ -32,6 +32,8 @@ namespace WpfApp3
         {
             InitializeComponent();
 
+            // Your Library 
+
             ((CollectionViewSource)FindResource("PopTagAlbums")).Filter += (s, e) =>
             {
                 var album = (Album)e.Item;
@@ -56,8 +58,48 @@ namespace WpfApp3
                 e.Accepted = album.Artist == "Adele";
             };
 
+            // Explore
 
+            ((CollectionViewSource)FindResource("ContemporarySoulAlbums")).Filter += (s, e) =>
+            {
+                var album = (Album)e.Item;
+                e.Accepted = album.Artist == "Adele";
+            };
 
+            ((CollectionViewSource)FindResource("ModernFunkHitsAlbums")).Filter += (s, e) =>
+            {
+                var album = (Album)e.Item;
+                e.Accepted = album.Artist == "Calvin Harris" || album.Artist == "Mark Ronson";
+            };
+
+            ((CollectionViewSource)FindResource("HeavyRockAlbums")).Filter += (s, e) =>
+            {
+                var album = (Album)e.Item;
+                e.Accepted = album.Artist == "AC, DC";
+            };
+
+            ((CollectionViewSource)FindResource("Proto-MetalClassicsAlbums")).Filter += (s, e) =>
+            {
+                var album = (Album)e.Item;
+                e.Accepted = album.Artist == "Pink Floyd";
+            };
+            ((CollectionViewSource)FindResource("ProgressiveRockClassicsAlbums")).Filter += (s, e) =>
+            {
+                var album = (Album)e.Item;
+                e.Accepted = album.Artist == "Led Zeppelin";
+            };
+
+            ((CollectionViewSource)FindResource("ModernAlternative/IndieAlbums")).Filter += (s, e) =>
+            {
+                var album = (Album)e.Item;
+                e.Accepted = album.Artist == "Tones and I";
+            };
+
+            ((CollectionViewSource)FindResource("Pop-CultureClassicsAlbums")).Filter += (s, e) =>
+            {
+                var album = (Album)e.Item;
+                e.Accepted = album.Artist == "Michael Jackson";
+            };
 
             m_vm = MainWindowViewModel.Instance;
             this.DataContext = m_vm;

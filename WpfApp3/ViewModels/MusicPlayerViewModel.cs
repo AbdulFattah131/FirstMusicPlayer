@@ -52,7 +52,17 @@ namespace WpfApp3
 
         // Audio Player 
 
-        private readonly AudioPlayer _player;
+        private AudioPlayer _player;
+        public AudioPlayer Player
+        {
+            get
+            {
+                if (_player is null)
+                    _player = new();
+
+                return _player;
+            }
+        }
 
      
         public MusicPlayerCache()
@@ -62,8 +72,6 @@ namespace WpfApp3
             var songs = TagReader.Instance.ReadSongsFromFilePaths(songFilePaths); // song objects
 
             Albums = new ObservableCollection<Album>(TagReader.Instance.GetAlbums()); // albums
-
-            _player = new AudioPlayer(); // playback tool initialization
 
             //PopTagAlbums = new ObservableCollection<Album>(Albums.Where(a => a.Artist == "Michael Jackson" || a.Artist == "Tones and I"));
 
