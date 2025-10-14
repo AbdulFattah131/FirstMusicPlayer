@@ -30,14 +30,13 @@ namespace WpfApp3
                 if (_currentSong != null)
                 {
                     // I am telling my AudioPlayer to load the new song's file
-                    _player.Load(_currentSong.FilePath);
+                    Player.Load(_currentSong.FilePath);
                 }
                 OnPropertyChanged(nameof(CurrentSong));
             }
         }
         public ObservableCollection<Album> Albums { get; set; }  // albums collection
 
-        //public ObservableCollection<Album> PopTagAlbums;
 
         private Album _selectedAlbum; // album navigation
         public Album SelectedAlbum
@@ -46,6 +45,7 @@ namespace WpfApp3
             set
             {
                 _selectedAlbum = value;
+                //queue.Add songs of this album from Songs
                 OnPropertyChanged(nameof(SelectedAlbum));
             }
         }
@@ -64,6 +64,21 @@ namespace WpfApp3
             }
         }
 
+        public void PlayPause()
+        {
+            if (CurrentSong == null)
+                return;
+
+            if (!Player.IsPlaying)
+                Player.Load(CurrentSong.FilePath);
+            
+            Player.TogglePlayPause();
+        }
+
+        public void Shuffle()
+        {
+
+        }
      
         public MusicPlayerCache()
         {
@@ -72,8 +87,6 @@ namespace WpfApp3
             var songs = TagReader.Instance.ReadSongsFromFilePaths(songFilePaths); // song objects
 
             Albums = new ObservableCollection<Album>(TagReader.Instance.GetAlbums()); // albums
-
-            //PopTagAlbums = new ObservableCollection<Album>(Albums.Where(a => a.Artist == "Michael Jackson" || a.Artist == "Tones and I"));
 
         }
 

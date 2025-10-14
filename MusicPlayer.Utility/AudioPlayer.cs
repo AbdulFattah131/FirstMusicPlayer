@@ -22,6 +22,8 @@ namespace MusicPlayer.Utility
             _player.Init(_audioFile);
         }
 
+        WaveOutEvent WaveOut = new WaveOutEvent();
+
         public void TogglePlayPause()
         {
             if (IsPlaying)
@@ -32,8 +34,17 @@ namespace MusicPlayer.Utility
             {
                 Play();
             }
+        }
+        public void Shuffle(string filePath)
+        {
 
         }
+
+        public void Repeat(string filePath)
+        {
+
+        }
+
         public void Pause()
         {
             _player?.Pause();
@@ -49,18 +60,6 @@ namespace MusicPlayer.Utility
             _player?.Stop();
             _audioFile?.Dispose();
             _audioFile = null;
-        }
-
-        public void Shuffle(string filePath)
-        {
-            Stop();
-            
-        }
-
-        public void Repeat()
-        {
-            Stop();
-
         }
 
         public void SetOutputDevice(int deviceNumber)

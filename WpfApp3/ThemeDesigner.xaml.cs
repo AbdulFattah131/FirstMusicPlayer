@@ -129,7 +129,7 @@ namespace MusicPlayer.UIComponents
             if (itbQueryTextBox.Name == "itbPlayPauseBackgroundHex")
             {
                 m_vm.CustomTheme.PlayPauseBackground.Hex = stQueryText;
-            }
+            }                                                 
 
 
             itbQueryTextBox.BorderBrush = Brushes.Gray;

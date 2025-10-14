@@ -68,6 +68,7 @@
             <!-- Column 0 Left Side Panel -->
             
             <DockPanel Name="dpLeftPanel" LastChildFill="True" Grid.Column="0" Grid.Row="1" Margin="20, 30, 15, 15">
+                
                 <StackPanel x:Name="ToggleGroup" DockPanel.Dock="Top">
 
                     <StackPanel x:Name="spLogo" Orientation="Horizontal">
@@ -696,7 +697,7 @@
 
                             <!-- YourLibraryListBox2 -->
 
-                            <ScrollViewer Grid.Row="1" Grid.Column="0" >
+                            <ScrollViewer Margin="0, 0, 0, 0" Grid.Row="1" Grid.Column="0" >
                                 
                                 <Grid>
                                     <Grid.RowDefinitions>
@@ -1777,6 +1778,7 @@ Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={Stati
                 <!-- MusicControl -->
 
                 <Grid x:Name="MusicControl" VerticalAlignment="Center">
+                    
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
@@ -1821,30 +1823,75 @@ Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={Stati
                                 </Grid.ColumnDefinitions>
 
 
-                                <Button x:Name="btnRepeat" Grid.Row="0" Grid.Column="0" Background="Transparent" BorderBrush="Transparent" Width="40" Margin="0, 0, 30, 0">
-                                    <Button.ContentTemplate>
-                                        <DataTemplate>
-                                                <Path x:Name="Repeat"
-                                                        Data ="M17,17H7V14L3,18L7,22V19H19V13H17M7,7H17V10L21,6L17,2V5H5V11H7V7Z"
-                                                        Fill="{Binding DataContext.CurrentTheme.ComplementGray.Brush, RelativeSource={RelativeSource AncestorType=Button}}"
-                                                        Stretch="Uniform" Width="32" Height="32"
-                                                        Stroke="{Binding DataContext.CurrentTheme.ComplementGray.Brush, RelativeSource={RelativeSource AncestorType=Button}}"
-                                                        StrokeThickness="1.5" />
-                                        </DataTemplate>
-                                    </Button.ContentTemplate>
-                                </Button>
-                                
-                                <Button x:Name="btnPrevious" Grid.Row="0" Grid.Column="1" Width="60" Background="Transparent" BorderBrush="Transparent">
-                                    <Button.ContentTemplate>
-                                        <DataTemplate>
-                                                    <Path x:Name="Previous" Data="M6,6H8V18H6M9.5,12L18,18V6M16,14.14L12.97,12L16,9.86V14.14Z"
-                                                          Fill="{Binding DataContext.CurrentTheme.ComplementGray.Brush, RelativeSource={RelativeSource AncestorType=Button}}"
-                                                          Stretch="Uniform" Width="34" Height="34"/>
-                                            </DataTemplate>
-                                    </Button.ContentTemplate>
-                                </Button>
+                                    <ToggleButton x:Name="tbRepeat" Click="tbRepeat_Click" Checked="PlaybackToggle_Checked" Grid.Row="0" Grid.Column="0" Background="Transparent" BorderBrush="Transparent" Width="40" Margin="0, 0, 30, 0">
+                                    <ToggleButton.Style>
+                                        <Style TargetType="ToggleButton">
+                                                <Setter Property="ContentTemplate">
+                                                    <Setter.Value>
+                                                        <DataTemplate>
+                                                            <!-- Repeat Default -->
+                                                            <Path x:Name="Repeat"
+                                                             Data ="M17,17H7V14L3,18L7,22V19H19V13H17M7,7H17V10L21,6L17,2V5H5V11H7V7Z"
+                                                             Fill="{Binding DataContext.CurrentTheme.ComplementGray.Brush, RelativeSource={RelativeSource AncestorType=ToggleButton}}"
+                                                             Stretch="Uniform" Width="32" Height="32"
+                                                             Stroke="{Binding DataContext.CurrentTheme.ComplementGray.Brush, RelativeSource={RelativeSource AncestorType=ToggleButton}}"
+                                                             StrokeThickness="1.5"/>           
+                                                        </DataTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
 
-                                    <ToggleButton Grid.Row="0" Grid.Column="2" Command="{Binding PlayPauseCommand}"
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsChecked" Value="True">
+                                                        <Setter Property="ContentTemplate">
+                                                            <Setter.Value>
+                                                                <DataTemplate>
+                                                                     <!-- Enable Repeat -->
+                                                                    <Path Data="M13,15V9H12L10,10V11H11.5V15M17,17H7V14L3,18L7,22V19H19V13H17M7,7H17V10L21,6L17,2V5H5V11H7V7Z"
+                                                                    Fill="#1e1e1e"
+                                                                    Stretch="Uniform" Width="32" Height="32"
+                                                                    Stroke="#1e1e1e"
+                                                                    StrokeThickness="1.5"></Path>
+                                                                </DataTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                        </Style>
+                                    </ToggleButton.Style>
+                                </ToggleButton>
+
+                                    <ToggleButton x:Name="tbPrevious" Click="tbPrevious_Click" Grid.Row="0" Checked="PlaybackToggle_Checked" Grid.Column="1" Width="60" Background="Transparent" BorderBrush="Transparent">
+                                    <ToggleButton.Style>
+                                            <Style TargetType="ToggleButton">
+                                                <Setter Property="ContentTemplate">
+                                                    <Setter.Value>
+                                                        <DataTemplate>
+                                                            <!-- Previous Default -->
+                                                            <Path x:Name="Previous" Data="M6,6H8V18H6M9.5,12L18,18V6M16,14.14L12.97,12L16,9.86V14.14Z"
+                                                               Fill="{Binding DataContext.CurrentTheme.ComplementGray.Brush, RelativeSource={RelativeSource AncestorType=ToggleButton}}"
+                                                               Stretch="Uniform" Width="34" Height="34"/>
+                                                        </DataTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            
+                                            <Style.Triggers>
+                                                <Trigger Property="IsPressed" Value="True">
+                                                    <Setter Property="ContentTemplate">
+                                                        <Setter.Value>
+                                                            <DataTemplate>
+                                                                    <Path x:Name="Previous" Data="M6,6H8V18H6M9.5,12L18,18V6M16,14.14L12.97,12L16,9.86V14.14Z"
+                                                                       Fill="#1e1e1e"
+                                                                       Stretch="Uniform" Width="34" Height="34"/>
+                                                                </DataTemplate>
+                                                        </Setter.Value>
+                                                        </Setter>
+                                                        </Trigger>
+                                            </Style.Triggers>
+                                                    </Style>
+                                        </ToggleButton.Style>
+                                </ToggleButton>
+
+                                    <ToggleButton x:Name="tbPlayPause" Click="tbPlayPause_Click" Checked="PlaybackToggle_Checked" Grid.Row="0" Grid.Column="2" 
                                   Background="Transparent" BorderBrush="Transparent">
                                     <ToggleButton.Style>
                                         <Style TargetType="ToggleButton">
@@ -1872,48 +1919,87 @@ Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={Stati
                                                         </Setter.Value>
                                                     </Setter>
                                                 </Trigger>
-                                            </Style.Triggers>
+                                                    <Trigger Property="IsPressed" Value="True">
+                                                        <Setter Property="ContentTemplate">
+                                                            <Setter.Value>
+                                                                <DataTemplate>
+                                                                    <!-- Pause icon -->
+                                                                    <Path x:Name="Pause" Data="M15,16H13V8H15M11,16H9V8H11M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"
+                                                                       Fill="#6d6d6d"
+                                                                       Stretch="Uniform" Width="60" Height="60"/>   
+                                                                </DataTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </Trigger>
+                                                </Style.Triggers>
                                         </Style>
                                     </ToggleButton.Style>
                                 </ToggleButton>
 
-                                    <ToggleButton Grid.Row="0" Grid.Column="3" Width="60"
+                                    <ToggleButton x:Name="tbNext" Grid.Row="0" Click="tbNext_Click" Grid.Column="3" Width="60" Checked="PlaybackToggle_Checked"
                                              Background="Transparent" BorderBrush="Transparent">
-                                        <ToggleButton.ContentTemplate>
-                                            <DataTemplate>
-                                                <Path x:Name="Next"
-                                                  Data="M6,18L14.5,12L6,6M8,9.86L11.03,12L8,14.14M16,6H18V18H16"
-                                                  Stretch="Uniform"
-                                                  Width="34" Height="34">
-                                                    <Path.Style>
-                                                        <Style TargetType="Path">
-                                                            <Setter Property="Fill"
-                                                Value="{Binding DataContext.CurrentTheme.ComplementGray.Brush,
-                                                RelativeSource={RelativeSource AncestorType=ToggleButton}}"/>
-                                                            <Style.Triggers>
-                                                                <!-- When checked -->
-                                                                <DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource AncestorType=ToggleButton}}" Value="True">
-                                                                    <Setter Property="Fill"
-                                                        Value="{Binding DataContext.CurrentTheme.WindowPrimaryAnchor.Brush,
-                                                        RelativeSource={RelativeSource AncestorType=ToggleButton}}"/>
-                                                                </DataTrigger>
-                                                            </Style.Triggers>
-                                                        </Style>
-                                                    </Path.Style>
-                                                </Path>
-                                            </DataTemplate>
-                                        </ToggleButton.ContentTemplate>
+                                        <ToggleButton.Style>
+                                            <Style TargetType="ToggleButton">
+                                                <Setter Property="ContentTemplate">
+                                                    <Setter.Value>
+                                                        <DataTemplate>
+                                                            <!-- Next Default -->
+                                                            <Path x:Name="Next"
+                                                                  Data="M6,18L14.5,12L6,6M8,9.86L11.03,12L8,14.14M16,6H18V18H16"
+                                                                  Stretch="Uniform"
+                                                                  Width="34" Height="34">
+                                                                <Path.Style>
+                                                                    <Style TargetType="Path">
+                                                                        <Setter Property="Fill"
+                                                                        Value="{Binding DataContext.CurrentTheme.ComplementGray.Brush,
+                                                                        RelativeSource={RelativeSource AncestorType=ToggleButton}}"/>   
+                                                                        <Style.Triggers>
+                                                                            <!-- When pressed -->
+                                                                            <DataTrigger Binding="{Binding IsPressed, RelativeSource={RelativeSource AncestorType=ToggleButton}}" Value="True">
+                                                                                <Setter Property="Fill"
+                                                                                Value="#1e1e1e"/>
+                                                                            </DataTrigger>
+                                                                        </Style.Triggers>
+                                                                    </Style>
+                                                                </Path.Style>
+                                                            </Path>
+                                                        </DataTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </ToggleButton.Style>
                                     </ToggleButton>
 
-                                    <Button Grid.Row="0" Grid.Column="4" Background="Transparent" BorderBrush="Transparent" Width="40" Margin="30, 0, 0, 0">
-                                    <Button.ContentTemplate>
-                                        <DataTemplate>
-                                                <Path x:Name="Shuffle" Data="M17,3L22.25,7.5L17,12L22.25,16.5L17,21V18H14.26L11.44,15.18L13.56,13.06L15.5,15H17V12L17,9H15.5L6.5,18H2V15H5.26L14.26,6H17V3M2,6H6.5L9.32,8.82L7.2,10.94L5.26,9H2V6Z"
-                                                          Fill="{Binding DataContext.CurrentTheme.ComplementGray.Brush, RelativeSource={RelativeSource AncestorType=Button}}"
-                                                          Stretch="Uniform" Width="32" Height="32"/>
-                                            </DataTemplate>
-                                    </Button.ContentTemplate>
-                                </Button>
+                                    <ToggleButton x:Name="tbShuffle" Grid.Row="0" Click="tbShuffle_Click" Grid.Column="4" Checked="PlaybackToggle_Checked" Background="Transparent" BorderBrush="Transparent" Width="40" Margin="30, 0, 0, 0">
+                                    <ToggleButton.Style>
+                                            <Style TargetType="ToggleButton">
+                                                <Setter Property="ContentTemplate">
+                                                    <Setter.Value>
+                                                        <DataTemplate>
+                                                            <!-- Shuffle Default-->
+                                                            <Path x:Name="pShuffleEnabled" Data="M17,3L22.25,7.5L17,12L22.25,16.5L17,21V18H14.26L11.44,15.18L13.56,13.06L15.5,15H17V12L17,9H15.5L6.5,18H2V15H5.26L14.26,6H17V3M2,6H6.5L9.32,8.82L7.2,10.94L5.26,9H2V6Z"
+                                                              Stretch="Uniform" Width="32" Height="32">
+                                                                <Path.Style>
+                                                                    <Style TargetType="Path">
+                                                                        <Setter Property="Fill"
+                                                                     Value="{Binding DataContext.CurrentTheme.ComplementGray.Brush,
+                                                                     RelativeSource={RelativeSource AncestorType=ToggleButton}}"/>
+                                                                        <Style.Triggers>
+                                                                            <!-- When checked -->
+                                                                            <DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource AncestorType=ToggleButton}}" Value="True">
+                                                                                <Setter Property="Fill"
+                                                                             Value="#1e1e1e"/>
+                                                                            </DataTrigger>
+                                                                        </Style.Triggers>
+                                                                    </Style>
+                                                                </Path.Style>
+                                                            </Path>
+                                                        </DataTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                    </ToggleButton.Style>
+                                </ToggleButton>
                             </Grid>
                         </Viewbox>
                     </Grid>
@@ -2032,7 +2118,7 @@ Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={Stati
                         </Slider>
 
                         
-                        <ToggleButton Margin="0, 0, 20, 0" Click="SwitchButton_Click" Width="30" Background="Transparent" BorderBrush="Transparent">
+                        <ToggleButton x:Name="tbSwitchTheme" Margin="0, 0, 20, 0" Click="SwitchButton_Click" Width="30" Background="Transparent" BorderBrush="Transparent">
                                 <ToggleButton.Template>
                                     <ControlTemplate TargetType="{x:Type ToggleButton}">
                                         <Border x:Name="TemplateRoot"
@@ -2072,7 +2158,7 @@ Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={Stati
 
                     <!-- PlaybackSlider (main one) -->
 
-                        <StackPanel Grid.Row="1" Grid.Column="1" x:Name="MainSlider" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <StackPanel Grid.Row="1" Grid.Column="1" x:Name="MainSlider" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <TextBlock x:Name="tbTrackStart" Margin="0, 0, 10, 0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Text="00:00" FontWeight="Regular" FontSize="11.3" Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}"/>
 
                             <Slider Width="400" 

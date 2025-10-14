@@ -83,6 +83,7 @@ namespace WpfApp3
                 var album = (Album)e.Item;
                 e.Accepted = album.Artist == "Pink Floyd";
             };
+
             ((CollectionViewSource)FindResource("ProgressiveRockClassicsAlbums")).Filter += (s, e) =>
             {
                 var album = (Album)e.Item;
@@ -228,6 +229,44 @@ namespace WpfApp3
                 if (child is Border border && border.Child is ToggleButton toggle && toggle != clickedToggle)
                     toggle.IsChecked = false;
             }
+        }
+
+        private void tbPlayPause_Click(object sender, RoutedEventArgs e)
+        {
+            m_vm.MusicPlayerCache.PlayPause();
+        }
+
+        private void PlaybackToggle_Checked(object sender, RoutedEventArgs e)
+        {
+            if (sender is not ToggleButton clickedToggle)
+                return;
+
+            foreach (var child in grdPlayback.Children)
+            {
+                if (child is ToggleButton toggle && toggle != clickedToggle)
+                    toggle.IsChecked = false;
+            }
+
+        }
+
+        private void tbRepeat_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void tbPrevious_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void tbNext_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void tbShuffle_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
