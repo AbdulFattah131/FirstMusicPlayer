@@ -9,7 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Assets\userphoto.png" />
     <None Remove="Images\Adele_-_21.png" />
     <None Remove="Images\Beat_It.jpg" />
     <None Remove="Images\Dark_Side_of_the_Moon.png" />
@@ -35,9 +34,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Assets\userphoto.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
     <Resource Include="Images\Adele_-_21.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -62,6 +58,10 @@
     <Resource Include="Images\The_Kids_Are_Coming_by_Tones_and_I.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Assets\" />
   </ItemGroup>
 
 </Project>

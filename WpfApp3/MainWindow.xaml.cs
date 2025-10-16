@@ -1,22 +1,13 @@
-﻿using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.ComponentModel;
 using MusicPlayer.Data.Objects;
-using MusicPlayer.Utility;
-using System.Configuration;
 using MusicPlayer.UIComponents;
 using MusicPlayer.UIComponents.ViewModels;
-using System.Globalization;
-using System.IO;
+using MusicPlayer.Utility;
 
 namespace WpfApp3
 {
@@ -31,6 +22,8 @@ namespace WpfApp3
         public MainWindow()
         {
             InitializeComponent();
+
+            #region Filters for Views
 
             // Your Library 
 
@@ -69,7 +62,7 @@ namespace WpfApp3
             ((CollectionViewSource)FindResource("ModernFunkHitsAlbums")).Filter += (s, e) =>
             {
                 var album = (Album)e.Item;
-                e.Accepted = album.Artist == "Calvin Harris" || album.Artist == "Mark Ronson";
+                e.Accepted = true;
             };
 
             ((CollectionViewSource)FindResource("HeavyRockAlbums")).Filter += (s, e) =>
@@ -102,6 +95,8 @@ namespace WpfApp3
                 e.Accepted = album.Artist == "Michael Jackson";
             };
 
+            #endregion
+
             m_vm = MainWindowViewModel.Instance;
             this.DataContext = m_vm;
 
@@ -112,6 +107,7 @@ namespace WpfApp3
             this.Width = m_vm.Settings.LastWindowDimensions.X;
             this.Height = m_vm.Settings.LastWindowDimensions.Y;
 
+            //btnToggleAlbums.IsChecked = true;
         }
 
         private void borderWindowMove_MouseDown(object sender, MouseButtonEventArgs e)
@@ -180,7 +176,6 @@ namespace WpfApp3
             m_vm.Settings.LastWindowCoordinates = new Point(this.Left, this.Top);
             m_vm.Settings.LastWindowDimensions = new Point(this.Width, this.Height);
             SettingsWriter.Instance.WriteToFile(m_vm.Settings);
-
         }
 
         private void grdSettings_MouseEnter(object sender, MouseEventArgs e)
@@ -246,7 +241,18 @@ namespace WpfApp3
                 if (child is ToggleButton toggle && toggle != clickedToggle)
                     toggle.IsChecked = false;
             }
+        }
 
+
+        private void ToggleButton_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (sender == null)
+                return;
+
+            if (sender is ToggleButton btn)
+            {
+                btn.IsChecked = false;
+            }
         }
 
         private void tbRepeat_Click(object sender, RoutedEventArgs e)
@@ -256,11 +262,11 @@ namespace WpfApp3
 
         private void tbPrevious_Click(object sender, RoutedEventArgs e)
         {
-
         }
 
         private void tbNext_Click(object sender, RoutedEventArgs e)
         {
+            m_vm.MusicPlayerCache.Next();
 
         }
 

@@ -8,11 +8,15 @@ using MusicPlayer.Data.Objects;
 using MusicPlayer.UIComponents.ViewModels;
 using MusicPlayer.Utility;
 using System.Windows;
+using NAudio.Wave;
+using System.Security.Cryptography.X509Certificates;
 
 namespace WpfApp3
 {
     public class MusicPlayerCache : INotifyPropertyChanged
     {
+        #region Music Player Collections
+
         private ObservableCollection<Song> _lstSongs;
         public ObservableCollection<Song> Songs
         {
@@ -27,6 +31,8 @@ namespace WpfApp3
             set
             {
                 _currentSong = value;
+                CurrentIndex = PlaybackQueue.IndexOf(_currentSong);
+
                 if (_currentSong != null)
                 {
                     // I am telling my AudioPlayer to load the new song's file
@@ -36,7 +42,12 @@ namespace WpfApp3
             }
         }
         public ObservableCollection<Album> Albums { get; set; }  // albums collection
-
+        public int CurrentIndex
+        {
+            get; private set;
+        }
+        
+        public List<Song> PlaybackQueue = new List<Song>();
 
         private Album _selectedAlbum; // album navigation
         public Album SelectedAlbum
@@ -45,10 +56,24 @@ namespace WpfApp3
             set
             {
                 _selectedAlbum = value;
+
+                PlaybackQueue.Clear();
+                foreach (Song song in Songs)
+                {
+                    if (song.Album == _selectedAlbum)
+                        PlaybackQueue.Add(song);
+                }
+
+                CurrentIndex = 0;
+                CurrentSong = PlaybackQueue[CurrentIndex];
                 //queue.Add songs of this album from Songs
                 OnPropertyChanged(nameof(SelectedAlbum));
             }
         }
+
+        #endregion
+
+        #region Playback Functionality
 
         // Audio Player 
 
@@ -64,6 +89,8 @@ namespace WpfApp3
             }
         }
 
+        // Methods
+
         public void PlayPause()
         {
             if (CurrentSong == null)
@@ -74,17 +101,55 @@ namespace WpfApp3
             
             Player.TogglePlayPause();
         }
+        
+        public void Next()
+        {
+            if (PlaybackQueue == null || PlaybackQueue.Count == 0)
+                return;
 
+            Player.Stop();
+
+            CurrentIndex++;
+
+            if (CurrentIndex == PlaybackQueue.Count)
+                CurrentIndex = 0;
+
+            CurrentSong = PlaybackQueue[CurrentIndex];
+            PlayPause();
+        }
+
+        public void Previous()
+        {
+            if (PlaybackQueue == null || PlaybackQueue.Count == 0)
+                return;
+
+            Player.Stop();
+
+            CurrentIndex--;
+
+            if (CurrentIndex < 0)
+                CurrentIndex = PlaybackQueue.Count - 1;
+
+            CurrentSong = PlaybackQueue[CurrentIndex];
+            PlayPause();
+        }
         public void Shuffle()
         {
 
         }
-     
+
+        public void Repeat()
+        {
+
+        }
+
+        #endregion
+
         public MusicPlayerCache()
         {
             var songFilePaths = FileScanner.Instance.ScanSongs(); // song file paths
 
-            var songs = TagReader.Instance.ReadSongsFromFilePaths(songFilePaths); // song objects
+            Songs = TagReader.Instance.ReadSongsFromFilePaths(songFilePaths); // song objects
 
             Albums = new ObservableCollection<Album>(TagReader.Instance.GetAlbums()); // albums
 

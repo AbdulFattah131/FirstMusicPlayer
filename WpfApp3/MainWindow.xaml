@@ -19,6 +19,7 @@
         <!-- Convertor -->
         <convertor:DurationToDisplayTimeConvertor x:Key="DurationDisplayConverter"/>
 
+        <!-- #region Filtered Albums -->
         <!-- Your Library View -->
         <CollectionViewSource x:Key="PopTagAlbums" Source="{Binding MusicPlayerCache.Albums}"/>
         <CollectionViewSource x:Key="FunkTagAlbums" Source="{Binding MusicPlayerCache.Albums}"/>
@@ -33,6 +34,8 @@
         <CollectionViewSource x:Key="ProgressiveRockClassicsAlbums" Source="{Binding MusicPlayerCache.Albums}"/>
         <CollectionViewSource x:Key="ModernAlternative/IndieAlbums" Source="{Binding MusicPlayerCache.Albums}"/>
         <CollectionViewSource x:Key="Pop-CultureClassicsAlbums" Source="{Binding MusicPlayerCache.Albums}"/>
+        <!-- #endregion -->
+        
     </Window.Resources>
     
     <!-- Main Grid -->
@@ -90,6 +93,7 @@
                           Width="180"
                           Margin="0,25,0,0"
                           Checked="ToggleButton_Checked"
+                          Unchecked="ToggleButton_Unchecked"
                           FontSize="14"
                           BorderBrush="Transparent"
                           Foreground="Black">
@@ -220,7 +224,7 @@
                               ShadowDepth="2"
                               Opacity="0.2"/>
                         </Border.Effect>
-                        <ToggleButton x:Name="Albums"
+                        <ToggleButton x:Name="btnToggleAlbums"
                            Height="40"
                            Width="180"
                            Checked="ToggleButton_Checked"
@@ -349,9 +353,10 @@
             </DockPanel>
             
             <!-- Column 2 Right Side Panel -->
-
+            
             <Grid x:Name="grdRightPanel" Grid.Column="2" Grid.Row="1">
                 <StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="15,10,25,0">
+                    
                     <!--Genres-->
                     <Border Height="150" CornerRadius="15" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}">
                         <StackPanel Orientation="Vertical" Margin="15,17,15,0">
@@ -377,7 +382,13 @@
                     <Border x:Name="bdrLyrics" Height="250" CornerRadius="15" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}" Margin="0,25,0,0">
                         <StackPanel x:Name="spLyrics" Orientation="Vertical">
                             <TextBlock Text="Lyrics" FontWeight="Bold" Margin="15,17,0,0" FontSize="14" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"/>
-                            <TextBlock Text="Lyrics" VerticalAlignment="Center" FontWeight="UltraBlack" Margin="15,10,0,0" FontSize="13" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Queue -->
+                    <Border x:Name="bdrQueue" Height="250" CornerRadius="15" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}" Margin="0,25,0,0">
+                        <StackPanel x:Name="spQueue" Orientation="Vertical">
+                            <TextBlock Text="Queue" FontWeight="Bold" Margin="15,17,0,0" FontSize="14" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"/>
                         </StackPanel>
                     </Border>
                 </StackPanel>
@@ -385,7 +396,6 @@
 
 
             <!-- Column 1 Center Main Bar -->
-
             <UserControl x:Name="ucAlbumsView" Grid.Column="1"> <!-- Albums View -->
             <Border x:Name="bdCenterPanel" CornerRadius="13" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}" Margin="10, 10, 10, 15" >
                 <Border.Effect>
@@ -644,7 +654,7 @@
                     </Style>
                 </UserControl.Style>
             </UserControl>
-            
+
             <UserControl x:Name="ucYourLibraryView" Grid.Column="1"> <!-- YourLibrary View -->
                
                 <Border x:Name="bdCenterPanelLibraryView" CornerRadius="13" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}" Margin="10, 10, 10, 15">
@@ -1065,8 +1075,10 @@
                     </Style>
                 </UserControl.Style>
             </UserControl>
-           
+
             <UserControl x:Name="ucExploreView" Grid.Column="1">
+                <!-- YourLibrary View -->
+
                 <Border x:Name="bdExplore" CornerRadius="13" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}" Margin="10, 10, 10, 15">
                     <Border.Effect>
                         <DropShadowEffect Color="{Binding CurrentTheme.ComplementGray.Brush}"
@@ -1116,9 +1128,12 @@
 
                             <!-- ExploreListBox2 -->
 
-                            <ScrollViewer Grid.Row="1" Grid.Column="0" >
+                            <ScrollViewer Grid.Row="1" Grid.Column="0" CanContentScroll="True">
 
                                 <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*"></RowDefinition>
                                         <RowDefinition Height="*"></RowDefinition>
@@ -1134,7 +1149,7 @@
                                         <TextBlock x:Name="tbType1" Text="Contemporary Soul" FontSize="18" FontWeight="Black" FontStyle="Italic" 
                                              Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}" HorizontalAlignment="Left"/>
     
-                                        <ListBox x:Name="lbTypeList1" Height="150" Margin="0, 10, 0, 20" VerticalAlignment="Center" HorizontalAlignment="Stretch" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                        <ListBox x:Name="lbTypeList1" Height="150" Margin="0, 10, 0, 20" VerticalAlignment="Center" HorizontalAlignment="Stretch" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.CanContentScroll="False"
                                         Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={StaticResource ContemporarySoulAlbums}}" SelectedItem="{Binding MusicPlayerCache.SelectedAlbum, Mode=TwoWay}">
 
                                             <ListBox.ItemTemplate>
@@ -1219,7 +1234,7 @@
                                         <TextBlock x:Name="tbExplore2" Text="Modern Funk Hits" FontSize="18" FontWeight="Black" FontStyle="Italic"
                                              Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}" HorizontalAlignment="Left"/>
 
-                                        <ListBox x:Name="lbExplore2" Height="150" Margin="0, 10, 0, 20" VerticalAlignment="Center" HorizontalAlignment="Stretch" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                        <ListBox x:Name="lbExplore2" Height="150" Margin="0, 10, 0, 20" VerticalAlignment="Center" HorizontalAlignment="Left" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Visible"
             Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={StaticResource ModernFunkHitsAlbums}}" SelectedItem="{Binding MusicPlayerCache.SelectedAlbum, Mode=TwoWay}">
 
                                             <ListBox.ItemTemplate>
@@ -1304,7 +1319,7 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                         <TextBlock x:Name="tbExplore3" Text="Heavy Rock" FontSize="18" FontWeight="Black" FontStyle="Italic"
                                              Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}" HorizontalAlignment="Left"/>
 
-                                        <ListBox x:Name="lbExplore3" Height="150" Margin="0, 10, 0, 20" VerticalAlignment="Center" HorizontalAlignment="Stretch" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                        <ListBox x:Name="lbExplore3" Height="150" Margin="0, 10, 0, 20" VerticalAlignment="Center" HorizontalAlignment="Left" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                                               Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={StaticResource HeavyRockAlbums}}" SelectedItem="{Binding MusicPlayerCache.SelectedAlbum, Mode=TwoWay}">
 
                                             <ListBox.ItemTemplate>
@@ -1745,7 +1760,7 @@ Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={Stati
         </Grid>
 
         <!-- Row 2 BottomBar -->
-
+        
         <Border x:Name="bdrPlaybackPanel" Grid.Row="2" Grid.ColumnSpan="3" VerticalAlignment="Bottom">
             <Border.Effect>
                 <DropShadowEffect Color="Black"
@@ -1821,7 +1836,6 @@ Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={Stati
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-
 
                                     <ToggleButton x:Name="tbRepeat" Click="tbRepeat_Click" Checked="PlaybackToggle_Checked" Grid.Row="0" Grid.Column="0" Background="Transparent" BorderBrush="Transparent" Width="40" Margin="0, 0, 30, 0">
                                     <ToggleButton.Style>
