@@ -107,7 +107,7 @@ namespace WpfApp3
             this.Width = m_vm.Settings.LastWindowDimensions.X;
             this.Height = m_vm.Settings.LastWindowDimensions.Y;
 
-            //btnToggleAlbums.IsChecked = true;
+            btnToggleAlbums.IsChecked = true;
         }
 
         private void borderWindowMove_MouseDown(object sender, MouseButtonEventArgs e)
@@ -243,7 +243,6 @@ namespace WpfApp3
             }
         }
 
-
         private void ToggleButton_Unchecked(object sender, RoutedEventArgs e)
         {
             if (sender == null)
@@ -251,29 +250,32 @@ namespace WpfApp3
 
             if (sender is ToggleButton btn)
             {
-                btn.IsChecked = false;
+                btn.IsChecked = true;
             }
         }
 
+        #region Playback Controls
         private void tbRepeat_Click(object sender, RoutedEventArgs e)
         {
-
+            m_vm.MusicPlayerCache.Repeat();
         }
 
         private void tbPrevious_Click(object sender, RoutedEventArgs e)
         {
+            m_vm.MusicPlayerCache.Previous();
         }
 
         private void tbNext_Click(object sender, RoutedEventArgs e)
         {
             m_vm.MusicPlayerCache.Next();
-
         }
 
         private void tbShuffle_Click(object sender, RoutedEventArgs e)
         {
-
+            m_vm.MusicPlayerCache.Shuffle();
         }
+
+        #endregion
     }
 }
 

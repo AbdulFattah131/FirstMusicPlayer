@@ -135,12 +135,28 @@ namespace WpfApp3
         }
         public void Shuffle()
         {
+            if (PlaybackQueue == null || PlaybackQueue.Count == 0)
+                return;
 
+            Player.Stop();
+
+            Random random = new Random();
+            int randomIndex = random.Next(PlaybackQueue.Count);
+
+            CurrentIndex = randomIndex;
+            CurrentSong = PlaybackQueue[CurrentIndex];
+            PlayPause();
         }
 
         public void Repeat()
         {
+            if (PlaybackQueue == null || PlaybackQueue.Count == 0)
+                return;
 
+            Player.Stop();
+
+            CurrentSong = PlaybackQueue[CurrentIndex];
+            PlayPause();
         }
 
         #endregion
