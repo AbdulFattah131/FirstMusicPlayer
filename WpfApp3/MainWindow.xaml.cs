@@ -1,9 +1,11 @@
-﻿using System.Windows;
+﻿using System.Numerics;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Threading;
 using MusicPlayer.Data.Objects;
 using MusicPlayer.UIComponents;
 using MusicPlayer.UIComponents.ViewModels;
@@ -19,6 +21,7 @@ namespace WpfApp3
         private ThemeDesignerViewModel themeDesignerVM;
 
         public MainWindowViewModel m_vm;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -108,6 +111,7 @@ namespace WpfApp3
             this.Height = m_vm.Settings.LastWindowDimensions.Y;
 
             btnToggleAlbums.IsChecked = true;
+
         }
 
         private void borderWindowMove_MouseDown(object sender, MouseButtonEventArgs e)
@@ -276,6 +280,7 @@ namespace WpfApp3
         }
 
         #endregion
+
     }
 }
 

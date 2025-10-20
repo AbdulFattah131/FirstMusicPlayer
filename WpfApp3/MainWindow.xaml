@@ -1852,7 +1852,7 @@ Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={Stati
                             </StackPanel>
                         </Border>
 
-                        <!-- Grid Library View -->
+                        <!-- Grid Songs View -->
                         <Grid x:Name="grdSongsView" Grid.Row="1" Grid.ColumnSpan="2" Margin="40, 5, 40, 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -1861,7 +1861,6 @@ Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={Stati
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"></RowDefinition>
                                 <RowDefinition Height="*"></RowDefinition>
-
                             </Grid.RowDefinitions>
 
                             <!-- Heading -->
@@ -1871,7 +1870,7 @@ Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={Stati
 
                             <!-- SongsListBox1 -->
 
-                            <ScrollViewer Grid.Row="1" Grid.Column="0" CanContentScroll="True">
+                            <TextBlock x:Name="tbSongsList" Text="All Songs" FontSize="17" FontWeight="Black" Margin="0, 45, 0, 20" Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}"></TextBlock>
 
                                 <Grid x:Name="grdSongs" Grid.Row="1" Grid.Column="0" Margin="40, 20, 40, 0">
                                     <Grid.ColumnDefinitions>
@@ -1879,16 +1878,11 @@ Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={Stati
                                     </Grid.ColumnDefinitions>
 
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="1*"></RowDefinition>
-                                        <RowDefinition Height="9*"></RowDefinition>
+                                        <RowDefinition Height="*"></RowDefinition>
                                     </Grid.RowDefinitions>
 
-                                    <TextBlock x:Name="tbSongsList" Grid.Row="0" Text="All Songs" FontSize="18" FontWeight="Black" Margin="0, 10, 0, 20" Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}"></TextBlock>
-
-                                    <Grid Grid.Row="1" Margin="0, 10, 0, 0">
-
-                                        <ListBox x:Name="lbAllSongsList" VerticalAlignment="Stretch" Height="800" ItemsSource="{Binding MusicPlayerCache.Songs}" SelectedItem="{Binding MusicPlayerCache.CurrentSong, Mode=TwoWay}"
-                                        Background="Transparent" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+                                        <ListBox x:Name="lbAllSongsList" ItemsSource="{Binding MusicPlayerCache.Songs}" AlternationCount="9999" SelectedItem="{Binding MusicPlayerCache.CurrentSong, Mode=TwoWay}"
+                                        Background="Transparent" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                                             <ListBox.ItemTemplate>
                                                 <DataTemplate>
                                                     <Grid Margin="20, 13, 0, 13">
@@ -1900,11 +1894,11 @@ Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={Stati
                                                             <ColumnDefinition Width="Auto"></ColumnDefinition>
                                                         </Grid.ColumnDefinitions>
 
-                                                        <ContentControl x:Name="ccTrackNumber" Grid.Column="0" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                                        <ContentControl x:Name="ccTrackPosition" Grid.Column="0" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center">
                                                             <ContentControl.Style>
                                                                 <Style TargetType="ContentControl">
-                                                                    <Setter Property="Content" Value="{Binding TrackNumber}"/>
-                                                                    <Setter Property="Foreground" Value="{Binding DataContext.CurrentTheme.ComplementGray.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}" />
+                                                            <Setter Property="Content" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(ItemsControl.AlternationIndex), StringFormat='{}{0}. '}"/>
+                                                                    <Setter Property="Foreground" Value="{Binding DataContext.CurrentTheme.ComplementGray.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                                                     <Setter Property="FontWeight" Value="Bold"/>
                                                                     <Setter Property="FontSize" Value="12"/>
 
@@ -1914,8 +1908,8 @@ Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={Stati
                                                                                 <Setter.Value>
                                                                                     <DataTemplate>
                                                                                                 <Path Data="M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M10,16.5L16,12L10,7.5V16.5Z"
-                                                                  Fill="{Binding DataContext.CurrentTheme.WindowPrimaryAnchor.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"
-                                                                  Stretch="Uniform" Width="15" Height="15"/>    
+                                                                                                      Fill="{Binding DataContext.CurrentTheme.WindowPrimaryAnchor.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"
+                                                                                                      Stretch="Uniform" Width="15" Height="15"/>    
                                                                                     </DataTemplate>
                                                                                 </Setter.Value>
                                                                             </Setter>
@@ -1985,9 +1979,7 @@ Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={Stati
                                     </Grid>
                                 </Grid>
 
-                            </ScrollViewer>
                         </Grid>
-                    </Grid>
                 </Border>
                 
                 <UserControl.Style>
@@ -2017,7 +2009,7 @@ Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={Stati
                  BlurRadius="8"/>
             </Border.Effect>
 
-            <!-- Row 2 MusicControl -->
+        <!-- Row 2 MusicControl -->
 
         <Grid x:Name="grdMusicControl">
             <Grid.ColumnDefinitions>
@@ -2420,14 +2412,15 @@ Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={Stati
                     <!-- PlaybackSlider (main one) -->
 
                     <StackPanel Grid.Row="1" Grid.Column="1" x:Name="MainSlider" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock x:Name="tbTrackStart" Margin="0, 0, 10, 0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Text="00:00" FontWeight="Regular" FontSize="11.3" Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}"/>
+                            
+                    <TextBlock x:Name="tbTrackStart" Margin="0, 0, 10, 0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Text="00:00" FontWeight="Regular" FontSize="11.3" Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}"/>
 
-                            <Slider Width="400" 
-                                Minimum="0" Maximum="100" Value="50"
-                                 Margin="0, 10, 0, 0">
+                    <Slider x:Name="sdrMusicPlayerSeekBar" Width="400" Minimum="0" Maximum="100" Value="50" PreviewMouseDown="sdrMusicPlayerSeekBar_PreviewMouseDown" PreviewMouseUp="sdrMusicPlayerSeekBar_PreviewMouseUp" ValueChanged="sdrMusicPlayerSeekBar_ValueChanged" Margin="0, 10, 0, 0">
                         
                         <Slider.Resources>
+                            
                             <!-- Style -->
+                            
                                 <Style TargetType="RepeatButton">
                                     <Setter Property="Template">
                                         <Setter.Value>
@@ -2438,12 +2431,8 @@ Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={Stati
                                             </ControlTemplate>
                                         </Setter.Value>
                                     </Setter>
-                                        <Style.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Background" Value="White"></Setter>
-                                            </Trigger>
-                                        </Style.Triggers>
                                 </Style>
+                            
                             <Style TargetType="Thumb">
                                 <Setter Property="Width" Value="16"/>
                                 <Setter Property="Height" Value="16"/>
@@ -2455,9 +2444,11 @@ Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={Stati
                                     </Setter.Value>
                                 </Setter>
                             </Style>
+                            
                         </Slider.Resources>
 
                         <Slider.Template>
+                            
                             <ControlTemplate TargetType="Slider">
 
                                 <!-- Root container -->
@@ -2479,7 +2470,7 @@ Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={Stati
                                         <Track.Thumb>
                                             <Thumb x:Name="Thumb"
                                                    Width="12" Height="12"
-                                                   Background="{Binding CurrentTheme.WindowTextForeground.Brush}"
+                                                   Background="{Binding CurrentTheme.WindowPrimaryAnchor.Brush}"
                                                    BorderBrush="#494454"
                                                    BorderThickness="0"
                                                    />
@@ -2495,23 +2486,27 @@ Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={Stati
                                         </Track.IncreaseRepeatButton>
 
                                     </Track>
-
                                     
                                 </Grid>
 
                                 <!-- TRIGGERS -->
                                 <ControlTemplate.Triggers>
-                                    
+
+                                            <Trigger SourceName="DecreaseRepeatButton" Property="IsMouseOver" Value="True">
+                                                <Setter Property="Cursor" Value="Hand"></Setter>
+                                                <Setter TargetName="DecreaseRepeatButton" Property="Background" Value="{Binding CurrentTheme.WindowHeadingForeground.Brush}"></Setter>
+                                            </Trigger>
+
                                     <!-- Hover on Thumb -->
                                     <Trigger SourceName="Thumb" Property="IsMouseOver" Value="True">
                                         <Setter Property="Cursor" Value="Hand"/>
                                         <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
-                                        <Setter TargetName="Thumb" Property="Foreground" Value="Gray"/>
+                                        <Setter TargetName="Thumb" Property="Background" Value="{Binding CurrentTheme.WindowHeadingForeground.Brush}"/>
                                     </Trigger>
 
                                     <!-- Thumb pressed -->
                                     <Trigger SourceName="Thumb" Property="IsDragging" Value="True">
-                                            <Setter TargetName="Thumb" Property="Background" Value="{Binding CurrentTheme.WindowPrimaryAnchor.Brush}"/>
+                                            <Setter TargetName="Thumb" Property="Background" Value="Gray"/>
                                     </Trigger>
 
                                     <!-- Disabled Slider -->
@@ -2520,15 +2515,15 @@ Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={Stati
                                         <Setter TargetName="Thumb" Property="Opacity" Value="0.5"/>
                                     </Trigger>
 
-                                    
-
                                 </ControlTemplate.Triggers>
 
                             </ControlTemplate>
                         </Slider.Template>
                     </Slider>
-                            <TextBlock x:Name="tbTrackEnd" Margin="10, 0, 0, 0" VerticalAlignment="Bottom" HorizontalAlignment="Right" Text="{Binding MusicPlayerCache.CurrentSong.Length , Converter={StaticResource DurationDisplayConverter}}" FontWeight="Regular" FontSize="11.3" Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}"/>
-                        </StackPanel>
+                            
+                        <TextBlock x:Name="tbTrackEnd" Margin="10, 0, 0, 0" VerticalAlignment="Bottom" HorizontalAlignment="Right" Text="{Binding MusicPlayerCache.CurrentSong.Length , Converter={StaticResource DurationDisplayConverter}}" FontWeight="Regular" FontSize="11.3" Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}"/>
+                        
+                    </StackPanel>
                     </Grid>
             </Border>
         </Grid>

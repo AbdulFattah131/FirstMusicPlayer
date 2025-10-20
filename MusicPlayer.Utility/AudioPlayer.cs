@@ -7,8 +7,9 @@ namespace MusicPlayer.Utility
     {
         private IWavePlayer _player;
         private AudioFileReader _audioFile;
+        private WaveStream _stream;
         public bool IsPlaying => _player?.PlaybackState == PlaybackState.Playing;
-          
+        
         public AudioPlayer()
         {
             _player = new WaveOutEvent();
@@ -23,6 +24,8 @@ namespace MusicPlayer.Utility
         }
 
         WaveOutEvent WaveOut = new WaveOutEvent();
+
+        TimeSpan currentTime = WaveStream.CurrentTime;
 
         public void TogglePlayPause()
         {

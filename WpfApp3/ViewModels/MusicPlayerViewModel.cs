@@ -89,7 +89,7 @@ namespace WpfApp3
             }
         }
 
-        // Methods
+        // Playback Control Buttons
 
         public void PlayPause()
         {
@@ -157,6 +157,31 @@ namespace WpfApp3
 
             CurrentSong = PlaybackQueue[CurrentIndex];
             PlayPause();
+        }
+
+        // Slider (Music Seek Bar)
+
+        private double _currentPosition;
+
+        private double _totalDuration;
+
+        private bool _isUserDragging;
+
+        public double CurrentPosition
+        {
+            get => _currentPosition;
+            set
+            {
+                if (_currentPosition != value)
+                {
+                    _currentPosition = value;
+                    OnPropertyChanged(nameof(CurrentPosition));
+
+                    if (!_isUserDragging)
+                        Player.Position(value);
+
+                }
+            }
         }
 
         #endregion
