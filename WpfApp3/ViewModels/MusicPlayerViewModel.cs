@@ -10,11 +10,30 @@ using MusicPlayer.Utility;
 using System.Windows;
 using NAudio.Wave;
 using System.Security.Cryptography.X509Certificates;
+using System.Windows.Threading;
+using System.Windows.Data;
 
 namespace WpfApp3
 {
     public class MusicPlayerCache : INotifyPropertyChanged
     {
+        #region Search Box Functionality
+
+        public ICollectionView FilteredSongs { get; set; }
+
+        private string _searchText;
+        public string SearchText
+        {
+            get => _searchText;
+            set
+            {
+                _searchText = value;
+                OnPropertyChanged(nameof(SearchText));
+                FilteredSongs.Refresh();
+            }
+        }
+        #endregion
+
         #region Music Player Collections
 
         private ObservableCollection<Song> _lstSongs;
@@ -89,16 +108,32 @@ namespace WpfApp3
             }
         }
 
+        private AudioPlayer _audioFile;
+        public AudioPlayer AudioFile
+        {
+            get
+            {
+                if (_audioFile is null)
+                    _audioFile = new();
+
+                return _audioFile;
+            }
+        }
+
+        private readonly DispatcherTimer _timer;
+
         // Playback Control Buttons
 
+        private string _loadedFilePath;
         public void PlayPause()
         {
             if (CurrentSong == null)
                 return;
 
-            if (!Player.IsPlaying)
+            if (_loadedFilePath != CurrentSong.FilePath)
                 Player.Load(CurrentSong.FilePath);
-            
+                _loadedFilePath = CurrentSong.FilePath;
+
             Player.TogglePlayPause();
         }
         
@@ -158,16 +193,22 @@ namespace WpfApp3
             CurrentSong = PlaybackQueue[CurrentIndex];
             PlayPause();
         }
-
+        
         // Slider (Music Seek Bar)
 
-        private double _currentPosition;
-
-        private double _totalDuration;
-
         private bool _isUserDragging;
+        public bool IsUserDragging
+        {
+            get => _isUserDragging;
+            set
+            {
+                _isUserDragging = value;
+                OnPropertyChanged(nameof(IsUserDragging));
+            }
+        }
 
-        public double CurrentPosition
+        private int _currentPosition;
+        public int CurrentPosition
         {
             get => _currentPosition;
             set
@@ -175,15 +216,17 @@ namespace WpfApp3
                 if (_currentPosition != value)
                 {
                     _currentPosition = value;
+
+                    if (_isUserDragging && _player != null)
+                    {
+                        double progress = _currentPosition / _player.TotalTime.TotalSeconds;
+                        _player.Seek(progress);
+                    }
+
                     OnPropertyChanged(nameof(CurrentPosition));
-
-                    if (!_isUserDragging)
-                        Player.Position(value);
-
                 }
             }
         }
-
         #endregion
 
         public MusicPlayerCache()
@@ -194,6 +237,42 @@ namespace WpfApp3
 
             Albums = new ObservableCollection<Album>(TagReader.Instance.GetAlbums()); // albums
 
+            #region Timer
+            _timer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromMilliseconds(500)
+            };
+            _timer.Tick += Timer_Tick;
+            _timer.Start();
+            #endregion
+
+            #region Filtered Songs
+            FilteredSongs = CollectionViewSource.GetDefaultView(Songs);
+            FilteredSongs.Filter = FilterSongs;
+            #endregion
+        }
+
+        // Timer Tick
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            if (_player != null && _player.IsPlaying)
+            {
+                CurrentPosition = (int)_player.CurrentTime.TotalSeconds;
+            }
+        }
+        
+        // Filter Songs
+        private bool FilterSongs(object obj)
+        {
+            if (obj is Song song)
+            {
+                if (string.IsNullOrWhiteSpace(SearchText))
+                    return true;
+
+                return song.Title.Contains(SearchText, StringComparison.OrdinalIgnoreCase)
+                    || song.Artist.Contains(SearchText, StringComparison.OrdinalIgnoreCase);
+            }
+            return false;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

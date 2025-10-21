@@ -19,7 +19,7 @@ namespace MusicPlayer.Data.Objects
 
         public bool isLiked { get; set; }
         public BitmapImage Image => Album?.Image;
-        public string Length { get; set; }
+        public int Length { get; set; }
         public int PlayCount { get; set; }
 
     }

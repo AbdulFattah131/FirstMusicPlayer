@@ -15,22 +15,21 @@ namespace MusicPlayer.UIComponents.Convertor
                 return "--:--";
             }
 
-            int nValue = 0;
-            if (value is not int)
+            double nValue = 0;
+            if (value is not double)
             {
-                int.TryParse(value.ToString(), out nValue);
+                double.TryParse(value.ToString(), out nValue);
             }
 
-            int nDurationMilliseconds = nValue;
-            int nDuration = nDurationMilliseconds / 1000;
+            double nDuration = nValue;
 
             if (nDuration is < 0)
             {
                 return "--:--";
             }
 
-            int nMinutes = nDuration / 60;
-            int nSeconds = nDuration % 60;
+            double nMinutes = Math.Floor(nDuration / 60);
+            double nSeconds = nDuration % 60;
 
             return $"{nMinutes:00}:{nSeconds:00}";
         }

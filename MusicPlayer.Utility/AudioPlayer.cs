@@ -1,5 +1,7 @@
 ﻿using MusicPlayer.Data.Objects;
 using NAudio.Wave;
+using NAudio.Utils;
+using NAudio.MediaFoundation;
 
 namespace MusicPlayer.Utility
 {
@@ -8,6 +10,7 @@ namespace MusicPlayer.Utility
         private IWavePlayer _player;
         private AudioFileReader _audioFile;
         private WaveStream _stream;
+        private string _loadedFilePath;
         public bool IsPlaying => _player?.PlaybackState == PlaybackState.Playing;
         
         public AudioPlayer()
@@ -21,11 +24,11 @@ namespace MusicPlayer.Utility
 
             _audioFile = new AudioFileReader(filePath);
             _player.Init(_audioFile);
+            _loadedFilePath = filePath;
         }
 
         WaveOutEvent WaveOut = new WaveOutEvent();
 
-        TimeSpan currentTime = WaveStream.CurrentTime;
 
         public void TogglePlayPause()
         {
@@ -77,5 +80,39 @@ namespace MusicPlayer.Utility
                 _player.Init(_audioFile);
             }
         }
+        public TimeSpan CurrentTime
+        {
+            get
+            {
+                if (_audioFile == null)
+                    return TimeSpan.Zero;
+                return _audioFile.CurrentTime;
+            }
+            set
+            {
+                if (_audioFile != null)
+                    _audioFile.CurrentTime = value;
+            }
+        }
+
+        public TimeSpan TotalTime
+        {
+            get
+            {
+                if (_audioFile == null)
+                    return TimeSpan.Zero;
+                return _audioFile.TotalTime;
+            }
+        }
+
+        public void Seek(double progress)
+        {
+            if (_audioFile != null && progress >= 0 && progress <= 1)
+            {
+                _audioFile.CurrentTime = TimeSpan.FromSeconds(_audioFile.TotalTime.TotalSeconds * progress);
+            }
+        }
+
+
     }
 }

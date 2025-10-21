@@ -65,7 +65,7 @@ namespace WpfApp3
             ((CollectionViewSource)FindResource("ModernFunkHitsAlbums")).Filter += (s, e) =>
             {
                 var album = (Album)e.Item;
-                e.Accepted = true;
+                e.Accepted = album.Artist == "Mark Ronson" || album.Artist == "Calvin Harris";
             };
 
             ((CollectionViewSource)FindResource("HeavyRockAlbums")).Filter += (s, e) =>
@@ -281,6 +281,25 @@ namespace WpfApp3
 
         #endregion
 
+        private void sdrMusicPlayerSeekBar_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (DataContext is MainWindowViewModel m_vm)
+                m_vm.MusicPlayerCache.IsUserDragging = true;
+        }
+
+        private void sdrMusicPlayerSeekBar_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (DataContext is MainWindowViewModel m_vm)
+            {
+                m_vm.MusicPlayerCache.IsUserDragging = false;
+                m_vm.MusicPlayerCache.CurrentPosition = (int)((Slider)sender).Value;
+            }
+        }
+
+        private void sdrMusicPlayerSeekBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+
+        }
     }
 }
 

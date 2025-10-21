@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using MusicPlayer.Data.Objects;
+using NAudio.Wave;
 
 namespace MusicPlayer.Utility
 {
@@ -49,7 +50,7 @@ namespace MusicPlayer.Utility
                     Artist = string.Join(", ", file.Tag.Performers),
                     Album = m_dictAlbums[file.Tag.Album],
                     Genre = string.Join(", ", file.Tag.Genres),
-                    Length = file.Tag.Length,
+                    //Length = file.Tag.Length,
                     TrackNumber = (int)file.Tag.Track,
                     FilePath = stfilePath
                 };
@@ -63,10 +64,17 @@ namespace MusicPlayer.Utility
         {
             ObservableCollection<Song> lstSongs = new ObservableCollection<Song>();
 
+
             // add each song
             foreach (string stFilePath in lstFilePaths)
             {
                 Song temp = ReadSongFromFilePath(stFilePath);
+
+                using (var audioFileReader = new AudioFileReader(stFilePath))
+                {
+                    TimeSpan duration = audioFileReader.TotalTime;
+                    temp.Length = duration.Hours*3600 + duration.Minutes*60 + duration.Seconds;
+                }
 
                 if (temp != null)
                 {
