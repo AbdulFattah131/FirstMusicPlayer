@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Threading;
 using MusicPlayer.Data.Objects;
 using MusicPlayer.UIComponents;
+using MusicPlayer.UIComponents.Constants;
 using MusicPlayer.UIComponents.ViewModels;
 using MusicPlayer.Utility;
 
@@ -225,8 +226,14 @@ namespace WpfApp3
             var clickedToggle = sender as ToggleButton;
             foreach (var child in ToggleGroup.Children)
             {
-                if (child is Border border && border.Child is ToggleButton toggle && toggle != clickedToggle)
-                    toggle.IsChecked = false;
+                if (child is Border border)
+                {
+                    if(border.Child is ToggleButton toggle)
+                    {
+                        if(toggle != clickedToggle)
+                            toggle.IsChecked = false;
+                    }
+                }
             }
         }
 
@@ -283,8 +290,31 @@ namespace WpfApp3
 
         private void sdrMusicPlayerSeekBar_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (DataContext is MainWindowViewModel m_vm)
-                m_vm.MusicPlayerCache.IsUserDragging = true;
+            if (DataContext is not MainWindowViewModel m_vm)
+                return;
+
+            var slider = sender as Slider;
+            if (slider == null) return;
+
+            // Check what was clicked
+            if (e.OriginalSource is FrameworkElement fe && fe.TemplatedParent is Thumb)
+                return; // allow normal thumb dragging, do NOT handle
+
+            m_vm.MusicPlayerCache.IsUserDragging = true;
+
+            var track = slider.Template.FindName("PART_Track", slider) as System.Windows.Controls.Primitives.Track;
+            if (track == null) return;
+
+            Point clickPoint = e.GetPosition(track);
+            double ratio = clickPoint.X / track.ActualWidth;
+            double newValue = ratio * (slider.Maximum - slider.Minimum) + slider.Minimum;
+
+            slider.Value = newValue;
+            double normalized = newValue / slider.Maximum;
+
+            m_vm.MusicPlayerCache.Player.Seek(newValue);
+
+            e.Handled = true; // only handle non-thumb clicks
         }
 
         private void sdrMusicPlayerSeekBar_PreviewMouseUp(object sender, MouseButtonEventArgs e)
@@ -299,6 +329,10 @@ namespace WpfApp3
         private void sdrMusicPlayerSeekBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
 
+        }
+
+        private void lbAllSongsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
         }
     }
 }

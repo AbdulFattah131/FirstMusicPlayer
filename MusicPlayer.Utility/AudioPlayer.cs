@@ -2,6 +2,7 @@
 using NAudio.Wave;
 using NAudio.Utils;
 using NAudio.MediaFoundation;
+using NAudio.CoreAudioApi;
 
 namespace MusicPlayer.Utility
 {
@@ -11,12 +12,15 @@ namespace MusicPlayer.Utility
         private AudioFileReader _audioFile;
         private WaveStream _stream;
         private string _loadedFilePath;
+        private readonly MMDevice _mMDevice;
         public bool IsPlaying => _player?.PlaybackState == PlaybackState.Playing;
         
         public AudioPlayer()
         {
             _player = new WaveOutEvent();
         }
+
+        public MMDevice MMDevice;
 
         public void Load(string filePath)
         {

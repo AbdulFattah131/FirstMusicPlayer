@@ -12,13 +12,14 @@ using NAudio.Wave;
 using System.Security.Cryptography.X509Certificates;
 using System.Windows.Threading;
 using System.Windows.Data;
+using MusicPlayer.UIComponents.Constants;
+using NAudio.CoreAudioApi;
 
 namespace WpfApp3
 {
     public class MusicPlayerCache : INotifyPropertyChanged
     {
         #region Search Box Functionality
-
         public ICollectionView FilteredSongs { get; set; }
 
         private string _searchText;
@@ -60,13 +61,23 @@ namespace WpfApp3
                 OnPropertyChanged(nameof(CurrentSong));
             }
         }
+
         public ObservableCollection<Album> Albums { get; set; }  // albums collection
         public int CurrentIndex
         {
             get; private set;
         }
-        
-        public List<Song> PlaybackQueue = new List<Song>();
+
+        private List<Song> _lstPlaybackQueue = new List<Song>();
+        public List<Song> PlaybackQueue
+        {
+            get => _lstPlaybackQueue;
+            set
+            {
+                _lstPlaybackQueue = value;
+            }
+        }
+
 
         private Album _selectedAlbum; // album navigation
         public Album SelectedAlbum
@@ -75,8 +86,8 @@ namespace WpfApp3
             set
             {
                 _selectedAlbum = value;
-
                 PlaybackQueue.Clear();
+                
                 foreach (Song song in Songs)
                 {
                     if (song.Album == _selectedAlbum)
@@ -87,6 +98,7 @@ namespace WpfApp3
                 CurrentSong = PlaybackQueue[CurrentIndex];
                 //queue.Add songs of this album from Songs
                 OnPropertyChanged(nameof(SelectedAlbum));
+                OnPropertyChanged(nameof(PlaybackQueue));
             }
         }
 
@@ -249,6 +261,14 @@ namespace WpfApp3
             #region Filtered Songs
             FilteredSongs = CollectionViewSource.GetDefaultView(Songs);
             FilteredSongs.Filter = FilterSongs;
+            #endregion
+
+            #region Volume Control
+
+            var deviceEnumerator = new MMDeviceEnumerator();
+            Player.MMDevice = deviceEnumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
+
+
             #endregion
         }
 
