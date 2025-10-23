@@ -31,21 +31,19 @@ namespace MusicPlayer.Data.Objects
         }
         public int ReleaseDate { get; set; }
 
-
         private HashSet<string> _hsGenres = new();
         public HashSet<string> Genres
         {
                 get => _hsGenres;
         }
+        
         //public string Genre
         //{
         //    get => string.Join(" ; ", Genres);
         //}
 
-
         public int Year { get; set; }   
         public ObservableCollection<Song> Songs { get; set; } = new ObservableCollection<Song>();
-
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName) =>

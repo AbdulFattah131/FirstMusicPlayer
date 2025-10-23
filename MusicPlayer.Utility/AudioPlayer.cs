@@ -1,18 +1,18 @@
-﻿using MusicPlayer.Data.Objects;
-using NAudio.Wave;
-using NAudio.Utils;
-using NAudio.MediaFoundation;
+﻿using System.ComponentModel;
 using NAudio.CoreAudioApi;
+using NAudio.Wave;
 
 namespace MusicPlayer.Utility
 {
-    public class AudioPlayer
+    public class AudioPlayer :INotifyPropertyChanged
     {
         private IWavePlayer _player;
         private AudioFileReader _audioFile;
         private WaveStream _stream;
         private string _loadedFilePath;
-        private readonly MMDevice _mMDevice;
+        private MMDevice _defaultDevice;
+        private float _systemVolume;
+        private bool _isMuted;
         public bool IsPlaying => _player?.PlaybackState == PlaybackState.Playing;
         
         public AudioPlayer()
@@ -20,8 +20,50 @@ namespace MusicPlayer.Utility
             _player = new WaveOutEvent();
         }
 
-        public MMDevice MMDevice;
+        public void InitializeVolume()
+        {
+            var enumerator = new MMDeviceEnumerator();
+            _defaultDevice = enumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
 
+            _systemVolume = _defaultDevice.AudioEndpointVolume.MasterVolumeLevelScalar;
+            _isMuted = _defaultDevice.AudioEndpointVolume.Mute;
+
+            _defaultDevice.AudioEndpointVolume.OnVolumeNotification += (data) =>
+            {
+                SystemVolume = data.MasterVolume;
+                IsMuted = data.Muted;
+            };
+
+        }
+        public float SystemVolume
+        {
+            get => _systemVolume;
+            set
+            {
+                if (Math.Abs(value - _systemVolume) > 0.001f)
+                {
+                    _systemVolume = value;
+                    if (_defaultDevice != null)
+                        _defaultDevice.AudioEndpointVolume.MasterVolumeLevelScalar = value;
+                }
+
+                OnPropertyChanged(nameof(SystemVolume));
+            }
+        }
+        public bool IsMuted
+        {
+            get => _isMuted;
+            set
+            {
+                if (_isMuted != value)
+                {
+                    _isMuted = value;
+                    if (_defaultDevice != null)
+                        _defaultDevice.AudioEndpointVolume.Mute = value;
+                }
+
+            }
+        }
         public void Load(string filePath)
         {
             Stop();
@@ -33,6 +75,10 @@ namespace MusicPlayer.Utility
 
         WaveOutEvent WaveOut = new WaveOutEvent();
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged(string propertyName) =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
         public void TogglePlayPause()
         {

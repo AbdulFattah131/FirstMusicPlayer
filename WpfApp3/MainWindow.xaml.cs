@@ -113,6 +113,8 @@ namespace WpfApp3
 
             btnToggleAlbums.IsChecked = true;
 
+            m_vm.MusicPlayerCache.Player.InitializeVolume();
+
         }
 
         private void borderWindowMove_MouseDown(object sender, MouseButtonEventArgs e)

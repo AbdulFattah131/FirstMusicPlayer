@@ -19,32 +19,32 @@ namespace WpfApp3
 {
     public class MusicPlayerCache : INotifyPropertyChanged
     {
-        #region Search Box Functionality
-        public ICollectionView FilteredSongs { get; set; }
+        //#region Search Box Functionality
+        //public ICollectionView FilteredSongs { get; set; }
 
-        private string _searchText;
-        public string SearchText
-        {
-            get => _searchText;
-            set
-            {
-                _searchText = value;
-                OnPropertyChanged(nameof(SearchText));
-                FilteredSongs.Refresh();
-            }
-        }
-        #endregion
+        //private string _searchText;
+        //public string SearchText
+        //{
+        //    get => _searchText;
+        //    set
+        //    {
+        //        _searchText = value;
+        //        OnPropertyChanged(nameof(SearchText));
+        //        FilteredSongs.Refresh();
+        //    }
+        //}
+        //#endregion
 
         #region Music Player Collections
 
-        private ObservableCollection<Song> _lstSongs;
+        private ObservableCollection<Song> _lstSongs; // list of all songs
         public ObservableCollection<Song> Songs
         {
             get => _lstSongs;
             set => _lstSongs = value;
         }
 
-        private Song _currentSong;
+        private Song _currentSong; // currently selected song
         public Song CurrentSong
         {
             get => _currentSong;
@@ -104,6 +104,7 @@ namespace WpfApp3
 
         #endregion
 
+
         #region Playback Functionality
 
         // Audio Player 
@@ -131,6 +132,8 @@ namespace WpfApp3
                 return _audioFile;
             }
         }
+
+        public AudioPlayer MMDevice;
 
         private readonly DispatcherTimer _timer;
 
@@ -258,15 +261,13 @@ namespace WpfApp3
             _timer.Start();
             #endregion
 
-            #region Filtered Songs
-            FilteredSongs = CollectionViewSource.GetDefaultView(Songs);
-            FilteredSongs.Filter = FilterSongs;
-            #endregion
+            //#region Filtered Songs
+            //FilteredSongs = CollectionViewSource.GetDefaultView(Songs);
+            //FilteredSongs.Filter = FilterSongs;
+            //#endregion
 
             #region Volume Control
 
-            var deviceEnumerator = new MMDeviceEnumerator();
-            Player.MMDevice = deviceEnumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
 
 
             #endregion
@@ -282,18 +283,19 @@ namespace WpfApp3
         }
         
         // Filter Songs
-        private bool FilterSongs(object obj)
-        {
-            if (obj is Song song)
-            {
-                if (string.IsNullOrWhiteSpace(SearchText))
-                    return true;
+        //private bool FilterSongs(object obj)
+        //{
+        //    if (obj is Song song)
+        //    {
+        //        if (string.IsNullOrWhiteSpace(SearchText))
+        //            return true;
 
-                return song.Title.Contains(SearchText, StringComparison.OrdinalIgnoreCase)
-                    || song.Artist.Contains(SearchText, StringComparison.OrdinalIgnoreCase);
-            }
-            return false;
-        }
+        //        return song.Title.Contains(SearchText, StringComparison.OrdinalIgnoreCase)
+        //            || song.Artist.Contains(SearchText, StringComparison.OrdinalIgnoreCase);
+        //    }
+        //    return false;
+        //}
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 
