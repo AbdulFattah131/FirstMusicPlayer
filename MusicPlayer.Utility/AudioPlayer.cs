@@ -61,7 +61,6 @@ namespace MusicPlayer.Utility
                     if (_defaultDevice != null)
                         _defaultDevice.AudioEndpointVolume.Mute = value;
                 }
-
             }
         }
         public void Load(string filePath)

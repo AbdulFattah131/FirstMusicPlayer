@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MusicPlayer.UIComponents")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+73f957e66d45a1fde15f4a8597970ec3de412fba")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+233c448c67c10bdb2670d766a496a9d85a9d8e33")]
 [assembly: System.Reflection.AssemblyProductAttribute("MusicPlayer.UIComponents")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MusicPlayer.UIComponents")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

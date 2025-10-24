@@ -425,6 +425,7 @@
                         <Border.Effect>
                             <DropShadowEffect Color="#B0B8C0"
                               BlurRadius="0"
+                              Direction="270"
                               ShadowDepth="3"
                               Opacity="0.2"/>
                         </Border.Effect>
@@ -447,11 +448,11 @@
                         </StackPanel>
                     </Border>
                     
-
                     <!--Lyrics-->
                     <Border x:Name="bdrLyrics" Height="250" CornerRadius="15" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}" Margin="0,25,0,0">
                         <Border.Effect>
                             <DropShadowEffect Color="#B0B8C0"
+                              Direction="270"
                               BlurRadius="0"
                               ShadowDepth="3"
                               Opacity="0.2"/>
@@ -465,6 +466,7 @@
                     <Border x:Name="bdrQueue" Height="350" CornerRadius="15" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}" Margin="0,25,0,0">
                         <Border.Effect>
                             <DropShadowEffect Color="#B0B8C0"
+                              Direction="270"
                               BlurRadius="0"
                               ShadowDepth="3.5"
                               Opacity="0.2"/>
