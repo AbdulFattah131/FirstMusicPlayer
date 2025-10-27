@@ -298,11 +298,11 @@ namespace WpfApp3
             var slider = sender as Slider;
             if (slider == null) return;
 
+            m_vm.MusicPlayerCache.IsUserDragging = true;
+
             // Check what was clicked
             if (e.OriginalSource is FrameworkElement fe && fe.TemplatedParent is Thumb)
                 return; // allow normal thumb dragging, do NOT handle
-
-            m_vm.MusicPlayerCache.IsUserDragging = true;
 
             var track = slider.Template.FindName("PART_Track", slider) as System.Windows.Controls.Primitives.Track;
             if (track == null) return;
@@ -317,6 +317,7 @@ namespace WpfApp3
             m_vm.MusicPlayerCache.Player.Seek(newValue);
 
             e.Handled = true; // only handle non-thumb clicks
+
         }
 
         private void sdrMusicPlayerSeekBar_PreviewMouseUp(object sender, MouseButtonEventArgs e)

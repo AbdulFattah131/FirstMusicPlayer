@@ -19,22 +19,6 @@ namespace WpfApp3
 {
     public class MusicPlayerCache : INotifyPropertyChanged
     {
-        //#region Search Box Functionality
-        //public ICollectionView FilteredSongs { get; set; }
-
-        //private string _searchText;
-        //public string SearchText
-        //{
-        //    get => _searchText;
-        //    set
-        //    {
-        //        _searchText = value;
-        //        OnPropertyChanged(nameof(SearchText));
-        //        FilteredSongs.Refresh();
-        //    }
-        //}
-        //#endregion
-
         #region Music Player Collections
 
         private ObservableCollection<Song> _lstSongs; // list of all songs
@@ -68,7 +52,7 @@ namespace WpfApp3
             get; private set;
         }
 
-        private List<Song> _lstPlaybackQueue = new List<Song>();
+        private List<Song> _lstPlaybackQueue;
         public List<Song> PlaybackQueue
         {
             get => _lstPlaybackQueue;
@@ -78,7 +62,6 @@ namespace WpfApp3
             }
         }
 
-
         private Album _selectedAlbum; // album navigation
         public Album SelectedAlbum
         {
@@ -87,10 +70,10 @@ namespace WpfApp3
             {
                 _selectedAlbum = value;
                 PlaybackQueue.Clear();
-                
+
                 foreach (Song song in Songs)
                 {
-                    if (song.Album == _selectedAlbum)
+                    if (song.Album == SelectedAlbum)
                         PlaybackQueue.Add(song);
                 }
 
@@ -208,8 +191,11 @@ namespace WpfApp3
             CurrentSong = PlaybackQueue[CurrentIndex];
             PlayPause();
         }
-        
-        // Slider (Music Seek Bar)
+
+        #endregion
+
+
+        #region Slider (Music Seek Bar)
 
         private bool _isUserDragging;
         public bool IsUserDragging
@@ -252,6 +238,8 @@ namespace WpfApp3
 
             Albums = new ObservableCollection<Album>(TagReader.Instance.GetAlbums()); // albums
 
+            PlaybackQueue = new List<Song>();
+
             #region Timer
             _timer = new DispatcherTimer
             {
@@ -261,16 +249,6 @@ namespace WpfApp3
             _timer.Start();
             #endregion
 
-            //#region Filtered Songs
-            //FilteredSongs = CollectionViewSource.GetDefaultView(Songs);
-            //FilteredSongs.Filter = FilterSongs;
-            //#endregion
-
-            #region Volume Control
-
-
-
-            #endregion
         }
 
         // Timer Tick
@@ -281,21 +259,6 @@ namespace WpfApp3
                 CurrentPosition = (int)_player.CurrentTime.TotalSeconds;
             }
         }
-        
-        // Filter Songs
-        //private bool FilterSongs(object obj)
-        //{
-        //    if (obj is Song song)
-        //    {
-        //        if (string.IsNullOrWhiteSpace(SearchText))
-        //            return true;
-
-        //        return song.Title.Contains(SearchText, StringComparison.OrdinalIgnoreCase)
-        //            || song.Artist.Contains(SearchText, StringComparison.OrdinalIgnoreCase);
-        //    }
-        //    return false;
-        //}
-
 
         public event PropertyChangedEventHandler PropertyChanged;
 

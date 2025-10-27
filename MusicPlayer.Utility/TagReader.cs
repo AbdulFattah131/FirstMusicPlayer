@@ -64,7 +64,6 @@ namespace MusicPlayer.Utility
         {
             ObservableCollection<Song> lstSongs = new ObservableCollection<Song>();
 
-
             // add each song
             foreach (string stFilePath in lstFilePaths)
             {
