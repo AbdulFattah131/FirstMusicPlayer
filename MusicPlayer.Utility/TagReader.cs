@@ -23,7 +23,7 @@ namespace MusicPlayer.Utility
         public Song ReadSongFromFilePath(string stfilePath) // read song from file path
         {
             Song song = null;
-
+           
             using (TagLib.File file = TagLib.File.Create(stfilePath))
             {
                 if (!m_dictAlbums.ContainsKey(file.Tag.Album))
@@ -89,6 +89,7 @@ namespace MusicPlayer.Utility
         }
         private TagReader()
         {
+
         }
     }
 }
