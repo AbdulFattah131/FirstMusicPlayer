@@ -28,37 +28,30 @@ namespace WpfApp3
             set => _lstSongs = value;
         }
 
-        private Song _currentSong; // currently selected song
-        public Song CurrentSong
-        {
-            get => _currentSong;
-            set
-            {
-                _currentSong = value;
-                CurrentIndex = PlaybackQueue.IndexOf(_currentSong);
-
-                if (_currentSong != null)
-                {
-                    // I am telling my AudioPlayer to load the new song's file
-                    Player.Load(_currentSong.FilePath);
-                }
-                OnPropertyChanged(nameof(CurrentSong));
-            }
-        }
-
         public ObservableCollection<Album> Albums { get; set; }  // albums collection
         public int CurrentIndex
         {
             get; private set;
         }
 
-        private List<Song> _lstPlaybackQueue;
-        public List<Song> PlaybackQueue
+        private ObservableCollection<Song> _ocPlaybackQueue;
+        public ObservableCollection<Song> PlaybackQueue
         {
-            get => _lstPlaybackQueue;
+            get => _ocPlaybackQueue;
             set
             {
-                _lstPlaybackQueue = value;
+                _ocPlaybackQueue = value;
+                OnPropertyChanged(nameof(PlaybackQueue));
+            }
+        }
+
+        public bool IsPlaying
+        {
+            get => _player.IsPlaying;
+            set
+            {
+                _player.TogglePlayPause();
+                OnPropertyChanged(nameof(IsPlaying));
             }
         }
 
@@ -69,19 +62,47 @@ namespace WpfApp3
             set
             {
                 _selectedAlbum = value;
-                PlaybackQueue.Clear();
+                _player.Stop();
 
-                foreach (Song song in Songs)
+                CurrentSong = null;
+
+                PlaybackQueue = _selectedAlbum.Songs;
+
+                if (PlaybackQueue.Count > 0)
                 {
-                    if (song.Album == SelectedAlbum)
-                        PlaybackQueue.Add(song);
+                    CurrentIndex = 0;
+                    CurrentSong = PlaybackQueue[CurrentIndex];
                 }
 
-                CurrentIndex = 0;
-                CurrentSong = PlaybackQueue[CurrentIndex];
                 //queue.Add songs of this album from Songs
                 OnPropertyChanged(nameof(SelectedAlbum));
-                OnPropertyChanged(nameof(PlaybackQueue));
+            }
+        }
+
+        private Song _currentSong; // currently selected song
+        public Song CurrentSong
+        {
+            get => _currentSong;
+            set
+            {
+                Player.Stop();
+                _currentSong = value;
+                CurrentPosition = 0;
+
+                if (value == null)
+                    return;
+
+                CurrentIndex = PlaybackQueue.IndexOf(_currentSong);
+
+                if (_currentSong != null)
+                {
+                    // I am telling my AudioPlayer to load the new song's file
+                    Player.Load(_currentSong.FilePath);
+                }
+
+                _player.TogglePlayPause();
+                OnPropertyChanged(nameof(CurrentSong));
+                OnPropertyChanged(nameof(IsPlaying));
             }
         }
 
@@ -238,12 +259,12 @@ namespace WpfApp3
 
             Albums = new ObservableCollection<Album>(TagReader.Instance.GetAlbums()); // albums
 
-            PlaybackQueue = new List<Song>();
+            PlaybackQueue = new ObservableCollection<Song>();
 
             #region Timer
             _timer = new DispatcherTimer
             {
-                Interval = TimeSpan.FromMilliseconds(500)
+                Interval = TimeSpan.FromMilliseconds(1000)
             };
             _timer.Tick += Timer_Tick;
             _timer.Start();
@@ -254,10 +275,11 @@ namespace WpfApp3
         // Timer Tick
         private void Timer_Tick(object sender, EventArgs e)
         {
-            if (_player != null && _player.IsPlaying)
-            {
+            if (!IsPlaying)
+                return;
+
+            if (_player != null)
                 CurrentPosition = (int)_player.CurrentTime.TotalSeconds;
-            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -8,11 +8,10 @@ namespace MusicPlayer.Utility
     {
         private IWavePlayer _player;
         private AudioFileReader _audioFile;
-        private WaveStream _stream;
-        private string _loadedFilePath;
         private MMDevice _defaultDevice;
-        private float _systemVolume;
         private bool _isMuted;
+        string _loadedFilePath;
+
         public bool IsPlaying => _player?.PlaybackState == PlaybackState.Playing;
         
         public AudioPlayer()
@@ -25,28 +24,16 @@ namespace MusicPlayer.Utility
             var enumerator = new MMDeviceEnumerator();
             _defaultDevice = enumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
 
-            _systemVolume = _defaultDevice.AudioEndpointVolume.MasterVolumeLevelScalar;
+            _player.Volume = _defaultDevice.AudioEndpointVolume.MasterVolumeLevelScalar;
             _isMuted = _defaultDevice.AudioEndpointVolume.Mute;
-
-            _defaultDevice.AudioEndpointVolume.OnVolumeNotification += (data) =>
-            {
-                SystemVolume = data.MasterVolume;
-                IsMuted = data.Muted;
-            };
-
         }
+
         public float SystemVolume
         {
-            get => _systemVolume;
+            get => _player.Volume;
             set
             {
-                if (Math.Abs(value - _systemVolume) > 0.001f)
-                {
-                    _systemVolume = value;
-                    if (_defaultDevice != null)
-                        _defaultDevice.AudioEndpointVolume.MasterVolumeLevelScalar = value;
-                }
-
+                _player.Volume = value;
                 OnPropertyChanged(nameof(SystemVolume));
             }
         }

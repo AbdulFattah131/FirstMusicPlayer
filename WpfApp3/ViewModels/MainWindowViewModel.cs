@@ -110,7 +110,7 @@ namespace WpfApp3
             };
 
             CurrentTheme = solidTheme;
-            ThemeWriter.Instance.WriteToFile(CurrentTheme);
+            //ThemeWriter.Instance.WriteToFile(CurrentTheme);
 
             MusicPlayerCache = new MusicPlayerCache();
             Settings = new Settings();

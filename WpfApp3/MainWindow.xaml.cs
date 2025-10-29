@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
+using System.Windows.Forms.VisualStyles;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
@@ -110,6 +111,15 @@ namespace WpfApp3
             this.Top = m_vm.Settings.LastWindowCoordinates.Y;
             this.Width = m_vm.Settings.LastWindowDimensions.X;
             this.Height = m_vm.Settings.LastWindowDimensions.Y;
+
+            foreach (Theme objTheme in ThemeReader.Instance.GetThemes())
+            {
+                if(m_vm.Settings.CurrentThemeName == objTheme.Name)
+                {
+                    m_vm.CurrentTheme = objTheme;
+                    break;
+                }
+            }
 
             btnToggleAlbums.IsChecked = true;
 
@@ -246,14 +256,15 @@ namespace WpfApp3
 
         private void PlaybackToggle_Checked(object sender, RoutedEventArgs e)
         {
-            if (sender is not ToggleButton clickedToggle)
-                return;
+            bool? bValue = (sender as ToggleButton).IsChecked;
 
-            foreach (var child in grdPlayback.Children)
+            if (bValue == null)
             {
-                if (child is ToggleButton toggle && toggle != clickedToggle)
-                    toggle.IsChecked = false;
+                m_vm.MusicPlayerCache.IsPlaying = false;
+                return;
             }
+
+            m_vm.MusicPlayerCache.IsPlaying = (bool)bValue;
         }
 
         private void ToggleButton_Unchecked(object sender, RoutedEventArgs e)
