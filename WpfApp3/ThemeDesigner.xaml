@@ -49,6 +49,8 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+
                 </Grid.RowDefinitions>
 
                 <TextBlock Text="Theme Name" VerticalAlignment="Center" Grid.Row="0"/>
@@ -156,6 +158,12 @@
                 <StackPanel Orientation="Horizontal" Height="32" Grid.Column="1" Grid.Row="17">
                     <TextBox Name="itbPlayPauseBackgroundHex" TextChanged="TextBox_TextChanged" VerticalContentAlignment="Center" BorderThickness="2" MaxLength="9" Width="128" Margin="8,4,4,4"/>
                     <Rectangle Fill="{Binding Path=CustomTheme.PlayPauseBackground.Brush, UpdateSourceTrigger=PropertyChanged}" Width="24" Height="24" Margin="4" VerticalAlignment="Center" Stroke="Black" StrokeThickness="1"/>
+                </StackPanel>
+
+                <TextBlock Text="Genres Text" VerticalAlignment="Center" Grid.Row="18"/>
+                <StackPanel Orientation="Horizontal" Height="32" Grid.Column="1" Grid.Row="18">
+                    <TextBox Name="itbGenresTextForegroundHex" TextChanged="TextBox_TextChanged" VerticalContentAlignment="Center" BorderThickness="2" MaxLength="9" Width="128" Margin="8,4,4,4"/>
+                    <Rectangle Fill="{Binding Path=CustomTheme.GenresTextForeground.Brush, UpdateSourceTrigger=PropertyChanged}" Width="24" Height="24" Margin="4" VerticalAlignment="Center" Stroke="Black" StrokeThickness="1"/>
                 </StackPanel>
 
             </Grid>

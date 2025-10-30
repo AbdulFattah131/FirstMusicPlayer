@@ -47,10 +47,10 @@ namespace WpfApp3
 
         public bool IsPlaying
         {
-            get => _player.IsPlaying;
+            get => Player.IsPlaying;
             set
             {
-                _player.TogglePlayPause();
+                Player.TogglePlayPause();
                 OnPropertyChanged(nameof(IsPlaying));
             }
         }
@@ -62,7 +62,7 @@ namespace WpfApp3
             set
             {
                 _selectedAlbum = value;
-                _player.Stop();
+                Player.Stop();
 
                 CurrentSong = null;
 
@@ -100,7 +100,6 @@ namespace WpfApp3
                     Player.Load(_currentSong.FilePath);
                 }
 
-                _player.TogglePlayPause();
                 OnPropertyChanged(nameof(CurrentSong));
                 OnPropertyChanged(nameof(IsPlaying));
             }
@@ -239,10 +238,10 @@ namespace WpfApp3
                 {
                     _currentPosition = value;
 
-                    if (_isUserDragging && _player != null)
+                    if (_isUserDragging)
                     {
-                        double progress = _currentPosition / _player.TotalTime.TotalSeconds;
-                        _player.Seek(progress);
+                        double progress = _currentPosition / Player.TotalTime.TotalSeconds;
+                        Player.Seek(progress);
                     }
 
                     OnPropertyChanged(nameof(CurrentPosition));
@@ -278,8 +277,7 @@ namespace WpfApp3
             if (!IsPlaying)
                 return;
 
-            if (_player != null)
-                CurrentPosition = (int)_player.CurrentTime.TotalSeconds;
+            CurrentPosition = (int)Player.CurrentTime.TotalSeconds;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

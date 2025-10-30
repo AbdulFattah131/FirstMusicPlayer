@@ -28,6 +28,7 @@ namespace MusicPlayer.Utility
             _isMuted = _defaultDevice.AudioEndpointVolume.Mute;
         }
 
+        float _fLastKnownVolume = 1.0f;
         public float SystemVolume
         {
             get => _player.Volume;
@@ -37,16 +38,21 @@ namespace MusicPlayer.Utility
                 OnPropertyChanged(nameof(SystemVolume));
             }
         }
+
         public bool IsMuted
         {
             get => _isMuted;
             set
             {
-                if (_isMuted != value)
+                _isMuted = value;
+                if (_isMuted)
                 {
-                    _isMuted = value;
-                    if (_defaultDevice != null)
-                        _defaultDevice.AudioEndpointVolume.Mute = value;
+                    _fLastKnownVolume = SystemVolume;
+                    SystemVolume = 0f;
+                }
+                else
+                {
+                    SystemVolume = _fLastKnownVolume;
                 }
             }
         }

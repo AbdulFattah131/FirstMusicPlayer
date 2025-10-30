@@ -22,6 +22,6 @@ namespace MusicPlayer.Data.Objects
         public int Length { get; set; }
         public int PlayCount { get; set; }
         public int Index { get; set; }  // for the app
-
+        public string Lyrics { get; set; } = string.Empty;
     }
 }

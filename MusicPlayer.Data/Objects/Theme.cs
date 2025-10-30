@@ -114,6 +114,12 @@ namespace MusicPlayer.Data.Objects
             set;
         }
 
+        public ThemeColor GenresTextForeground
+        {
+            get;
+            set;
+        }
+
         public Theme ()
         {
             

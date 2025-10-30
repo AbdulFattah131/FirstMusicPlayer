@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <CurrentThemeName>Apple Music™ </CurrentThemeName>
+  <CurrentThemeName>Thor: Ragnarok</CurrentThemeName>
   <LastWindowCoordinates>
-    <X>-1654</X>
-    <Y>136</Y>
+    <X>-1054</X>
+    <Y>60</Y>
   </LastWindowCoordinates>
   <LastWindowDimensions>
-    <X>1446</X>
-    <Y>600</Y>
+    <X>951</X>
+    <Y>744</Y>
   </LastWindowDimensions>
+  <LastKnownVolume>0.12498665</LastKnownVolume>
 </Settings>

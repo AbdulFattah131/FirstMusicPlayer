@@ -107,10 +107,7 @@ namespace WpfApp3
 
             m_vm.Settings = SettingsReader.Instance.ReadFromFile("./Settings.xml");
 
-            this.Left = m_vm.Settings.LastWindowCoordinates.X;
-            this.Top = m_vm.Settings.LastWindowCoordinates.Y;
-            this.Width = m_vm.Settings.LastWindowDimensions.X;
-            this.Height = m_vm.Settings.LastWindowDimensions.Y;
+            LoadPersistence();
 
             foreach (Theme objTheme in ThemeReader.Instance.GetThemes())
             {
@@ -122,9 +119,21 @@ namespace WpfApp3
             }
 
             btnToggleAlbums.IsChecked = true;
+        }
 
-            m_vm.MusicPlayerCache.Player.InitializeVolume();
+        private void LoadPersistence()
+        {
+            this.Left = m_vm.Settings.LastWindowCoordinates.X;
+            this.Top = m_vm.Settings.LastWindowCoordinates.Y;
+            this.Width = m_vm.Settings.LastWindowDimensions.X;
+            this.Height = m_vm.Settings.LastWindowDimensions.Y;
 
+            float? fLastKnownVolume = m_vm.Settings.LastKnownVolume;
+
+            if (fLastKnownVolume == null)
+                m_vm.MusicPlayerCache.Player.InitializeVolume();
+            else
+                m_vm.MusicPlayerCache.Player.SystemVolume = (float)m_vm.Settings.LastKnownVolume;
         }
 
         private void borderWindowMove_MouseDown(object sender, MouseButtonEventArgs e)
@@ -192,6 +201,8 @@ namespace WpfApp3
             m_vm.Settings.CurrentThemeName = m_vm.CurrentTheme.Name;
             m_vm.Settings.LastWindowCoordinates = new Point(this.Left, this.Top);
             m_vm.Settings.LastWindowDimensions = new Point(this.Width, this.Height);
+            m_vm.Settings.LastKnownVolume = m_vm.MusicPlayerCache.Player.SystemVolume;
+
             SettingsWriter.Instance.WriteToFile(m_vm.Settings);
         }
 
@@ -347,6 +358,32 @@ namespace WpfApp3
 
         private void lbAllSongsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+        }
+
+        private void bdrTitleBar_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount == 2)
+            {
+                if (this.WindowState == WindowState.Normal)
+                    this.WindowState = WindowState.Maximized;
+                else if (this.WindowState == WindowState.Maximized)
+                    this.WindowState = WindowState.Normal;
+            }
+        }
+
+        private void grdRightPanel_Scroll(object sender, ScrollEventArgs e)
+        {
+
+        }
+
+        private void PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            var scrollViewer = sender as ScrollViewer;
+            if (scrollViewer == null) return;
+
+            // Move the content
+            scrollViewer.ScrollToVerticalOffset(scrollViewer.VerticalOffset - e.Delta);
+            e.Handled = true;
         }
     }
 }

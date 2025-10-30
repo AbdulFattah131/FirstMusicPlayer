@@ -82,6 +82,7 @@ namespace WpfApp3
                 LeftToggleHover = new ThemeColor(239, 241, 245), // Toggle Buttons Hover
                 LeftToggleSelected = new ThemeColor(197, 178, 239), // Toggle Buttons Selected
                 PlayPauseBackground = new ThemeColor(114, 91, 164), // Playback Controls : Play, Pause
+                GenresTextForeground = new ThemeColor(Brushes.Black), // Text for Genres
 
             };
 
@@ -106,7 +107,7 @@ namespace WpfApp3
                 LeftToggleHover = new ThemeColor(92, 90, 114),
                 LeftToggleSelected = new ThemeColor(106, 103, 131),
                 PlayPauseBackground = new ThemeColor(197, 178, 239),
-
+                GenresTextForeground = new ThemeColor(Brushes.Black),
             };
 
             CurrentTheme = solidTheme;

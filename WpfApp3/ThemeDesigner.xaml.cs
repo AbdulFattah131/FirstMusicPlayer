@@ -129,8 +129,11 @@ namespace MusicPlayer.UIComponents
             if (itbQueryTextBox.Name == "itbPlayPauseBackgroundHex")
             {
                 m_vm.CustomTheme.PlayPauseBackground.Hex = stQueryText;
-            }                                                 
-
+            }
+            if (itbQueryTextBox.Name == "itbGenresTextForegroundHex")
+            {
+                m_vm.CustomTheme.GenresTextForeground.Hex = stQueryText;
+            }
 
             itbQueryTextBox.BorderBrush = Brushes.Gray;
         }
@@ -158,6 +161,14 @@ namespace MusicPlayer.UIComponents
             {
                 MainWindowViewModel.Instance.CurrentTheme = m_vm.CustomTheme;
             }
+
+            // Hide Switch
+
+            //var mainWindow = Application.Current.MainWindow as MainWindow;
+            //if (mainWindow != null)
+            //{
+            //    mainWindow.tbSwitchTheme.Visibility = Visibility.Collapsed;
+            //}
         }
     }
 }

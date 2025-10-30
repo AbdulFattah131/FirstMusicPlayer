@@ -21,5 +21,11 @@ namespace MusicPlayer.Data.Objects
             get;
             set;
         }
+
+        public float? LastKnownVolume
+        {
+            get;
+            set;
+        }
     }
 }

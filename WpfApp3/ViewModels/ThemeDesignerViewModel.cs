@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Drawing;
 using MusicPlayer.Data.Objects;
 using MusicPlayer.Utility;
 using WpfApp3;
@@ -29,13 +30,15 @@ namespace MusicPlayer.UIComponents.ViewModels
                 ListBoxSelected = new ThemeColor(), // List Box Selected
                 LeftToggleHover = new ThemeColor(), // Toggle Buttons Hover
                 LeftToggleSelected = new ThemeColor(), // Toggle Buttons Selected
-                PlayPauseBackground = new ThemeColor() // Playback Controls : Play, Pause
+                PlayPauseBackground = new ThemeColor(), // Playback Controls : Play, Pause
+                GenresTextForeground = new ThemeColor() // Text for Genres
             };
         }
-
+        
         public void ApplyTheme(Theme theme)
         {
             MainWindowViewModel.Instance.CurrentTheme = CustomTheme;
+
         }
 
         private Theme m_customTheme;

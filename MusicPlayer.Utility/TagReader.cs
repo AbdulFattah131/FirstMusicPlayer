@@ -52,8 +52,12 @@ namespace MusicPlayer.Utility
                     Genre = string.Join(", ", file.Tag.Genres),
                     //Length = file.Tag.Length,
                     TrackNumber = (int)file.Tag.Track,
-                    FilePath = stfilePath
+                    FilePath = stfilePath,
                 };
+
+                if (!string.IsNullOrEmpty(file.Tag.Lyrics))
+                    song.Lyrics = file.Tag.Lyrics;
+
                 m_dictAlbums[file.Tag.Album].Songs.Add(song);
             }
 
