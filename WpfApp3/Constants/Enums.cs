@@ -10,6 +10,7 @@
     {
         None = 0,
         RepeatList = 1,
-        RepeatSong = 2
+        RepeatSong = 2,
     }
+
 }

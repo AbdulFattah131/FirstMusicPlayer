@@ -13,10 +13,12 @@ namespace MusicPlayer.Utility
         string _loadedFilePath;
 
         public bool IsPlaying => _player?.PlaybackState == PlaybackState.Playing;
-        
+
+
         public AudioPlayer()
         {
             _player = new WaveOutEvent();
+
         }
 
         public void InitializeVolume()
@@ -100,6 +102,12 @@ namespace MusicPlayer.Utility
 
         public void Play()
         {
+            if (_player == null)
+                return;
+
+            if (_player.PlaybackState == NAudio.Wave.PlaybackState.Stopped && _audioFile == null)
+                return;
+
             _player?.Play();
         }
         

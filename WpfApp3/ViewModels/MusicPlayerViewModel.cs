@@ -21,11 +21,18 @@ namespace WpfApp3
     {
         #region Music Player Collections
 
-        private ObservableCollection<Song> _lstSongs; // list of all songs
+        private ObservableCollection<Song> _lstSongs; // collection of all songs
         public ObservableCollection<Song> Songs
         {
             get => _lstSongs;
             set => _lstSongs = value;
+        }
+
+        private ObservableCollection<Song> _obAllSongs;
+        public ObservableCollection<Song> AllSongs
+        {
+            get => _obAllSongs;
+            set => _obAllSongs = value;
         }
 
         public ObservableCollection<Album> Albums { get; set; }  // albums collection
@@ -42,6 +49,17 @@ namespace WpfApp3
             {
                 _ocPlaybackQueue = value;
                 OnPropertyChanged(nameof(PlaybackQueue));
+            }
+        }
+
+        private ENMusicPlayerMode _currentMode = ENMusicPlayerMode.Albums;
+        public ENMusicPlayerMode CurrentMode
+        {
+            get => _currentMode;
+            set
+            {
+                _currentMode = value;
+                OnPropertyChanged(nameof(CurrentMode));
             }
         }
 
@@ -63,10 +81,14 @@ namespace WpfApp3
             {
                 _selectedAlbum = value;
                 Player.Stop();
-
+                
                 CurrentSong = null;
 
-                PlaybackQueue = _selectedAlbum.Songs;
+                if (_selectedAlbum != null)
+                {
+                    PlaybackQueue = new ObservableCollection<Song>(SelectedAlbum.Songs);
+                    CurrentMode = ENMusicPlayerMode.Albums;
+                }
 
                 if (PlaybackQueue.Count > 0)
                 {
@@ -74,7 +96,6 @@ namespace WpfApp3
                     CurrentSong = PlaybackQueue[CurrentIndex];
                 }
 
-                //queue.Add songs of this album from Songs
                 OnPropertyChanged(nameof(SelectedAlbum));
             }
         }
@@ -85,6 +106,9 @@ namespace WpfApp3
             get => _currentSong;
             set
             {
+                if (_currentSong == value)
+                    return;
+
                 Player.Stop();
                 _currentSong = value;
                 CurrentPosition = 0;
@@ -92,13 +116,22 @@ namespace WpfApp3
                 if (value == null)
                     return;
 
+                if (SelectedAlbum != null && SelectedAlbum.Songs.Contains(value))
+                {
+                    CurrentMode = ENMusicPlayerMode.Albums;
+                    PlaybackQueue = new ObservableCollection<Song>(SelectedAlbum.Songs);
+                }
+                else
+                {
+                    CurrentMode = ENMusicPlayerMode.Songs;
+                    PlaybackQueue = new ObservableCollection<Song>(AllSongs);
+                }
+
                 CurrentIndex = PlaybackQueue.IndexOf(_currentSong);
 
                 if (_currentSong != null)
-                {
-                    // I am telling my AudioPlayer to load the new song's file
                     Player.Load(_currentSong.FilePath);
-                }
+                
 
                 OnPropertyChanged(nameof(CurrentSong));
                 OnPropertyChanged(nameof(IsPlaying));
@@ -145,7 +178,7 @@ namespace WpfApp3
         private string _loadedFilePath;
         public void PlayPause()
         {
-            if (CurrentSong == null)
+            if (CurrentSong == null && PlaybackQueue == null || PlaybackQueue.Count == 0 && CurrentIndex < 0 || CurrentIndex >= PlaybackQueue.Count)
                 return;
 
             if (_loadedFilePath != CurrentSong.FilePath)
@@ -168,7 +201,6 @@ namespace WpfApp3
                 CurrentIndex = 0;
 
             CurrentSong = PlaybackQueue[CurrentIndex];
-            PlayPause();
         }
 
         public void Previous()
@@ -184,8 +216,8 @@ namespace WpfApp3
                 CurrentIndex = PlaybackQueue.Count - 1;
 
             CurrentSong = PlaybackQueue[CurrentIndex];
-            PlayPause();
         }
+
         public void Shuffle()
         {
             if (PlaybackQueue == null || PlaybackQueue.Count == 0)
@@ -198,7 +230,6 @@ namespace WpfApp3
 
             CurrentIndex = randomIndex;
             CurrentSong = PlaybackQueue[CurrentIndex];
-            PlayPause();
         }
 
         public void Repeat()
@@ -254,7 +285,7 @@ namespace WpfApp3
         {
             var songFilePaths = FileScanner.Instance.ScanSongs(); // song file paths
 
-            Songs = TagReader.Instance.ReadSongsFromFilePaths(songFilePaths); // song objects
+            AllSongs = TagReader.Instance.ReadSongsFromFilePaths(songFilePaths); // song objects
 
             Albums = new ObservableCollection<Album>(TagReader.Instance.GetAlbums()); // albums
 

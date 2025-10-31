@@ -292,7 +292,7 @@ namespace WpfApp3
         #region Playback Controls
         private void tbRepeat_Click(object sender, RoutedEventArgs e)
         {
-            m_vm.MusicPlayerCache.Repeat();
+           m_vm.MusicPlayerCache.Repeat();
         }
 
         private void tbPrevious_Click(object sender, RoutedEventArgs e)
