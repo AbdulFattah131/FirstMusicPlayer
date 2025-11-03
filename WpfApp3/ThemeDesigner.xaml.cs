@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -134,6 +135,10 @@ namespace MusicPlayer.UIComponents
             {
                 m_vm.CustomTheme.GenresTextForeground.Hex = stQueryText;
             }
+            if (itbQueryTextBox.Name == "itbNowPlayingForegroundHex")
+            {
+                m_vm.CustomTheme.NowPlayingForeground.Hex = stQueryText;
+            }
 
             itbQueryTextBox.BorderBrush = Brushes.Gray;
         }
@@ -164,11 +169,12 @@ namespace MusicPlayer.UIComponents
 
             // Hide Switch
 
-            //var mainWindow = Application.Current.MainWindow as MainWindow;
-            //if (mainWindow != null)
-            //{
-            //    mainWindow.tbSwitchTheme.Visibility = Visibility.Collapsed;
-            //}
+            var mainWindow = Application.Current.MainWindow as MainWindow;
+            if (mainWindow != null)
+            {
+                mainWindow.tbSwitchTheme.Visibility = Visibility.Hidden;
+            }
         }
+
     }
 }

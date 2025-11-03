@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Windows;
+using System.Windows.Media;
 
 namespace MusicPlayer.Data.Objects
 {
@@ -120,6 +121,11 @@ namespace MusicPlayer.Data.Objects
             set;
         }
 
+        public ThemeColor NowPlayingForeground
+        {
+            get;
+            set;
+        }
         public Theme ()
         {
             

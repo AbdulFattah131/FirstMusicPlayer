@@ -118,6 +118,15 @@ namespace WpfApp3
                 }
             }
 
+            if (MainWindowViewModel.Instance.CurrentTheme == MainWindowViewModel.Instance.DefaultTheme || MainWindowViewModel.Instance.CurrentTheme == MainWindowViewModel.Instance.DefaultTheme2)
+            {
+                var mainWindow = Application.Current.MainWindow as MainWindow;
+                if (mainWindow != null)
+                {
+                    mainWindow.tbSwitchTheme.Visibility = Visibility.Visible;
+                }
+            }
+
             btnToggleAlbums.IsChecked = true;
         }
 
@@ -220,8 +229,6 @@ namespace WpfApp3
         {
             var window = new ThemeDesigner();
             window.Show();
-            //var settingsWindow = new SettingsWindow();
-            //settingsWindow.ShowDialog();
         }
         private void SwitchButton_Click(object sender, RoutedEventArgs e)
         {

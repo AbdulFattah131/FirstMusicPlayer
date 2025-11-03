@@ -6,6 +6,7 @@ using MusicPlayer.Utility;
 using System.IO;
 using System.Xml.Serialization;
 using System.Windows.Controls;
+using System.Windows;
 
 namespace WpfApp3
 {
@@ -55,13 +56,24 @@ namespace WpfApp3
             get; set;
         }
 
-        private Theme solidTheme;
-        private Theme solidTheme2;
+        private Theme defaultTheme;
+        public Theme DefaultTheme
+        {
+            get => defaultTheme;
+            set => DefaultTheme = value;
+        }
+
+        private Theme defaultTheme2;
+        public Theme DefaultTheme2
+        {
+            get => defaultTheme2;
+            set => DefaultTheme2 = value;
+        }
 
         public MainWindowViewModel()
         {
             WindowTitle = "Music Player";
-            solidTheme = new Theme()
+            defaultTheme = new Theme()
             {
 
                 Name = "Lavender",
@@ -83,10 +95,11 @@ namespace WpfApp3
                 LeftToggleSelected = new ThemeColor(197, 178, 239), // Toggle Buttons Selected
                 PlayPauseBackground = new ThemeColor(114, 91, 164), // Playback Controls : Play, Pause
                 GenresTextForeground = new ThemeColor(Brushes.Black), // Text for Genres
+                NowPlayingForeground = new ThemeColor(114, 91, 164), // Now Playing Icon
 
             };
 
-            solidTheme2 = new Theme()
+            defaultTheme2 = new Theme()
             {
 
                 Name = "Lavender Dark",
@@ -108,9 +121,10 @@ namespace WpfApp3
                 LeftToggleSelected = new ThemeColor(106, 103, 131),
                 PlayPauseBackground = new ThemeColor(197, 178, 239),
                 GenresTextForeground = new ThemeColor(Brushes.Black),
+                NowPlayingForeground = new ThemeColor(114, 91, 164),
             };
 
-            CurrentTheme = solidTheme;
+            CurrentTheme = defaultTheme;
             //ThemeWriter.Instance.WriteToFile(CurrentTheme);
 
             MusicPlayerCache = new MusicPlayerCache();
@@ -119,7 +133,7 @@ namespace WpfApp3
 
         public void SwitchTheme()
         {
-            CurrentTheme = CurrentTheme == solidTheme ? solidTheme2 : solidTheme;
+            CurrentTheme = CurrentTheme == DefaultTheme ? DefaultTheme2 : DefaultTheme;
         }
 
         public void SaveTheme(string path)

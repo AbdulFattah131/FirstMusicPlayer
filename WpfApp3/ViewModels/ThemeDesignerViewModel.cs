@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Drawing;
+using System.Windows;
 using MusicPlayer.Data.Objects;
 using MusicPlayer.Utility;
 using WpfApp3;
@@ -11,7 +12,6 @@ namespace MusicPlayer.UIComponents.ViewModels
         public MainWindowViewModel _mainWindowVM;
         public ThemeDesignerViewModel(MainWindowViewModel Instance)
         {
-
             CustomTheme = new Theme()
             {
                 WindowTextForeground = new ThemeColor(), // Text
@@ -31,18 +31,28 @@ namespace MusicPlayer.UIComponents.ViewModels
                 LeftToggleHover = new ThemeColor(), // Toggle Buttons Hover
                 LeftToggleSelected = new ThemeColor(), // Toggle Buttons Selected
                 PlayPauseBackground = new ThemeColor(), // Playback Controls : Play, Pause
-                GenresTextForeground = new ThemeColor() // Text for Genres
+                GenresTextForeground = new ThemeColor(), // Text for Genres
+                NowPlayingForeground = new ThemeColor(), // Now Playing Icon
             };
         }
-        
+
+        //private Visibility _toggleVisibility = Visibility.Visible;
+        //public Visibility ToggleVisibility
+        //{
+        //    get => _toggleVisibility;
+        //    set
+        //    {
+        //        _toggleVisibility = value;
+        //        OnPropertyChanged(nameof(ToggleVisibility));
+        //    }
+        //}
+
         public void ApplyTheme(Theme theme)
         {
             MainWindowViewModel.Instance.CurrentTheme = CustomTheme;
-
         }
 
         private Theme m_customTheme;
-
         public Theme CustomTheme
         {
             get { return m_customTheme; }
@@ -60,7 +70,6 @@ namespace MusicPlayer.UIComponents.ViewModels
                 return ThemeReader.Instance.GetThemes();
             }
         }
-
 
         public event PropertyChangedEventHandler? PropertyChanged;
         public void OnPropertyChanged(PropertyChangedEventArgs e)

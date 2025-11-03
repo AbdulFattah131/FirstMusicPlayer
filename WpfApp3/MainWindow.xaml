@@ -62,7 +62,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="220"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="280"/>
+                <ColumnDefinition Width="295"/>
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
@@ -460,11 +460,115 @@
                               Opacity="0.2"/>
                         </Border.Effect>
                         <StackPanel x:Name="spLyrics" Orientation="Vertical" Margin="15,0,0,0">
-                            <TextBlock Text="Lyrics" FontWeight="Bold" Margin="0,12,0,0" FontSize="14" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"/>
+                            <TextBlock Text="Lyrics" FontWeight="Bold" Margin="0, 12, 0, 0" FontSize="14" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"/>
 
-                            <ScrollViewer Margin ="0, 10, 4, 10" Height="250" VerticalScrollBarVisibility="Visible" PreviewMouseWheel="PreviewMouseWheel" >
-                                <TextBlock Text="{Binding MusicPlayerCache.CurrentSong.Lyrics}" LineHeight="20" TextWrapping="Wrap" FontSize="12" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"/>
-                            </ScrollViewer>
+                            <ScrollViewer Margin ="0, 10, 10, 10" Height="250" VerticalScrollBarVisibility="Visible" PreviewMouseWheel="PreviewMouseWheel" >
+                                
+
+                                    <ScrollViewer.Style>
+                                        <Style TargetType="ScrollViewer">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="ScrollViewer">
+                                                        <Grid x:Name="Root" Background="Transparent">
+                                                            <!-- Scroll content -->
+                                                            <ScrollContentPresenter />
+
+                                                            <!-- Custom vertical scrollbar -->
+                                                            <ScrollBar x:Name="PART_VerticalScrollBar"
+                                       Orientation="Vertical"
+                                       Width="8"
+                                       Margin="0"
+                                       HorizontalAlignment="Right"
+                                       VerticalAlignment="Stretch"
+                                       Background="Transparent"
+                                       Visibility="Collapsed"
+                                       Minimum="0"
+                                       Maximum="{TemplateBinding ScrollableHeight}"
+                                       ViewportSize="{TemplateBinding ViewportHeight}"
+                                       Value="{TemplateBinding VerticalOffset}"
+                                       SmallChange="16"
+                                       LargeChange="64">
+                                                                <ScrollBar.Style>
+                                                                    <Style TargetType="ScrollBar">
+                                                                        <Setter Property="Template">
+                                                                            <Setter.Value>
+                                                                                <ControlTemplate TargetType="ScrollBar">
+                                                                                    <Grid x:Name="ScrollRoot" Background="Transparent" Width="8">
+                                                                                        <Track x:Name="PART_Track" IsDirectionReversed="True">
+
+                                                                                            <!-- Hidden arrow buttons -->
+                                                                                            <Track.DecreaseRepeatButton>
+                                                                                                <RepeatButton Command="ScrollBar.LineUpCommand"
+                                                                              Height="10"
+                                                                              Visibility="Hidden"
+                                                                              Background="Transparent"
+                                                                              Focusable="False"
+                                                                              BorderThickness="0"/>
+                                                                                            </Track.DecreaseRepeatButton>
+
+                                                                                            <!-- Rounded thumb -->
+                                                                                            <Track.Thumb>
+                                                                                                <Thumb x:Name="Thumb" Visibility="Collapsed">
+                                                                                                    <Thumb.Template>
+                                                                                                        <ControlTemplate TargetType="Thumb">
+                                                                                                            <Border Background="#c0c0c0"
+                                                                                    CornerRadius="4"
+                                                                                    SnapsToDevicePixels="True"/>
+                                                                                                        </ControlTemplate>
+                                                                                                    </Thumb.Template>
+                                                                                                </Thumb>
+                                                                                            </Track.Thumb>
+
+                                                                                            <Track.IncreaseRepeatButton>
+                                                                                                <RepeatButton Command="ScrollBar.LineDownCommand"
+                                                                              Height="10"
+                                                                              Visibility="Hidden"
+                                                                              Background="Transparent"
+                                                                              Focusable="False"
+                                                                              BorderThickness="0"/>
+                                                                                            </Track.IncreaseRepeatButton>
+                                                                                        </Track>
+                                                                                    </Grid>
+
+                                                                                    <!-- Hover logic -->
+                                                                                    <ControlTemplate.Triggers>
+                                                                                        <!-- Show thumb when scrollbar hovered -->
+                                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                                            <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
+                                                                                        </Trigger>
+
+                                                                                        <!-- Show thumb when track hovered -->
+                                                                                        <Trigger SourceName="PART_Track" Property="IsMouseOver" Value="True">
+                                                                                            <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
+                                                                                        </Trigger>
+
+                                                                                        <!-- Show thumb when ScrollViewer (lyrics area) hovered -->
+                                                                                        <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" Value="True">
+                                                                                            <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
+                                                                                        </DataTrigger>
+                                                                                    </ControlTemplate.Triggers>
+                                                                                </ControlTemplate>
+                                                                            </Setter.Value>
+                                                                        </Setter>
+                                                                    </Style>
+                                                                </ScrollBar.Style>
+                                                            </ScrollBar>
+                                                        </Grid>
+
+                                                        <!-- Make scrollbar visible only on hover -->
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter TargetName="PART_VerticalScrollBar" Property="Visibility" Value="Visible"/>
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </ScrollViewer.Style>
+                                    <TextBlock Text="{Binding MusicPlayerCache.CurrentSong.Lyrics}" LineHeight="20" Margin="0, 0, 25, 0" TextWrapping="Wrap" FontSize="12" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"/>
+                                </ScrollViewer>
                         </StackPanel>
                     </Border>
 
@@ -480,9 +584,96 @@
                         <StackPanel x:Name="spQueue" Orientation="Vertical">
                             <TextBlock Text="Queue" FontWeight="Bold" Margin="15,17,0,0" FontSize="14" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"/>
                             
-                            <ListBox x:Name="lbQueueContent" Height="260" Margin="0, 10, 20, 0" ItemsSource="{Binding MusicPlayerCache.PlaybackQueue}" SelectedItem="{Binding MusicPlayerCache.CurrentSong}"
-                            Background="Transparent" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
-                                <ListBox.ItemTemplate>
+                            <ListBox x:Name="lbQueueContent" Height="260" Margin="0, 10, 10, 0" ItemsSource="{Binding MusicPlayerCache.PlaybackQueue}" SelectedItem="{Binding MusicPlayerCache.CurrentSong}"
+                            Background="Transparent" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+
+                                    <ListBox.Template>
+                                        <ControlTemplate TargetType="ListBox">
+                                            <Border Background="Transparent" CornerRadius="10">
+                                                <ScrollViewer x:Name="ScrollViewer"
+                                                  VerticalScrollBarVisibility="Visible"
+                                                  HorizontalScrollBarVisibility="Disabled"
+                                                  Focusable="False">
+
+                                                    <ScrollViewer.Resources>
+                                                        <Style TargetType="ScrollBar">
+                                                            <Setter Property="Width" Value="8"/>
+                                                            <Setter Property="Background" Value="Transparent"/>
+                                                            <Setter Property="Template">
+                                                                <Setter.Value>
+                                                                    <ControlTemplate TargetType="ScrollBar">
+                                                                        <Grid x:Name="Root" Background="Transparent" Width="8">
+                                                                            <Track x:Name="PART_Track" IsDirectionReversed="True">
+                                                                                <Track.DecreaseRepeatButton>
+                                                                                    <RepeatButton Command="ScrollBar.LineUpCommand"
+                                                                                      Height="10"
+                                                                                      Visibility="Hidden"
+                                                                                      Background="Transparent"
+                                                                                      Focusable="False"
+                                                                                      BorderThickness="0"/>
+                                                                                </Track.DecreaseRepeatButton>
+
+                                                                                <!-- Hidden by default -->
+                                                                                <Track.Thumb>
+                                                                                    <Thumb x:Name="Thumb" Visibility="Collapsed">
+                                                                                        <Thumb.Template>
+                                                                                            <ControlTemplate TargetType="Thumb">
+                                                                                                <Border Background="#c0c0c0"
+                                                                                                    CornerRadius="4"
+                                                                                                    SnapsToDevicePixels="True"/>
+                                                                                            </ControlTemplate>
+                                                                                        </Thumb.Template>
+                                                                                    </Thumb>
+                                                                                </Track.Thumb>
+
+                                                                                <Track.IncreaseRepeatButton>
+                                                                                    <RepeatButton Command="ScrollBar.LineDownCommand"
+                                                                                      Height="10"
+                                                                                      Visibility="Hidden"
+                                                                                      Background="Transparent"
+                                                                                      Focusable="False"
+                                                                                      BorderThickness="0"/>
+                                                                                </Track.IncreaseRepeatButton>
+                                                                            </Track>
+                                                                        </Grid>
+
+                                                                        <!-- Hover behavior -->
+                                                                        <ControlTemplate.Triggers>
+
+                                                                            <!-- 1️⃣ Hovering scrollbar itself -->
+                                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                                <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
+                                                                            </Trigger>
+
+                                                                            <!-- 2️⃣ Hovering scrollbar track -->
+                                                                            <Trigger SourceName="PART_Track" Property="IsMouseOver" Value="True">
+                                                                                <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
+                                                                            </Trigger>
+
+                                                                            <!-- 3️⃣ Hovering the parent ListBox -->
+                                                                            <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=ListBox}}" Value="True">
+                                                                                <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
+                                                                            </DataTrigger>
+
+                                                                            <!-- Optional background highlight -->
+                                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                                <Setter TargetName="Root" Property="Background" Value="#f0f0f0"/>
+                                                                            </Trigger>
+
+                                                                        </ControlTemplate.Triggers>
+                                                                    </ControlTemplate>
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                        </Style>
+                                                    </ScrollViewer.Resources>
+
+                                                    <ItemsPresenter />
+                                                </ScrollViewer>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </ListBox.Template>
+
+                                    <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <Grid Margin="20, 13, 0, 13">
                                             <Grid.ColumnDefinitions>
@@ -564,34 +755,124 @@
                             
                         </StackPanel>
                     </Border>
-
-                        <!--<StackPanel Orientation="Horizontal" Margin="0, 70, 5, 0" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+ 
+                    <!-- Current Theme Name -->
+                    <!--<StackPanel Orientation="Horizontal" Margin="0, 70, 5, 0" VerticalAlignment="Bottom" HorizontalAlignment="Right">
                         <TextBlock Text="{Binding CurrentTheme.Name}" FontFamily="Bahnschrift" FontWeight="Bold" FontSize="10.5" Foreground="{Binding CurrentTheme.WindowPrimaryAnchor.Brush}"></TextBlock>
                         <TextBlock Text="Theme" FontFamily="Bahnschrift" FontSize="10.5" FontWeight="Bold" Margin="5, 0, 0, 0" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"></TextBlock>
                         </StackPanel>-->
                         
                     </StackPanel>
             </Grid>
-            </ScrollViewer>
-            <ScrollBar Orientation="Vertical"
-           Minimum="0"
-           Maximum="{Binding ScrollableHeight, ElementName=svRightSidePanel}"
-           Value="{Binding VerticalOffset, ElementName=svRightSidePanel, Mode=OneWay}"
-           Visibility="Collapsed">
-                <ScrollBar.Style>
-                    <Style TargetType="ScrollBar">
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Visibility" Value="Visible"/>
-                            </Trigger>
-                        </Style.Triggers>
+                <ScrollViewer.Style>
+                    <Style TargetType="ScrollViewer">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ScrollViewer">
+                                    <Grid x:Name="Root" Background="Transparent">
+                                        <!-- Scroll content -->
+                                        <ScrollContentPresenter />
+
+                                        <!-- Custom vertical scrollbar -->
+                                        <ScrollBar x:Name="PART_VerticalScrollBar"
+   Orientation="Vertical"
+   Width="8"
+   Margin="0"
+   HorizontalAlignment="Right"
+   VerticalAlignment="Stretch"
+   Background="Transparent"
+   Visibility="Collapsed"
+   Minimum="0"
+   Maximum="{TemplateBinding ScrollableHeight}"
+   ViewportSize="{TemplateBinding ViewportHeight}"
+   Value="{TemplateBinding VerticalOffset}"
+   SmallChange="16"
+   LargeChange="64">
+                                            <ScrollBar.Style>
+                                                <Style TargetType="ScrollBar">
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="ScrollBar">
+                                                                <Grid x:Name="ScrollRoot" Background="Transparent" Width="8">
+                                                                    <Track x:Name="PART_Track" IsDirectionReversed="True">
+
+                                                                        <!-- Hidden arrow buttons -->
+                                                                        <Track.DecreaseRepeatButton>
+                                                                            <RepeatButton Command="ScrollBar.LineUpCommand"
+                                          Height="10"
+                                          Visibility="Hidden"
+                                          Background="Transparent"
+                                          Focusable="False"
+                                          BorderThickness="0"/>
+                                                                        </Track.DecreaseRepeatButton>
+
+                                                                        <!-- Rounded thumb -->
+                                                                        <Track.Thumb>
+                                                                            <Thumb x:Name="Thumb" Visibility="Collapsed">
+                                                                                <Thumb.Template>
+                                                                                    <ControlTemplate TargetType="Thumb">
+                                                                                        <Border Background="#c0c0c0"
+                                                CornerRadius="4"
+                                                SnapsToDevicePixels="True"/>
+                                                                                    </ControlTemplate>
+                                                                                </Thumb.Template>
+                                                                            </Thumb>
+                                                                        </Track.Thumb>
+
+                                                                        <Track.IncreaseRepeatButton>
+                                                                            <RepeatButton Command="ScrollBar.LineDownCommand"
+                                          Height="10"
+                                          Visibility="Hidden"
+                                          Background="Transparent"
+                                          Focusable="False"
+                                          BorderThickness="0"/>
+                                                                        </Track.IncreaseRepeatButton>
+                                                                    </Track>
+                                                                </Grid>
+
+                                                                <!-- Hover logic -->
+                                                                <ControlTemplate.Triggers>
+                                                                    <!-- Show thumb when scrollbar hovered -->
+                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                        <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
+                                                                    </Trigger>
+
+                                                                    <!-- Show thumb when track hovered -->
+                                                                    <Trigger SourceName="PART_Track" Property="IsMouseOver" Value="True">
+                                                                        <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
+                                                                    </Trigger>
+
+                                                                    <!-- Show thumb when ScrollViewer (lyrics area) hovered -->
+                                                                    <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" Value="True">
+                                                                        <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
+                                                                    </DataTrigger>
+                                                                </ControlTemplate.Triggers>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </ScrollBar.Style>
+                                        </ScrollBar>
+                                    </Grid>
+
+                                    <!-- Make scrollbar visible only on hover -->
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="PART_VerticalScrollBar" Property="Visibility" Value="Visible"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
                     </Style>
-                </ScrollBar.Style>
-            </ScrollBar>
+                </ScrollViewer.Style>
+            </ScrollViewer>
+            
 
             <!-- Column 1 Center Main Bar -->
 
             <UserControl x:Name="ucYourLibraryView" Grid.Column="1">
+                
                 <!-- YourLibrary View -->
 
                 <Border x:Name="bdCenterPanelLibraryView" CornerRadius="13" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}" Margin="10, 10, 10, 15">
@@ -994,7 +1275,110 @@
                                         </ListBox>
                                     </StackPanel>
                                 </Grid>
+                                <ScrollViewer.Style>
+                                    <Style TargetType="ScrollViewer">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="ScrollViewer">
+                                                    <Grid x:Name="Root" Background="Transparent">
+                                                        <!-- Scroll content -->
+                                                        <ScrollContentPresenter />
+
+                                                        <!-- Custom vertical scrollbar -->
+                                                        <ScrollBar x:Name="PART_VerticalScrollBar"
+Orientation="Vertical"
+Width="8"
+Margin="0"
+HorizontalAlignment="Right"
+VerticalAlignment="Stretch"
+Background="Transparent"
+Visibility="Collapsed"
+Minimum="0"
+Maximum="{TemplateBinding ScrollableHeight}"
+ViewportSize="{TemplateBinding ViewportHeight}"
+Value="{TemplateBinding VerticalOffset}"
+SmallChange="16"
+LargeChange="64">
+                                                            <ScrollBar.Style>
+                                                                <Style TargetType="ScrollBar">
+                                                                    <Setter Property="Template">
+                                                                        <Setter.Value>
+                                                                            <ControlTemplate TargetType="ScrollBar">
+                                                                                <Grid x:Name="ScrollRoot" Background="Transparent" Width="8">
+                                                                                    <Track x:Name="PART_Track" IsDirectionReversed="True">
+
+                                                                                        <!-- Hidden arrow buttons -->
+                                                                                        <Track.DecreaseRepeatButton>
+                                                                                            <RepeatButton Command="ScrollBar.LineUpCommand"
+                                       Height="10"
+                                       Visibility="Hidden"
+                                       Background="Transparent"
+                                       Focusable="False"
+                                       BorderThickness="0"/>
+                                                                                        </Track.DecreaseRepeatButton>
+
+                                                                                        <!-- Rounded thumb -->
+                                                                                        <Track.Thumb>
+                                                                                            <Thumb x:Name="Thumb" Visibility="Collapsed">
+                                                                                                <Thumb.Template>
+                                                                                                    <ControlTemplate TargetType="Thumb">
+                                                                                                        <Border Background="#c0c0c0"
+                                             CornerRadius="4"
+                                             SnapsToDevicePixels="True"/>
+                                                                                                    </ControlTemplate>
+                                                                                                </Thumb.Template>
+                                                                                            </Thumb>
+                                                                                        </Track.Thumb>
+
+                                                                                        <Track.IncreaseRepeatButton>
+                                                                                            <RepeatButton Command="ScrollBar.LineDownCommand"
+                                       Height="10"
+                                       Visibility="Hidden"
+                                       Background="Transparent"
+                                       Focusable="False"
+                                       BorderThickness="0"/>
+                                                                                        </Track.IncreaseRepeatButton>
+                                                                                    </Track>
+                                                                                </Grid>
+
+                                                                                <!-- Hover logic -->
+                                                                                <ControlTemplate.Triggers>
+                                                                                    <!-- Show thumb when scrollbar hovered -->
+                                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                                        <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
+                                                                                    </Trigger>
+
+                                                                                    <!-- Show thumb when track hovered -->
+                                                                                    <Trigger SourceName="PART_Track" Property="IsMouseOver" Value="True">
+                                                                                        <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
+                                                                                    </Trigger>
+
+                                                                                    <!-- Show thumb when ScrollViewer (lyrics area) hovered -->
+                                                                                    <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" Value="True">
+                                                                                        <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
+                                                                                    </DataTrigger>
+                                                                                </ControlTemplate.Triggers>
+                                                                            </ControlTemplate>
+                                                                        </Setter.Value>
+                                                                    </Setter>
+                                                                </Style>
+                                                            </ScrollBar.Style>
+                                                        </ScrollBar>
+                                                    </Grid>
+
+                                                    <!-- Make scrollbar visible only on hover -->
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter TargetName="PART_VerticalScrollBar" Property="Visibility" Value="Visible"/>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </ScrollViewer.Style>
                             </ScrollViewer>
+                        
                         </Grid>
                     </Grid>
                 </Border>
@@ -1156,6 +1540,7 @@
                                                     </Setter>
                                                 </Style>
                                             </ListBox.ItemContainerStyle>
+                                            
                                             <ListBox.ItemsPanel>
                                                 <ItemsPanelTemplate>
                                                     <StackPanel Orientation="Horizontal">
@@ -1163,6 +1548,7 @@
                                                     </StackPanel>
                                                 </ItemsPanelTemplate>
                                             </ListBox.ItemsPanel>
+
                                         </ListBox>
                                     </StackPanel>
 
@@ -1676,6 +2062,108 @@ Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={Stati
                                         </ListBox>
                                     </StackPanel>
                                 </Grid>
+                                <ScrollViewer.Style>
+                                    <Style TargetType="ScrollViewer">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="ScrollViewer">
+                                                    <Grid x:Name="Root" Background="Transparent">
+                                                        <!-- Scroll content -->
+                                                        <ScrollContentPresenter />
+
+                                                        <!-- Custom vertical scrollbar -->
+                                                        <ScrollBar x:Name="PART_VerticalScrollBar"
+   Orientation="Vertical"
+   Width="8"
+   Margin="0"
+   HorizontalAlignment="Right"
+   VerticalAlignment="Stretch"
+   Background="Transparent"
+   Visibility="Collapsed"
+   Minimum="0"
+   Maximum="{TemplateBinding ScrollableHeight}"
+   ViewportSize="{TemplateBinding ViewportHeight}"
+   Value="{TemplateBinding VerticalOffset}"
+   SmallChange="16"
+   LargeChange="64">
+                                                            <ScrollBar.Style>
+                                                                <Style TargetType="ScrollBar">
+                                                                    <Setter Property="Template">
+                                                                        <Setter.Value>
+                                                                            <ControlTemplate TargetType="ScrollBar">
+                                                                                <Grid x:Name="ScrollRoot" Background="Transparent" Width="8">
+                                                                                    <Track x:Name="PART_Track" IsDirectionReversed="True">
+
+                                                                                        <!-- Hidden arrow buttons -->
+                                                                                        <Track.DecreaseRepeatButton>
+                                                                                            <RepeatButton Command="ScrollBar.LineUpCommand"
+                                          Height="10"
+                                          Visibility="Hidden"
+                                          Background="Transparent"
+                                          Focusable="False"
+                                          BorderThickness="0"/>
+                                                                                        </Track.DecreaseRepeatButton>
+
+                                                                                        <!-- Rounded thumb -->
+                                                                                        <Track.Thumb>
+                                                                                            <Thumb x:Name="Thumb" Visibility="Collapsed">
+                                                                                                <Thumb.Template>
+                                                                                                    <ControlTemplate TargetType="Thumb">
+                                                                                                        <Border Background="#c0c0c0"
+                                                CornerRadius="4"
+                                                SnapsToDevicePixels="True"/>
+                                                                                                    </ControlTemplate>
+                                                                                                </Thumb.Template>
+                                                                                            </Thumb>
+                                                                                        </Track.Thumb>
+
+                                                                                        <Track.IncreaseRepeatButton>
+                                                                                            <RepeatButton Command="ScrollBar.LineDownCommand"
+                                          Height="10"
+                                          Visibility="Hidden"
+                                          Background="Transparent"
+                                          Focusable="False"
+                                          BorderThickness="0"/>
+                                                                                        </Track.IncreaseRepeatButton>
+                                                                                    </Track>
+                                                                                </Grid>
+
+                                                                                <!-- Hover logic -->
+                                                                                <ControlTemplate.Triggers>
+                                                                                    <!-- Show thumb when scrollbar hovered -->
+                                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                                        <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
+                                                                                    </Trigger>
+
+                                                                                    <!-- Show thumb when track hovered -->
+                                                                                    <Trigger SourceName="PART_Track" Property="IsMouseOver" Value="True">
+                                                                                        <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
+                                                                                    </Trigger>
+
+                                                                                    <!-- Show thumb when ScrollViewer (lyrics area) hovered -->
+                                                                                    <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" Value="True">
+                                                                                        <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
+                                                                                    </DataTrigger>
+                                                                                </ControlTemplate.Triggers>
+                                                                            </ControlTemplate>
+                                                                        </Setter.Value>
+                                                                    </Setter>
+                                                                </Style>
+                                                            </ScrollBar.Style>
+                                                        </ScrollBar>
+                                                    </Grid>
+
+                                                    <!-- Make scrollbar visible only on hover -->
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter TargetName="PART_VerticalScrollBar" Property="Visibility" Value="Visible"/>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </ScrollViewer.Style>
                             </ScrollViewer>
                         </Grid>
                     </Grid>
@@ -1837,7 +2325,93 @@ Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={Stati
                                 </Style>
                             </ListBox.ItemContainerStyle>
 
-                        </ListBox>
+                            <ListBox.Template>
+                                    <ControlTemplate TargetType="ListBox">
+                                        <Border Background="Transparent" CornerRadius="10">
+                                            <ScrollViewer x:Name="ScrollViewer"
+              VerticalScrollBarVisibility="Visible"
+              HorizontalScrollBarVisibility="Disabled"
+              Focusable="False">
+
+                                                <ScrollViewer.Resources>
+                                                    <Style TargetType="ScrollBar">
+                                                        <Setter Property="Width" Value="8"/>
+                                                        <Setter Property="Background" Value="Transparent"/>
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="ScrollBar">
+                                                                    <Grid x:Name="Root" Background="Transparent" Width="8">
+                                                                        <Track x:Name="PART_Track" IsDirectionReversed="True">
+                                                                            <Track.DecreaseRepeatButton>
+                                                                                <RepeatButton Command="ScrollBar.LineUpCommand"
+                                                  Height="10"
+                                                  Visibility="Hidden"
+                                                  Background="Transparent"
+                                                  Focusable="False"
+                                                  BorderThickness="0"/>
+                                                                            </Track.DecreaseRepeatButton>
+
+                                                                            <!-- Hidden by default -->
+                                                                            <Track.Thumb>
+                                                                                <Thumb x:Name="Thumb" Visibility="Collapsed">
+                                                                                    <Thumb.Template>
+                                                                                        <ControlTemplate TargetType="Thumb">
+                                                                                            <Border Background="#c0c0c0"
+                                                                CornerRadius="4"
+                                                                SnapsToDevicePixels="True"/>
+                                                                                        </ControlTemplate>
+                                                                                    </Thumb.Template>
+                                                                                </Thumb>
+                                                                            </Track.Thumb>
+
+                                                                            <Track.IncreaseRepeatButton>
+                                                                                <RepeatButton Command="ScrollBar.LineDownCommand"
+                                                  Height="10"
+                                                  Visibility="Hidden"
+                                                  Background="Transparent"
+                                                  Focusable="False"
+                                                  BorderThickness="0"/>
+                                                                            </Track.IncreaseRepeatButton>
+                                                                        </Track>
+                                                                    </Grid>
+
+                                                                    <!-- Hover behavior -->
+                                                                    <ControlTemplate.Triggers>
+
+                                                                        <!-- 1️⃣ Hovering scrollbar itself -->
+                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                            <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
+                                                                        </Trigger>
+
+                                                                        <!-- 2️⃣ Hovering scrollbar track -->
+                                                                        <Trigger SourceName="PART_Track" Property="IsMouseOver" Value="True">
+                                                                            <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
+                                                                        </Trigger>
+
+                                                                        <!-- 3️⃣ Hovering the parent ListBox -->
+                                                                        <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=ListBox}}" Value="True">
+                                                                            <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
+                                                                        </DataTrigger>
+
+                                                                        <!-- Optional background highlight -->
+                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                            <Setter TargetName="Root" Property="Background" Value="#f0f0f0"/>
+                                                                        </Trigger>
+
+                                                                    </ControlTemplate.Triggers>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </Style>
+                                                </ScrollViewer.Resources>
+
+                                                <ItemsPresenter />
+                                            </ScrollViewer>
+                                        </Border>
+                                    </ControlTemplate>
+                                </ListBox.Template>
+                            </ListBox>
+                    
                     </Grid>
                     
                     <!-- AlbumContentsListBox -->
@@ -1857,7 +2431,8 @@ Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={Stati
                             
                             <ListBox x:Name="lbAlbumContents" VerticalAlignment="Stretch" Height="300" ItemsSource="{Binding MusicPlayerCache.SelectedAlbum.Songs}" SelectedItem="{Binding MusicPlayerCache.CurrentSong, Mode=TwoWay}"
                         Background="Transparent" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
-                            <ListBox.ItemTemplate>
+                            
+                                <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <Grid Margin="20, 13, 0, 13">
                                         <Grid.ColumnDefinitions>
@@ -1880,8 +2455,8 @@ Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={Stati
                                                             <Setter Property="ContentTemplate">
                                                                 <Setter.Value>
                                                                     <DataTemplate>
-                                                                        <Path Data="M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M10,16.5L16,12L10,7.5V16.5Z"
-                                                                          Fill="{Binding DataContext.CurrentTheme.WindowPrimaryAnchor.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"
+                                                                        <Path x:Name="pNowPlayingIcon" Data="M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M10,16.5L16,12L10,7.5V16.5Z"
+                                                                          Fill="{Binding DataContext.CurrentTheme.NowPlayingForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"
                                                                           Stretch="Uniform" Width="15" Height="15"/>
                                                                     </DataTemplate>
                                                                 </Setter.Value>
@@ -1907,8 +2482,8 @@ Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={Stati
                                     </Grid>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
-
-                            <ListBox.ItemContainerStyle>
+                            
+                                <ListBox.ItemContainerStyle>
                                 <Style TargetType="ListBoxItem">
                                     <Setter Property="Background" Value="Transparent"/>
                                     <Setter Property="BorderThickness" Value="0"/>
@@ -1945,7 +2520,93 @@ Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={Stati
                                 </Style>
                             </ListBox.ItemContainerStyle>
 
-                        </ListBox>
+                                <ListBox.Template>
+                                        <ControlTemplate TargetType="ListBox">
+                                            <Border Background="Transparent" CornerRadius="10">
+                                                <ScrollViewer x:Name="ScrollViewer"
+VerticalScrollBarVisibility="Visible"
+HorizontalScrollBarVisibility="Disabled"
+Focusable="False">
+
+                                                    <ScrollViewer.Resources>
+                                                        <Style TargetType="ScrollBar">
+                                                            <Setter Property="Width" Value="8"/>
+                                                            <Setter Property="Background" Value="Transparent"/>
+                                                            <Setter Property="Template">
+                                                                <Setter.Value>
+                                                                    <ControlTemplate TargetType="ScrollBar">
+                                                                        <Grid x:Name="Root" Background="Transparent" Width="8">
+                                                                            <Track x:Name="PART_Track" IsDirectionReversed="True">
+                                                                                <Track.DecreaseRepeatButton>
+                                                                                    <RepeatButton Command="ScrollBar.LineUpCommand"
+                                    Height="10"
+                                    Visibility="Hidden"
+                                    Background="Transparent"
+                                    Focusable="False"
+                                    BorderThickness="0"/>
+                                                                                </Track.DecreaseRepeatButton>
+
+                                                                                <!-- Hidden by default -->
+                                                                                <Track.Thumb>
+                                                                                    <Thumb x:Name="Thumb" Visibility="Collapsed">
+                                                                                        <Thumb.Template>
+                                                                                            <ControlTemplate TargetType="Thumb">
+                                                                                                <Border Background="#c0c0c0"
+                                                  CornerRadius="4"
+                                                  SnapsToDevicePixels="True"/>
+                                                                                            </ControlTemplate>
+                                                                                        </Thumb.Template>
+                                                                                    </Thumb>
+                                                                                </Track.Thumb>
+
+                                                                                <Track.IncreaseRepeatButton>
+                                                                                    <RepeatButton Command="ScrollBar.LineDownCommand"
+                                    Height="10"
+                                    Visibility="Hidden"
+                                    Background="Transparent"
+                                    Focusable="False"
+                                    BorderThickness="0"/>
+                                                                                </Track.IncreaseRepeatButton>
+                                                                            </Track>
+                                                                        </Grid>
+
+                                                                        <!-- Hover behavior -->
+                                                                        <ControlTemplate.Triggers>
+
+                                                                            <!-- 1️⃣ Hovering scrollbar itself -->
+                                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                                <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
+                                                                            </Trigger>
+
+                                                                            <!-- 2️⃣ Hovering scrollbar track -->
+                                                                            <Trigger SourceName="PART_Track" Property="IsMouseOver" Value="True">
+                                                                                <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
+                                                                            </Trigger>
+
+                                                                            <!-- 3️⃣ Hovering the parent ListBox -->
+                                                                            <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=ListBox}}" Value="True">
+                                                                                <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
+                                                                            </DataTrigger>
+
+                                                                            <!-- Optional background highlight -->
+                                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                                <Setter TargetName="Root" Property="Background" Value="#f0f0f0"/>
+                                                                            </Trigger>
+
+                                                                        </ControlTemplate.Triggers>
+                                                                    </ControlTemplate>
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                        </Style>
+                                                    </ScrollViewer.Resources>
+
+                                                    <ItemsPresenter />
+                                                </ScrollViewer>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </ListBox.Template>
+                                
+                                </ListBox>
                             
                         </Grid>
                     </Grid>
@@ -2121,7 +2782,92 @@ Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={Stati
                                                 </Style>
                                             </ListBox.ItemContainerStyle>
 
-                                        </ListBox>
+                                            <ListBox.Template>
+                                        <ControlTemplate TargetType="ListBox">
+                                            <Border Background="Transparent" CornerRadius="10">
+                                                <ScrollViewer x:Name="ScrollViewer"
+VerticalScrollBarVisibility="Visible"
+HorizontalScrollBarVisibility="Disabled"
+Focusable="False">
+
+                                                    <ScrollViewer.Resources>
+                                                        <Style TargetType="ScrollBar">
+                                                            <Setter Property="Width" Value="8"/>
+                                                            <Setter Property="Background" Value="Transparent"/>
+                                                            <Setter Property="Template">
+                                                                <Setter.Value>
+                                                                    <ControlTemplate TargetType="ScrollBar">
+                                                                        <Grid x:Name="Root" Background="Transparent" Width="8">
+                                                                            <Track x:Name="PART_Track" IsDirectionReversed="True">
+                                                                                <Track.DecreaseRepeatButton>
+                                                                                    <RepeatButton Command="ScrollBar.LineUpCommand"
+                                    Height="10"
+                                    Visibility="Hidden"
+                                    Background="Transparent"
+                                    Focusable="False"
+                                    BorderThickness="0"/>
+                                                                                </Track.DecreaseRepeatButton>
+
+                                                                                <!-- Hidden by default -->
+                                                                                <Track.Thumb>
+                                                                                    <Thumb x:Name="Thumb" Visibility="Collapsed">
+                                                                                        <Thumb.Template>
+                                                                                            <ControlTemplate TargetType="Thumb">
+                                                                                                <Border Background="#c0c0c0"
+                                                  CornerRadius="4"
+                                                  SnapsToDevicePixels="True"/>
+                                                                                            </ControlTemplate>
+                                                                                        </Thumb.Template>
+                                                                                    </Thumb>
+                                                                                </Track.Thumb>
+
+                                                                                <Track.IncreaseRepeatButton>
+                                                                                    <RepeatButton Command="ScrollBar.LineDownCommand"
+                                    Height="10"
+                                    Visibility="Hidden"
+                                    Background="Transparent"
+                                    Focusable="False"
+                                    BorderThickness="0"/>
+                                                                                </Track.IncreaseRepeatButton>
+                                                                            </Track>
+                                                                        </Grid>
+
+                                                                        <!-- Hover behavior -->
+                                                                        <ControlTemplate.Triggers>
+
+                                                                            <!-- 1️⃣ Hovering scrollbar itself -->
+                                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                                <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
+                                                                            </Trigger>
+
+                                                                            <!-- 2️⃣ Hovering scrollbar track -->
+                                                                            <Trigger SourceName="PART_Track" Property="IsMouseOver" Value="True">
+                                                                                <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
+                                                                            </Trigger>
+
+                                                                            <!-- 3️⃣ Hovering the parent ListBox -->
+                                                                            <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=ListBox}}" Value="True">
+                                                                                <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
+                                                                            </DataTrigger>
+
+                                                                            <!-- Optional background highlight -->
+                                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                                <Setter TargetName="Root" Property="Background" Value="#f0f0f0"/>
+                                                                            </Trigger>
+
+                                                                        </ControlTemplate.Triggers>
+                                                                    </ControlTemplate>
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                        </Style>
+                                                    </ScrollViewer.Resources>
+
+                                                    <ItemsPresenter />
+                                                </ScrollViewer>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </ListBox.Template>
+                                </ListBox>
 
                                     </Grid>
                                 </Grid>
@@ -2224,22 +2970,21 @@ Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={Stati
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
 
-                                    <Button x:Name="tbRepeat" Click="tbRepeat_Click" Grid.Row="0" Grid.Column="0" Background="Transparent" BorderBrush="Transparent" Width="40" Margin="0, 0, 30, 0">
+                                    <Button x:Name="tbRepeat" Click="tbRepeat_Click" Grid.Row="0" Grid.Column="0"  Background="Transparent" BorderBrush="Transparent" Width="40" Margin="0, 0, 30, 0">
                                     <Button.Style>
                                         <Style TargetType="Button">
-
                                                 <!-- 0 Repeat Default (Off) -->
                                                 <Setter Property="ContentTemplate">
                                                     <Setter.Value>
                                                         <DataTemplate>
-                                                            <Viewbox Width="32" Height="32">
-                                                                <Path x:Name="pRepeatOff"
-                                                                      Data ="M17,17H7V14L3,18L7,22V19H19V13H17M7,7H17V10L21,6L17,2V5H5V11H7V7Z"
-                                                                      Fill="{Binding DataContext.CurrentTheme.ComplementGray.Brush, RelativeSource={RelativeSource AncestorType=Button}}"
-                                                                      Stretch="Uniform"
-                                                                      Stroke="{Binding DataContext.CurrentTheme.ComplementGray.Brush, RelativeSource={RelativeSource AncestorType=Button}}"
-                                                                      StrokeThickness="1.5"/>
-                                                            </Viewbox>
+                                                                <Viewbox Width="32" Height="32">
+                                                                    <Path x:Name="pRepeatOff"
+                                                                              Data ="M17,17H7V14L3,18L7,22V19H19V13H17M7,7H17V10L21,6L17,2V5H5V11H7V7Z"
+                                                                              Fill="{Binding DataContext.CurrentTheme.ComplementGray.Brush, RelativeSource={RelativeSource AncestorType=Button}}"
+                                                                              Stretch="Uniform"
+                                                                              Stroke="{Binding DataContext.CurrentTheme.ComplementGray.Brush, RelativeSource={RelativeSource AncestorType=Button}}"
+                                                                              StrokeThickness="1.5"/>
+                                                                </Viewbox>
                                                         </DataTemplate>
                                                     </Setter.Value>
                                                 </Setter>
@@ -2251,7 +2996,7 @@ Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={Stati
                                                             <Setter.Value>
                                                                 <DataTemplate>
                                                                     <Viewbox Width="32" Height="32">
-                                                                        <Path x:Name="pRepeatList"
+                                                                        <Path x:Name="pRepeatSong"
                                                                               Data ="M17,17H7V14L3,18L7,22V19H19V13H17M7,7H17V10L21,6L17,2V5H5V11H7V7Z"
                                                                               Fill="{Binding DataContext.CurrentTheme.WindowPrimaryAnchor.Brush, RelativeSource={RelativeSource AncestorType=Button}}"
                                                                               Stretch="Uniform"
@@ -2444,10 +3189,13 @@ Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={Stati
                                                     <ContentPresenter 
                                                         HorizontalAlignment="Center" 
                                                         VerticalAlignment="Center"/>
+                                                    <ControlTemplate.Triggers>
+                                                    </ControlTemplate.Triggers>
                                                 </ControlTemplate>
                                             </Setter.Value>
                                         </Setter>
                                         <Style.Triggers>
+                                            
                                             <Trigger Property="IsChecked" Value="True">
                                                 <Setter Property="Content" Value="🔇"></Setter>
                                             </Trigger>
@@ -2455,11 +3203,13 @@ Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={Stati
                                                 <Setter Property="Content" Value="📢"></Setter>
                                             </Trigger>
                                             
+
                                         </Style.Triggers>
                                     </Style>
                                 </ToggleButton.Style>
                         </ToggleButton>
-                        <Slider x:Name="sdrVolumeSlider" Minimum="0" Maximum="1" Value="{Binding MusicPlayerCache.Player.SystemVolume}" Width="60" Margin="0, 0, 10, 0">
+                        
+                            <Slider x:Name="sdrVolumeSlider" Minimum="0" Maximum="1" Value="{Binding MusicPlayerCache.Player.SystemVolume}" Width="60" Margin="0, 0, 10, 0">
 
                             <Slider.Resources>
                                 <!-- Style -->
@@ -2581,9 +3331,9 @@ Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={Stati
                                             </Grid>
                                         </Border>
                                         <ControlTemplate.Triggers>
+                                            
                                             <Trigger Property="IsChecked" Value="True">
-                                                <Setter TargetName="Track" Property="Background" Value="{Binding DataContext.CurrentTheme.WindowPrimaryAnchor.Brush,
-                                                                     RelativeSource={RelativeSource AncestorType=ToggleButton}}"/>
+                                                <Setter TargetName="Track" Property="Background" Value="{Binding DataContext.CurrentTheme.WindowPrimaryAnchor.Brush, RelativeSource={RelativeSource AncestorType=ToggleButton}}"/>
                                                 <Setter TargetName="Thumb" Property="HorizontalAlignment" Value="Right" />
                                             </Trigger>
                                             <Trigger Property="IsMouseOver" Value="True">

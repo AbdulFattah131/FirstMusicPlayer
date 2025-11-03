@@ -50,6 +50,7 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
 
                 </Grid.RowDefinitions>
 
@@ -164,6 +165,12 @@
                 <StackPanel Orientation="Horizontal" Height="32" Grid.Column="1" Grid.Row="18">
                     <TextBox Name="itbGenresTextForegroundHex" TextChanged="TextBox_TextChanged" VerticalContentAlignment="Center" BorderThickness="2" MaxLength="9" Width="128" Margin="8,4,4,4"/>
                     <Rectangle Fill="{Binding Path=CustomTheme.GenresTextForeground.Brush, UpdateSourceTrigger=PropertyChanged}" Width="24" Height="24" Margin="4" VerticalAlignment="Center" Stroke="Black" StrokeThickness="1"/>
+                </StackPanel>
+
+                <TextBlock Text="Now Playing Icon" VerticalAlignment="Center" Grid.Row="19"/>
+                <StackPanel Orientation="Horizontal" Height="32" Grid.Column="1" Grid.Row="19">
+                    <TextBox Name="itbNowPlayingForegroundHex" TextChanged="TextBox_TextChanged" VerticalContentAlignment="Center" BorderThickness="2" MaxLength="9" Width="128" Margin="8,4,4,4"/>
+                    <Rectangle Fill="{Binding Path=CustomTheme.NowPlayingForeground.Brush, UpdateSourceTrigger=PropertyChanged}" Width="24" Height="24" Margin="4" VerticalAlignment="Center" Stroke="Black" StrokeThickness="1"/>
                 </StackPanel>
 
             </Grid>
