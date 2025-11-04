@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <CurrentThemeName>Lavendar Dark</CurrentThemeName>
+  <CurrentThemeName>Netflix</CurrentThemeName>
   <LastWindowCoordinates>
-    <X>-2198</X>
-    <Y>118</Y>
+    <X>-2411</X>
+    <Y>100</Y>
   </LastWindowCoordinates>
   <LastWindowDimensions>
     <X>1934</X>
     <Y>1094</Y>
   </LastWindowDimensions>
-  <LastKnownVolume>0.062485695</LastKnownVolume>
+  <LastKnownVolume>0.33331808</LastKnownVolume>
 </Settings>

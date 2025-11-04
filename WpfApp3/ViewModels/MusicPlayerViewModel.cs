@@ -95,7 +95,7 @@ namespace WpfApp3
                     CurrentIndex = 0;
                     CurrentSong = PlaybackQueue[CurrentIndex];
                 }
-
+                
                 OnPropertyChanged(nameof(SelectedAlbum));
             }
         }

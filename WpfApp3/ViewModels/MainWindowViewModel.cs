@@ -7,6 +7,7 @@ using System.IO;
 using System.Xml.Serialization;
 using System.Windows.Controls;
 using System.Windows;
+using MusicPlayer.UIComponents.ViewModels;
 
 namespace WpfApp3
 {
@@ -24,13 +25,7 @@ namespace WpfApp3
                 return _instance;
             }
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        public ThemeDesignerViewModel ThemeDesignerViewModel => ThemeDesignerViewModel.Instance;
         public string WindowTitle
         {
             get;
@@ -133,7 +128,16 @@ namespace WpfApp3
 
         public void SwitchTheme()
         {
-            CurrentTheme = CurrentTheme == DefaultTheme ? DefaultTheme2 : DefaultTheme;
+            
+            if (CurrentTheme.Name == DefaultTheme.Name)
+            {
+                CurrentTheme = DefaultTheme2;
+            }
+            else
+            {
+                CurrentTheme = DefaultTheme;
+            }
+
         }
 
         public void SaveTheme(string path)
@@ -173,6 +177,11 @@ namespace WpfApp3
             }
         }
 
-        
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

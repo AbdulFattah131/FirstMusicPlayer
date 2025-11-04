@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System.Diagnostics;
+using System.Numerics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -118,13 +119,16 @@ namespace WpfApp3
                 }
             }
 
-            if (MainWindowViewModel.Instance.CurrentTheme == MainWindowViewModel.Instance.DefaultTheme || MainWindowViewModel.Instance.CurrentTheme == MainWindowViewModel.Instance.DefaultTheme2)
+            var savedThemes = ThemeReader.Instance.GetThemes();
+            bool isCustom = savedThemes.Any(t => t.Name == m_vm.CurrentTheme?.Name);
+
+            if (isCustom)
             {
-                var mainWindow = Application.Current.MainWindow as MainWindow;
-                if (mainWindow != null)
-                {
-                    mainWindow.tbSwitchTheme.Visibility = Visibility.Visible;
-                }
+                tbSwitchTheme.Visibility = Visibility.Hidden;
+            }
+            else if (m_vm.CurrentTheme == m_vm.DefaultTheme || m_vm.CurrentTheme == m_vm.DefaultTheme2)
+            {
+                tbSwitchTheme.Visibility = Visibility.Visible;
             }
 
             btnToggleAlbums.IsChecked = true;
@@ -391,6 +395,32 @@ namespace WpfApp3
             // Move the content
             scrollViewer.ScrollToVerticalOffset(scrollViewer.VerticalOffset - e.Delta);
             e.Handled = true;
+        }
+        private void LibraryList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (sender is not ListBox sourceListBox)
+                return;
+
+            // Get the newly selected album
+            if (sourceListBox.SelectedItem is Album album)
+            {
+                m_vm.MusicPlayerCache.SelectedAlbum = album;
+
+                // Deselect all other listboxes safely
+                var allListBoxes = new[] { lbGenreList1, lbGenreList2, lbGenreList3, lbGenreList4 };
+                foreach (var lb in allListBoxes)
+                {
+                    if (lb != sourceListBox && lb.SelectedItem != null)
+                    {
+                        lb.SelectedItem = null;
+                    }
+                }
+
+                // Force update the visuals
+                var lbi = (ListBoxItem)sourceListBox.ItemContainerGenerator.ContainerFromItem(album);
+                if (lbi != null)
+                    lbi.IsSelected = true;
+            }
         }
     }
 }

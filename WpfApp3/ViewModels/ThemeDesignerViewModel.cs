@@ -10,6 +10,18 @@ namespace MusicPlayer.UIComponents.ViewModels
     public class ThemeDesignerViewModel : INotifyPropertyChanged
     {
         public MainWindowViewModel _mainWindowVM;
+
+        private static ThemeDesignerViewModel _instance;
+
+        public static ThemeDesignerViewModel Instance
+        {
+            get
+            {
+                if (_instance == null)
+                    _instance = new ThemeDesignerViewModel();
+                return _instance;
+            }
+        }
         public ThemeDesignerViewModel(MainWindowViewModel Instance)
         {
             CustomTheme = new Theme()
@@ -35,18 +47,6 @@ namespace MusicPlayer.UIComponents.ViewModels
                 NowPlayingForeground = new ThemeColor(), // Now Playing Icon
             };
         }
-
-        //private Visibility _toggleVisibility = Visibility.Visible;
-        //public Visibility ToggleVisibility
-        //{
-        //    get => _toggleVisibility;
-        //    set
-        //    {
-        //        _toggleVisibility = value;
-        //        OnPropertyChanged(nameof(ToggleVisibility));
-        //    }
-        //}
-
         public void ApplyTheme(Theme theme)
         {
             MainWindowViewModel.Instance.CurrentTheme = CustomTheme;
@@ -69,6 +69,10 @@ namespace MusicPlayer.UIComponents.ViewModels
             {
                 return ThemeReader.Instance.GetThemes();
             }
+        }
+
+        public ThemeDesignerViewModel()
+        {
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
