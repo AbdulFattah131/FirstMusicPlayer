@@ -32,7 +32,6 @@ namespace WpfApp3
             set;
         }
 
-
         private Theme _currentTheme;
         public Theme CurrentTheme
         {
@@ -116,7 +115,7 @@ namespace WpfApp3
                 LeftToggleSelected = new ThemeColor(106, 103, 131),
                 PlayPauseBackground = new ThemeColor(197, 178, 239),
                 GenresTextForeground = new ThemeColor(Brushes.Black),
-                NowPlayingForeground = new ThemeColor(114, 91, 164),
+                NowPlayingForeground = new ThemeColor(197, 178, 239),
             };
 
             CurrentTheme = defaultTheme;
@@ -129,7 +128,7 @@ namespace WpfApp3
         public void SwitchTheme()
         {
             
-            if (CurrentTheme.Name == DefaultTheme.Name)
+            if (CurrentTheme.Name == "Lavender")
             {
                 CurrentTheme = DefaultTheme2;
             }

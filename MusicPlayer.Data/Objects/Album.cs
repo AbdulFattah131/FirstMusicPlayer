@@ -37,11 +37,6 @@ namespace MusicPlayer.Data.Objects
                 get => _hsGenres;
         }
         
-        //public string Genre
-        //{
-        //    get => string.Join(" ; ", Genres);
-        //}
-
         public int Year { get; set; }   
         public ObservableCollection<Song> Songs { get; set; } = new ObservableCollection<Song>();
 

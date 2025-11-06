@@ -86,8 +86,8 @@ namespace WpfApp3
 
                 if (_selectedAlbum != null)
                 {
-                    PlaybackQueue = new ObservableCollection<Song>(SelectedAlbum.Songs);
                     CurrentMode = ENMusicPlayerMode.Albums;
+                    PlaybackQueue = new ObservableCollection<Song>(SelectedAlbum.Songs);
                 }
 
                 if (PlaybackQueue.Count > 0)
@@ -116,15 +116,14 @@ namespace WpfApp3
                 if (value == null)
                     return;
 
-                if (SelectedAlbum != null && SelectedAlbum.Songs.Contains(value))
+                if (SelectedAlbum != null && SelectedAlbum.Songs.Contains(value) && CurrentMode == ENMusicPlayerMode.Albums)
                 {
-                    CurrentMode = ENMusicPlayerMode.Albums;
                     PlaybackQueue = new ObservableCollection<Song>(SelectedAlbum.Songs);
                 }
                 else
                 {
-                    CurrentMode = ENMusicPlayerMode.Songs;
                     PlaybackQueue = new ObservableCollection<Song>(AllSongs);
+                    CurrentMode = ENMusicPlayerMode.Songs;
                 }
 
                 CurrentIndex = PlaybackQueue.IndexOf(_currentSong);
@@ -139,7 +138,6 @@ namespace WpfApp3
         }
 
         #endregion
-
 
         #region Playback Functionality
 
@@ -176,6 +174,13 @@ namespace WpfApp3
         // Playback Control Buttons
 
         private string _loadedFilePath;
+        public void PlayFromPlaylist()
+        {
+            if (PlaybackQueue == null || PlaybackQueue.Count == 0)
+                return;
+            CurrentIndex = 0;
+            CurrentSong = PlaybackQueue[CurrentIndex];
+        }
         public void PlayPause()
         {
             if (CurrentSong == null && PlaybackQueue == null || PlaybackQueue.Count == 0 && CurrentIndex < 0 || CurrentIndex >= PlaybackQueue.Count)
@@ -244,7 +249,6 @@ namespace WpfApp3
         }
 
         #endregion
-
 
         #region Slider (Music Seek Bar)
 

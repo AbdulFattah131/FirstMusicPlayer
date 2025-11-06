@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.DirectoryServices;
 using System.Numerics;
 using System.Windows;
 using System.Windows.Controls;
@@ -29,6 +31,46 @@ namespace WpfApp3
         {
             InitializeComponent();
 
+            InitializeViewModel();
+
+            InitializeFilters();
+
+            InitializeSettings();
+            LoadPersistence();
+
+            LoadThemes();
+            UpdateThemeSwitchVisibility();
+
+            InitializeUIState();
+        }
+
+        private void LoadPersistence()
+        {
+            this.Left = m_vm.Settings.LastWindowCoordinates.X;
+            this.Top = m_vm.Settings.LastWindowCoordinates.Y;
+            this.Width = m_vm.Settings.LastWindowDimensions.X;
+            this.Height = m_vm.Settings.LastWindowDimensions.Y;
+
+            float? fLastKnownVolume = m_vm.Settings.LastKnownVolume;
+
+            if (fLastKnownVolume == null)
+                m_vm.MusicPlayerCache.Player.InitializeVolume();
+            else
+                m_vm.MusicPlayerCache.Player.SystemVolume = (float)m_vm.Settings.LastKnownVolume;
+
+            if (m_vm.CurrentTheme == m_vm.DefaultTheme || m_vm.CurrentTheme == m_vm.DefaultTheme2)
+            {
+                tbSwitchTheme.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                tbSwitchTheme.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void InitializeFilters()
+        {
+            //Initialize Filters
             #region Filters for Views
 
             // Your Library 
@@ -102,51 +144,56 @@ namespace WpfApp3
             };
 
             #endregion
+        }
 
+        private void InitializeViewModel()
+        {             
+            //Initialize ViewModel
             m_vm = MainWindowViewModel.Instance;
             this.DataContext = m_vm;
+        }
 
+        private void InitializeSettings()
+        {
+            //Initialize settings
             m_vm.Settings = SettingsReader.Instance.ReadFromFile("./Settings.xml");
+        }
 
-            LoadPersistence();
-
+        private void LoadThemes()
+        { 
+            //Load Themes
             foreach (Theme objTheme in ThemeReader.Instance.GetThemes())
             {
-                if(m_vm.Settings.CurrentThemeName == objTheme.Name)
+                if (m_vm.Settings.CurrentThemeName == objTheme.Name)
                 {
                     m_vm.CurrentTheme = objTheme;
                     break;
                 }
             }
-
-            var savedThemes = ThemeReader.Instance.GetThemes();
-            bool isCustom = savedThemes.Any(t => t.Name == m_vm.CurrentTheme?.Name);
-
-            if (isCustom)
-            {
-                tbSwitchTheme.Visibility = Visibility.Hidden;
-            }
-            else if (m_vm.CurrentTheme == m_vm.DefaultTheme || m_vm.CurrentTheme == m_vm.DefaultTheme2)
-            {
-                tbSwitchTheme.Visibility = Visibility.Visible;
-            }
-
-            btnToggleAlbums.IsChecked = true;
         }
 
-        private void LoadPersistence()
-        {
-            this.Left = m_vm.Settings.LastWindowCoordinates.X;
-            this.Top = m_vm.Settings.LastWindowCoordinates.Y;
-            this.Width = m_vm.Settings.LastWindowDimensions.X;
-            this.Height = m_vm.Settings.LastWindowDimensions.Y;
+        private void UpdateThemeSwitchVisibility()
+        { 
+            //Update Theme Switch Visibility
+            var currentName = m_vm.CurrentTheme?.Name?.Trim();
 
-            float? fLastKnownVolume = m_vm.Settings.LastKnownVolume;
-
-            if (fLastKnownVolume == null)
-                m_vm.MusicPlayerCache.Player.InitializeVolume();
+            if (currentName == "Lavender" || currentName == "Lavender Dark")
+            {
+                tbSwitchTheme.Visibility = Visibility.Visible;
+                tbSwitchTheme.IsEnabled = true;
+            }
             else
-                m_vm.MusicPlayerCache.Player.SystemVolume = (float)m_vm.Settings.LastKnownVolume;
+            {
+                var savedThemes = ThemeReader.Instance.GetThemes();
+                bool isCustom = savedThemes.Any(t => t.Name == currentName);
+                tbSwitchTheme.Visibility = isCustom ? Visibility.Hidden : Visibility.Visible;
+            }
+        }
+
+        private void InitializeUIState()
+        { 
+            //Initialize UI State
+            btnToggleAlbums.IsChecked = true;
         }
 
         private void borderWindowMove_MouseDown(object sender, MouseButtonEventArgs e)
@@ -229,11 +276,21 @@ namespace WpfApp3
             grdSettings.Background = null;
         }
 
+        private ThemeDesigner _themeDesigner;
         private void grdSettings_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            var window = new ThemeDesigner();
-            window.Show();
+            if (_themeDesigner == null || !_themeDesigner.IsLoaded)
+            {
+                _themeDesigner = new ThemeDesigner();
+                _themeDesigner.Show();
+            }
+            else
+            {
+                _themeDesigner.Activate();
+            }
         }
+
+
         private void SwitchButton_Click(object sender, RoutedEventArgs e)
         {
             var m_vm = (MainWindowViewModel)this.DataContext;
@@ -241,16 +298,6 @@ namespace WpfApp3
         }
 
         private void HoverZone_MouseEnter(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
         {
 
         }
@@ -362,15 +409,6 @@ namespace WpfApp3
             }
         }
 
-        private void sdrMusicPlayerSeekBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-
-        }
-
-        private void lbAllSongsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-        }
-
         private void bdrTitleBar_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ClickCount == 2)
@@ -380,11 +418,6 @@ namespace WpfApp3
                 else if (this.WindowState == WindowState.Maximized)
                     this.WindowState = WindowState.Normal;
             }
-        }
-
-        private void grdRightPanel_Scroll(object sender, ScrollEventArgs e)
-        {
-
         }
 
         private void PreviewMouseWheel(object sender, MouseWheelEventArgs e)
@@ -401,12 +434,10 @@ namespace WpfApp3
             if (sender is not ListBox sourceListBox)
                 return;
 
-            // Get the newly selected album
             if (sourceListBox.SelectedItem is Album album)
             {
                 m_vm.MusicPlayerCache.SelectedAlbum = album;
 
-                // Deselect all other listboxes safely
                 var allListBoxes = new[] { lbGenreList1, lbGenreList2, lbGenreList3, lbGenreList4 };
                 foreach (var lb in allListBoxes)
                 {
@@ -416,10 +447,25 @@ namespace WpfApp3
                     }
                 }
 
-                // Force update the visuals
                 var lbi = (ListBoxItem)sourceListBox.ItemContainerGenerator.ContainerFromItem(album);
                 if (lbi != null)
                     lbi.IsSelected = true;
+            }
+        }
+
+        private CreatePlaylist _createPlaylist;
+        private void NewPlaylist_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            var window = new CreatePlaylist();
+            window.Show();
+            if (_createPlaylist == null || !_createPlaylist.IsLoaded)
+            {
+                _createPlaylist = new CreatePlaylist();
+                _createPlaylist.Show();
+            }
+            else
+            {
+                _createPlaylist.Activate();
             }
         }
     }

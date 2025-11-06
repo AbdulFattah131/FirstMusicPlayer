@@ -77,6 +77,7 @@
 
                     <StackPanel x:Name="spLogo" Orientation="Horizontal">
                         <Path Data="M72 12 A24 24 0 0 0 48 36 V84 A24 24 0 0 0 72 108 H136 A48 48 0 0 0 136 12 H72 Z" Fill="{Binding CurrentTheme.WindowHeadingForeground.Brush}"  Margin="0, 0, -3, 0" Width="25" Height="25" Stretch="Uniform" VerticalAlignment="Center"/>
+                        <TextBlock Text="sc" FontStyle="Normal" FontFamily="Lucida Handwriting" FontSize="13" Margin="-18, 4, 0, 5" Foreground="{Binding CurrentTheme.WindowPrimary.Brush}"></TextBlock>
                         <Path Data="M60 20 Q150 150, 60 280 H120 Q210 150, 120 20 Z" Fill="{Binding CurrentTheme.WindowHeadingForeground.Brush}"  Margin="0, 0, -8, 0" Width="15" Height="15" Stretch="Uniform" VerticalAlignment="Center"/>
                         <Path Data="M50 20 Q130 150, 50 280 H70 Q150 150, 70 20 Z" Fill="{Binding CurrentTheme.WindowHeadingForeground.Brush}"  Margin="0, 0, 0, 0" Width="15" Height="14.8" Stretch="Uniform" VerticalAlignment="Center"/>
 
@@ -318,8 +319,8 @@
                                                        Content="{TemplateBinding Content}"/>
                                                     </Border>
                                                     <Path x:Name="pSongs" Margin="25, 0, 10, 0" Width="15" Height="15" Stretch="Uniform"
-                                              Fill="{Binding CurrentTheme.WindowPrimaryAnchor.Brush}" HorizontalAlignment="Left"
-                                              Data="M21,3V15.5A3.5,3.5 0 0,1 17.5,19A3.5,3.5 0 0,1 14,15.5A3.5,3.5 0 0,1 17.5,12C18.04,12 18.55,12.12 19,12.34V6.47L9,8.6V17.5A3.5,3.5 0 0,1 5.5,21A3.5,3.5 0 0,1 2,17.5A3.5,3.5 0 0,1 5.5,14C6.04,14 6.55,14.12 7,14.34V6L21,3Z"/>            
+                                                          Fill="{Binding CurrentTheme.WindowPrimaryAnchor.Brush}" HorizontalAlignment="Left"
+                                                          Data="M21,3V15.5A3.5,3.5 0 0,1 17.5,19A3.5,3.5 0 0,1 14,15.5A3.5,3.5 0 0,1 17.5,12C18.04,12 18.55,12.12 19,12.34V6.47L9,8.6V17.5A3.5,3.5 0 0,1 5.5,21A3.5,3.5 0 0,1 2,17.5A3.5,3.5 0 0,1 5.5,14C6.04,14 6.55,14.12 7,14.34V6L21,3Z"/>            
                                                     <TextBlock Margin="50, 0, 10, 0" HorizontalAlignment="Left" x:Name="tbSongs" Text="Songs" VerticalAlignment="Center" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"/>
                                                 </Grid>
                                                 <ControlTemplate.Triggers>
@@ -356,6 +357,7 @@
                            Opacity="0.4"/>
                     </Border.Effect>
                     <ToggleButton x:Name="NewPlaylist"
+                       MouseLeftButtonUp="NewPlaylist_MouseLeftButtonUp"
                        Height="35"
                        Margin="0,25,0,0"
                        BorderBrush="Transparent"
@@ -693,7 +695,7 @@
                                                                     <Setter.Value>
                                                                         <DataTemplate>
                                                                             <Path Data="M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M10,16.5L16,12L10,7.5V16.5Z"
-                                                                                  Fill="{Binding DataContext.CurrentTheme.WindowPrimaryAnchor.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"
+                                                                                  Fill="{Binding DataContext.CurrentTheme.NowPlayingForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"
                                                                                   Stretch="Uniform" Width="15" Height="15"/>        
                                                                         </DataTemplate>
                                                                     </Setter.Value>
@@ -2197,7 +2199,7 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                     </Grid.ColumnDefinitions>
 
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="60"></RowDefinition>
+                        <RowDefinition Height="50"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
@@ -2247,12 +2249,12 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                             <RowDefinition Height="9*"></RowDefinition>
                         </Grid.RowDefinitions>
                         
-                        <TextBlock x:Name="tbAlbums" Grid.Row="0" Text="Albums" FontSize="18" FontWeight="Black" 
+                        <TextBlock x:Name="tbAlbums" Grid.Row="0" Text="Albums" FontSize="18" FontFamily="Bahnschrift" FontWeight="Black" 
                         Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}" HorizontalAlignment="Left"/>
 
                         <!-- AlbumsListBox -->
 
-                            <ListBox x:Name="lbAlbumsList" Height="300" Grid.Column="0" Grid.Row="1" Margin="0, 20, 0, 20" VerticalAlignment="Center" HorizontalAlignment="Stretch" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                            <ListBox x:Name="lbAlbumsList" Height="300" Grid.Column="0" Grid.Row="1" Margin="0, 30, 0, 20" VerticalAlignment="Center" HorizontalAlignment="Stretch" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                              Background="Transparent" BorderBrush="Black" ItemsSource="{Binding MusicPlayerCache.Albums}" SelectedItem="{Binding MusicPlayerCache.SelectedAlbum, Mode=TwoWay}">
 
                             <ListBox.ItemTemplate>
@@ -2418,9 +2420,9 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                             <RowDefinition Height="9*"></RowDefinition>
                         </Grid.RowDefinitions>
 
-                        <TextBlock x:Name="tbAlbumContents" Grid.Row="0" Text="Album Contents" FontSize="18" FontWeight="Black" Margin="0, 10, 0, 20" Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}"></TextBlock>
+                        <TextBlock x:Name="tbAlbumContents" Grid.Row="0" Text="Album Contents" FontSize="18" FontWeight="Black" FontFamily="Bahnschrift" Margin="0, 10, 0, 20" Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}"></TextBlock>
 
-                        <Grid Grid.Row="1" Margin="0, 10, 0, 0">
+                        <Grid Grid.Row="1" Margin="0, 20, 0, 0">
                             
                             <ListBox x:Name="lbAlbumContents" VerticalAlignment="Stretch" Height="300" ItemsSource="{Binding MusicPlayerCache.SelectedAlbum.Songs}" SelectedItem="{Binding MusicPlayerCache.CurrentSong, Mode=TwoWay}"
                         Background="Transparent" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
@@ -2662,12 +2664,11 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
 
                             <!-- Heading -->
 
-                            <TextBlock x:Name="tbSongViewHeading" Grid.Row="0" Text="Songs" FontSize="18" FontWeight="Black" 
-                             Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}" HorizontalAlignment="Left"/>
+                            <TextBlock x:Name="tbSongViewHeading" Grid.Row="0" Text="Songs" FontFamily="Bahnschrift" FontSize="18" FontWeight="Black" Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}" HorizontalAlignment="Left"/>
 
                             <!-- SongsListBox1 -->
 
-                            <TextBlock x:Name="tbSongsList" Text="All Songs" FontSize="17" FontWeight="Black" Margin="0, 45, 0, 20" Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}"></TextBlock>
+                            <TextBlock x:Name="tbSongsList" Text="All Songs" FontSize="16.5" FontStyle="Italic" FontWeight="Black" Margin="0, 45, 0, 20" Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}"></TextBlock>
 
                                 <Grid x:Name="grdSongs" Grid.Row="1" Grid.Column="0" Margin="40, 20, 40, 0">
                                     <Grid.ColumnDefinitions>
@@ -2679,7 +2680,8 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                     </Grid.RowDefinitions>
 
                                         <ListBox x:Name="lbAllSongsList" ItemsSource="{Binding MusicPlayerCache.AllSongs}" SelectedItem="{Binding MusicPlayerCache.CurrentSong, Mode=TwoWay}"
-                                        SelectionChanged="lbAllSongsList_SelectionChanged" Background="Transparent" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                         Background="Transparent" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                            
                                             <ListBox.ItemTemplate>
                                                 <DataTemplate>
                                                     <Grid Margin="20, 13, 0, 13">
@@ -2704,7 +2706,7 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                                                                 <Setter.Value>
                                                                                     <DataTemplate>
                                                                                                 <Path Data="M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M10,16.5L16,12L10,7.5V16.5Z"
-                                                                                                      Fill="{Binding DataContext.CurrentTheme.WindowPrimaryAnchor.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"
+                                                                                                      Fill="{Binding DataContext.CurrentTheme.NowPlayingForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"
                                                                                                       Stretch="Uniform" Width="15" Height="15"/>    
                                                                                     </DataTemplate>
                                                                                 </Setter.Value>
@@ -2731,6 +2733,7 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                                         </Button>
                                                     </Grid>
                                                 </DataTemplate>
+                                                
                                             </ListBox.ItemTemplate>
 
                                             <ListBox.ItemContainerStyle>
@@ -2851,11 +2854,10 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                             </Border>
                                         </ControlTemplate>
                                     </ListBox.Template>
-                                </ListBox>
-
+                                            
+                                        </ListBox>
                                     </Grid>
                                 </Grid>
-
                         </Grid>
                 </Border>
                 
@@ -3338,7 +3340,7 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
 
                             <TextBlock x:Name="tbTrackStart" Margin="0, 0, 10, 0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Text="{Binding MusicPlayerCache.CurrentPosition, Converter={StaticResource DurationDisplayConverter}}" FontWeight="Regular" FontSize="11.3" Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}"/>
 
-                            <Slider x:Name="sdrMusicPlayerSeekBar" Width="400" Minimum="0" Maximum="{Binding MusicPlayerCache.CurrentSong.Length}" Value="{Binding MusicPlayerCache.CurrentPosition, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" PreviewMouseDown="sdrMusicPlayerSeekBar_PreviewMouseDown" PreviewMouseUp="sdrMusicPlayerSeekBar_PreviewMouseUp" ValueChanged="sdrMusicPlayerSeekBar_ValueChanged" Margin="0, 10, 0, 0">
+                            <Slider x:Name="sdrMusicPlayerSeekBar" Width="400" Minimum="0" Maximum="{Binding MusicPlayerCache.CurrentSong.Length}" Value="{Binding MusicPlayerCache.CurrentPosition, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" PreviewMouseDown="sdrMusicPlayerSeekBar_PreviewMouseDown" PreviewMouseUp="sdrMusicPlayerSeekBar_PreviewMouseUp" Margin="0, 10, 0, 0">
                         
                         <Slider.Resources>
                             

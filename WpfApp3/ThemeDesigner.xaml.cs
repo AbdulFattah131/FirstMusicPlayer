@@ -156,25 +156,25 @@ namespace MusicPlayer.UIComponents
 
         private void btnApply_Click(object sender, RoutedEventArgs e)
         {
-            var m_vm = (ThemeDesignerViewModel)this.DataContext;
-
-            if (cbThemes.SelectedItem is Theme selectedTheme)
-            {
-                MainWindowViewModel.Instance.CurrentTheme = selectedTheme;
-            }
-            else
-            {
-                MainWindowViewModel.Instance.CurrentTheme = m_vm.CustomTheme;
-            }
-
-            // Hide Switch
 
             var mainWindow = Application.Current.MainWindow as MainWindow;
-            if (mainWindow != null)
-            {
-                mainWindow.tbSwitchTheme.Visibility = Visibility.Hidden;
-            }
-        }
+            var td_vm = (ThemeDesignerViewModel)DataContext;
+            var theme = cbThemes.SelectedItem as Theme ?? td_vm.CustomTheme;
+            
+            MainWindowViewModel.Instance.CurrentTheme = theme;
 
+            bool isDefault = theme?.Name is "Lavender" or "Lavender Dark";
+
+            mainWindow.tbSwitchTheme.Visibility = isDefault ? Visibility.Visible : Visibility.Hidden;
+            mainWindow.tbSwitchTheme.IsEnabled = isDefault;
+
+            if (theme?.Name == "Lavender Dark")
+                mainWindow.tbSwitchTheme.IsChecked = true;
+            else
+                mainWindow.tbSwitchTheme.IsChecked = false;
+
+
+
+        }
     }
 }

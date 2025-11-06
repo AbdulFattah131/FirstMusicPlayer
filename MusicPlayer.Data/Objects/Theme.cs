@@ -91,7 +91,6 @@ namespace MusicPlayer.Data.Objects
             get;
             set;
         }
-
       
         public ThemeColor CurrentSongTitleForeground
         {
