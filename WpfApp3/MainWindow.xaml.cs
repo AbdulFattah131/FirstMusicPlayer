@@ -202,47 +202,81 @@ namespace WpfApp3
                 this.DragMove();
         }
 
-        private void grdClose_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        #region Settings Button (opens up themedesigner)
+        private void bdrSettings_MouseEnter(object sender, MouseEventArgs e)
+        {
+            grdSettings.Background = Brushes.DarkGray;
+        }
+
+        private void bdrSettings_MouseLeave(object sender, MouseEventArgs e)
+        {
+            grdSettings.Background = null;
+        }
+
+        private ThemeDesigner _themeDesigner;
+        private void bdrSettings_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (_themeDesigner == null || !_themeDesigner.IsLoaded)
+            {
+                _themeDesigner = new ThemeDesigner();
+                _themeDesigner.Show();
+            }
+            else
+            {
+                _themeDesigner.Activate();
+            }
+        }
+
+        #endregion
+
+        #region Close Button
+        private void bdrClose_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             this.Close();
         }
 
-        private void grdClose_MouseEnter(object sender, MouseEventArgs e)
+        private void bdrClose_MouseEnter(object sender, MouseEventArgs e)
         {
-            grdClose.Background = (m_vm.CurrentTheme.WindowPrimary.Brush);
+            bdrClose.Background = (m_vm.CurrentTheme.WindowPrimary.Brush);
         }
 
-        private void grdClose_MouseLeave(object sender, MouseEventArgs e)
+        private void bdrClose_MouseLeave(object sender, MouseEventArgs e)
         {
-            grdClose.Background = Brushes.Transparent;
+            bdrClose.Background = Brushes.Transparent;
         }
 
-        private void grdMinimize_MouseEnter(object sender, MouseEventArgs e)
+        #endregion
+
+        #region Minimize Button
+        private void bdrMinimize_MouseEnter(object sender, MouseEventArgs e)
         {
             grdMinimize.Background = Brushes.DarkGray;
         }
 
-        private void grdMinimize_MouseLeave(object sender, MouseEventArgs e)
+        private void bdrMinimize_MouseLeave(object sender, MouseEventArgs e)
         {
             grdMinimize.Background = Brushes.Transparent;
         }
 
-        private void grdMinimize_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void bdrMinimize_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
         }
 
-        private void grdResize_MouseEnter(object sender, MouseEventArgs e)
+        #endregion
+
+        #region Resize Button
+        private void bdrResize_MouseEnter(object sender, MouseEventArgs e)
         {
             grdResize.Background = Brushes.DarkGray;
         }
 
-        private void grdResize_MouseLeave(object sender, MouseEventArgs e)
+        private void bdrResize_MouseLeave(object sender, MouseEventArgs e)
         {
             grdResize.Background = null;
         }
 
-        private void grdResize_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void bdrResize_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (this.WindowState == WindowState.Maximized)
             {
@@ -256,6 +290,9 @@ namespace WpfApp3
             }
         }
 
+        #endregion
+
+        #region On Window Close
         private void Window_Closed(object sender, EventArgs e)
         {
             m_vm.Settings.CurrentThemeName = m_vm.CurrentTheme.Name;
@@ -266,85 +303,17 @@ namespace WpfApp3
             SettingsWriter.Instance.WriteToFile(m_vm.Settings);
         }
 
-        private void grdSettings_MouseEnter(object sender, MouseEventArgs e)
-        {
-            grdSettings.Background = Brushes.DarkGray;
-        }
-
-        private void grdSettings_MouseLeave(object sender, MouseEventArgs e)
-        {
-            grdSettings.Background = null;
-        }
-
-        private ThemeDesigner _themeDesigner;
-        private void grdSettings_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            if (_themeDesigner == null || !_themeDesigner.IsLoaded)
-            {
-                _themeDesigner = new ThemeDesigner();
-                _themeDesigner.Show();
-            }
-            else
-            {
-                _themeDesigner.Activate();
-            }
-        }
-
+        #endregion
 
         private void SwitchButton_Click(object sender, RoutedEventArgs e)
         {
             var m_vm = (MainWindowViewModel)this.DataContext;
             m_vm.SwitchTheme();
         }
-
-        private void HoverZone_MouseEnter(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void ToggleButton_Checked(object sender, RoutedEventArgs e)
-        {
-            var clickedToggle = sender as ToggleButton;
-            foreach (var child in ToggleGroup.Children)
-            {
-                if (child is Border border)
-                {
-                    if(border.Child is ToggleButton toggle)
-                    {
-                        if(toggle != clickedToggle)
-                            toggle.IsChecked = false;
-                    }
-                }
-            }
-        }
-
+        
         private void tbPlayPause_Click(object sender, RoutedEventArgs e)
         {
             m_vm.MusicPlayerCache.PlayPause();
-        }
-
-        private void PlaybackToggle_Checked(object sender, RoutedEventArgs e)
-        {
-            bool? bValue = (sender as ToggleButton).IsChecked;
-
-            if (bValue == null)
-            {
-                m_vm.MusicPlayerCache.IsPlaying = false;
-                return;
-            }
-
-            m_vm.MusicPlayerCache.IsPlaying = (bool)bValue;
-        }
-
-        private void ToggleButton_Unchecked(object sender, RoutedEventArgs e)
-        {
-            if (sender == null)
-                return;
-
-            if (sender is ToggleButton btn)
-            {
-                btn.IsChecked = true;
-            }
         }
 
         #region Playback Controls
@@ -370,6 +339,7 @@ namespace WpfApp3
 
         #endregion
 
+        #region MusicPlayerSeekBar
         private void sdrMusicPlayerSeekBar_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             if (DataContext is not MainWindowViewModel m_vm)
@@ -409,6 +379,8 @@ namespace WpfApp3
             }
         }
 
+        #endregion
+
         private void bdrTitleBar_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ClickCount == 2)
@@ -419,8 +391,7 @@ namespace WpfApp3
                     this.WindowState = WindowState.Normal;
             }
         }
-
-        private void PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        private new void PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
             var scrollViewer = sender as ScrollViewer;
             if (scrollViewer == null) return;
@@ -429,6 +400,8 @@ namespace WpfApp3
             scrollViewer.ScrollToVerticalOffset(scrollViewer.VerticalOffset - e.Delta);
             e.Handled = true;
         }
+
+        #region the problematic stuff
         private void LibraryList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (sender is not ListBox sourceListBox)
@@ -452,20 +425,57 @@ namespace WpfApp3
                     lbi.IsSelected = true;
             }
         }
-
-        private CreatePlaylist _createPlaylist;
-        private void NewPlaylist_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void ToggleButton_Checked(object sender, RoutedEventArgs e)
         {
-            var window = new CreatePlaylist();
-            window.Show();
-            if (_createPlaylist == null || !_createPlaylist.IsLoaded)
+            var clickedToggle = sender as ToggleButton;
+            foreach (var child in ToggleGroup.Children)
             {
-                _createPlaylist = new CreatePlaylist();
-                _createPlaylist.Show();
+                if (child is Border border)
+                {
+                    if (border.Child is ToggleButton toggle)
+                    {
+                        if (toggle != clickedToggle)
+                            toggle.IsChecked = false;
+                    }
+                }
+            }
+        }
+        private void PlaybackToggle_Checked(object sender, RoutedEventArgs e)
+        {
+            bool? bValue = (sender as ToggleButton).IsChecked;
+
+            if (bValue == null)
+            {
+                m_vm.MusicPlayerCache.IsPlaying = false;
+                return;
+            }
+
+            m_vm.MusicPlayerCache.IsPlaying = (bool)bValue;
+        }
+        private void ToggleButton_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (sender == null)
+                return;
+
+            if (sender is ToggleButton btn)
+            {
+                btn.IsChecked = true;
+            }
+        }
+
+        #endregion
+
+        private PlaylistsWindow _playlistsWindow;
+        private void NewPlaylist_Click(object sender, RoutedEventArgs e)
+        {
+            if (_playlistsWindow == null || !_playlistsWindow.IsLoaded)
+            {
+                _playlistsWindow = new PlaylistsWindow();
+                _playlistsWindow.Show();
             }
             else
             {
-                _createPlaylist.Activate();
+                _playlistsWindow.Activate();
             }
         }
     }

@@ -5,7 +5,7 @@
     <Compile Update="Controls\List.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="CreatePlaylist.xaml.cs">
+    <Compile Update="PlaylistsWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="ThemeDesigner.xaml.cs">

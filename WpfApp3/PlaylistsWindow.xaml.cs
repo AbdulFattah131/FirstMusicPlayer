@@ -18,25 +18,24 @@ namespace MusicPlayer.UIComponents
     /// <summary>
     /// Interaction logic for CreatePlaylist.xaml
     /// </summary>
-    public partial class CreatePlaylist : Window
+    public partial class PlaylistsWindow : Window
     {
-        public CreatePlaylist()
+        public PlaylistsWindow()
         {
-            InitializeComponent();
         }
 
-        //// Create new playlist
-        //CreatePlaylistViewModel.Instance.CreateNewPlaylist("My Chill Mix");
+        // Create new playlist
+        PlaylistsWindowViewModel
 
         //// Add songs
-        //CreatePlaylistViewModel.Instance.AddSongToCurrentPlaylist(selectedSong);
+        //PlaylistViewModel.Instance.AddSongToCurrentPlaylist(selectedSong);
 
         //// Save
-        //CreatePlaylistViewModel.Instance.SaveCurrentPlaylist();
+        //PlaylistViewModel.Instance.SaveCurrentPlaylist();
 
         //// Play existing one
-        //var playlist = CreatePlaylistViewModel.Instance.LoadedPlaylists.FirstOrDefault(p => p.Name == "My Chill Mix");
-        //        CreatePlaylistViewModel.Instance.PlayPlaylist(playlist);
+        //var playlist = PlaylistViewModel.Instance.LoadedPlaylists.FirstOrDefault(p => p.Name == "My Chill Mix");
+        //PlaylistViewModel.Instance.PlayPlaylist(playlist);
 
     }
 }

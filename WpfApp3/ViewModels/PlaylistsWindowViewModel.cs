@@ -10,28 +10,28 @@ using WpfApp3;
 
 namespace MusicPlayer.UIComponents.ViewModels
 {
-    public class CreatePlaylistViewModel : INotifyPropertyChanged
+    public class PlaylistsWindowViewModel : INotifyPropertyChanged
     {
         public MainWindowViewModel _mainWindowVM;
 
-        private static CreatePlaylistViewModel _instance;
-        public static CreatePlaylistViewModel Instance
+        private static PlaylistsWindowViewModel _instance;
+        public static PlaylistsWindowViewModel Instance
         {
             get
             {
                 if (_instance == null)
-                    _instance = new CreatePlaylistViewModel();
+                    _instance = new PlaylistsWindowViewModel();
                 return _instance;
             }
         }
 
-        public CreatePlaylistViewModel(MainWindowViewModel mainWindowVM)
+        public PlaylistsWindowViewModel(MainWindowViewModel mainWindowVM)
         {
             _mainWindowVM = mainWindowVM;
             LoadSavedPlaylists();
         }
 
-        public CreatePlaylistViewModel()
+        public PlaylistsWindowViewModel()
         {
             LoadSavedPlaylists();
         }
@@ -47,15 +47,13 @@ namespace MusicPlayer.UIComponents.ViewModels
             }
         }
 
-        private ObservableCollection<Playlist> _loadedPlaylists = new ObservableCollection<Playlist>();
-        public ObservableCollection<Playlist> LoadedPlaylists
+        public List<Playlist> LoadedPlaylists
         {
-            get { return _loadedPlaylists; }
-            set
-            {
-                _loadedPlaylists = value;
-                OnPropertyChanged(new PropertyChangedEventArgs(nameof(LoadedPlaylists)));
+            get 
+            { 
+                return PlaylistReader.Instance.GetPlaylists();
             }
+           
         }
 
         public void CreateNewPlaylist(string name)
@@ -84,7 +82,7 @@ namespace MusicPlayer.UIComponents.ViewModels
         public void LoadSavedPlaylists()
         {
             var loaded = PlaylistReader.Instance.GetPlaylists();
-            LoadedPlaylists = new ObservableCollection<Playlist>(loaded);
+            //LoadedPlaylists = new ObservableCollection<Playlist>(loaded);
         }
 
         public void PlayPlaylist(Playlist playlist)

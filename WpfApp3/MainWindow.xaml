@@ -357,14 +357,14 @@
                            Opacity="0.4"/>
                     </Border.Effect>
                     <ToggleButton x:Name="NewPlaylist"
-                       MouseLeftButtonUp="NewPlaylist_MouseLeftButtonUp"
+                       Click="NewPlaylist_Click"
                        Height="35"
                        Margin="0,25,0,0"
                        BorderBrush="Transparent"
                        VerticalAlignment="Bottom">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                            
                         </StackPanel>
+                        
                         <ToggleButton.Style>
                             <Style TargetType="ToggleButton">
                                 <Setter Property="Background" Value="{Binding CurrentTheme.WindowPrimary.Brush}"/>
@@ -377,13 +377,13 @@
                                         <ControlTemplate TargetType="ToggleButton">
                                             <Grid>
                                                 <Border x:Name="border"
-                                                     CornerRadius="13"
-                                                     Background="{TemplateBinding Background}"
-                                                     BorderBrush="{TemplateBinding BorderBrush}">   
+                                                        CornerRadius="13"
+                                                        Background="{TemplateBinding Background}"
+                                                        BorderBrush="{TemplateBinding BorderBrush}">
                                                     <ContentPresenter HorizontalAlignment="Center"
-                                               VerticalAlignment="Center"
-                                               Content="{TemplateBinding Content}"/>
-                                            </Border>
+                                                                      VerticalAlignment="Center"
+                                                                      Content="{TemplateBinding Content}"/>
+                                                </Border>
                                                 <StackPanel x:Name="spNewPlaylist" Margin="-5, 0, 0, 0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                                                 <Path x:Name="pNewPlaylist" Margin="0, 3, 0, 0" VerticalAlignment="Center" HorizontalAlignment="Left"
                                                 Data ="M3 16H10V14H3M18 14V10H16V14H12V16H16V20H18V16H22V14M14 6H3V8H14M14 10H3V12H14V10Z"
@@ -3480,26 +3480,68 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
 
                     <StackPanel x:Name="spHeaderItems" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
 
-                        <Grid Name="grdSettings" VerticalAlignment="Stretch" 
-                          MouseEnter="grdSettings_MouseEnter" MouseLeave="grdSettings_MouseLeave" 
-                          MouseLeftButtonUp="grdSettings_MouseLeftButtonUp">
-                            <TextBlock Name="tbSettings" Text="⚙" Foreground="White" Width="32" FontSize="11" TextAlignment="Center" VerticalAlignment="Center"/>
-                        </Grid>
-                        <Grid Name="grdMinimize" VerticalAlignment="Stretch" 
-                          MouseEnter="grdMinimize_MouseEnter" MouseLeave="grdMinimize_MouseLeave" 
-                          MouseLeftButtonUp="grdMinimize_MouseLeftButtonUp">
-                            <TextBlock Name="tbMinimize" Text="─" Foreground="White" Width="32" TextAlignment="Center" VerticalAlignment="Center" />
-                        </Grid>
-                        <Grid Name="grdResize" VerticalAlignment="Stretch" 
-                          MouseEnter="grdResize_MouseEnter" MouseLeave="grdResize_MouseLeave" 
-                          MouseLeftButtonUp="grdResize_MouseLeftButtonUp">
-                            <TextBlock Name="tbResize" Text="🗗" Foreground="White" Width="32" TextAlignment="Center" VerticalAlignment="Center"/>
-                        </Grid>
-                        <Grid Name="grdClose" VerticalAlignment="Stretch"  
-                          MouseEnter="grdClose_MouseEnter" MouseLeftButtonUp="grdClose_MouseLeftButtonUp" MouseLeave="grdClose_MouseLeave">
-                            <TextBlock Name="tbClose" Text="✕" Foreground="White" Width="32" TextAlignment="Center" VerticalAlignment="Center"/>
-                        </Grid>
-                    </StackPanel>
+                    <Grid x:Name="grdSettings" Width="32" Height="32" HorizontalAlignment="Right">
+                        <Border x:Name="bdrSettings"
+                                CornerRadius="0"
+                                Background="Transparent"
+                                MouseEnter="bdrSettings_MouseEnter"
+                                MouseLeave="bdrSettings_MouseLeave"
+                                MouseLeftButtonUp="bdrSettings_MouseLeftButtonUp">
+                            <TextBlock Text="⚙"
+                                       Foreground="White"
+                                       FontSize="11"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                        </Border>
+                    </Grid>
+
+                    <Grid x:Name="grdMinimize" Width="32" Height="32" HorizontalAlignment="Right">
+                        <Border x:Name="bdrMinimize"
+                                        CornerRadius="0"
+                                        Background="Transparent"
+                                        MouseEnter="bdrMinimize_MouseEnter"
+                                        MouseLeave="bdrMinimize_MouseLeave"
+                                        MouseLeftButtonUp="bdrMinimize_MouseLeftButtonUp">
+                            <TextBlock Text="─"
+                                       Foreground="White"
+                                       FontSize="14"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                        </Border>
+                    </Grid>
+
+                    <Grid x:Name="grdResize" Width="32" Height="32" HorizontalAlignment="Right">
+                        <Border x:Name="bdrResize"
+                                CornerRadius="0,10,0,0" 
+                            Background="Transparent"
+                            MouseEnter="bdrResize_MouseEnter"
+                            MouseLeave="bdrResize_MouseLeave"
+                            MouseLeftButtonUp="bdrResize_MouseLeftButtonUp">
+                            <TextBlock x:Name="tbResize" Text="🗗"
+                                       Foreground="White"
+                                       FontSize="12"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/> 
+                        </Border>
+                    </Grid>
+
+                    <Grid x:Name="grdClose" Width="32" Height="32"
+                          VerticalAlignment="Stretch"
+                          HorizontalAlignment="Right">
+                        <Border x:Name="bdrClose"
+                                CornerRadius="0,10,0,0"
+                                Background="Transparent"
+                                MouseEnter="bdrClose_MouseEnter"
+                                MouseLeave="bdrClose_MouseLeave"
+                                MouseLeftButtonUp="bdrClose_MouseLeftButtonUp">
+                            <TextBlock x:Name="tbClose" Text="✕"
+                                       Foreground="White"
+                                       FontSize="12"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/> 
+                        </Border>
+                    </Grid>
+                </StackPanel>
                 </Grid>
         </Border>
 
