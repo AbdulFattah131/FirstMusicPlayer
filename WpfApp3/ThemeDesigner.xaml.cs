@@ -139,6 +139,10 @@ namespace MusicPlayer.UIComponents
             {
                 m_vm.CustomTheme.NowPlayingForeground.Hex = stQueryText;
             }
+            if (itbQueryTextBox.Name == "itbNewPlaylistHoverHex")
+            {
+                m_vm.CustomTheme.NewPlaylistHover.Hex = stQueryText;
+            }
 
             itbQueryTextBox.BorderBrush = Brushes.Gray;
         }

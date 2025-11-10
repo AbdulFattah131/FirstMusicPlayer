@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MusicPlayer.UIComponents.ViewModels;
+using WpfApp3;
 
 namespace MusicPlayer.UIComponents
 {
@@ -20,12 +21,24 @@ namespace MusicPlayer.UIComponents
     /// </summary>
     public partial class PlaylistsWindow : Window
     {
+        public MainWindowViewModel m_vm;
         public PlaylistsWindow()
         {
+            InitializeComponent();
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
         // Create new playlist
-        PlaylistsWindowViewModel
+        //PlaylistsWindowViewModel
 
         //// Add songs
         //PlaylistViewModel.Instance.AddSongToCurrentPlaylist(selectedSong);

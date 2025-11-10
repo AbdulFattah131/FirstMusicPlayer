@@ -51,6 +51,7 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
 
                 </Grid.RowDefinitions>
 
@@ -171,6 +172,12 @@
                 <StackPanel Orientation="Horizontal" Height="32" Grid.Column="1" Grid.Row="19">
                     <TextBox Name="itbNowPlayingForegroundHex" TextChanged="TextBox_TextChanged" VerticalContentAlignment="Center" BorderThickness="2" MaxLength="9" Width="128" Margin="8,4,4,4"/>
                     <Rectangle Fill="{Binding Path=CustomTheme.NowPlayingForeground.Brush, UpdateSourceTrigger=PropertyChanged}" Width="24" Height="24" Margin="4" VerticalAlignment="Center" Stroke="Black" StrokeThickness="1"/>
+                </StackPanel>
+
+                <TextBlock Text="New Playlist Button on Hover" VerticalAlignment="Center" Grid.Row="20"/>
+                <StackPanel Orientation="Horizontal" Height="32" Grid.Column="1" Grid.Row="20">
+                    <TextBox Name="itbNewPlaylistHoverHex" TextChanged="TextBox_TextChanged" VerticalContentAlignment="Center" BorderThickness="2" MaxLength="9" Width="128" Margin="8,4,4,4"/>
+                    <Rectangle Fill="{Binding Path=CustomTheme.NewPlaylistHover.Brush, UpdateSourceTrigger=PropertyChanged}" Width="24" Height="24" Margin="4" VerticalAlignment="Center" Stroke="Black" StrokeThickness="1"/>
                 </StackPanel>
 
             </Grid>

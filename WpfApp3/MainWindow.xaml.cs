@@ -471,6 +471,8 @@ namespace WpfApp3
             if (_playlistsWindow == null || !_playlistsWindow.IsLoaded)
             {
                 _playlistsWindow = new PlaylistsWindow();
+                _playlistsWindow.Owner = this;
+                _playlistsWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 _playlistsWindow.Show();
             }
             else

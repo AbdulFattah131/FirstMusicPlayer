@@ -125,6 +125,11 @@ namespace MusicPlayer.Data.Objects
             get;
             set;
         }
+        public ThemeColor NewPlaylistHover
+        {
+            get;
+            set;
+        }
         public Theme ()
         {
             
