@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <CurrentThemeName>Apple Music™ </CurrentThemeName>
+  <CurrentThemeName>Lavender</CurrentThemeName>
   <LastWindowCoordinates>
     <X>-1348</X>
     <Y>57</Y>
@@ -9,5 +9,5 @@
     <X>1934</X>
     <Y>1094</Y>
   </LastWindowDimensions>
-  <LastKnownVolume>0.33331808</LastKnownVolume>
+  <LastKnownVolume>0</LastKnownVolume>
 </Settings>

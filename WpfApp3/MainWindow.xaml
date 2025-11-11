@@ -471,8 +471,7 @@
                     <!--#endregion-->
                    
                         <StackPanel x:Name="spPlaylists" Orientation="Vertical">
-                    <TextBlock x:Name="tbHeading3" Text="Playlists" Margin="0, 40, 0, 0" FontWeight="Bold" FontSize="15" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"></TextBlock>
-                    <Border x:Name="bdrSelect">
+                    <Border x:Name="bdrSelectPlaylist">
                         <Border.Effect>
                             <DropShadowEffect Color="#B0B8C0"
                               BlurRadius="2"
@@ -510,10 +509,10 @@
                                       Fill="{Binding CurrentTheme.WindowPrimaryAnchor.Brush}" HorizontalAlignment="Left"
                                       Data="M 0 0 L 8 8 L 16 0 Z">
                                                         <Path.RenderTransform>
-                                                            <RotateTransform Angle="180" CenterX="7.5" CenterY="3.5"/>
+                                                            <RotateTransform Angle="270" CenterX="7.5" CenterY="3.5"/>
                                                         </Path.RenderTransform>
                                                     </Path>
-                                                    <TextBlock x:Name="tbPlaylists" Text="Select Playlist" Margin="50, 0, 10, 0" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"/>
+                                                    <TextBlock x:Name="tbPlaylists" Text="Playlists" Margin="50, 0, 10, 0" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"/>
                                                 </Grid>
                                                 <ControlTemplate.Triggers>
                                                     
@@ -533,7 +532,7 @@
                                                         <Setter TargetName="pPlaylists" Property="Fill" Value="White"/>
                                                         <Setter TargetName="pPlaylists" Property="RenderTransform">
                                                             <Setter.Value>
-                                                                <RotateTransform Angle="+0" CenterX="7.5" CenterY="3.5"/>
+                                                                <RotateTransform Angle="-45" CenterX="12" CenterY="3.5"/>
                                                             </Setter.Value>
                                                         </Setter>
                                                         <Setter TargetName="tbPlaylists" Property="Foreground" Value="White"/>
@@ -549,7 +548,7 @@
                             </ToggleButton.Style>
                         </ToggleButton>
                     </Border>
-                    <Border x:Name="bdrPlaylists" Visibility="{Binding IsChecked, ElementName=btnSelectPlaylist, Converter={StaticResource BoolToVis}}" Height="334" CornerRadius="15" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}" Margin="0,25,0,0">
+                        <Border x:Name="bdrPlaylists" Visibility="{Binding IsChecked, ElementName=btnSelectPlaylist, Converter={StaticResource BoolToVis}}" Height="334" CornerRadius="15" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}" Margin="0,25,0,0">
                         <Border.Effect>
                             <DropShadowEffect Color="#B0B8C0"
   Direction="270"
@@ -2620,29 +2619,55 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
 
                         <Grid.RowDefinitions>
                             <RowDefinition Height="1*"></RowDefinition>
+                            <RowDefinition Height="25"></RowDefinition>
                             <RowDefinition Height="9*"></RowDefinition>
                         </Grid.RowDefinitions>
                         
                         <TextBlock x:Name="tbAlbums" Grid.Row="0" Text="Albums" FontSize="18" FontFamily="Bahnschrift" FontWeight="Black" 
                         Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}" HorizontalAlignment="Left"/>
 
+                            <Border CornerRadius="10,10,0,0" Margin="0,10,0,-20" Grid.Row="1">
+                                <Grid Margin="20,10,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                                        <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock Grid.ColumnSpan="1" x:Name="Title" Text="Title" HorizontalAlignment="Left" FontSize="13" FontWeight="Normal" FontStyle="Italic"></TextBlock>
+                                    <TextBlock Grid.Column="2" x:Name="Artist" Text="Artist" FontSize="13" FontWeight="Normal" FontStyle="Italic"></TextBlock>
+                                    <TextBlock Grid.Column="3" x:Name="Year" Text="Year" HorizontalAlignment="Center" Margin="-25,0,0,0" FontSize="13" FontWeight="Normal" FontStyle="Italic"></TextBlock>
+                                    <TextBlock Grid.Column="4" x:Name="Details" Text="Details" HorizontalAlignment="Center" Margin="126,0,0,0" FontSize="13" FontWeight="Normal" FontStyle="Italic"></TextBlock>
+                                    <TextBlock></TextBlock>
+
+                                </Grid>
+
+                            </Border>
                         <!-- AlbumsListBox -->
 
-                            <ListBox x:Name="lbAlbumsList" Height="300" Grid.Column="0" Grid.Row="1" Margin="0, 30, 0, 20" VerticalAlignment="Center" HorizontalAlignment="Stretch" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                            <ListBox x:Name="lbAlbumsList" Height="300" Grid.Column="0" Grid.Row="2" Margin="0, 20, 0, 20" VerticalAlignment="Center" HorizontalAlignment="Stretch" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                              Background="Transparent" BorderBrush="Black" ItemsSource="{Binding MusicPlayerCache.Albums}" SelectedItem="{Binding MusicPlayerCache.SelectedAlbum, Mode=TwoWay}">
 
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid Margin="0, 15">
+                                    <Grid x:Name="grdAlbumsList" Margin="0, 15">
+
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"></RowDefinition>
+                                                <RowDefinition Height="*"></RowDefinition>
+                                            </Grid.RowDefinitions>  
+                                        
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto"></ColumnDefinition>
                                             <ColumnDefinition Width="*"></ColumnDefinition>
                                             <ColumnDefinition Width="*"></ColumnDefinition>
                                             <ColumnDefinition Width="0.5*"></ColumnDefinition>
                                             <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
 
-                                            </Grid.ColumnDefinitions>
-
+                                        
                                         <Image Source="{Binding Image}" Margin="15, 0, 0, 0" Grid.Column="0" Width="35" RenderOptions.BitmapScalingMode="HighQuality"></Image>
                                        
                                         <StackPanel x:Name="AlbumTitle" Grid.Column="1" VerticalAlignment="Center" Orientation="Vertical" Margin="7, 0, 0, 0">
@@ -2703,9 +2728,9 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                     <ControlTemplate TargetType="ListBox">
                                         <Border Background="Transparent" CornerRadius="10">
                                             <ScrollViewer x:Name="ScrollViewer"
-              VerticalScrollBarVisibility="Visible"
-              HorizontalScrollBarVisibility="Disabled"
-              Focusable="False">
+                                              VerticalScrollBarVisibility="Visible"
+                                              HorizontalScrollBarVisibility="Disabled"
+                                              Focusable="False">
 
                                                 <ScrollViewer.Resources>
                                                     <Style TargetType="ScrollBar">
@@ -2752,17 +2777,17 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                                                     <!-- Hover behavior -->
                                                                     <ControlTemplate.Triggers>
 
-                                                                        <!-- 1️⃣ Hovering scrollbar itself -->
+                                                                        <!-- 1️ Hovering scrollbar itself -->
                                                                         <Trigger Property="IsMouseOver" Value="True">
                                                                             <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
                                                                         </Trigger>
 
-                                                                        <!-- 2️⃣ Hovering scrollbar track -->
+                                                                        <!-- 2️ Hovering scrollbar track -->
                                                                         <Trigger SourceName="PART_Track" Property="IsMouseOver" Value="True">
                                                                             <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
                                                                         </Trigger>
 
-                                                                        <!-- 3️⃣ Hovering the parent ListBox -->
+                                                                        <!-- 3️ Hovering the parent ListBox -->
                                                                         <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=ListBox}}" Value="True">
                                                                             <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
                                                                         </DataTrigger>
