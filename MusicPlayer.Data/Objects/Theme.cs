@@ -130,6 +130,11 @@ namespace MusicPlayer.Data.Objects
             get;
             set;
         }
+        public ThemeColor PlaylistsToggleSelected
+        {
+            get;
+            set;
+        }
         public Theme ()
         {
             

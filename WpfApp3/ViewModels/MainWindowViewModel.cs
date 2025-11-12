@@ -90,7 +90,9 @@ namespace WpfApp3
                 PlayPauseBackground = new ThemeColor(114, 91, 164), // Playback Controls : Play, Pause
                 GenresTextForeground = new ThemeColor(Brushes.Black), // Text for Genres
                 NowPlayingForeground = new ThemeColor(114, 91, 164), // Now Playing Icon
-                NewPlaylistHover = new ThemeColor(114, 91, 164), // NewPlaylist Button on Hover
+                NewPlaylistHover = new ThemeColor(102, 102, 102), // New Playlist Button on Hover
+                PlaylistsToggleSelected = new ThemeColor(140, 140, 140), // Playlists Button when Selected
+
 
             };
 
@@ -118,6 +120,8 @@ namespace WpfApp3
                 GenresTextForeground = new ThemeColor(Brushes.Black),
                 NowPlayingForeground = new ThemeColor(197, 178, 239),
                 NewPlaylistHover = new ThemeColor(114, 91, 164),
+                PlaylistsToggleSelected = new ThemeColor(114, 91, 164),
+
             };
 
             CurrentTheme = defaultTheme;

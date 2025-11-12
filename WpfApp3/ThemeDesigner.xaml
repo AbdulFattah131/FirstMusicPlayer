@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MusicPlayer.UIComponents"
         mc:Ignorable="d"
-        Title="ThemeDesigner" Height="800" Width="400">
+        Title="ThemeDesigner" Height="850" Width="400">
 
 
     <Grid Name="grdMain" Margin="8,8,0,0" Background="{Binding CurrentTheme.WindowAccent.Brush}">
@@ -52,7 +52,7 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
-
+                    <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
 
                 <TextBlock Text="Theme Name" VerticalAlignment="Center" Grid.Row="0"/>
@@ -180,8 +180,15 @@
                     <Rectangle Fill="{Binding Path=CustomTheme.NewPlaylistHover.Brush, UpdateSourceTrigger=PropertyChanged}" Width="24" Height="24" Margin="4" VerticalAlignment="Center" Stroke="Black" StrokeThickness="1"/>
                 </StackPanel>
 
+                <TextBlock Text="Playlists Toggle when Selected" VerticalAlignment="Center" Grid.Row="21"/>
+                <StackPanel Orientation="Horizontal" Height="32" Grid.Column="1" Grid.Row="21">
+                    <TextBox Name="itbPlaylistsToggleSelectedHex" TextChanged="TextBox_TextChanged" VerticalContentAlignment="Center" BorderThickness="2" MaxLength="9" Width="128" Margin="8,4,4,4"/>
+                    <Rectangle Fill="{Binding Path=CustomTheme.PlaylistsToggleSelected.Brush, UpdateSourceTrigger=PropertyChanged}" Width="24" Height="24" Margin="4" VerticalAlignment="Center" Stroke="Black" StrokeThickness="1"/>
+                </StackPanel>
+
             </Grid>
         </ScrollViewer>
+        
         <!-- Buttons -->
         <StackPanel Margin="0, 0, 15, 0" Grid.Row="3"
         Orientation="Horizontal"

@@ -143,6 +143,10 @@ namespace MusicPlayer.UIComponents
             {
                 m_vm.CustomTheme.NewPlaylistHover.Hex = stQueryText;
             }
+            if (itbQueryTextBox.Name == "itbPlaylistsToggleSelectedHex")
+            {
+                m_vm.CustomTheme.PlaylistsToggleSelected.Hex = stQueryText;
+            }
 
             itbQueryTextBox.BorderBrush = Brushes.Gray;
         }

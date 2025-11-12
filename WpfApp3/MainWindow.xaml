@@ -502,12 +502,12 @@
                                                              Background="{TemplateBinding Background}"
                                                              BorderBrush="{TemplateBinding BorderBrush}">
                                                         <ContentPresenter Margin="25, 0, 0, 0" HorizontalAlignment="Left"
-                                   VerticalAlignment="Center"
-                                   Content="{TemplateBinding Content}"/>
+                                                                          VerticalAlignment="Center"
+                                                                          Content="{TemplateBinding Content}"/>
                                                     </Border>
                                                     <Path x:Name="pPlaylists" Margin="25, 0, 10, 0" Width="15" Height="15" Stretch="Uniform"
-                                      Fill="{Binding CurrentTheme.WindowPrimaryAnchor.Brush}" HorizontalAlignment="Left"
-                                      Data="M 0 0 L 8 8 L 16 0 Z">
+                                                          Fill="{Binding CurrentTheme.WindowPrimaryAnchor.Brush}" HorizontalAlignment="Left"
+                                                          Data="M 0 0 L 8 8 L 16 0 Z">
                                                         <Path.RenderTransform>
                                                             <RotateTransform Angle="270" CenterX="7.5" CenterY="3.5"/>
                                                         </Path.RenderTransform>
@@ -522,13 +522,10 @@
                                                     </Trigger>
                                                     
                                                     <Trigger Property="IsPressed" Value="True">
-                                                        <Setter TargetName="border" Property="Background" Value="{Binding CurrentTheme.LeftToggleSelected.Brush}"/>
-                                                        <Setter TargetName="pPlaylists" Property="Fill" Value="White"/>
-                                                        <Setter TargetName="tbPlaylists" Property="Foreground" Value="White"/>
                                                     </Trigger>
                                                     
                                                     <Trigger Property="IsChecked" Value="True">
-                                                        <Setter TargetName="border" Property="Background" Value="{Binding CurrentTheme.LeftToggleSelected.Brush}"/>
+                                                        <Setter TargetName="border" Property="Background" Value="{Binding CurrentTheme.PlaylistsToggleSelected.Brush}"/>
                                                         <Setter TargetName="pPlaylists" Property="Fill" Value="White"/>
                                                         <Setter TargetName="pPlaylists" Property="RenderTransform">
                                                             <Setter.Value>
@@ -537,7 +534,6 @@
                                                         </Setter>
                                                         <Setter TargetName="tbPlaylists" Property="Foreground" Value="White"/>
                                                         <Setter TargetName="tbPlaylists" Property="Text" Value="Hide"/>
-
                                                     </Trigger>
                                                     
                                                 </ControlTemplate.Triggers>

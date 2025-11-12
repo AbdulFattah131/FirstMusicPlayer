@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <CurrentThemeName>Lavender</CurrentThemeName>
+  <CurrentThemeName>Lavender Dark</CurrentThemeName>
   <LastWindowCoordinates>
-    <X>-1348</X>
-    <Y>57</Y>
+    <X>-812</X>
+    <Y>20</Y>
   </LastWindowCoordinates>
   <LastWindowDimensions>
-    <X>1934</X>
-    <Y>1094</Y>
+    <X>800</X>
+    <Y>1014</Y>
   </LastWindowDimensions>
-  <LastKnownVolume>0</LastKnownVolume>
+  <LastKnownVolume>0.29166093</LastKnownVolume>
 </Settings>

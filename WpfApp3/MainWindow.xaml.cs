@@ -36,10 +36,11 @@ namespace WpfApp3
             InitializeFilters();
 
             InitializeSettings();
+            UpdateThemeSwitchVisibility();
+
             LoadPersistence();
 
             LoadThemes();
-            UpdateThemeSwitchVisibility();
 
             InitializeUIState();
         }
@@ -58,14 +59,7 @@ namespace WpfApp3
             else
                 m_vm.MusicPlayerCache.Player.SystemVolume = (float)m_vm.Settings.LastKnownVolume;
 
-            if (m_vm.CurrentTheme == m_vm.DefaultTheme || m_vm.CurrentTheme == m_vm.DefaultTheme2)
-            {
-                tbSwitchTheme.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                tbSwitchTheme.Visibility = Visibility.Hidden;
-            }
+            UpdateThemeSwitchVisibility();
         }
 
         private void InitializeFilters()
@@ -173,20 +167,33 @@ namespace WpfApp3
         }
 
         private void UpdateThemeSwitchVisibility()
-        { 
-            //Update Theme Switch Visibility
+        {
             var currentName = m_vm.CurrentTheme?.Name?.Trim();
+            var savedThemes = ThemeReader.Instance.GetThemes();
 
-            if (currentName == "Lavender" || currentName == "Lavender Dark")
+            bool isDefaultTheme =
+                string.Equals(currentName, "Lavender", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(currentName, "Lavender Dark", StringComparison.OrdinalIgnoreCase);
+
+            bool isCustom = !isDefaultTheme && savedThemes.Any(t =>
+                !string.IsNullOrEmpty(t.Name) &&
+                string.Equals(t.Name, currentName, StringComparison.OrdinalIgnoreCase));
+
+            if (isCustom)
+            {
+                tbSwitchTheme.Visibility = Visibility.Hidden;
+            }
+            else if (string.Equals(currentName, "Lavender Dark", StringComparison.OrdinalIgnoreCase))
             {
                 tbSwitchTheme.Visibility = Visibility.Visible;
                 tbSwitchTheme.IsEnabled = true;
+                tbSwitchTheme.IsHitTestVisible = true;
             }
-            else
+            else if (string.Equals(currentName, "Lavender", StringComparison.OrdinalIgnoreCase))
             {
-                var savedThemes = ThemeReader.Instance.GetThemes();
-                bool isCustom = savedThemes.Any(t => t.Name == currentName);
-                tbSwitchTheme.Visibility = isCustom ? Visibility.Hidden : Visibility.Visible;
+                tbSwitchTheme.Visibility = Visibility.Visible;
+                tbSwitchTheme.IsEnabled = false;
+                tbSwitchTheme.IsHitTestVisible = false;
             }
         }
 
