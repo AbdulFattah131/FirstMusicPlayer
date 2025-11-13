@@ -61,7 +61,14 @@ namespace WpfApp3
         public Theme DefaultTheme2
         {
             get => defaultTheme2;
-            set => DefaultTheme2 = value;
+            set
+            {
+                if (defaultTheme2 != value)
+                {
+                    defaultTheme2 = value;
+                    OnPropertyChanged(nameof(DefaultTheme2));
+                }
+            }
         }
 
         public MainWindowViewModel()
@@ -133,7 +140,6 @@ namespace WpfApp3
 
         public void SwitchTheme()
         {
-            
             if (CurrentTheme.Name == "Lavender")
             {
                 CurrentTheme = DefaultTheme2;
@@ -142,7 +148,6 @@ namespace WpfApp3
             {
                 CurrentTheme = DefaultTheme;
             }
-
         }
 
         public void SaveTheme(string path)

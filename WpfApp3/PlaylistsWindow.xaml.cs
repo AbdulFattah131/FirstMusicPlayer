@@ -37,6 +37,21 @@ namespace MusicPlayer.UIComponents
 
         }
 
+        private void borderWindowMove_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void borderWindowMove_MouseDown_1(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void bdrMinimize_MouseEnter(object sender, MouseEventArgs e)
+        {
+
+        }
+
         // Create new playlist
         //PlaylistsWindowViewModel
 

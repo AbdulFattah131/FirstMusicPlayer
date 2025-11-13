@@ -58,8 +58,16 @@ namespace WpfApp3
                 m_vm.MusicPlayerCache.Player.InitializeVolume();
             else
                 m_vm.MusicPlayerCache.Player.SystemVolume = (float)m_vm.Settings.LastKnownVolume;
+        }
 
-            UpdateThemeSwitchVisibility();
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            var theme = m_vm.CurrentTheme;
+            bool isDefault = theme?.Name is "Lavender" or "Lavender Dark";
+
+            tbSwitchTheme.Visibility = isDefault ? Visibility.Visible : Visibility.Hidden;
+            tbSwitchTheme.IsEnabled = isDefault;
+            tbSwitchTheme.IsChecked = theme?.Name == "Lavender Dark";
         }
 
         private void InitializeFilters()
@@ -168,33 +176,6 @@ namespace WpfApp3
 
         private void UpdateThemeSwitchVisibility()
         {
-            var currentName = m_vm.CurrentTheme?.Name?.Trim();
-            var savedThemes = ThemeReader.Instance.GetThemes();
-
-            bool isDefaultTheme =
-                string.Equals(currentName, "Lavender", StringComparison.OrdinalIgnoreCase) ||
-                string.Equals(currentName, "Lavender Dark", StringComparison.OrdinalIgnoreCase);
-
-            bool isCustom = !isDefaultTheme && savedThemes.Any(t =>
-                !string.IsNullOrEmpty(t.Name) &&
-                string.Equals(t.Name, currentName, StringComparison.OrdinalIgnoreCase));
-
-            if (isCustom)
-            {
-                tbSwitchTheme.Visibility = Visibility.Hidden;
-            }
-            else if (string.Equals(currentName, "Lavender Dark", StringComparison.OrdinalIgnoreCase))
-            {
-                tbSwitchTheme.Visibility = Visibility.Visible;
-                tbSwitchTheme.IsEnabled = true;
-                tbSwitchTheme.IsHitTestVisible = true;
-            }
-            else if (string.Equals(currentName, "Lavender", StringComparison.OrdinalIgnoreCase))
-            {
-                tbSwitchTheme.Visibility = Visibility.Visible;
-                tbSwitchTheme.IsEnabled = false;
-                tbSwitchTheme.IsHitTestVisible = false;
-            }
         }
 
         private void InitializeUIState()

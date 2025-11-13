@@ -180,9 +180,6 @@ namespace MusicPlayer.UIComponents
                 mainWindow.tbSwitchTheme.IsChecked = true;
             else
                 mainWindow.tbSwitchTheme.IsChecked = false;
-
-
-
         }
     }
 }
