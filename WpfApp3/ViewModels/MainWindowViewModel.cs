@@ -172,21 +172,6 @@ namespace WpfApp3
             }
         }
 
-        // UserControls
-
-        private UserControl _currentView;
-
-        public UserControl CurrentView 
-        {
-
-            get => _currentView;
-            set
-            {
-                _currentView = value;
-                OnPropertyChanged(nameof(CurrentView));
-            }
-        }
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(string propertyName)

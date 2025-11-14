@@ -5,166 +5,220 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:local="clr-namespace:MusicPlayer.UIComponents"
         mc:Ignorable="d"
-        Title="PlaylistsWindow" Height="500" Width="1000"
+        Title="PlaylistsWindow" Height="340" Width="1000"
         WindowStyle="None" ResizeMode="NoResize"
         Closed="Window_Closed"
-        AllowsTransparency="True" Background="Transparent">
+        AllowsTransparency="True" Background="Transparent"
+        >
 
-    <Grid Name="grdPlaylistsWindow" Background="Transparent">
-        
-        <Grid.RowDefinitions>
+
+    <!-- Background Border -->
+    <Border Grid.RowSpan="2" Grid.ColumnSpan="1"
+                             Background="LightGray"
+                             CornerRadius="20"
+                             Margin="25">
+        <Border.Effect>
+            <DropShadowEffect Color="#666666"
+                              Direction="315"
+                              ShadowDepth="8"
+                              Opacity="1"
+                              BlurRadius="0"/>
+        </Border.Effect>
+
+        <StackPanel>
+            <!-- Main Grid -->
             
-            <RowDefinition Height="32"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <Grid Name="grdPlaylistsWindow" Background="Transparent">
 
-        </Grid.RowDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="32"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <!-- Title bar -->
+            <Border Name="bdrTitleBar" Background="DarkGray" PreviewMouseLeftButtonDown="bdrTitleBar_PreviewMouseLeftButtonDown" Grid.Row="0" Grid.ColumnSpan="3" CornerRadius="15, 15, 0, 0">
 
+                <Grid x:Name="grdTitleBar">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="130"/>
+                    </Grid.ColumnDefinitions>
 
-        <!-- Background Border -->
-        <Border Grid.RowSpan="2" Grid.ColumnSpan="1"
- Background="Gray"
- CornerRadius="15"
- Margin="0">
-            <Border.Effect>
-                <DropShadowEffect Color="Black"
-      Direction="270"
-      ShadowDepth="10"
-      Opacity="1"
-      BlurRadius="0"/>
-            </Border.Effect>
-        </Border>
-        
-        <!-- Title Bar -->
-        <Border Name="bdrTitleBar" Background="{Binding CurrentTheme.TitleBarBackground.Brush}" PreviewMouseLeftButtonDown="bdrTitleBar_PreviewMouseLeftButtonDown" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" CornerRadius="10, 10, 0, 0">
+                    <TextBlock Name="tbWindowTitle" Text="New Playlist" 
+                               Foreground="Black" 
+                               VerticalAlignment="Center" HorizontalAlignment="Center"
+                               Grid.Row="0" Grid.Column="1"/>
 
-            <Grid x:Name="grdTitleBar">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="20"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="130"/>
-                </Grid.ColumnDefinitions>
+                    <!-- to drag window-->
+                    <Border Name="borderWindowMove" Grid.Row="0" Grid.Column="1" Background="Transparent" MouseDown="borderWindowMove_MouseDown"/>
 
-                <TextBlock Name="tbWindowTitle" Text="{Binding Path=WindowTitle}" 
-                   Foreground="{Binding Path=CurrentTheme.WindowTitleForeground.Brush}" 
-                   VerticalAlignment="Center" HorizontalAlignment="Center"
-                   Grid.Row="0" Grid.Column="1"/>
+                    <!-- Title bar buttons-->
+                    <StackPanel x:Name="spHeaderItems" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
 
-                <Border Name="borderWindowMove" Grid.Row="0" Grid.Column="1" Background="Transparent" MouseDown="borderWindowMove_MouseDown"/>
+                        <Grid x:Name="grdMinimize" Width="32" Height="32" HorizontalAlignment="Right">
+                                <Border x:Name="bdrMinimize"
+                                                CornerRadius="0"
+                                                Background="Transparent"
+                                                MouseEnter="bdrMinimize_MouseEnter"
+                                                MouseLeave="bdrMinimize_MouseLeave"
+                                                MouseLeftButtonUp="bdrMinimize_MouseLeftButtonUp">  
+                       <TextBlock Text="─"
+                       Foreground="White"
+                       FontSize="14"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+                            </Border>
+                        </Grid>
 
-                <StackPanel x:Name="spHeaderItems" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Grid x:Name="grdResize" Width="32" Height="32" HorizontalAlignment="Right">
+                            <Border x:Name="bdrResize"
+                CornerRadius="0,10,0,0" 
+            Background="Transparent"
+            MouseEnter="bdrResize_MouseEnter"
+            MouseLeave="bdrResize_MouseLeave"
+            MouseLeftButtonUp="bdrResize_MouseLeftButtonUp">
+                                <TextBlock x:Name="tbResize" Text="🗗"
+                       Foreground="White"
+                       FontSize="12"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+                            </Border>
+                        </Grid>
 
-                    <Grid x:Name="grdMinimize" Width="32" Height="32" HorizontalAlignment="Right">
-                        <Border x:Name="bdrMinimize"
-                                CornerRadius="0"
-                                Background="Transparent"
-                                MouseEnter="bdrMinimize_MouseEnter"
-                                MouseLeave="bdrMinimize_MouseLeave"
-                                MouseLeftButtonUp="bdrMinimize_MouseLeftButtonUp">
-                            <TextBlock Text="─"
-                               Foreground="White"
-                               FontSize="14"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"/>
-                        </Border>
-                    </Grid>
-
-                    <Grid x:Name="grdResize" Width="32" Height="32" HorizontalAlignment="Right">
-                        <Border x:Name="bdrResize"
-                        CornerRadius="0,10,0,0" 
-                    Background="Transparent"
-                    MouseEnter="bdrResize_MouseEnter"
-                    MouseLeave="bdrResize_MouseLeave"
-                    MouseLeftButtonUp="bdrResize_MouseLeftButtonUp">
-                            <TextBlock x:Name="tbResize" Text="🗗"
-                               Foreground="White"
-                               FontSize="12"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"/>
-                        </Border>
-                    </Grid>
-
-                    <Grid x:Name="grdClose" Width="32" Height="32"
-                  VerticalAlignment="Stretch"
-                  HorizontalAlignment="Right">
-                        <Border x:Name="bdrClose"
-                        CornerRadius="0,10,0,0"
-                        Background="Transparent"
-                        MouseEnter="bdrClose_MouseEnter"
-                        MouseLeave="bdrClose_MouseLeave"
-                        MouseLeftButtonUp="bdrClose_MouseLeftButtonUp">
-                            <TextBlock x:Name="tbClose" Text="✕"
-                               Foreground="White"
-                               FontSize="12"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"/>
-                        </Border>
-                    </Grid>
-                </StackPanel>
-            </Grid>
-        </Border>
-
-
-
-
-        <!-- Main Content -->
-        <Grid Grid.Row="1" Margin="15,10,15,15">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="2*"/>
-            </Grid.ColumnDefinitions>
-            <!-- Left: Playlist List -->
-            <Border Grid.Column="0"
-                    CornerRadius="12"
-                    Background="{Binding CurrentTheme.PlayerControlBackground.Brush}"
-                    Margin="0,0,10,0"
-                    Padding="10">
-                <StackPanel>
-                    <TextBlock Text="Your Playlists"
-                               FontSize="14"
-                               FontWeight="Bold"
-                               Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"
-                               Margin="0,0,0,10"/>
-                    <!-- Placeholder playlist items -->
-                    <ItemsControl ItemsSource="{Binding Playlists}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Border Background="{Binding DataContext.CurrentTheme.LeftToggleHover.Brush, RelativeSource={RelativeSource AncestorType=Window}}"
-                                        CornerRadius="8"
-                                        Margin="0,5,0,0"
-                                        Padding="8">
-                                    <TextBlock Text="{Binding Name}"
-                                               Foreground="{Binding DataContext.CurrentTheme.WindowTextForeground.Brush, RelativeSource={RelativeSource AncestorType=Window}}"
-                                               FontSize="13"/>
-                                </Border>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </StackPanel>
-            </Border>
-            <!-- Right: Playlist Detail Preview -->
-            <Border Grid.Column="1"
-                    CornerRadius="12"
-                    Background="{Binding CurrentTheme.PlayerControlBackground.Brush}"
-                    Padding="20">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <TextBlock Text="{Binding SelectedPlaylist.Name}"
-                               FontSize="16"
-                               FontWeight="Bold"
-                               Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"/>
-                    <TextBlock Grid.Row="1"
-                               Text="Select a playlist to view details"
-                               FontSize="13"
-                               Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"
-                               Margin="0,10,0,0"/>
+                        <Grid x:Name="grdClose" Width="32" Height="32"
+          VerticalAlignment="Stretch"
+          HorizontalAlignment="Right">
+                            <Border x:Name="bdrClose"
+                CornerRadius="0,10,0,0"
+                Background="Transparent"
+                MouseEnter="bdrClose_MouseEnter"
+                MouseLeave="bdrClose_MouseLeave"
+                MouseLeftButtonUp="bdrClose_MouseLeftButtonUp">
+                                <TextBlock x:Name="tbClose" Text="✕"
+                       Foreground="White"
+                       FontSize="12"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+                            </Border>
+                        </Grid>
+                    </StackPanel>
                 </Grid>
             </Border>
+
+                <!-- Content -->
+            <Grid Grid.Row="1" Margin="15,10,15,15">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="7*"/>
+                     </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="8*"/>
+                        <RowDefinition Height="2*"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Column="0" Grid.Row="0"
+                CornerRadius="12"
+                Background="LightCyan"
+                Margin="0,0,10,0"
+                Padding="10">
+                        <StackPanel>
+                            <TextBlock Text="Your Playlists"
+                           FontSize="14"
+                           FontWeight="Bold"
+                           Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"
+                           Margin="0,0,0,10"/>
+                            <ItemsControl ItemsSource="{Binding Playlists}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Background="{Binding DataContext.CurrentTheme.LeftToggleHover.Brush, RelativeSource={RelativeSource AncestorType=Window}}"
+                                    CornerRadius="8"
+                                    Margin="0,5,0,0"
+                                    Padding="8">
+                                            <TextBlock Text="{Binding Name}"
+                                           Foreground="{Binding DataContext.CurrentTheme.WindowTextForeground.Brush, RelativeSource={RelativeSource AncestorType=Window}}"
+                                           FontSize="13"/>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Column="1" Grid.Row="0"
+                CornerRadius="12"
+                Background="LightCoral"
+                Padding="20">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="{Binding SelectedPlaylist.Name}"
+                           FontSize="16"
+                           FontWeight="Bold"
+                           Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"/>
+                            <TextBlock Grid.Row="1"
+                           Text="Select a playlist to view details"
+                           FontSize="13"
+                           Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"
+                           Margin="0,10,0,0"/>
+                        </Grid>
+                    </Border>
+
+                    <Border Grid.Row="1" Grid.Column="0"
+                            CornerRadius="12"
+                            Background="LightCyan"
+                            Margin="0,0,10,0"
+                            Padding="10">
+                        <StackPanel>
+                            <TextBlock Text="Your Playlists"
+                                       FontSize="14"
+                                       FontWeight="Bold"
+                                       Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"
+                                       Margin="0,0,0,10"/>
+                            <ItemsControl ItemsSource="{Binding Playlists}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Background="{Binding DataContext.CurrentTheme.LeftToggleHover.Brush, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                CornerRadius="8"
+                                                Margin="0,5,0,0"
+                                                Padding="8">
+                                            <TextBlock Text="{Binding Name}"
+                                                       Foreground="{Binding DataContext.CurrentTheme.WindowTextForeground.Brush, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                       FontSize="13"/>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Row="1" Grid.Column="2"
+                        CornerRadius="12"
+                        Background="LightCoral"
+                        Padding="20">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="{Binding SelectedPlaylist.Name}"
+                                       FontSize="16"
+                                       FontWeight="Bold"
+                                       Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"/>
+                            <TextBlock Grid.Row="1"
+                                       Text="Select a playlist to view details"
+                                       FontSize="13"
+                                       Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"
+                                       Margin="0,10,0,0"/>
+                        </Grid>
+                    </Border>
+
+                </Grid>
+            
         </Grid>
-        
-    </Grid>
-    
+        </StackPanel>
+    </Border>
 </Window>

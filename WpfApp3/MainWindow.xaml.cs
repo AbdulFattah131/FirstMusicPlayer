@@ -36,7 +36,6 @@ namespace WpfApp3
             InitializeFilters();
 
             InitializeSettings();
-            UpdateThemeSwitchVisibility();
 
             LoadPersistence();
 
@@ -174,21 +173,13 @@ namespace WpfApp3
             }
         }
 
-        private void UpdateThemeSwitchVisibility()
-        {
-        }
-
         private void InitializeUIState()
         { 
             //Initialize UI State
             btnToggleAlbums.IsChecked = true;
         }
 
-        private void borderWindowMove_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ButtonState == e.LeftButton)
-                this.DragMove();
-        }
+        #region Title Bar
 
         #region Settings Button (opens up themedesigner)
         private void bdrSettings_MouseEnter(object sender, MouseEventArgs e)
@@ -293,18 +284,47 @@ namespace WpfApp3
 
         #endregion
 
+        #region Double Click
+        private void bdrTitleBar_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount == 2)
+            {
+                if (this.WindowState == WindowState.Normal)
+                    this.WindowState = WindowState.Maximized;
+                else if (this.WindowState == WindowState.Maximized)
+                    this.WindowState = WindowState.Normal;
+            }
+        }
+        #endregion
+
+        #region Move Window (through title bar)
+        private void borderWindowMove_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ButtonState == e.LeftButton)
+                this.DragMove();
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Switch Button
         private void SwitchButton_Click(object sender, RoutedEventArgs e)
         {
             var m_vm = (MainWindowViewModel)this.DataContext;
             m_vm.SwitchTheme();
         }
-        
+        private void UpdateThemeSwitchVisibility()
+        {
+        }
+
+        #endregion
+
+        #region Playback Controls
         private void tbPlayPause_Click(object sender, RoutedEventArgs e)
         {
             m_vm.MusicPlayerCache.PlayPause();
         }
-
-        #region Playback Controls
         private void tbRepeat_Click(object sender, RoutedEventArgs e)
         {
            m_vm.MusicPlayerCache.Repeat();
@@ -369,16 +389,6 @@ namespace WpfApp3
 
         #endregion
 
-        private void bdrTitleBar_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ClickCount == 2)
-            {
-                if (this.WindowState == WindowState.Normal)
-                    this.WindowState = WindowState.Maximized;
-                else if (this.WindowState == WindowState.Maximized)
-                    this.WindowState = WindowState.Normal;
-            }
-        }
         private new void PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
             var scrollViewer = sender as ScrollViewer;
@@ -453,6 +463,8 @@ namespace WpfApp3
 
         #endregion
 
+        #region New Playlist Button
+        
         private PlaylistsWindow _playlistsWindow;
         private void NewPlaylist_Click(object sender, RoutedEventArgs e)
         {
@@ -468,6 +480,8 @@ namespace WpfApp3
                 _playlistsWindow.Activate();
             }
         }
+        #endregion
+
     }
 }
 

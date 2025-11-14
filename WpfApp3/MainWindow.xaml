@@ -1236,7 +1236,6 @@ Background="Transparent" BorderThickness="0" ScrollViewer.VerticalScrollBarVisib
                     </Style>
                 </ScrollViewer.Style>
             </ScrollViewer>
-            
 
             <!-- Column 1 Center Main Bar -->
 
@@ -3258,13 +3257,13 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
         <Border x:Name="bdrPlaybackPanel" Grid.Row="2" Grid.ColumnSpan="3" VerticalAlignment="Bottom">
             <Border.Effect>
                 <DropShadowEffect Color="Black"
-                 Direction="270"
-                 ShadowDepth="5"
-                 Opacity="0.18"
-                 BlurRadius="8"/>
+                                  Direction="270"
+                                  ShadowDepth="5"
+                                  Opacity="0.18"
+                                  BlurRadius="8"/>
             </Border.Effect>
 
-        <!-- Row 2 MusicControl -->
+            <!-- Row 2 MusicControl -->
 
         <Grid x:Name="grdMusicControl">
             <Grid.ColumnDefinitions>

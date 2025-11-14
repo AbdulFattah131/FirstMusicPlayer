@@ -39,10 +39,21 @@ namespace MusicPlayer.UIComponents
 
         private void borderWindowMove_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            if (e.ButtonState == e.LeftButton)
+                this.DragMove();
+        }
+
+        private void bdrClose_MouseEnter(object sender, MouseEventArgs e)
+        {
 
         }
 
-        private void borderWindowMove_MouseDown_1(object sender, MouseButtonEventArgs e)
+        private void bdrClose_MouseLeave(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void bdrClose_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
 
         }
@@ -52,18 +63,34 @@ namespace MusicPlayer.UIComponents
 
         }
 
-        // Create new playlist
-        //PlaylistsWindowViewModel
+        private void bdrMinimize_MouseLeave(object sender, MouseEventArgs e)
+        {
 
-        //// Add songs
-        //PlaylistViewModel.Instance.AddSongToCurrentPlaylist(selectedSong);
+        }
 
-        //// Save
-        //PlaylistViewModel.Instance.SaveCurrentPlaylist();
+        private void bdrMinimize_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
 
-        //// Play existing one
-        //var playlist = PlaylistViewModel.Instance.LoadedPlaylists.FirstOrDefault(p => p.Name == "My Chill Mix");
-        //PlaylistViewModel.Instance.PlayPlaylist(playlist);
+        }
 
+        private void bdrResize_MouseEnter(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void bdrResize_MouseLeave(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void bdrResize_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void bdrTitleBar_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }
