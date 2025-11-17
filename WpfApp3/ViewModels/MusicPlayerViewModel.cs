@@ -173,7 +173,6 @@ namespace WpfApp3
 
         // Playback Control Buttons
 
-        private string _loadedFilePath;
         public void PlayFromPlaylist()
         {
             if (PlaybackQueue == null || PlaybackQueue.Count == 0)
@@ -181,6 +180,8 @@ namespace WpfApp3
             CurrentIndex = 0;
             CurrentSong = PlaybackQueue[CurrentIndex];
         }
+
+        private string _loadedFilePath;
         public void PlayPause()
         {
             if (CurrentSong == null && PlaybackQueue == null || PlaybackQueue.Count == 0 && CurrentIndex < 0 || CurrentIndex >= PlaybackQueue.Count)
