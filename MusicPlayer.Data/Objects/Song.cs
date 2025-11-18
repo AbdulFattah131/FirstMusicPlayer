@@ -21,7 +21,7 @@ namespace MusicPlayer.Data.Objects
         public BitmapImage Image => Album?.Image;
         public int Length { get; set; }
         public int PlayCount { get; set; }
-        public int Index { get; set; }  // for the app
+        public int Index { get; set; } 
         public string Lyrics { get; set; } = string.Empty;
     }
 }

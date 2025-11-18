@@ -288,13 +288,13 @@ namespace WpfApp3
 
         public MusicPlayerCache()
         {
-            var songFilePaths = FileScanner.Instance.ScanSongs(); // song file paths
+            var songFilePaths = FileScanner.Instance.ScanSongs();             // song file paths
 
             AllSongs = TagReader.Instance.ReadSongsFromFilePaths(songFilePaths); // song objects
 
-            Albums = new ObservableCollection<Album>(TagReader.Instance.GetAlbums()); // albums
+            Albums = new ObservableCollection<Album>(TagReader.Instance.GetAlbums());  // albums
 
-            PlaybackQueue = new ObservableCollection<Song>();
+            PlaybackQueue = new ObservableCollection<Song>();                  // playback queue
 
             #region Timer
             _timer = new DispatcherTimer

@@ -33,8 +33,6 @@ namespace WpfApp3
 
             InitializeViewModel();
 
-            InitializeFilters();
-
             InitializeSettings();
 
             LoadPersistence();
@@ -67,84 +65,6 @@ namespace WpfApp3
             tbSwitchTheme.Visibility = isDefault ? Visibility.Visible : Visibility.Hidden;
             tbSwitchTheme.IsEnabled = isDefault;
             tbSwitchTheme.IsChecked = theme?.Name == "Lavender Dark";
-        }
-
-        private void InitializeFilters()
-        {
-            //Initialize Filters
-            #region Filters for Views
-
-            // Your Library 
-
-            ((CollectionViewSource)FindResource("PopTagAlbums")).Filter += (s, e) =>
-            {
-                var album = (Album)e.Item;
-                e.Accepted = album.Artist == "Michael Jackson" || album.Artist == "Tones and I";
-            };
-
-            ((CollectionViewSource)FindResource("FunkTagAlbums")).Filter += (s, e) =>
-            {
-                var album = (Album)e.Item;
-                e.Accepted = album.Artist == "Calvin Harris" || album.Artist == "Mark Ronson";
-            };
-
-            ((CollectionViewSource)FindResource("RockTagAlbums")).Filter += (s, e) =>
-            {
-                var album = (Album)e.Item;
-                e.Accepted = album.Artist == "AC, DC" || album.Artist == "Pink Floyd" || album.Artist == "Led Zeppelin";
-            };
-
-            ((CollectionViewSource)FindResource("RnB/SoulTagAlbums")).Filter += (s, e) =>
-            {
-                var album = (Album)e.Item;
-                e.Accepted = album.Artist == "Adele";
-            };
-
-            // Explore
-
-            ((CollectionViewSource)FindResource("ContemporarySoulAlbums")).Filter += (s, e) =>
-            {
-                var album = (Album)e.Item;
-                e.Accepted = album.Artist == "Adele";
-            };
-
-            ((CollectionViewSource)FindResource("ModernFunkHitsAlbums")).Filter += (s, e) =>
-            {
-                var album = (Album)e.Item;
-                e.Accepted = album.Artist == "Mark Ronson" || album.Artist == "Calvin Harris";
-            };
-
-            ((CollectionViewSource)FindResource("HeavyRockAlbums")).Filter += (s, e) =>
-            {
-                var album = (Album)e.Item;
-                e.Accepted = album.Artist == "AC, DC";
-            };
-
-            ((CollectionViewSource)FindResource("Proto-MetalClassicsAlbums")).Filter += (s, e) =>
-            {
-                var album = (Album)e.Item;
-                e.Accepted = album.Artist == "Pink Floyd";
-            };
-
-            ((CollectionViewSource)FindResource("ProgressiveRockClassicsAlbums")).Filter += (s, e) =>
-            {
-                var album = (Album)e.Item;
-                e.Accepted = album.Artist == "Led Zeppelin";
-            };
-
-            ((CollectionViewSource)FindResource("ModernAlternative/IndieAlbums")).Filter += (s, e) =>
-            {
-                var album = (Album)e.Item;
-                e.Accepted = album.Artist == "Tones and I";
-            };
-
-            ((CollectionViewSource)FindResource("Pop-CultureClassicsAlbums")).Filter += (s, e) =>
-            {
-                var album = (Album)e.Item;
-                e.Accepted = album.Artist == "Michael Jackson";
-            };
-
-            #endregion
         }
 
         private void InitializeViewModel()
@@ -399,30 +319,6 @@ namespace WpfApp3
             e.Handled = true;
         }
 
-        #region the problematic stuff
-        private void LibraryList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (sender is not ListBox sourceListBox)
-                return;
-
-            if (sourceListBox.SelectedItem is Album album)
-            {
-                m_vm.MusicPlayerCache.SelectedAlbum = album;
-
-                var allListBoxes = new[] { lbGenreList1, lbGenreList2, lbGenreList3, lbGenreList4 };
-                foreach (var lb in allListBoxes)
-                {
-                    if (lb != sourceListBox && lb.SelectedItem != null)
-                    {
-                        lb.SelectedItem = null;
-                    }
-                }
-
-                var lbi = (ListBoxItem)sourceListBox.ItemContainerGenerator.ContainerFromItem(album);
-                if (lbi != null)
-                    lbi.IsSelected = true;
-            }
-        }
         private void ToggleButton_Checked(object sender, RoutedEventArgs e)
         {
             var clickedToggle = sender as ToggleButton;
@@ -460,11 +356,8 @@ namespace WpfApp3
                 btn.IsChecked = true;
             }
         }
-
-        #endregion
-
         #region New Playlist Button
-        
+
         private PlaylistsWindow _playlistsWindow;
         private void NewPlaylist_Click(object sender, RoutedEventArgs e)
         {
@@ -480,8 +373,118 @@ namespace WpfApp3
                 _playlistsWindow.Activate();
             }
         }
+
         #endregion
 
+        #region unused code
+        //private void LibraryList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    if (sender is not ListBox sourceListBox)
+        //        return;
+
+        //    if (sourceListBox.SelectedItem is Album album)
+        //    {
+        //        m_vm.MusicPlayerCache.SelectedAlbum = album;
+
+        //        var allListBoxes = new[] { lbGenreList1, lbGenreList2, lbGenreList3, lbGenreList4 };
+        //        foreach (var lb in allListBoxes)
+        //        {
+        //            if (lb != sourceListBox && lb.SelectedItem != null)
+        //            {
+        //                lb.SelectedItem = null;
+        //            }
+        //        }
+
+        //        var lbi = (ListBoxItem)sourceListBox.ItemContainerGenerator.ContainerFromItem(album);
+        //        if (lbi != null)
+        //            lbi.IsSelected = true;
+        //    }
+        //}
+
+
+        #endregion
+
+        #region unused code
+        //#region Filters for Views
+
+        //// Your Library 
+
+        //((CollectionViewSource)FindResource("PopTagAlbums")).Filter += (s, e) =>
+        //{
+        //    var album = (Album)e.Item;
+        //    e.Accepted = album.Artist == "Michael Jackson" || album.Artist == "Tones and I";
+        //};
+
+        //((CollectionViewSource)FindResource("FunkTagAlbums")).Filter += (s, e) =>
+        //{
+        //    var album = (Album)e.Item;
+        //    e.Accepted = album.Artist == "Calvin Harris" || album.Artist == "Mark Ronson";
+        //};
+
+        //((CollectionViewSource)FindResource("RockTagAlbums")).Filter += (s, e) =>
+        //{
+        //    var album = (Album)e.Item;
+        //    e.Accepted = album.Artist == "AC, DC" || album.Artist == "Pink Floyd" || album.Artist == "Led Zeppelin";
+        //};
+
+        //((CollectionViewSource)FindResource("RnB/SoulTagAlbums")).Filter += (s, e) =>
+        //{
+        //    var album = (Album)e.Item;
+        //    e.Accepted = album.Artist == "Adele";
+        //};
+
+        //// Explore
+
+        //((CollectionViewSource)FindResource("ContemporarySoulAlbums")).Filter += (s, e) =>
+        //{
+        //    var album = (Album)e.Item;
+        //    e.Accepted = album.Artist == "Adele";
+        //};
+
+        //((CollectionViewSource)FindResource("ModernFunkHitsAlbums")).Filter += (s, e) =>
+        //{
+        //    var album = (Album)e.Item;
+        //    e.Accepted = album.Artist == "Mark Ronson" || album.Artist == "Calvin Harris";
+        //};
+
+        //((CollectionViewSource)FindResource("HeavyRockAlbums")).Filter += (s, e) =>
+        //{
+        //    var album = (Album)e.Item;
+        //    e.Accepted = album.Artist == "AC, DC";
+        //};
+
+        //((CollectionViewSource)FindResource("Proto-MetalClassicsAlbums")).Filter += (s, e) =>
+        //{
+        //    var album = (Album)e.Item;
+        //    e.Accepted = album.Artist == "Pink Floyd";
+        //};
+
+        //((CollectionViewSource)FindResource("ProgressiveRockClassicsAlbums")).Filter += (s, e) =>
+        //{
+        //    var album = (Album)e.Item;
+        //    e.Accepted = album.Artist == "Led Zeppelin";
+        //};
+
+        //((CollectionViewSource)FindResource("ModernAlternative/IndieAlbums")).Filter += (s, e) =>
+        //{
+        //    var album = (Album)e.Item;
+        //    e.Accepted = album.Artist == "Tones and I";
+        //};
+
+        //((CollectionViewSource)FindResource("Pop-CultureClassicsAlbums")).Filter += (s, e) =>
+        //{
+        //    var album = (Album)e.Item;
+        //    e.Accepted = album.Artist == "Michael Jackson";
+        //};
+
+        //#endregion
+        #endregion
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            (sender as ListBox)?.ScrollIntoView((sender as ListBox)?.SelectedItem);
+
+        }
     }
 }
 

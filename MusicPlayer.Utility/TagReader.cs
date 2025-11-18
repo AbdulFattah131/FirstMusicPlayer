@@ -37,9 +37,7 @@ namespace MusicPlayer.Utility
                     };
 
                     foreach (string genre in file.Tag.Genres)
-                    {
                         album.Genres.Add(genre);
-                    }
 
                     m_dictAlbums.Add(file.Tag.Album, album);
                 }

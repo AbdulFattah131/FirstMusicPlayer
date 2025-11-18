@@ -21,21 +21,21 @@
         <convertor:IndexConvertor x:Key="IndexConvertor"/>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
 
-        <!-- #region Filtered Albums -->
-        <!-- Your Library View -->
+        <!-- #region Filtered Albums (unused) -->
+        <!-- Your Library View --><!--
         <CollectionViewSource x:Key="PopTagAlbums" Source="{Binding MusicPlayerCache.Albums}"/>
         <CollectionViewSource x:Key="FunkTagAlbums" Source="{Binding MusicPlayerCache.Albums}"/>
         <CollectionViewSource x:Key="RockTagAlbums" Source="{Binding MusicPlayerCache.Albums}"/>
         <CollectionViewSource x:Key="RnB/SoulTagAlbums" Source="{Binding MusicPlayerCache.Albums}"/>
 
-        <!-- Explore View -->
+        --><!-- Explore View --><!--
         <CollectionViewSource x:Key="ContemporarySoulAlbums" Source="{Binding MusicPlayerCache.Albums}"/>
         <CollectionViewSource x:Key="ModernFunkHitsAlbums" Source="{Binding MusicPlayerCache.Albums}"/>
         <CollectionViewSource x:Key="HeavyRockAlbums" Source="{Binding MusicPlayerCache.Albums}"/>
         <CollectionViewSource x:Key="Proto-MetalClassicsAlbums" Source="{Binding MusicPlayerCache.Albums}"/>
         <CollectionViewSource x:Key="ProgressiveRockClassicsAlbums" Source="{Binding MusicPlayerCache.Albums}"/>
         <CollectionViewSource x:Key="ModernAlternative/IndieAlbums" Source="{Binding MusicPlayerCache.Albums}"/>
-        <CollectionViewSource x:Key="Pop-CultureClassicsAlbums" Source="{Binding MusicPlayerCache.Albums}"/>
+        <CollectionViewSource x:Key="Pop-CultureClassicsAlbums" Source="{Binding MusicPlayerCache.Albums}"/>-->
         <!-- #endregion -->
         
     </Window.Resources>
@@ -57,7 +57,7 @@
                 Background="{Binding CurrentTheme.WindowContentBackground.Brush}" 
                 CornerRadius="15"/>
 
-        <!-- Row 1 Grid -->
+        <!-- Row 1 Main View -->
         
         <Grid Name="grdMainView" Grid.Row="1" Margin="10, 0, 10, 0">
             <Grid.ColumnDefinitions>
@@ -72,20 +72,28 @@
 
             <!-- Column 0 Left Side Panel -->
             
-            <DockPanel Name="dpLeftPanel" LastChildFill="True" Grid.Column="0" Grid.Row="1" Margin="20, 30, 15, 15">
+            <DockPanel Name="dpLeftPanel" LastChildFill="True" Grid.Column="0" Grid.Row="1" Margin="20, 25, 15, 15">
                 
                 <StackPanel x:Name="ToggleGroup" DockPanel.Dock="Top">
 
+                    <!-- Current Theme Name -->
+                    <StackPanel Orientation="Horizontal" Margin="0, 0, 0, 5" VerticalAlignment="Center" HorizontalAlignment="Left">
+                        <TextBlock Text="{Binding CurrentTheme.Name}" FontFamily="Bahnschrift" FontWeight="Bold" FontSize="10.1" Foreground="{Binding CurrentTheme.WindowPrimaryAnchor.Brush}"></TextBlock>
+                    </StackPanel>
+
+                    <!-- LOGO -->
                     <StackPanel x:Name="spLogo" Orientation="Horizontal">
                         <Path Data="M72 12 A24 24 0 0 0 48 36 V84 A24 24 0 0 0 72 108 H136 A48 48 0 0 0 136 12 H72 Z" Fill="{Binding CurrentTheme.WindowHeadingForeground.Brush}"  Margin="0, 0, -3, 0" Width="25" Height="25" Stretch="Uniform" VerticalAlignment="Center"/>
                         <TextBlock Text="sc" FontStyle="Normal" FontFamily="Lucida Handwriting" FontSize="13" Margin="-18, 4, 0, 5" Foreground="{Binding CurrentTheme.WindowPrimary.Brush}"></TextBlock>
                         <Path Data="M60 20 Q150 150, 60 280 H120 Q210 150, 120 20 Z" Fill="{Binding CurrentTheme.WindowHeadingForeground.Brush}"  Margin="0, 0, -8, 0" Width="15" Height="15" Stretch="Uniform" VerticalAlignment="Center"/>
                         <Path Data="M50 20 Q130 150, 50 280 H70 Q150 150, 70 20 Z" Fill="{Binding CurrentTheme.WindowHeadingForeground.Brush}"  Margin="0, 0, 0, 0" Width="15" Height="14.8" Stretch="Uniform" VerticalAlignment="Center"/>
 
-                        <TextBlock Text="Spices &amp; Co" FontSize="18" FontFamily="Bahnschrift" FontWeight="Bold" Margin="1,0,0,0" VerticalAlignment="Center" Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}"></TextBlock>
+                        <TextBlock Text="Spices &amp; Co" FontSize="18.4" FontFamily="Bahnschrift" FontWeight="Bold" Margin="1,0,0,0" VerticalAlignment="Center" Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}"></TextBlock>
                     </StackPanel>
 
-                    <TextBlock x:Name="tbHeading1" Text="Curation" Margin="0, 35, 0, 0" FontWeight="Bold" FontSize="15" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"></TextBlock>
+                    <!--#region unused views-->
+                    
+                    <!--<TextBlock x:Name="tbHeading1" Text="Curation" Margin="0, 35, 0, 0" FontWeight="Bold" FontSize="15" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"></TextBlock>
 
                     <Border x:Name="bdrYourLibrary"> 
                         <Border.Effect>
@@ -218,7 +226,9 @@
                                 </Style>
                             </ToggleButton.Style>
                         </ToggleButton>
-                    </Border>
+                    </Border>-->
+                    
+                    <!--#endregion-->
 
                     <TextBlock x:Name="tbHeading2" Text="My Music" Margin="0, 40, 0, 0" FontWeight="Bold" FontSize="15" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"></TextBlock>
 
@@ -235,6 +245,7 @@
                            Checked="ToggleButton_Checked"
                            Margin="0,25,0,0"
                            FontSize="14"
+                           FontWeight="Normal"
                            BorderBrush="Transparent">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
                                 
@@ -348,129 +359,6 @@
                         </ToggleButton>
                     </Border>
 
-                    <!--#region -->
-                    <!--<StackPanel Width="180" Margin="0,30,0,0">
-
-                        --><!-- Accordion Toggle Button --><!--
-                        <ToggleButton x:Name="btnAccordion"
-                                      Height="35"
-                                      FontSize="14"
-                                      BorderBrush="Transparent"
-                                      Background="Transparent">
-                            <ToggleButton.Style>
-                                <Style TargetType="ToggleButton">
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="ToggleButton">
-                                                <Border x:Name="border"
-                                    CornerRadius="10"
-                                    Background="{TemplateBinding Background}"
-                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                    >
-                                                    
-                                                        <Path x:Name="arrow"
-                                                              Width="13"
-                                                              Height="13"
-                                                              Stretch="Uniform"
-                                                              VerticalAlignment="Center"
-                                                              HorizontalAlignment="Left"
-                                                              Margin="25, 0, 10, 0"
-                                                              Fill="{Binding CurrentTheme.WindowPrimaryAnchor.Brush}"
-                                                              Data="M 0 0 L 8 8 L 16 0 Z">
-                                                            <Path.RenderTransform>
-                                                                <RotateTransform Angle="0" CenterX="8" CenterY="4"/>
-                                                            </Path.RenderTransform>
-                                                        </Path>
-                                                </Border>
-
-                                                <ControlTemplate.Triggers>
-                                                    --><!-- Hover --><!--
-                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter TargetName="border" Property="Background"
-                                            Value="{Binding CurrentTheme.LeftToggleHover.Brush}"/>
-                                                    </Trigger>
-
-                                                    --><!-- Pressed or Checked --><!--
-                                                    <Trigger Property="IsChecked" Value="True">
-                                                        <Setter TargetName="border" Property="Background"
-                                            Value="{Binding CurrentTheme.LeftToggleSelected.Brush}"/>
-                                                        <Setter TargetName="arrow" Property="RenderTransform">
-                                                            <Setter.Value>
-                                                                <RotateTransform Angle="180" CenterX="8" CenterY="4"/>
-                                                            </Setter.Value>
-                                                        </Setter>
-                                                        <Setter TargetName="arrow" Property="Fill" Value="White"/>
-                                                    </Trigger>
-                                                </ControlTemplate.Triggers>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </ToggleButton.Style>
-                        </ToggleButton>
-
-                        --><!-- Collapsible content --><!--
-                        <StackPanel x:Name="spAccordionContent"
-                Margin="0,10,0,0"
-                Visibility="Collapsed">
-
-                            <TextBlock x:Name="tbHeading3"
-                   Text="Playlists"
-                   FontWeight="Bold"
-                   FontSize="15"
-                   Margin="0,0,0,5"
-                   Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"/>
-
-                            <Border x:Name="bdrSelect">
-                                <Border.Effect>
-                                    <DropShadowEffect Color="#B0B8C0"
-                                  BlurRadius="2"
-                                  ShadowDepth="2"
-                                  Opacity="0.2"/>
-                                </Border.Effect>
-
-                                <ToggleButton x:Name="btnSelectPlaylist"
-                          Height="40"
-                          FontSize="14"
-                          BorderBrush="Transparent"
-                          Background="{Binding CurrentTheme.PlayerControlBackground.Brush}">
-                                    <TextBlock Text="Select"
-                           Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"
-                           VerticalAlignment="Center"
-                           Margin="10,0,0,0"/>
-                                </ToggleButton>
-                            </Border>
-                        </StackPanel>
-
-                        --><!-- Collapse/Expand trigger --><!--
-                        <StackPanel.Triggers>
-                            <EventTrigger SourceName="btnAccordion" RoutedEvent="ToggleButton.Checked">
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="spAccordionContent"
-                                                   Storyboard.TargetProperty="Visibility">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
-                                        </ObjectAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-
-                            <EventTrigger SourceName="btnAccordion" RoutedEvent="ToggleButton.Unchecked">
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="spAccordionContent"
-                                                   Storyboard.TargetProperty="Visibility">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Collapsed}"/>
-                                        </ObjectAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                        </StackPanel.Triggers>
-                        
-                    </StackPanel>-->
-                    <!--#endregion-->
-                   
-                        <StackPanel x:Name="spPlaylists" Orientation="Vertical">
                     <Border x:Name="bdrSelectPlaylist">
                         <Border.Effect>
                             <DropShadowEffect Color="#B0B8C0"
@@ -479,10 +367,11 @@
                               Opacity="0.2"/>
                         </Border.Effect>
                         
-                        <ToggleButton x:Name="btnSelectPlaylist"
+                        <ToggleButton x:Name="btnToggleSelectPlaylist"
                            Height="40"
                            Width="180"
                            Margin="0,25,0,0"
+                           Checked="ToggleButton_Checked"
                            FontSize="14"
                            BorderBrush="Transparent">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
@@ -507,10 +396,7 @@
                                                     </Border>
                                                     <Path x:Name="pPlaylists" Margin="25, 0, 10, 0" Width="15" Height="15" Stretch="Uniform"
                                                           Fill="{Binding CurrentTheme.WindowPrimaryAnchor.Brush}" HorizontalAlignment="Left"
-                                                          Data="M 0 0 L 8 8 L 16 0 Z">
-                                                        <Path.RenderTransform>
-                                                            <RotateTransform Angle="270" CenterX="7.5" CenterY="3.5"/>
-                                                        </Path.RenderTransform>
+                                                          Data="M15,6H3V8H15V6M15,10H3V12H15V10M3,16H11V14H3V16M17,6V14.18C16.69,14.07 16.35,14 16,14A3,3 0 0,0 13,17A3,3 0 0,0 16,20A3,3 0 0,0 19,17V8H22V6H17Z">
                                                     </Path>
                                                     <TextBlock x:Name="tbPlaylists" Text="Playlists" Margin="50, 0, 10, 0" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"/>
                                                 </Grid>
@@ -527,13 +413,7 @@
                                                     <Trigger Property="IsChecked" Value="True">
                                                         <Setter TargetName="border" Property="Background" Value="{Binding CurrentTheme.PlaylistsToggleSelected.Brush}"/>
                                                         <Setter TargetName="pPlaylists" Property="Fill" Value="White"/>
-                                                        <Setter TargetName="pPlaylists" Property="RenderTransform">
-                                                            <Setter.Value>
-                                                                <RotateTransform Angle="-45" CenterX="12" CenterY="3.5"/>
-                                                            </Setter.Value>
-                                                        </Setter>
                                                         <Setter TargetName="tbPlaylists" Property="Foreground" Value="White"/>
-                                                        <Setter TargetName="tbPlaylists" Property="Text" Value="Hide"/>
                                                     </Trigger>
                                                     
                                                 </ControlTemplate.Triggers>
@@ -544,183 +424,6 @@
                             </ToggleButton.Style>
                         </ToggleButton>
                     </Border>
-                        <Border x:Name="bdrPlaylists" Visibility="{Binding IsChecked, ElementName=btnSelectPlaylist, Converter={StaticResource BoolToVis}}" Height="310" CornerRadius="15" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}" Margin="0,25,0,0">
-                        <Border.Effect>
-                            <DropShadowEffect Color="#B0B8C0"
-  Direction="270"
-  BlurRadius="0"
-  ShadowDepth="3.5"
-  Opacity="0.2"/>
-                        </Border.Effect>
-                        <StackPanel x:Name="spPlaylist" Orientation="Vertical">
-
-                            <ListBox x:Name="lbPlaylistContent" Height="285" Margin="0, 15, 10, 0" ItemsSource="{Binding MusicPlayerCache.PlaybackQueue}" SelectedItem="{Binding MusicPlayerCache.CurrentSong}"
-Background="Transparent" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
-
-                                <ListBox.Template>
-                                    <ControlTemplate TargetType="ListBox">
-                                        <Border Background="Transparent" CornerRadius="10">
-                                            <ScrollViewer x:Name="ScrollViewer"
-                      VerticalScrollBarVisibility="Visible"
-                      HorizontalScrollBarVisibility="Disabled"
-                      Focusable="False">
-
-                                                <ScrollViewer.Resources>
-                                                    <Style TargetType="ScrollBar">
-                                                        <Setter Property="Width" Value="8"/>
-                                                        <Setter Property="Background" Value="Transparent"/>
-                                                        <Setter Property="Template">
-                                                            <Setter.Value>
-                                                                <ControlTemplate TargetType="ScrollBar">
-                                                                    <Grid x:Name="Root" Background="Transparent" Width="8">
-                                                                        <Track x:Name="PART_Track" IsDirectionReversed="True">
-                                                                            <Track.DecreaseRepeatButton>
-                                                                                <RepeatButton Command="ScrollBar.LineUpCommand"
-                                                          Height="10"
-                                                          Visibility="Hidden"
-                                                          Background="Transparent"
-                                                          Focusable="False"
-                                                          BorderThickness="0"/>
-                                                                            </Track.DecreaseRepeatButton>
-
-                                                                            <!-- Hidden by default -->
-                                                                            <Track.Thumb>
-                                                                                <Thumb x:Name="Thumb" Visibility="Collapsed">
-                                                                                    <Thumb.Template>
-                                                                                        <ControlTemplate TargetType="Thumb">
-                                                                                            <Border Background="#c0c0c0"
-                                                                        CornerRadius="4"
-                                                                        SnapsToDevicePixels="True"/>
-                                                                                        </ControlTemplate>
-                                                                                    </Thumb.Template>
-                                                                                </Thumb>
-                                                                            </Track.Thumb>
-
-                                                                            <Track.IncreaseRepeatButton>
-                                                                                <RepeatButton Command="ScrollBar.LineDownCommand"
-                                                          Height="10"
-                                                          Visibility="Hidden"
-                                                          Background="Transparent"
-                                                          Focusable="False"
-                                                          BorderThickness="0"/>
-                                                                            </Track.IncreaseRepeatButton>
-                                                                        </Track>
-                                                                    </Grid>
-
-                                                                    <!-- Hover behavior -->
-                                                                    <ControlTemplate.Triggers>
-
-                                                                        <!-- 1️ Hovering scrollbar itself -->
-                                                                        <Trigger Property="IsMouseOver" Value="True">
-                                                                            <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
-                                                                        </Trigger>
-
-                                                                        <!-- 2️ Hovering scrollbar track -->
-                                                                        <Trigger SourceName="PART_Track" Property="IsMouseOver" Value="True">
-                                                                            <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
-                                                                        </Trigger>
-
-                                                                        <!-- 3️ Hovering the parent ListBox -->
-                                                                        <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=ListBox}}" Value="True">
-                                                                            <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
-                                                                        </DataTrigger>
-
-                                                                    </ControlTemplate.Triggers>
-                                                                </ControlTemplate>
-                                                            </Setter.Value>
-                                                        </Setter>
-                                                    </Style>
-                                                </ScrollViewer.Resources>
-
-                                                <ItemsPresenter />
-                                            </ScrollViewer>
-                                        </Border>
-                                    </ControlTemplate>
-                                </ListBox.Template>
-
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid Margin="20, 13, 0, 13">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                                <ColumnDefinition Width="*"></ColumnDefinition>
-                                            </Grid.ColumnDefinitions>
-
-                                            <ContentControl x:Name="ccTrackNumber" Grid.Column="0" Width="15" Height="15" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                                <ContentControl.Style>
-                                                    <Style TargetType="ContentControl">
-                                                        <Setter Property="Content" Value="{Binding Queue.TrackNumber}"/>
-                                                        <Setter Property="Foreground" Value="{Binding DataContext.CurrentTheme.ComplementGray.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                        <Setter Property="FontWeight" Value="Bold"/>
-                                                        <Setter Property="FontSize" Value="10"/>
-
-                                                        <Style.Triggers>
-                                                            <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ListBoxItem}}" Value="True">
-                                                                <Setter Property="ContentTemplate">
-                                                                    <Setter.Value>
-                                                                        <DataTemplate>
-                                                                            <Path Data="M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M10,16.5L16,12L10,7.5V16.5Z"
-                                                      Fill="{Binding DataContext.CurrentTheme.NowPlayingForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"
-                                                      Stretch="Uniform" Width="15" Height="15"/>
-                                                                        </DataTemplate>
-                                                                    </Setter.Value>
-                                                                </Setter>
-                                                            </DataTrigger>
-                                                        </Style.Triggers>
-                                                    </Style>
-                                                </ContentControl.Style>
-                                            </ContentControl>
-
-                                            <StackPanel x:Name="spTitleandArtist" Grid.Column="1" Margin="15, 0, 15, 0" Orientation="Vertical">
-                                                <TextBlock x:Name="tbTrackTitle" Text="{Binding Title}" FontWeight="Bold" FontSize="12" Foreground="{Binding DataContext.CurrentTheme.WindowHeadingForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                <TextBlock x:Name="tbArtistNames" Text="{Binding Artist}" FontSize="11.5" Foreground="{Binding DataContext.CurrentTheme.CurrentSongArtistForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                            </StackPanel>
-
-                                        </Grid>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-
-                                <ListBox.ItemContainerStyle>
-                                    <Style TargetType="ListBoxItem">
-                                        <Setter Property="Background" Value="Transparent"/>
-                                        <Setter Property="BorderThickness" Value="0"/>
-                                        <Setter Property="Padding" Value="5"/>
-                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                        <Setter Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate TargetType="ListBoxItem">
-                                                    <Border x:Name="border"
-                            Background="{TemplateBinding Background}"
-                            CornerRadius="11">
-                                                        <ContentPresenter />
-                                                    </Border>
-                                                    <ControlTemplate.Triggers>
-                                                        <!-- Hover -->
-                                                        <Trigger Property="IsMouseOver" Value="True">
-                                                            <Setter Property="Cursor" Value="Hand"/>
-                                                            <Setter TargetName="border"
-                                    Property="Background"
-                                    Value="{Binding DataContext.CurrentTheme.ListBoxHover.Brush,
-                            RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                        </Trigger>
-                                                        <!-- Selected -->
-                                                        <Trigger Property="IsSelected" Value="True">
-                                                            <Setter TargetName="border"
-                                    Property="Background"
-                                    Value="{Binding DataContext.CurrentTheme.ListBoxSelected.Brush,
-                                RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                        </Trigger>
-                                                    </ControlTemplate.Triggers>
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Style>
-                                </ListBox.ItemContainerStyle>
-                            </ListBox>
-
-                        </StackPanel>
-                    </Border>
-                    </StackPanel>
               
                 </StackPanel>
 
@@ -797,7 +500,7 @@ Background="Transparent" BorderThickness="0" ScrollViewer.VerticalScrollBarVisib
                     <StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="15, 10, 25, 0">
                     
                     <!--Genres-->
-                    <Border Height="150" CornerRadius="15" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}">
+                    <Border CornerRadius="15" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}">
                         <Border.Effect>
                             <DropShadowEffect Color="#B0B8C0"
                               BlurRadius="0"
@@ -825,7 +528,7 @@ Background="Transparent" BorderThickness="0" ScrollViewer.VerticalScrollBarVisib
                     </Border>
                     
                     <!--Lyrics-->
-                    <Border x:Name="bdrLyrics" Height="300" CornerRadius="15" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}" Margin="0,25,0,0">
+                    <Border x:Name="bdrLyrics" Height="200" CornerRadius="15" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}" Margin="0,25,0,0">
                         <Border.Effect>
                             <DropShadowEffect Color="#B0B8C0"
                               Direction="270"
@@ -836,7 +539,7 @@ Background="Transparent" BorderThickness="0" ScrollViewer.VerticalScrollBarVisib
                         <StackPanel x:Name="spLyrics" Orientation="Vertical" Margin="15,0,0,0">
                             <TextBlock Text="Lyrics" FontWeight="Bold" Margin="0, 12, 0, 0" FontSize="14" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"/>
 
-                            <ScrollViewer Margin ="0, 10, 10, 10" Height="250" VerticalScrollBarVisibility="Visible" PreviewMouseWheel="PreviewMouseWheel" >
+                            <ScrollViewer Margin ="0, 10, 10, 10" Height="140" VerticalScrollBarVisibility="Visible" PreviewMouseWheel="PreviewMouseWheel" >
                                 
 
                                     <ScrollViewer.Style>
@@ -850,19 +553,19 @@ Background="Transparent" BorderThickness="0" ScrollViewer.VerticalScrollBarVisib
 
                                                             <!-- Custom vertical scrollbar -->
                                                             <ScrollBar x:Name="PART_VerticalScrollBar"
-                                       Orientation="Vertical"
-                                       Width="8"
-                                       Margin="0"
-                                       HorizontalAlignment="Right"
-                                       VerticalAlignment="Stretch"
-                                       Background="Transparent"
-                                       Visibility="Collapsed"
-                                       Minimum="0"
-                                       Maximum="{TemplateBinding ScrollableHeight}"
-                                       ViewportSize="{TemplateBinding ViewportHeight}"
-                                       Value="{TemplateBinding VerticalOffset}"
-                                       SmallChange="16"
-                                       LargeChange="64">
+                                                                       Orientation="Vertical"
+                                                                       Width="8"
+                                                                       Margin="0"
+                                                                       HorizontalAlignment="Right"
+                                                                       VerticalAlignment="Stretch"
+                                                                       Background="Transparent"
+                                                                       Visibility="Collapsed"
+                                                                       Minimum="0"
+                                                                       Maximum="{TemplateBinding ScrollableHeight}"
+                                                                       ViewportSize="{TemplateBinding ViewportHeight}"
+                                                                       Value="{TemplateBinding VerticalOffset}"
+                                                                       SmallChange="16"
+                                                                       LargeChange="64">
                                                                 <ScrollBar.Style>
                                                                     <Style TargetType="ScrollBar">
                                                                         <Setter Property="Template">
@@ -947,7 +650,7 @@ Background="Transparent" BorderThickness="0" ScrollViewer.VerticalScrollBarVisib
                     </Border>
 
                     <!-- Queue -->
-                    <Border x:Name="bdrQueue" Height="320" CornerRadius="15" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}" Margin="0,25,0,0">
+                        <Border x:Name="bdrQueue" CornerRadius="15" Height="330" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}" Margin="0,25,0,0">
                         <Border.Effect>
                             <DropShadowEffect Color="#B0B8C0"
                               Direction="270"
@@ -958,8 +661,8 @@ Background="Transparent" BorderThickness="0" ScrollViewer.VerticalScrollBarVisib
                         <StackPanel x:Name="spQueue" Orientation="Vertical">
                             <TextBlock Text="Queue" FontWeight="Bold" Margin="15,17,0,0" FontSize="14" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"/>
                             
-                            <ListBox x:Name="lbQueueContent" Height="260" Margin="0, 10, 10, 0" ItemsSource="{Binding MusicPlayerCache.PlaybackQueue}" SelectedItem="{Binding MusicPlayerCache.CurrentSong}"
-                            Background="Transparent" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+                            <ListBox x:Name="lbQueueContent" Height="260" Margin="4, 10, 0, 0" ItemsSource="{Binding MusicPlayerCache.PlaybackQueue}" SelectedItem="{Binding MusicPlayerCache.CurrentSong}"
+                            Background="Transparent" SelectionChanged="ListBox_SelectionChanged" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
 
                                     <ListBox.Template>
                                         <ControlTemplate TargetType="ListBox">
@@ -967,7 +670,8 @@ Background="Transparent" BorderThickness="0" ScrollViewer.VerticalScrollBarVisib
                                                 <ScrollViewer x:Name="ScrollViewer"
                                                   VerticalScrollBarVisibility="Visible"
                                                   HorizontalScrollBarVisibility="Disabled"
-                                                  Focusable="False">
+                                                  Focusable="False"
+                                                  ClipToBounds="True">
 
                                                     <ScrollViewer.Resources>
                                                         <Style TargetType="ScrollBar">
@@ -1091,7 +795,7 @@ Background="Transparent" BorderThickness="0" ScrollViewer.VerticalScrollBarVisib
                                         <Setter Property="Padding" Value="5"/>
                                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                                         <Setter Property="Template">
-                                            <Setter.Value>
+                                                <Setter.Value>
                                                 <ControlTemplate TargetType="ListBoxItem">
                                                     <Border x:Name="border"
                                                         Background="{TemplateBinding Background}"
@@ -1118,19 +822,13 @@ Background="Transparent" BorderThickness="0" ScrollViewer.VerticalScrollBarVisib
                                                 </ControlTemplate>
                                             </Setter.Value>
                                         </Setter>
-                                    </Style>
+                                        </Style>
                                 </ListBox.ItemContainerStyle>
                             </ListBox>
                             
                         </StackPanel>
                     </Border>
  
-                    <!-- Current Theme Name -->
-                    <!--<StackPanel Orientation="Horizontal" Margin="0, 70, 5, 0" VerticalAlignment="Bottom" HorizontalAlignment="Right">
-                        <TextBlock Text="{Binding CurrentTheme.Name}" FontFamily="Bahnschrift" FontWeight="Bold" FontSize="10.5" Foreground="{Binding CurrentTheme.WindowPrimaryAnchor.Brush}"></TextBlock>
-                        <TextBlock Text="Theme" FontFamily="Bahnschrift" FontSize="10.5" FontWeight="Bold" Margin="5, 0, 0, 0" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"></TextBlock>
-                        </StackPanel>-->
-                        
                     </StackPanel>
             </Grid>
                 <ScrollViewer.Style>
@@ -1239,9 +937,11 @@ Background="Transparent" BorderThickness="0" ScrollViewer.VerticalScrollBarVisib
 
             <!-- Column 1 Center Main Bar -->
 
-            <UserControl x:Name="ucYourLibraryView" Grid.Column="1">
+            <!--#region Unused Views-->
+            
+            <!--<UserControl x:Name="ucYourLibraryView" Grid.Column="1">
                 
-                <!-- YourLibrary View -->
+                --><!-- YourLibrary View --><!--
 
                 <Border x:Name="bdCenterPanelLibraryView" CornerRadius="13" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}" Margin="10, 10, 10, 15">
                     <Border.Effect>
@@ -1264,7 +964,7 @@ Background="Transparent" BorderThickness="0" ScrollViewer.VerticalScrollBarVisib
                             <RowDefinition Height="Auto"></RowDefinition>
                         </Grid.RowDefinitions>
 
-                        <!-- SearchBox-->
+                        --><!-- SearchBox-->
                         <!--<Border x:Name="SearchBoxLibraryView" Height="40" CornerRadius="13" Background="{Binding CurrentTheme.SearchBoxBackground.Brush}" Grid.Row="0" Margin="40, 30, 0, 30" Grid.Column="0" Width="250" HorizontalAlignment="Left" VerticalAlignment="Center">
                 <StackPanel Orientation="Horizontal" Margin="20, 10, 10, 10" VerticalAlignment="Center">
                     <Path x:Name="pSearchLibraryView" Width="15" Height="15" Stretch="Uniform"
@@ -1274,7 +974,7 @@ Background="Transparent" BorderThickness="0" ScrollViewer.VerticalScrollBarVisib
                 </StackPanel>
             </Border>-->
 
-                        <!-- Grid Library View -->
+                        <!-- Grid Library View --><!--
                         <Grid x:Name="grdLibraryView" Grid.Row="1" Grid.ColumnSpan="2" Margin="40, 0, 40, 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -1286,12 +986,12 @@ Background="Transparent" BorderThickness="0" ScrollViewer.VerticalScrollBarVisib
 
                             </Grid.RowDefinitions>
 
-                            <!-- Heading -->
+                            --><!-- Heading --><!--
 
                             <TextBlock x:Name="tbYourLibraryView" Grid.Row="0" Text="Your Library" FontFamily="Bahnschrift" FontSize="18" FontWeight="Black" 
                              Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}" HorizontalAlignment="Left"/>
 
-                            <!-- YourLibraryListBox2 -->
+                            --><!-- YourLibraryListBox2 --><!--
 
                             <ScrollViewer Margin="0, 0, 0, 0" Grid.Row="1" Grid.Column="0" PreviewMouseWheel="PreviewMouseWheel">
 
@@ -1357,7 +1057,7 @@ Background="Transparent" BorderThickness="0" ScrollViewer.VerticalScrollBarVisib
                                                                     <ContentPresenter />
                                                                 </Border>
                                                                 <ControlTemplate.Triggers>
-                                                                    <!-- Hover -->
+                                                                    --><!-- Hover --><!--
                                                                     <Trigger Property="IsMouseOver" Value="True">
                                                                         <Setter Property="Cursor" Value="Hand"/>
                                                                         <Setter TargetName="border"
@@ -1365,7 +1065,7 @@ Background="Transparent" BorderThickness="0" ScrollViewer.VerticalScrollBarVisib
                                                             Value="{Binding DataContext.CurrentTheme.ListBoxHover.Brush,
                                                             RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                                                     </Trigger>
-                                                                    <!-- Selected -->
+                                                                    --><!-- Selected --><!--
                                                                     <Trigger Property="IsSelected" Value="True">
                                                                         <Setter TargetName="border"
                                                             Property="Background"
@@ -1443,7 +1143,7 @@ Background="Transparent" BorderThickness="0" ScrollViewer.VerticalScrollBarVisib
                                                                     <ContentPresenter />
                                                                 </Border>
                                                                 <ControlTemplate.Triggers>
-                                                                    <!-- Hover -->
+                                                                    --><!-- Hover --><!--
                                                                     <Trigger Property="IsMouseOver" Value="True">
                                                                         <Setter Property="Cursor" Value="Hand"/>
                                                                         <Setter TargetName="border"
@@ -1451,7 +1151,7 @@ Background="Transparent" BorderThickness="0" ScrollViewer.VerticalScrollBarVisib
         Value="{Binding DataContext.CurrentTheme.ListBoxHover.Brush,
         RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                                                     </Trigger>
-                                                                    <!-- Selected -->
+                                                                    --><!-- Selected --><!--
                                                                     <Trigger Property="IsSelected" Value="True">
                                                                         <Setter TargetName="border"
         Property="Background"
@@ -1527,7 +1227,7 @@ Background="Transparent" BorderThickness="0" ScrollViewer.VerticalScrollBarVisib
                                                                     <ContentPresenter />
                                                                 </Border>
                                                                 <ControlTemplate.Triggers>
-                                                                    <!-- Hover -->
+                                                                    --><!-- Hover --><!--
                                                                     <Trigger Property="IsMouseOver" Value="True">
                                                                         <Setter Property="Cursor" Value="Hand"/>
                                                                         <Setter TargetName="border"
@@ -1535,7 +1235,7 @@ Background="Transparent" BorderThickness="0" ScrollViewer.VerticalScrollBarVisib
                                                             Value="{Binding DataContext.CurrentTheme.ListBoxHover.Brush,
                                                             RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                                                     </Trigger>
-                                                                    <!-- Selected -->
+                                                                    --><!-- Selected --><!--
                                                                     <Trigger Property="IsSelected" Value="True">
                                                                         <Setter TargetName="border"
                                                             Property="Background"
@@ -1612,7 +1312,7 @@ Background="Transparent" BorderThickness="0" ScrollViewer.VerticalScrollBarVisib
                                                                     <ContentPresenter />
                                                                 </Border>
                                                                 <ControlTemplate.Triggers>
-                                                                    <!-- Hover -->
+                                                                    --><!-- Hover --><!--
                                                                     <Trigger Property="IsMouseOver" Value="True">
                                                                         <Setter Property="Cursor" Value="Hand"/>
                                                                         <Setter TargetName="border"
@@ -1620,7 +1320,7 @@ Background="Transparent" BorderThickness="0" ScrollViewer.VerticalScrollBarVisib
                                                     Value="{Binding DataContext.CurrentTheme.ListBoxHover.Brush,
                                                     RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                                                     </Trigger>
-                                                                    <!-- Selected -->
+                                                                    --><!-- Selected --><!--
                                                                     <Trigger Property="IsSelected" Value="True">
                                                                         <Setter TargetName="border"
                                                     Property="Background"
@@ -1649,10 +1349,10 @@ Background="Transparent" BorderThickness="0" ScrollViewer.VerticalScrollBarVisib
                                             <Setter.Value>
                                                 <ControlTemplate TargetType="ScrollViewer">
                                                     <Grid x:Name="Root" Background="Transparent">
-                                                        <!-- Scroll content -->
+                                                        --><!-- Scroll content --><!--
                                                         <ScrollContentPresenter />
 
-                                                        <!-- Custom vertical scrollbar -->
+                                                        --><!-- Custom vertical scrollbar --><!--
                                                         <ScrollBar x:Name="PART_VerticalScrollBar"
 Orientation="Vertical"
 Width="8"
@@ -1675,7 +1375,7 @@ LargeChange="64">
                                                                                 <Grid x:Name="ScrollRoot" Background="Transparent" Width="8">
                                                                                     <Track x:Name="PART_Track" IsDirectionReversed="True">
 
-                                                                                        <!-- Hidden arrow buttons -->
+                                                                                        --><!-- Hidden arrow buttons --><!--
                                                                                         <Track.DecreaseRepeatButton>
                                                                                             <RepeatButton Command="ScrollBar.LineUpCommand"
                                        Height="10"
@@ -1685,7 +1385,7 @@ LargeChange="64">
                                        BorderThickness="0"/>
                                                                                         </Track.DecreaseRepeatButton>
 
-                                                                                        <!-- Rounded thumb -->
+                                                                                        --><!-- Rounded thumb --><!--
                                                                                         <Track.Thumb>
                                                                                             <Thumb x:Name="Thumb" Visibility="Collapsed">
                                                                                                 <Thumb.Template>
@@ -1709,19 +1409,19 @@ LargeChange="64">
                                                                                     </Track>
                                                                                 </Grid>
 
-                                                                                <!-- Hover logic -->
+                                                                                --><!-- Hover logic --><!--
                                                                                 <ControlTemplate.Triggers>
-                                                                                    <!-- Show thumb when scrollbar hovered -->
+                                                                                    --><!-- Show thumb when scrollbar hovered --><!--
                                                                                     <Trigger Property="IsMouseOver" Value="True">
                                                                                         <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
                                                                                     </Trigger>
 
-                                                                                    <!-- Show thumb when track hovered -->
+                                                                                    --><!-- Show thumb when track hovered --><!--
                                                                                     <Trigger SourceName="PART_Track" Property="IsMouseOver" Value="True">
                                                                                         <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
                                                                                     </Trigger>
 
-                                                                                    <!-- Show thumb when ScrollViewer (lyrics area) hovered -->
+                                                                                    --><!-- Show thumb when ScrollViewer (lyrics area) hovered --><!--
                                                                                     <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" Value="True">
                                                                                         <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
                                                                                     </DataTrigger>
@@ -1734,7 +1434,7 @@ LargeChange="64">
                                                         </ScrollBar>
                                                     </Grid>
 
-                                                    <!-- Make scrollbar visible only on hover -->
+                                                    --><!-- Make scrollbar visible only on hover --><!--
                                                     <ControlTemplate.Triggers>
                                                         <Trigger Property="IsMouseOver" Value="True">
                                                             <Setter TargetName="PART_VerticalScrollBar" Property="Visibility" Value="Visible"/>
@@ -1766,7 +1466,7 @@ LargeChange="64">
             </UserControl>
 
             <UserControl x:Name="ucExploreView" Grid.Column="1">
-                <!-- Explore View -->
+                --><!-- Explore View --><!--
 
                 <Border x:Name="bdExplore" CornerRadius="13" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}" Margin="10, 10, 10, 15">
                     <Border.Effect>
@@ -1788,7 +1488,7 @@ LargeChange="64">
                             <RowDefinition Height="Auto"></RowDefinition>
                         </Grid.RowDefinitions>
 
-                        <!-- SearchBox-->
+                        --><!-- SearchBox-->
                         <!--<Border x:Name="SearchBoxExploreView" Height="40" CornerRadius="13" Background="{Binding CurrentTheme.SearchBoxBackground.Brush}" Grid.Row="0" Margin="40, 30, 0, 30" Grid.Column="0" Width="250" HorizontalAlignment="Left" VerticalAlignment="Center">
                             <StackPanel Orientation="Horizontal" Margin="20, 10, 10, 10" VerticalAlignment="Center">
                                 <Path x:Name="pExploreView" Width="15" Height="15" Stretch="Uniform"
@@ -1798,7 +1498,7 @@ LargeChange="64">
                             </StackPanel>
                         </Border>-->
 
-                        <!-- Grid Library View -->
+                        <!-- Grid Library View --><!--
                         <Grid x:Name="grdExploreView" Grid.Row="1" Grid.ColumnSpan="2" Margin="40, 0, 40, 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -1810,12 +1510,12 @@ LargeChange="64">
 
                             </Grid.RowDefinitions>
 
-                            <!-- Heading -->
+                            --><!-- Heading --><!--
 
                             <TextBlock x:Name="tbExploreViewHeading" Grid.Row="0" Text="Explore" FontFamily="Bahnschrift" FontSize="18" FontWeight="Black" 
                              Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}" HorizontalAlignment="Left"/>
 
-                            <!-- ExploreListBox2 -->
+                            --><!-- ExploreListBox2 --><!--
 
                             <ScrollViewer Grid.Row="1" Grid.Column="0" CanContentScroll="True" PreviewMouseWheel="PreviewMouseWheel" >
 
@@ -1887,7 +1587,7 @@ LargeChange="64">
                                                                     <ContentPresenter />
                                                                 </Border>
                                                                 <ControlTemplate.Triggers>
-                                                                    <!-- Hover -->
+                                                                    --><!-- Hover --><!--
                                                                     <Trigger Property="IsMouseOver" Value="True">
                                                                         <Setter Property="Cursor" Value="Hand"/>
                                                                         <Setter TargetName="border"
@@ -1895,7 +1595,7 @@ LargeChange="64">
                                                     Value="{Binding DataContext.CurrentTheme.ListBoxHover.Brush,
                                                     RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                                                     </Trigger>
-                                                                    <!-- Selected -->
+                                                                    --><!-- Selected --><!--
                                                                     <Trigger Property="IsSelected" Value="True">
                                                                         <Setter TargetName="border"
                                                     Property="Background"
@@ -1974,7 +1674,7 @@ LargeChange="64">
                                                                     <ContentPresenter />
                                                                 </Border>
                                                                 <ControlTemplate.Triggers>
-                                                                    <!-- Hover -->
+                                                                    --><!-- Hover --><!--
                                                                     <Trigger Property="IsMouseOver" Value="True">
                                                                         <Setter Property="Cursor" Value="Hand"/>
                                                                         <Setter TargetName="border"
@@ -1982,7 +1682,7 @@ Property="Background"
 Value="{Binding DataContext.CurrentTheme.ListBoxHover.Brush,
 RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                                                     </Trigger>
-                                                                    <!-- Selected -->
+                                                                    --><!-- Selected --><!--
                                                                     <Trigger Property="IsSelected" Value="True">
                                                                         <Setter TargetName="border"
 Property="Background"
@@ -2059,7 +1759,7 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                                                     <ContentPresenter />
                                                                 </Border>
                                                                 <ControlTemplate.Triggers>
-                                                                    <!-- Hover -->
+                                                                    --><!-- Hover --><!--
                                                                     <Trigger Property="IsMouseOver" Value="True">
                                                                         <Setter Property="Cursor" Value="Hand"/>
                                                                         <Setter TargetName="border"
@@ -2067,7 +1767,7 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                                                             Value="{Binding DataContext.CurrentTheme.ListBoxHover.Brush,
                                                                             RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                                                     </Trigger>
-                                                                    <!-- Selected -->
+                                                                    --><!-- Selected --><!--
                                                                     <Trigger Property="IsSelected" Value="True">
                                                                         <Setter TargetName="border"
                                                                             Property="Background"
@@ -2144,7 +1844,7 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                                                     <ContentPresenter />
                                                                 </Border>
                                                                 <ControlTemplate.Triggers>
-                                                                    <!-- Hover -->
+                                                                    --><!-- Hover --><!--
                                                                     <Trigger Property="IsMouseOver" Value="True">
                                                                         <Setter Property="Cursor" Value="Hand"/>
                                                                         <Setter TargetName="border"
@@ -2152,7 +1852,7 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                             Value="{Binding DataContext.CurrentTheme.ListBoxHover.Brush,
                                             RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                                                     </Trigger>
-                                                                    <!-- Selected -->
+                                                                    --><!-- Selected --><!--
                                                                     <Trigger Property="IsSelected" Value="True">
                                                                         <Setter TargetName="border"
                                             Property="Background"
@@ -2229,7 +1929,7 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                                                     <ContentPresenter />
                                                                 </Border>
                                                                 <ControlTemplate.Triggers>
-                                                                    <!-- Hover -->
+                                                                    --><!-- Hover --><!--
                                                                     <Trigger Property="IsMouseOver" Value="True">
                                                                         <Setter Property="Cursor" Value="Hand"/>
                                                                         <Setter TargetName="border"
@@ -2237,7 +1937,7 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                 Value="{Binding DataContext.CurrentTheme.ListBoxHover.Brush,
                                 RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                                                     </Trigger>
-                                                                    <!-- Selected -->
+                                                                    --><!-- Selected --><!--
                                                                     <Trigger Property="IsSelected" Value="True">
                                                                         <Setter TargetName="border"
                                 Property="Background"
@@ -2314,7 +2014,7 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                                                     <ContentPresenter />
                                                                 </Border>
                                                                 <ControlTemplate.Triggers>
-                                                                    <!-- Hover -->
+                                                                    --><!-- Hover --><!--
                                                                     <Trigger Property="IsMouseOver" Value="True">
                                                                         <Setter Property="Cursor" Value="Hand"/>
                                                                         <Setter TargetName="border"
@@ -2322,7 +2022,7 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                 Value="{Binding DataContext.CurrentTheme.ListBoxHover.Brush,
                                 RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                                                     </Trigger>
-                                                                    <!-- Selected -->
+                                                                    --><!-- Selected --><!--
                                                                     <Trigger Property="IsSelected" Value="True">
                                                                         <Setter TargetName="border"
                                 Property="Background"
@@ -2399,7 +2099,7 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                                                     <ContentPresenter />
                                                                 </Border>
                                                                 <ControlTemplate.Triggers>
-                                                                    <!-- Hover -->
+                                                                    --><!-- Hover --><!--
                                                                     <Trigger Property="IsMouseOver" Value="True">
                                                                         <Setter Property="Cursor" Value="Hand"/>
                                                                         <Setter TargetName="border"
@@ -2407,7 +2107,7 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                 Value="{Binding DataContext.CurrentTheme.ListBoxHover.Brush,
                                 RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                                                     </Trigger>
-                                                                    <!-- Selected -->
+                                                                    --><!-- Selected --><!--
                                                                     <Trigger Property="IsSelected" Value="True">
                                                                         <Setter TargetName="border"
                                 Property="Background"
@@ -2436,10 +2136,10 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                             <Setter.Value>
                                                 <ControlTemplate TargetType="ScrollViewer">
                                                     <Grid x:Name="Root" Background="Transparent">
-                                                        <!-- Scroll content -->
+                                                        --><!-- Scroll content --><!--
                                                         <ScrollContentPresenter />
 
-                                                        <!-- Custom vertical scrollbar -->
+                                                        --><!-- Custom vertical scrollbar --><!--
                                                         <ScrollBar x:Name="PART_VerticalScrollBar"
    Orientation="Vertical"
    Width="8"
@@ -2462,7 +2162,7 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                                                                 <Grid x:Name="ScrollRoot" Background="Transparent" Width="8">
                                                                                     <Track x:Name="PART_Track" IsDirectionReversed="True">
 
-                                                                                        <!-- Hidden arrow buttons -->
+                                                                                        --><!-- Hidden arrow buttons --><!--
                                                                                         <Track.DecreaseRepeatButton>
                                                                                             <RepeatButton Command="ScrollBar.LineUpCommand"
                                           Height="10"
@@ -2472,7 +2172,7 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                           BorderThickness="0"/>
                                                                                         </Track.DecreaseRepeatButton>
 
-                                                                                        <!-- Rounded thumb -->
+                                                                                        --><!-- Rounded thumb --><!--
                                                                                         <Track.Thumb>
                                                                                             <Thumb x:Name="Thumb" Visibility="Collapsed">
                                                                                                 <Thumb.Template>
@@ -2496,19 +2196,19 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                                                                     </Track>
                                                                                 </Grid>
 
-                                                                                <!-- Hover logic -->
+                                                                                --><!-- Hover logic --><!--
                                                                                 <ControlTemplate.Triggers>
-                                                                                    <!-- Show thumb when scrollbar hovered -->
+                                                                                    --><!-- Show thumb when scrollbar hovered --><!--
                                                                                     <Trigger Property="IsMouseOver" Value="True">
                                                                                         <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
                                                                                     </Trigger>
 
-                                                                                    <!-- Show thumb when track hovered -->
+                                                                                    --><!-- Show thumb when track hovered --><!--
                                                                                     <Trigger SourceName="PART_Track" Property="IsMouseOver" Value="True">
                                                                                         <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
                                                                                     </Trigger>
 
-                                                                                    <!-- Show thumb when ScrollViewer (lyrics area) hovered -->
+                                                                                    --><!-- Show thumb when ScrollViewer (lyrics area) hovered --><!--
                                                                                     <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" Value="True">
                                                                                         <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
                                                                                     </DataTrigger>
@@ -2521,7 +2221,7 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                                         </ScrollBar>
                                                     </Grid>
 
-                                                    <!-- Make scrollbar visible only on hover -->
+                                                    --><!-- Make scrollbar visible only on hover --><!--
                                                     <ControlTemplate.Triggers>
                                                         <Trigger Property="IsMouseOver" Value="True">
                                                             <Setter TargetName="PART_VerticalScrollBar" Property="Visibility" Value="Visible"/>
@@ -2549,8 +2249,28 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                         </Style.Triggers>
                     </Style>
                 </UserControl.Style>
-            </UserControl>
+            </UserControl>-->
             
+            <!--#endregion-->
+
+            <!-- LOGO -->
+            <StackPanel x:Name="spLogoBig" Margin="60,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1">
+                
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="13,0,0,10">
+                <Path Data="M72 12 A24 24 0 0 0 48 36 V84 A24 24 0 0 0 72 108 H136 A48 48 0 0 0 136 12 H72 Z" Fill="{Binding CurrentTheme.WindowHeadingForeground.Brush}"  Margin="0, 0, -3, 0" Width="25" Height="25" Stretch="Uniform" VerticalAlignment="Center"/>
+                <TextBlock Text="sc" FontStyle="Normal" FontFamily="Lucida Handwriting" FontSize="13" Margin="-18, 4, 0, 5" Foreground="{Binding CurrentTheme.WindowPrimary.Brush}"></TextBlock>
+                <Path Data="M60 20 Q150 150, 60 280 H120 Q210 150, 120 20 Z" Fill="{Binding CurrentTheme.WindowHeadingForeground.Brush}"  Margin="0, 0, -8, 0" Width="15" Height="15" Stretch="Uniform" VerticalAlignment="Center"/>
+                <Path Data="M50 20 Q130 150, 50 280 H70 Q150 150, 70 20 Z" Fill="{Binding CurrentTheme.WindowHeadingForeground.Brush}"  Margin="0, 0, 0, 0" Width="15" Height="14.8" Stretch="Uniform" VerticalAlignment="Center"/>
+                </StackPanel>
+                
+                    <StackPanel Orientation="Vertical">
+                <TextBlock Text="Spices &amp; Co" FontSize="25" FontFamily="Bahnschrift" FontWeight="Bold" Margin="1,0,0,0" VerticalAlignment="Center" Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}"></TextBlock>
+                    <TextBlock Text="Music Player" FontSize="22" FontWeight="Light" Margin="1,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}"></TextBlock>
+
+                </StackPanel>
+                
+            </StackPanel>
+
             <UserControl x:Name="ucAlbumsView" Grid.Column="1"> <!-- Albums View -->
             <Border x:Name="bdCenterPanel" CornerRadius="13" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}" Margin="10, 10, 10, 15">
                 <Border.Effect>
@@ -2623,7 +2343,7 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                         <!-- AlbumsListBox -->
 
                             <ListBox x:Name="lbAlbumsList" Height="300" Grid.Column="0" Grid.Row="1" Margin="0, 20, 0, 20" VerticalAlignment="Center" HorizontalAlignment="Stretch" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                             Background="Transparent" BorderBrush="Black" ItemsSource="{Binding MusicPlayerCache.Albums}" SelectedItem="{Binding MusicPlayerCache.SelectedAlbum, Mode=TwoWay}">
+                             Background="Transparent" SelectionChanged="ListBox_SelectionChanged" BorderBrush="Black" ItemsSource="{Binding MusicPlayerCache.Albums}" SelectedItem="{Binding MusicPlayerCache.SelectedAlbum, Mode=TwoWay}">
 
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
@@ -2639,7 +2359,6 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                             <ColumnDefinition Width="*"></ColumnDefinition>
                                             <ColumnDefinition Width="*"></ColumnDefinition>
                                             <ColumnDefinition Width="0.5*"></ColumnDefinition>
-                                            <ColumnDefinition Width="0.5*"></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
 
                                         
@@ -2653,11 +2372,7 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
 
                                         <TextBlock x:Name="tbAlbumYear" Text="{Binding Year}" HorizontalAlignment="Center" Grid.Column="3" Foreground="{Binding DataContext.CurrentTheme.WindowHeadingForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}" FontSize="14" VerticalAlignment="Center" />
                                         
-                                        <Button Grid.Column="4" HorizontalAlignment="Right" Background="Transparent" BorderBrush="Transparent" Margin="0, 0, 30, 0">
-                                            <Path Data="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z"
-                                                     Fill="{Binding DataContext.CurrentTheme.ComplementGray.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"
-                                                     Stretch="Uniform" Width="9" Height="9"></Path>
-                                        </Button>
+
                                     </Grid>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
@@ -2783,7 +2498,7 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                     
                     </Grid>
                     
-                    <!-- AlbumContentsListBox -->
+                    <!-- AlbumContentsListBox (Songs) -->
                     <Grid x:Name="grdAlbumContents" Grid.Row="2" Grid.ColumnSpan="2" Margin="40, 20, 40, 0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -2799,7 +2514,7 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                         <Grid Grid.Row="1" Margin="0, 20, 0, 0">
                             
                             <ListBox x:Name="lbAlbumContents" VerticalAlignment="Stretch" Height="300" ItemsSource="{Binding MusicPlayerCache.SelectedAlbum.Songs}" SelectedItem="{Binding MusicPlayerCache.CurrentSong, Mode=TwoWay}"
-                        Background="Transparent" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+                        Background="Transparent" SelectionChanged="ListBox_SelectionChanged" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
                             
                                 <ListBox.ItemTemplate>
                                 <DataTemplate>
@@ -2808,7 +2523,6 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                             <ColumnDefinition Width="Auto"></ColumnDefinition>
                                             <ColumnDefinition Width="*"></ColumnDefinition>
                                             <ColumnDefinition Width="*"></ColumnDefinition>
-                                            <ColumnDefinition Width="Auto"></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
 
                                         <ContentControl x:Name="ccTrackNumber" Grid.Column="0" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -2841,13 +2555,9 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                             <TextBlock x:Name="tbArtistNames" Text="{Binding Artist}" Foreground="{Binding DataContext.CurrentTheme.CurrentSongArtistForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                         </StackPanel>
                                         
-                                        <TextBlock x:Name="tbTrackLength" Grid.Column="2" Margin="0, 0, 0, 0" VerticalAlignment="Center" Text="{Binding Length, Converter={StaticResource DurationDisplayConverter}}" HorizontalAlignment="Center" FontWeight="Regular" FontSize="14" Foreground="{Binding DataContext.CurrentTheme.WindowHeadingForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
+                                        <TextBlock x:Name="tbTrackLength" Grid.Column="2" Margin="0, 0, 105, 0" VerticalAlignment="Center" Text="{Binding Length, Converter={StaticResource DurationDisplayConverter}}" HorizontalAlignment="Right" FontWeight="Regular" FontSize="14" Foreground="{Binding DataContext.CurrentTheme.WindowHeadingForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                         
-                                        <Button x:Name="bTrackDetails" Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Center" Background="Transparent" BorderBrush="Transparent" Margin="0, 0, 30, 0">
-                                            <Path Data="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z"
-                                             Fill="{Binding DataContext.CurrentTheme.ComplementGray.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"
-                                             Stretch="Uniform" Width="10" Height="10"></Path>
-                                        </Button>
+
                                     </Grid>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
@@ -3054,7 +2764,7 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                     </Grid.RowDefinitions>
 
                                         <ListBox x:Name="lbAllSongsList" ItemsSource="{Binding MusicPlayerCache.AllSongs}" SelectedItem="{Binding MusicPlayerCache.CurrentSong, Mode=TwoWay}"
-                                         Background="Transparent" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                         Background="Transparent" SelectionChanged="ListBox_SelectionChanged" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                                             
                                             <ListBox.ItemTemplate>
                                                 <DataTemplate>
@@ -3249,10 +2959,271 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                     </Style>
                 </UserControl.Style>
             </UserControl>
-            
+
+            <UserControl x:Name="ucPlaylistsView" Grid.Column="1">
+                <!-- Songs View -->
+
+                <Border x:Name="bdPlaylists" CornerRadius="13" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}" Margin="10, 10, 10, 15">
+                    <Border.Effect>
+                        <DropShadowEffect Color="{Binding CurrentTheme.ComplementGray.Brush}"
+              Direction="270"
+              ShadowDepth="4"
+              Opacity="0.18"
+              BlurRadius="8"/>
+                    </Border.Effect>
+                    <Grid x:Name="grdPlaylistsViewMain">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="60"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <!-- #region unused item -->
+                        <!-- SearchBox-->
+                        <!--<Border x:Name="SearchBoxSongsView" Height="40" CornerRadius="13" Background="{Binding CurrentTheme.SearchBoxBackground.Brush}" Grid.Row="0" Margin="40, 30, 0, 30" Grid.Column="0" Width="250" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <StackPanel Orientation="Horizontal" Margin="20, 10, 10, 10" VerticalAlignment="Center">
+                    <Path x:Name="pSongsView" Width="15" Height="15" Stretch="Uniform"
+                          Fill="{Binding CurrentTheme.WindowPrimaryAnchor.Brush}"
+                          Data="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"></Path>      
+                    <TextBox x:Name="tbSongsView" Text="Search" FontSize="13" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}" Margin="5, 0, 0, 0" VerticalAlignment="Center" Background="Transparent" BorderBrush="Transparent"></TextBox>
+                </StackPanel>
+            </Border>-->
+                        <!--#endregion-->
+
+                        <!-- Grid Songs View -->
+
+                        <Grid x:Name="grdPlaylistsView" Grid.Row="1" Grid.ColumnSpan="2" Margin="40, 5, 40, 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <!-- Heading -->
+
+                            <TextBlock x:Name="tbPlaylistsViewHeading" Grid.Row="0" Text="Playlists" FontFamily="Bahnschrift" FontSize="18" FontWeight="Black" Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}" HorizontalAlignment="Left"/>
+
+                            <!-- SongsListBox1 -->
+
+                            <TextBlock x:Name="tbPlaylistsList" Text="Saved Playlists" FontSize="16.5" FontStyle="Italic" FontWeight="Black" Margin="0, 45, 0, 20" Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}"></TextBlock>
+
+                            <Grid x:Name="grdPlaylists" Grid.Row="1" Grid.Column="0" Margin="40, 20, 40, 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+
+                                <ListBox x:Name="lbSavedPlaylistsList" ItemsSource="{Binding MusicPlayerCache}" SelectedItem="{Binding MusicPlayerCache.CurrentSong, Mode=TwoWay}"
+                             Background="Transparent" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid Margin="20, 13, 0, 13">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+
+                                                <ContentControl x:Name="ccTrackPosition" Grid.Column="0" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                                    <ContentControl.Style>
+                                                        <Style TargetType="ContentControl">
+                                                            <Setter Property="Content" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem}}, Converter={StaticResource IndexConvertor}}"/>
+                                                            <Setter Property="Foreground" Value="{Binding DataContext.CurrentTheme.ComplementGray.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
+                                                            <Setter Property="FontWeight" Value="Bold"/>
+                                                            <Setter Property="FontSize" Value="12"/>
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ListBoxItem}}" Value="True">
+                                                                    <Setter Property="ContentTemplate">
+                                                                        <Setter.Value>
+                                                                            <DataTemplate>
+                                                                                <Path Data="M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M10,16.5L16,12L10,7.5V16.5Z"
+                                                                                          Fill="{Binding DataContext.CurrentTheme.NowPlayingForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"
+                                                                                          Stretch="Uniform" Width="15" Height="15"/>
+                                                                            </DataTemplate>
+                                                                        </Setter.Value>
+                                                                    </Setter>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </ContentControl.Style>
+                                                </ContentControl>
+
+                                                <StackPanel x:Name="spTitleandArtist" Grid.Column="1" Margin="15, 0, 15, 0" Orientation="Vertical">
+                                                    <TextBlock x:Name="tbTrackTitle" Text="{Binding Title}" FontWeight="Bold" FontSize="14" Foreground="{Binding DataContext.CurrentTheme.WindowHeadingForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
+                                                    <TextBlock x:Name="tbArtistNames" Text="{Binding Artist}" Foreground="{Binding DataContext.CurrentTheme.CurrentSongArtistForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
+                                                </StackPanel>
+
+                                                <TextBlock Grid.Column="2" Text="{Binding Album.Title}" VerticalAlignment="Center" Foreground="{Binding DataContext.CurrentTheme.CurrentSongArtistForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"></TextBlock>
+
+                                                <TextBlock x:Name="tbTrackLength" Grid.Column="3" Margin="0, 0, 0, 0" VerticalAlignment="Center" Text="{Binding Length, Converter={StaticResource DurationDisplayConverter}}" HorizontalAlignment="Center" FontWeight="Regular" FontSize="14" Foreground="{Binding DataContext.CurrentTheme.WindowHeadingForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
+
+                                                <Button x:Name="bTrackDetails" Grid.Column="4" HorizontalAlignment="Right" VerticalAlignment="Center" Background="Transparent" BorderBrush="Transparent" Margin="0, 0, 30, 0">
+                                                    <Path Data="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z"
+                                                         Fill="{Binding DataContext.CurrentTheme.ComplementGray.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"
+                                                         Stretch="Uniform" Width="10" Height="10"></Path>
+                                                </Button>
+                                            </Grid>
+                                        </DataTemplate>
+
+                                    </ListBox.ItemTemplate>
+
+                                    <ListBox.ItemContainerStyle>
+                                        <Style TargetType="ListBoxItem">
+                                            <Setter Property="Background" Value="Transparent"/>
+                                            <Setter Property="BorderThickness" Value="0"/>
+                                            <Setter Property="Padding" Value="5"/>
+                                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="ListBoxItem">
+                                                        <Border x:Name="border"
+                                                                Background="{TemplateBinding Background}"
+                                                                CornerRadius="11">
+                                                            <ContentPresenter />
+                                                        </Border>
+                                                        <ControlTemplate.Triggers>
+                                                            <!-- Hover -->
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter Property="Cursor" Value="Hand"/>
+                                                                <Setter TargetName="border"
+                                                                Property="Background"
+                                                                Value="{Binding DataContext.CurrentTheme.ListBoxHover.Brush,
+                                                                RelativeSource={RelativeSource AncestorType=ListBox}}"/>
+                                                            </Trigger>
+                                                            <!-- Selected -->
+                                                            <Trigger Property="IsSelected" Value="True">
+                                                                <Setter TargetName="border"
+                                                            Property="Background"
+                                                            Value="{Binding DataContext.CurrentTheme.ListBoxSelected.Brush,
+                                                            RelativeSource={RelativeSource AncestorType=ListBox}}"/>
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </ListBox.ItemContainerStyle>
+
+                                    <ListBox.Template>
+                                        <ControlTemplate TargetType="ListBox">
+                                            <Border Background="Transparent" CornerRadius="10">
+                                                <ScrollViewer x:Name="ScrollViewer"
+                                                    VerticalScrollBarVisibility="Visible"
+                                                    HorizontalScrollBarVisibility="Disabled"
+                                                    Focusable="False">
+
+                                                    <ScrollViewer.Resources>
+                                                        <Style TargetType="ScrollBar">
+                                                            <Setter Property="Width" Value="8"/>
+                                                            <Setter Property="Background" Value="Transparent"/>
+                                                            <Setter Property="Template">
+                                                                <Setter.Value>
+                                                                    <ControlTemplate TargetType="ScrollBar">
+                                                                        <Grid x:Name="Root" Background="Transparent" Width="8">
+                                                                            <Track x:Name="PART_Track" IsDirectionReversed="True">
+                                                                                <Track.DecreaseRepeatButton>
+                                                                                    <RepeatButton Command="ScrollBar.LineUpCommand"
+                                                                                            Height="10"
+                                                                                            Visibility="Hidden"
+                                                                                            Background="Transparent"
+                                                                                            Focusable="False"
+                                                                                            BorderThickness="0"/>
+                                                                                </Track.DecreaseRepeatButton>
+
+                                                                                <!-- Hidden by default -->
+                                                                                <Track.Thumb>
+                                                                                    <Thumb x:Name="Thumb" Visibility="Collapsed">
+                                                                                        <Thumb.Template>
+                                                                                            <ControlTemplate TargetType="Thumb">
+                                                                                                <Border Background="#c0c0c0"
+                                                                                              CornerRadius="4"
+                                                                                              SnapsToDevicePixels="True"/>
+                                                                                            </ControlTemplate>
+                                                                                        </Thumb.Template>
+                                                                                    </Thumb>
+                                                                                </Track.Thumb>
+
+                                                                                <Track.IncreaseRepeatButton>
+                                                                                    <RepeatButton Command="ScrollBar.LineDownCommand"
+                                                                                        Height="10"
+                                                                                        Visibility="Hidden"
+                                                                                        Background="Transparent"
+                                                                                        Focusable="False"
+                                                                                        BorderThickness="0"/>
+                                                                                </Track.IncreaseRepeatButton>
+                                                                            </Track>
+                                                                        </Grid>
+
+                                                                        <!-- Hover behavior -->
+                                                                        <ControlTemplate.Triggers>
+
+                                                                            <!-- 1️ Hovering scrollbar itself -->
+                                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                                <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
+                                                                            </Trigger>
+
+                                                                            <!-- 2️ Hovering scrollbar track -->
+                                                                            <Trigger SourceName="PART_Track" Property="IsMouseOver" Value="True">
+                                                                                <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
+                                                                            </Trigger>
+
+                                                                            <!-- 3️ Hovering the parent ListBox -->
+                                                                            <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=ListBox}}" Value="True">
+                                                                                <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
+                                                                            </DataTrigger>
+
+
+                                                                        </ControlTemplate.Triggers>
+                                                                    </ControlTemplate>
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                        </Style>
+                                                    </ScrollViewer.Resources>
+
+                                                    <ItemsPresenter />
+                                                </ScrollViewer>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </ListBox.Template>
+
+                                </ListBox>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Border>
+
+                <UserControl.Style>
+                    <Style TargetType="UserControl">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsChecked, ElementName=btnToggleSelectPlaylist}" Value="True">
+                                <Setter Property="Visibility" Value="Visible"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsChecked, ElementName=btnToggleSelectPlaylist}" Value="False">
+                                <Setter Property="Visibility" Value="Collapsed"></Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </UserControl.Style>
+            </UserControl>
+
         </Grid>
 
-        <!-- Row 2 BottomBar -->
+        <!-- Row 2 Bottom View -->
         
         <Border x:Name="bdrPlaybackPanel" Grid.Row="2" Grid.ColumnSpan="3" VerticalAlignment="Bottom">
             <Border.Effect>
@@ -3834,7 +3805,7 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
         </Grid>
         </Border>
 
-        <!-- TitleBar -->
+        <!-- Row 0 Title Bar -->
 
         <Border Name="bdrTitleBar" Background="{Binding CurrentTheme.TitleBarBackground.Brush}" PreviewMouseLeftButtonDown="bdrTitleBar_PreviewMouseLeftButtonDown" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" CornerRadius="10, 10, 0, 0">
 
