@@ -1,15 +1,8 @@
-﻿using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.DirectoryServices;
-using System.Numerics;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Forms.VisualStyles;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Threading;
 using MusicPlayer.Data.Objects;
 using MusicPlayer.UIComponents;
 using MusicPlayer.UIComponents.Constants;
@@ -101,19 +94,19 @@ namespace WpfApp3
 
         #region Title Bar
 
-        #region Settings Button (opens up themedesigner)
-        private void bdrSettings_MouseEnter(object sender, MouseEventArgs e)
+        #region Theme designer Button
+        private void bdrThemeDesigner_MouseEnter(object sender, MouseEventArgs e)
         {
-            grdSettings.Background = Brushes.DarkGray;
+            grdThemeDesigner.Background = Brushes.DarkGray;
         }
 
-        private void bdrSettings_MouseLeave(object sender, MouseEventArgs e)
+        private void bdrThemeDesigner_MouseLeave(object sender, MouseEventArgs e)
         {
-            grdSettings.Background = null;
+            grdThemeDesigner.Background = null;
         }
 
         private ThemeDesigner _themeDesigner;
-        private void bdrSettings_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void bdrThemeDesigner_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (_themeDesigner == null || !_themeDesigner.IsLoaded)
             {
@@ -127,6 +120,22 @@ namespace WpfApp3
         }
 
         #endregion
+
+        private void bdrSettings_MouseEnter(object sender, MouseEventArgs e)
+        {
+            grdSettings.Background = Brushes.DarkGray;
+
+        }
+
+        private void bdrSettings_MouseLeave(object sender, MouseEventArgs e)
+        {
+            grdSettings.Background = null;
+        }
+
+        private void bdrSettings_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+
+        }
 
         #region Close Button
         private void bdrClose_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -328,12 +337,42 @@ namespace WpfApp3
                 {
                     if (border.Child is ToggleButton toggle)
                     {
-                        if (toggle != clickedToggle)
+                        if (toggle != clickedToggle) 
+                        {
                             toggle.IsChecked = false;
+                        }
+                        else
+                        {
+                            if (toggle.Name == "btnToggleAlbums")
+                            {
+                                lbAllSongsList.SelectionChanged -= AllSongsListBox_SelectionChanged;
+
+                                lbAlbumContents.SelectionChanged -= AlbumContentsListBox_SelectionChanged;
+                                lbAlbumContents.SelectionChanged += AlbumContentsListBox_SelectionChanged;
+                            }
+
+                            if (toggle.Name == "btnToggleSongs")
+                            {
+                                lbAlbumContents.SelectionChanged -= AlbumContentsListBox_SelectionChanged;
+
+                                lbAllSongsList.SelectionChanged -= AllSongsListBox_SelectionChanged;
+                                lbAllSongsList.SelectionChanged += AllSongsListBox_SelectionChanged;
+                            }
+
+                            if (toggle.Name == "btnPlaylistSongs")
+                            {
+                                lbAlbumContents.SelectionChanged -= AlbumContentsListBox_SelectionChanged;
+                                lbAllSongsList.SelectionChanged -= AllSongsListBox_SelectionChanged;
+
+                                //lbPlaylistList.SelectionChanged -= lbPlaylistList_SelectionChanaged;
+                                //lbPlaylistList.SelectionChanged += lbPlaylistList_SelectionChanaged;
+                            }
+                        }
                     }
                 }
             }
         }
+
         private void PlaybackToggle_Checked(object sender, RoutedEventArgs e)
         {
             bool? bValue = (sender as ToggleButton).IsChecked;
@@ -483,7 +522,19 @@ namespace WpfApp3
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             (sender as ListBox)?.ScrollIntoView((sender as ListBox)?.SelectedItem);
+        }
 
+        private void AlbumContentsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            (sender as ListBox)?.ScrollIntoView((sender as ListBox)?.SelectedItem);
+        }
+
+        private void AllSongsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ListBox element = sender as ListBox;
+            (sender as ListBox)?.ScrollIntoView((sender as ListBox)?.SelectedItem);
+            if (MainWindowViewModel.Instance.MusicPlayerCache.CurrentMode != ENMusicPlayerMode.Songs)
+                MainWindowViewModel.Instance.MusicPlayerCache.CurrentMode = ENMusicPlayerMode.Songs;
         }
     }
 }

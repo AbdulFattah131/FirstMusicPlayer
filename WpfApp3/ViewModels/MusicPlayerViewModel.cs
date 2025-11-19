@@ -59,6 +59,16 @@ namespace WpfApp3
             set
             {
                 _currentMode = value;
+                
+                switch (CurrentMode)
+                {
+                    case ENMusicPlayerMode.Songs:
+                        PlaybackQueue = new ObservableCollection<Song>(AllSongs);
+                        break;
+                    case ENMusicPlayerMode.Albums:
+                        break;
+                }
+
                 OnPropertyChanged(nameof(CurrentMode));
             }
         }
@@ -74,11 +84,15 @@ namespace WpfApp3
         }
 
         private Album _selectedAlbum; // album navigation
+        private Album _previousSelectedAlbum;
         public Album SelectedAlbum
         {
             get => _selectedAlbum;
             set
             {
+                if (_selectedAlbum != null)
+                    _previousSelectedAlbum = _selectedAlbum;
+
                 _selectedAlbum = value;
                 Player.Stop();
                 
@@ -115,16 +129,6 @@ namespace WpfApp3
 
                 if (value == null)
                     return;
-
-                if (SelectedAlbum != null && SelectedAlbum.Songs.Contains(value) && CurrentMode == ENMusicPlayerMode.Albums)
-                {
-                    PlaybackQueue = new ObservableCollection<Song>(SelectedAlbum.Songs);
-                }
-                else
-                {
-                    PlaybackQueue = new ObservableCollection<Song>(AllSongs);
-                    CurrentMode = ENMusicPlayerMode.Songs;
-                }
 
                 CurrentIndex = PlaybackQueue.IndexOf(_currentSong);
 
@@ -229,24 +233,24 @@ namespace WpfApp3
             if (PlaybackQueue == null || PlaybackQueue.Count == 0)
                 return;
 
-            Player.Stop();
-
             Random random = new Random();
-            int randomIndex = random.Next(PlaybackQueue.Count);
 
-            CurrentIndex = randomIndex;
-            CurrentSong = PlaybackQueue[CurrentIndex];
+            Song[] _arrTempQueue = PlaybackQueue.ToArray();
+            random.Shuffle(_arrTempQueue);
+            PlaybackQueue = new ObservableCollection<Song>(_arrTempQueue);
+            CurrentIndex = PlaybackQueue.IndexOf(CurrentSong);
         }
 
-        public void Repeat()
+        public void RepeatList()
         {
             if (PlaybackQueue == null || PlaybackQueue.Count == 0)
                 return;
 
-            Player.Stop();
+            
 
-            CurrentSong = PlaybackQueue[CurrentIndex];
-            PlayPause();
+
+
+            // repeat song
         }
 
         #endregion

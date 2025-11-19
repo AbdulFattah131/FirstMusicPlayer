@@ -20,24 +20,6 @@
         <convertor:DurationToDisplayTimeConvertor x:Key="DurationDisplayConverter"/>
         <convertor:IndexConvertor x:Key="IndexConvertor"/>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
-
-        <!-- #region Filtered Albums (unused) -->
-        <!-- Your Library View --><!--
-        <CollectionViewSource x:Key="PopTagAlbums" Source="{Binding MusicPlayerCache.Albums}"/>
-        <CollectionViewSource x:Key="FunkTagAlbums" Source="{Binding MusicPlayerCache.Albums}"/>
-        <CollectionViewSource x:Key="RockTagAlbums" Source="{Binding MusicPlayerCache.Albums}"/>
-        <CollectionViewSource x:Key="RnB/SoulTagAlbums" Source="{Binding MusicPlayerCache.Albums}"/>
-
-        --><!-- Explore View --><!--
-        <CollectionViewSource x:Key="ContemporarySoulAlbums" Source="{Binding MusicPlayerCache.Albums}"/>
-        <CollectionViewSource x:Key="ModernFunkHitsAlbums" Source="{Binding MusicPlayerCache.Albums}"/>
-        <CollectionViewSource x:Key="HeavyRockAlbums" Source="{Binding MusicPlayerCache.Albums}"/>
-        <CollectionViewSource x:Key="Proto-MetalClassicsAlbums" Source="{Binding MusicPlayerCache.Albums}"/>
-        <CollectionViewSource x:Key="ProgressiveRockClassicsAlbums" Source="{Binding MusicPlayerCache.Albums}"/>
-        <CollectionViewSource x:Key="ModernAlternative/IndieAlbums" Source="{Binding MusicPlayerCache.Albums}"/>
-        <CollectionViewSource x:Key="Pop-CultureClassicsAlbums" Source="{Binding MusicPlayerCache.Albums}"/>-->
-        <!-- #endregion -->
-        
     </Window.Resources>
     
     <!-- Main Grid -->
@@ -90,145 +72,6 @@
 
                         <TextBlock Text="Spices &amp; Co" FontSize="18.4" FontFamily="Bahnschrift" FontWeight="Bold" Margin="1,0,0,0" VerticalAlignment="Center" Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}"></TextBlock>
                     </StackPanel>
-
-                    <!--#region unused views-->
-                    
-                    <!--<TextBlock x:Name="tbHeading1" Text="Curation" Margin="0, 35, 0, 0" FontWeight="Bold" FontSize="15" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"></TextBlock>
-
-                    <Border x:Name="bdrYourLibrary"> 
-                        <Border.Effect>
-                            <DropShadowEffect Color="#B0B8C0"
-                              BlurRadius="2"
-                              ShadowDepth="2"
-                              Opacity="0.2"/>
-                        </Border.Effect>
-                        <ToggleButton x:Name="tbYourLibrary"
-                          Height="40"
-                          Width="180"
-                          Margin="0,25,0,0"
-                          Checked="ToggleButton_Checked"
-                          FontSize="14"
-                          BorderBrush="Transparent"
-                          Foreground="Black">
-                            
-                        <ToggleButton.Style>
-                            <Style TargetType="ToggleButton">
-                                <Setter Property="Background" Value="{Binding CurrentTheme.PlayerControlBackground.Brush}"/>
-                                <Setter Property="BorderBrush" Value="Transparent"/>
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        
-                                        <ControlTemplate TargetType="ToggleButton">
-                                            
-                                            <Grid>
-                                            <Border x:Name="border"
-                                                CornerRadius="13"
-                                                Background="{TemplateBinding Background}"
-                                                BorderBrush="{TemplateBinding BorderBrush}">
-                                                <ContentPresenter Margin="25, 0, 0, 0" HorizontalAlignment="Left"
-                                                VerticalAlignment="Center"
-                                                Content="{TemplateBinding Content}"/>
-                                                </Border>
-                                                    
-                                                    <Path x:Name="pLibrary" Margin="25, 0, 10, 0" HorizontalAlignment="Left"
-                                                     Data="M20,2H8A2,2 0 0,0 6,4V16A2,2 0 0,0 8,18H20A2,2 0 0,0 22,16V4A2,2 0 0,0 20,2M20,16H8V4H20M12.5,15A2.5,2.5 0 0,0 15,12.5V7H18V5H14V10.5C13.58,10.19 13.07,10 12.5,10A2.5,2.5 0 0,0 10,12.5A2.5,2.5 0 0,0 12.5,15M4,6H2V20A2,2 0 0,0 4,22H18V20H4"
-                                                     Fill="{Binding CurrentTheme.WindowPrimaryAnchor.Brush}"
-                                                     Width="15" Height="15" Stretch="Uniform" VerticalAlignment="Center" /> 
-                                                    <TextBlock x:Name="tbLibrary" Margin="50, 0, 0, 0" HorizontalAlignment="Left" Text="Your Library" VerticalAlignment="Center" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"/>
-                                            </Grid>
-                                            
-                                                    <ControlTemplate.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter TargetName="border" Property="Background"
-                                                      Value="{Binding CurrentTheme.LeftToggleHover.Brush}"/>
-                                                    </Trigger>
-                                                        
-                                                <Trigger Property="IsPressed" Value="True">
-                                                    <Setter TargetName="border" Property="Background" Value="{Binding CurrentTheme.LeftToggleSelected.Brush}"/>
-                                                        <Setter TargetName="pLibrary" Property="Fill" Value="White"/>
-                                                        <Setter TargetName="tbLibrary" Property="Foreground" Value="White"/>
-                                                    </Trigger>
-                                                        
-                                                <Trigger Property="IsChecked" Value="True">
-                                                    <Setter TargetName="border" Property="Background" Value="{Binding CurrentTheme.LeftToggleSelected.Brush}"/>
-                                                        <Setter TargetName="pLibrary" Property="Fill" Value="White"/>
-                                                        <Setter TargetName="tbLibrary" Property="Foreground" Value="White"/>
-                                                    </Trigger>
-                                                        
-                                            </ControlTemplate.Triggers>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </ToggleButton.Style>
-                    </ToggleButton>
-                    </Border>
-
-                    <Border x:Name="bdrExplore">
-                        <Border.Effect>
-                            <DropShadowEffect Color="#B0B8C0"
-                              BlurRadius="2"
-                              ShadowDepth="2"
-                              Opacity="0.2"/>
-                        </Border.Effect>
-                        <ToggleButton x:Name="tbExplore"
-                      Height="40"
-                      Width="180"
-                      Checked="ToggleButton_Checked"
-                      Margin="0,25,0,0"
-                      FontSize="14"
-                      BorderBrush="Transparent">
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                                
-                            </StackPanel>
-                            <ToggleButton.Style>
-                                <Style TargetType="ToggleButton">
-                                    <Setter Property="Background" Value="{Binding CurrentTheme.PlayerControlBackground.Brush}"/>
-                                    <Setter Property="BorderBrush" Value="Transparent"/>
-
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="ToggleButton">
-                                                <Grid>
-                                                    <Border x:Name="border"
-                                                CornerRadius="13"
-                                                Background="{TemplateBinding Background}"
-                                                BorderBrush="{TemplateBinding BorderBrush}">
-                                                    <ContentPresenter Margin="25, 0, 0, 0" HorizontalAlignment="Left"
-                                                  VerticalAlignment="Center"
-                                                  Content="{TemplateBinding Content}"/>
-                                                </Border>
-                                                <Path x:Name="pExplore" Margin="25, 0, 10, 0"
-                                                    Data="M22 8V11H20V8H4V18H13.78C13.38 18.59 13.13 19.26 13.04 20H4C2.9 20 2 19.11 2 18V6C2 4.89 2.89 4 4 4H10L12 6H20C21.1 6 22 6.89 22 8M18.5 13V18.21C18.19 18.07 17.86 18 17.5 18C16.12 18 15 19.12 15 20.5S16.12 23 17.5 23 20 21.88 20 20.5V15H22V13H18.5Z"
-                                                    Width="15" Height="15" Stretch="Uniform" HorizontalAlignment="Left"
-                                                    Fill="{Binding CurrentTheme.WindowPrimaryAnchor.Brush}"></Path>
-                                                <TextBlock x:Name="tbExplore" Text="Explore" Margin="50, 0, 0, 0" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"/>
-                                                </Grid>
-                                                <ControlTemplate.Triggers>
-                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter TargetName="border" Property="Background"
-                                                        Value="{Binding CurrentTheme.LeftToggleHover.Brush}"/>
-                                                    </Trigger>
-                                                    <Trigger Property="IsPressed" Value="True">
-                                                        <Setter TargetName="border" Property="Background" Value="{Binding CurrentTheme.LeftToggleSelected.Brush}"/>
-                                                        <Setter TargetName="pExplore" Property="Fill" Value="White"/>
-                                                        <Setter TargetName="tbExplore" Property="Foreground" Value="White"/>
-                                                    </Trigger>
-                                                    <Trigger Property="IsChecked" Value="True">
-                                                        <Setter TargetName="border" Property="Background" Value="{Binding CurrentTheme.LeftToggleSelected.Brush}"/>
-                                                        <Setter TargetName="pExplore" Property="Fill" Value="White"/>
-                                                        <Setter TargetName="tbExplore" Property="Foreground" Value="White"/>
-                                                    </Trigger>
-                                                </ControlTemplate.Triggers>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </ToggleButton.Style>
-                        </ToggleButton>
-                    </Border>-->
-                    
-                    <!--#endregion-->
 
                     <TextBlock x:Name="tbHeading2" Text="My Music" Margin="0, 40, 0, 0" FontWeight="Bold" FontSize="15" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}"></TextBlock>
 
@@ -937,1322 +780,6 @@
 
             <!-- Column 1 Center Main Bar -->
 
-            <!--#region Unused Views-->
-            
-            <!--<UserControl x:Name="ucYourLibraryView" Grid.Column="1">
-                
-                --><!-- YourLibrary View --><!--
-
-                <Border x:Name="bdCenterPanelLibraryView" CornerRadius="13" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}" Margin="10, 10, 10, 15">
-                    <Border.Effect>
-                        <DropShadowEffect Color="{Binding CurrentTheme.ComplementGray.Brush}"
-                          Direction="270"
-                          ShadowDepth="4"
-                          Opacity="0.18"
-                          BlurRadius="8"/>
-                    </Border.Effect>
-
-                    <Grid x:Name="grdYourLibraryView">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="50"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="Auto"></RowDefinition>
-                            <RowDefinition Height="Auto"></RowDefinition>
-                        </Grid.RowDefinitions>
-
-                        --><!-- SearchBox-->
-                        <!--<Border x:Name="SearchBoxLibraryView" Height="40" CornerRadius="13" Background="{Binding CurrentTheme.SearchBoxBackground.Brush}" Grid.Row="0" Margin="40, 30, 0, 30" Grid.Column="0" Width="250" HorizontalAlignment="Left" VerticalAlignment="Center">
-                <StackPanel Orientation="Horizontal" Margin="20, 10, 10, 10" VerticalAlignment="Center">
-                    <Path x:Name="pSearchLibraryView" Width="15" Height="15" Stretch="Uniform"
-                      Fill="{Binding CurrentTheme.WindowPrimaryAnchor.Brush}"
-                      Data="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"></Path>
-                    <TextBox x:Name="tbSearchLibraryView" Text="Search" FontSize="13" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}" Margin="5, 0, 0, 0" VerticalAlignment="Center" Background="Transparent" BorderBrush="Transparent"></TextBox>
-                </StackPanel>
-            </Border>-->
-
-                        <!-- Grid Library View --><!--
-                        <Grid x:Name="grdLibraryView" Grid.Row="1" Grid.ColumnSpan="2" Margin="40, 0, 40, 0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"></RowDefinition>
-                                <RowDefinition Height="*"></RowDefinition>
-
-                            </Grid.RowDefinitions>
-
-                            --><!-- Heading --><!--
-
-                            <TextBlock x:Name="tbYourLibraryView" Grid.Row="0" Text="Your Library" FontFamily="Bahnschrift" FontSize="18" FontWeight="Black" 
-                             Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}" HorizontalAlignment="Left"/>
-
-                            --><!-- YourLibraryListBox2 --><!--
-
-                            <ScrollViewer Margin="0, 0, 0, 0" Grid.Row="1" Grid.Column="0" PreviewMouseWheel="PreviewMouseWheel">
-
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*"></RowDefinition>
-                                        <RowDefinition Height="*"></RowDefinition>
-                                        <RowDefinition Height="*"></RowDefinition>
-                                        <RowDefinition Height="*"></RowDefinition>
-                                    </Grid.RowDefinitions>
-
-                                    <StackPanel x:Name="spYourLibrary1" Grid.Row="0" Margin="0, 30, 40, 0">
-
-                                        <TextBlock x:Name="tbGenre1" Text="Pop" FontSize="16.5" Margin="0, 15, 0, 0" FontWeight="Black" FontStyle="Italic" 
-                                            Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}" HorizontalAlignment="Left"/>
-
-                                        <ListBox x:Name="lbGenreList1" Height="150" Margin="0, 10, 0, 20" VerticalAlignment="Center" HorizontalAlignment="Stretch" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                                            Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={StaticResource PopTagAlbums}}" SelectedItem="{Binding MusicPlayerCache.SelectedAlbum, Mode=TwoWay}" SelectionChanged="LibraryList_SelectionChanged">
-
-                                            <ListBox.ItemTemplate>
-                                                <DataTemplate>
-                                                    <Grid x:Name="grdlbGenreList1" VerticalAlignment="Center" Margin="0, 10">
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition x:Name="img" Width="Auto"></ColumnDefinition>
-                                                            <ColumnDefinition x:Name="sp" Width="200"></ColumnDefinition>
-                                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                                        </Grid.ColumnDefinitions>
-
-                                                        <Rectangle x:Name="iAlbumCover" RenderOptions.BitmapScalingMode="HighQuality" VerticalAlignment="Top" Margin="15, 0, 0, 0" Grid.Column="0" Width="100" Height="100" RadiusX=" 5" RadiusY="5">
-                                                            <Rectangle.Fill>
-                                                                <ImageBrush ImageSource="{Binding Image}" Stretch="UniformToFill" />
-                                                            </Rectangle.Fill>
-                                                        </Rectangle>
-
-                                                        <StackPanel x:Name="spAlbumName" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Top" Margin="10, 0, 0, 0">
-                                                            <TextBlock Text="{Binding Title}" FontWeight="Bold" FontSize="14" Foreground="{Binding DataContext.CurrentTheme.WindowHeadingForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                            <TextBlock Text="{Binding Artist}" FontSize="12" Foreground="{Binding DataContext.CurrentTheme.CurrentSongArtistForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                            <TextBlock x:Name="tbAlbumYear" Text="{Binding Year}" Foreground="{Binding DataContext.CurrentTheme.CurrentSongArtistForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                                                        </StackPanel>
-
-                                                        <Button x:Name="bDetails" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="Transparent" BorderBrush="Transparent" Margin="0, 0, 30, 0">
-                                                            <Path Data="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z"
-                                                             Fill="{Binding DataContext.CurrentTheme.ComplementGray.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"
-                                                             Stretch="Uniform" Width="9" Height="9"></Path>     
-                                                        </Button>
-
-                                                    </Grid>
-                                                </DataTemplate>
-                                            </ListBox.ItemTemplate>
-
-                                            <ListBox.ItemContainerStyle>
-                                                <Style TargetType="ListBoxItem">
-                                                    <Setter Property="Background" Value="Transparent"/>
-                                                    <Setter Property="BorderThickness" Value="0"/>
-                                                    <Setter Property="Padding" Value="5"/>
-                                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                                    <Setter Property="Template">
-                                                        <Setter.Value>
-                                                            <ControlTemplate TargetType="ListBoxItem">
-                                                                <Border x:Name="border"
-                                                                Background="{TemplateBinding Background}"
-                                                                CornerRadius="13">
-                                                                    <ContentPresenter />
-                                                                </Border>
-                                                                <ControlTemplate.Triggers>
-                                                                    --><!-- Hover --><!--
-                                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                                        <Setter Property="Cursor" Value="Hand"/>
-                                                                        <Setter TargetName="border"
-                                                            Property="Background"
-                                                            Value="{Binding DataContext.CurrentTheme.ListBoxHover.Brush,
-                                                            RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                                    </Trigger>
-                                                                    --><!-- Selected --><!--
-                                                                    <Trigger Property="IsSelected" Value="True">
-                                                                        <Setter TargetName="border"
-                                                            Property="Background"
-                                                            Value="{Binding DataContext.CurrentTheme.ListBoxSelected.Brush,
-                                                            RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                                    </Trigger>
-                                                                </ControlTemplate.Triggers>
-                                                            </ControlTemplate>
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                </Style>
-                                            </ListBox.ItemContainerStyle>
-                                            
-                                            <ListBox.ItemsPanel>
-                                                <ItemsPanelTemplate>
-                                                    <StackPanel Orientation="Horizontal">
-
-                                                    </StackPanel>
-                                                </ItemsPanelTemplate>
-                                            </ListBox.ItemsPanel>
-                                        </ListBox>
-                                    </StackPanel>
-
-                                    <StackPanel x:Name="spYourLibrary2" Grid.Row="1" Margin="0, 0, 40, 0">
-
-                                        <TextBlock x:Name="tbGenre2" Text="Funk" FontSize="16.5" FontWeight="Black" FontStyle="Italic"
-                                        Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}" HorizontalAlignment="Left"/>
-
-                                        <ListBox x:Name="lbGenreList2" Height="150" Margin="0, 10, 0, 20" SelectionChanged="LibraryList_SelectionChanged" VerticalAlignment="Center" HorizontalAlignment="Stretch" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                                        Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={StaticResource FunkTagAlbums}}" SelectedItem="{Binding MusicPlayerCache.SelectedAlbum, Mode=TwoWay}">
-
-                                            <ListBox.ItemTemplate>
-                                                <DataTemplate>
-                                                    <Grid x:Name="grdlbGenreList2" VerticalAlignment="Center" Margin="0, 10">
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition x:Name="img" Width="Auto"></ColumnDefinition>
-                                                            <ColumnDefinition x:Name="sp" Width="200"></ColumnDefinition>
-                                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                                        </Grid.ColumnDefinitions>
-
-                                                        <Rectangle x:Name="iAlbumCover" RenderOptions.BitmapScalingMode="HighQuality" VerticalAlignment="Top" Margin="15, 0, 0, 0" Grid.Column="0" Width="100" Height="100" RadiusX="5" RadiusY="5">
-                                                            <Rectangle.Fill>
-                                                                <ImageBrush ImageSource="{Binding Image}" Stretch="UniformToFill" />
-                                                            </Rectangle.Fill>
-                                                        </Rectangle>
-
-                                                        <StackPanel x:Name="spAlbumName" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Top" Margin="10, 0, 0, 0">
-                                                            <TextBlock Text="{Binding Title}" FontWeight="Bold" FontSize="14" Foreground="{Binding DataContext.CurrentTheme.WindowHeadingForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                            <TextBlock Text="{Binding Artist}" FontSize="12" Foreground="{Binding DataContext.CurrentTheme.CurrentSongArtistForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                            <TextBlock x:Name="tbAlbumYear" Text="{Binding Year}" Foreground="{Binding DataContext.CurrentTheme.CurrentSongArtistForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                                                        </StackPanel>
-
-                                                        <Button x:Name="bDetails" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="Transparent" BorderBrush="Transparent" Margin="0, 0, 30, 0">
-                                                            <Path Data="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z"
-                                         Fill="{Binding DataContext.CurrentTheme.ComplementGray.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"
-                                         Stretch="Uniform" Width="9" Height="9"></Path>
-                                                        </Button>
-
-                                                    </Grid>
-                                                </DataTemplate>
-                                            </ListBox.ItemTemplate>
-
-                                            <ListBox.ItemContainerStyle>
-                                                <Style TargetType="ListBoxItem">
-                                                    <Setter Property="Background" Value="Transparent"/>
-                                                    <Setter Property="BorderThickness" Value="0"/>
-                                                    <Setter Property="Padding" Value="5"/>
-                                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                                    <Setter Property="Template">
-                                                        <Setter.Value>
-                                                            <ControlTemplate TargetType="ListBoxItem">
-                                                                <Border x:Name="border"
-                Background="{TemplateBinding Background}"
-                CornerRadius="13">
-                                                                    <ContentPresenter />
-                                                                </Border>
-                                                                <ControlTemplate.Triggers>
-                                                                    --><!-- Hover --><!--
-                                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                                        <Setter Property="Cursor" Value="Hand"/>
-                                                                        <Setter TargetName="border"
-        Property="Background"
-        Value="{Binding DataContext.CurrentTheme.ListBoxHover.Brush,
-        RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                                    </Trigger>
-                                                                    --><!-- Selected --><!--
-                                                                    <Trigger Property="IsSelected" Value="True">
-                                                                        <Setter TargetName="border"
-        Property="Background"
-        Value="{Binding DataContext.CurrentTheme.ListBoxSelected.Brush,
-        RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                                    </Trigger>
-                                                                </ControlTemplate.Triggers>
-                                                            </ControlTemplate>
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                </Style>
-                                            </ListBox.ItemContainerStyle>
-                                            <ListBox.ItemsPanel>
-                                                <ItemsPanelTemplate>
-                                                    <StackPanel Orientation="Horizontal">
-
-                                                    </StackPanel>
-                                                </ItemsPanelTemplate>
-                                            </ListBox.ItemsPanel>
-                                        </ListBox>
-                                    </StackPanel>
-
-                                    <StackPanel x:Name="spYourLibrary3" Grid.Row="2" Margin="0, 0, 40, 0">
-
-                                        <TextBlock x:Name="tbGenre3" Text="Rock" FontSize="16.5" FontWeight="Black" FontStyle="Italic"
-                                         Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}" HorizontalAlignment="Left"/>
-
-                                        <ListBox x:Name="lbGenreList3" Height="150" Margin="0, 10, 0, 20" SelectionChanged="LibraryList_SelectionChanged" VerticalAlignment="Center" HorizontalAlignment="Stretch" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                                         Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={StaticResource RockTagAlbums}}" SelectedItem="{Binding MusicPlayerCache.SelectedAlbum, Mode=TwoWay}">
-                                            <ListBox.ItemTemplate>
-                                                <DataTemplate>
-                                                    <Grid x:Name="grdlbGenreList3" VerticalAlignment="Center" Margin="0, 10">
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition x:Name="img" Width="Auto"></ColumnDefinition>
-                                                            <ColumnDefinition x:Name="sp" Width="200"></ColumnDefinition>
-                                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                                        </Grid.ColumnDefinitions>
-
-                                                        <Rectangle x:Name="iAlbumCover" RenderOptions.BitmapScalingMode="HighQuality" VerticalAlignment="Top" Margin="15, 0, 0, 0" Grid.Column="0" Width="100" Height="100" RadiusX=" 5" RadiusY="5">
-                                                            <Rectangle.Fill>
-                                                                <ImageBrush ImageSource="{Binding Image}" Stretch="UniformToFill" />
-                                                            </Rectangle.Fill>
-                                                        </Rectangle>
-
-                                                        <StackPanel x:Name="spAlbumName" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Top" Margin="10, 0, 0, 0">
-                                                            <TextBlock Text="{Binding Title}" FontWeight="Bold" FontSize="14" Foreground="{Binding DataContext.CurrentTheme.WindowHeadingForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                            <TextBlock Text="{Binding Artist}" FontSize="12" Foreground="{Binding DataContext.CurrentTheme.CurrentSongArtistForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                            <TextBlock x:Name="tbAlbumYear" Text="{Binding Year}" Foreground="{Binding DataContext.CurrentTheme.CurrentSongArtistForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                                                        </StackPanel>
-
-                                                        <Button x:Name="bDetails" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="Transparent" BorderBrush="Transparent" Margin="0, 0, 30, 0">
-                                                            <Path Data="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z"
-                                             Fill="{Binding DataContext.CurrentTheme.ComplementGray.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"
-                                             Stretch="Uniform" Width="9" Height="9"></Path>
-                                                        </Button>
-
-                                                    </Grid>
-                                                </DataTemplate>
-                                            </ListBox.ItemTemplate>
-
-                                            <ListBox.ItemContainerStyle>
-                                                <Style TargetType="ListBoxItem">
-                                                    <Setter Property="Background" Value="Transparent"/>
-                                                    <Setter Property="BorderThickness" Value="0"/>
-                                                    <Setter Property="Padding" Value="5"/>
-                                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                                    <Setter Property="Template">
-                                                        <Setter.Value>
-                                                            <ControlTemplate TargetType="ListBoxItem">
-                                                                <Border x:Name="border"
-                                                Background="{TemplateBinding Background}"
-                                                CornerRadius="13">
-                                                                    <ContentPresenter />
-                                                                </Border>
-                                                                <ControlTemplate.Triggers>
-                                                                    --><!-- Hover --><!--
-                                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                                        <Setter Property="Cursor" Value="Hand"/>
-                                                                        <Setter TargetName="border"
-                                                            Property="Background"
-                                                            Value="{Binding DataContext.CurrentTheme.ListBoxHover.Brush,
-                                                            RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                                    </Trigger>
-                                                                    --><!-- Selected --><!--
-                                                                    <Trigger Property="IsSelected" Value="True">
-                                                                        <Setter TargetName="border"
-                                                            Property="Background"
-                                                            Value="{Binding DataContext.CurrentTheme.ListBoxSelected.Brush,
-                                                            RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                                    </Trigger>
-                                                                </ControlTemplate.Triggers>
-                                                            </ControlTemplate>
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                </Style>
-                                            </ListBox.ItemContainerStyle>
-                                            <ListBox.ItemsPanel>
-                                                <ItemsPanelTemplate>
-                                                    <StackPanel Orientation="Horizontal">
-
-                                                    </StackPanel>
-                                                </ItemsPanelTemplate>
-                                            </ListBox.ItemsPanel>
-                                        </ListBox>
-                                    </StackPanel>
-
-                                    <StackPanel x:Name="spYourLibrary4" Grid.Row="3" Margin="0, 0, 40, 0">
-
-                                        <TextBlock x:Name="tbGenre4" Text="RnB/Soul" FontSize="16.5" FontWeight="Black" FontStyle="Italic"
-                                        Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}" HorizontalAlignment="Left"/>
-
-                                        <ListBox x:Name="lbGenreList4" Height="150" Margin="0, 10, 0, 20" VerticalAlignment="Center" SelectionChanged="LibraryList_SelectionChanged" HorizontalAlignment="Stretch" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                                        Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={StaticResource RnB/SoulTagAlbums}}" SelectedItem="{Binding MusicPlayerCache.SelectedAlbum, Mode=TwoWay}">
-
-                                            <ListBox.ItemTemplate>
-                                                <DataTemplate>
-                                                    <Grid x:Name="grdlbGenreList4" VerticalAlignment="Center" Margin="0, 10">
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition x:Name="img" Width="Auto"></ColumnDefinition>
-                                                            <ColumnDefinition x:Name="sp" Width="200"></ColumnDefinition>
-                                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                                        </Grid.ColumnDefinitions>
-
-                                                        <Rectangle x:Name="iAlbumCover" RenderOptions.BitmapScalingMode="HighQuality" VerticalAlignment="Top" Margin="15, 0, 0, 0" Grid.Column="0" Width="100" Height="100" RadiusX="5" RadiusY="5">
-                                                            <Rectangle.Fill>
-                                                                <ImageBrush ImageSource="{Binding Image}" Stretch="UniformToFill" />
-                                                            </Rectangle.Fill>
-                                                        </Rectangle>
-
-                                                        <StackPanel x:Name="spAlbumName" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Top" Margin="10, 0, 0, 0">
-                                                            <TextBlock Text="{Binding Title}" FontWeight="Bold" FontSize="14" Foreground="{Binding DataContext.CurrentTheme.WindowHeadingForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                            <TextBlock Text="{Binding Artist}" FontSize="12" Foreground="{Binding DataContext.CurrentTheme.CurrentSongArtistForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                            <TextBlock x:Name="tbAlbumYear" Text="{Binding Year}" Foreground="{Binding DataContext.CurrentTheme.CurrentSongArtistForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                                                        </StackPanel>
-
-                                                        <Button x:Name="bDetails" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="Transparent" BorderBrush="Transparent" Margin="0, 0, 30, 0">
-                                                            <Path Data="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z"
-                                         Fill="{Binding DataContext.CurrentTheme.ComplementGray.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"
-                                         Stretch="Uniform" Width="9" Height="9"></Path>
-                                                        </Button>
-
-                                                    </Grid>
-                                                </DataTemplate>
-                                            </ListBox.ItemTemplate>
-
-                                            <ListBox.ItemContainerStyle>
-                                                <Style TargetType="ListBoxItem">
-                                                    <Setter Property="Background" Value="Transparent"/>
-                                                    <Setter Property="BorderThickness" Value="0"/>
-                                                    <Setter Property="Padding" Value="5"/>
-                                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                                    <Setter Property="Template">
-                                                        <Setter.Value>
-                                                            <ControlTemplate TargetType="ListBoxItem">
-                                                                <Border x:Name="border"
-                                            Background="{TemplateBinding Background}"
-                                            CornerRadius="13">
-                                                                    <ContentPresenter />
-                                                                </Border>
-                                                                <ControlTemplate.Triggers>
-                                                                    --><!-- Hover --><!--
-                                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                                        <Setter Property="Cursor" Value="Hand"/>
-                                                                        <Setter TargetName="border"
-                                                    Property="Background"
-                                                    Value="{Binding DataContext.CurrentTheme.ListBoxHover.Brush,
-                                                    RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                                    </Trigger>
-                                                                    --><!-- Selected --><!--
-                                                                    <Trigger Property="IsSelected" Value="True">
-                                                                        <Setter TargetName="border"
-                                                    Property="Background"
-                                                    Value="{Binding DataContext.CurrentTheme.ListBoxSelected.Brush,
-                                                    RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                                    </Trigger>
-                                                                </ControlTemplate.Triggers>
-                                                            </ControlTemplate>
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                </Style>
-                                            </ListBox.ItemContainerStyle>
-                                            <ListBox.ItemsPanel>
-                                                <ItemsPanelTemplate>
-                                                    <StackPanel Orientation="Horizontal">
-
-                                                    </StackPanel>
-                                                </ItemsPanelTemplate>
-                                            </ListBox.ItemsPanel>
-                                        </ListBox>
-                                    </StackPanel>
-                                </Grid>
-                                <ScrollViewer.Style>
-                                    <Style TargetType="ScrollViewer">
-                                        <Setter Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate TargetType="ScrollViewer">
-                                                    <Grid x:Name="Root" Background="Transparent">
-                                                        --><!-- Scroll content --><!--
-                                                        <ScrollContentPresenter />
-
-                                                        --><!-- Custom vertical scrollbar --><!--
-                                                        <ScrollBar x:Name="PART_VerticalScrollBar"
-Orientation="Vertical"
-Width="8"
-Margin="0"
-HorizontalAlignment="Right"
-VerticalAlignment="Stretch"
-Background="Transparent"
-Visibility="Collapsed"
-Minimum="0"
-Maximum="{TemplateBinding ScrollableHeight}"
-ViewportSize="{TemplateBinding ViewportHeight}"
-Value="{TemplateBinding VerticalOffset}"
-SmallChange="16"
-LargeChange="64">
-                                                            <ScrollBar.Style>
-                                                                <Style TargetType="ScrollBar">
-                                                                    <Setter Property="Template">
-                                                                        <Setter.Value>
-                                                                            <ControlTemplate TargetType="ScrollBar">
-                                                                                <Grid x:Name="ScrollRoot" Background="Transparent" Width="8">
-                                                                                    <Track x:Name="PART_Track" IsDirectionReversed="True">
-
-                                                                                        --><!-- Hidden arrow buttons --><!--
-                                                                                        <Track.DecreaseRepeatButton>
-                                                                                            <RepeatButton Command="ScrollBar.LineUpCommand"
-                                       Height="10"
-                                       Visibility="Hidden"
-                                       Background="Transparent"
-                                       Focusable="False"
-                                       BorderThickness="0"/>
-                                                                                        </Track.DecreaseRepeatButton>
-
-                                                                                        --><!-- Rounded thumb --><!--
-                                                                                        <Track.Thumb>
-                                                                                            <Thumb x:Name="Thumb" Visibility="Collapsed">
-                                                                                                <Thumb.Template>
-                                                                                                    <ControlTemplate TargetType="Thumb">
-                                                                                                        <Border Background="#c0c0c0"
-                                             CornerRadius="4"
-                                             SnapsToDevicePixels="True"/>
-                                                                                                    </ControlTemplate>
-                                                                                                </Thumb.Template>
-                                                                                            </Thumb>
-                                                                                        </Track.Thumb>
-
-                                                                                        <Track.IncreaseRepeatButton>
-                                                                                            <RepeatButton Command="ScrollBar.LineDownCommand"
-                                       Height="10"
-                                       Visibility="Hidden"
-                                       Background="Transparent"
-                                       Focusable="False"
-                                       BorderThickness="0"/>
-                                                                                        </Track.IncreaseRepeatButton>
-                                                                                    </Track>
-                                                                                </Grid>
-
-                                                                                --><!-- Hover logic --><!--
-                                                                                <ControlTemplate.Triggers>
-                                                                                    --><!-- Show thumb when scrollbar hovered --><!--
-                                                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                                                        <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
-                                                                                    </Trigger>
-
-                                                                                    --><!-- Show thumb when track hovered --><!--
-                                                                                    <Trigger SourceName="PART_Track" Property="IsMouseOver" Value="True">
-                                                                                        <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
-                                                                                    </Trigger>
-
-                                                                                    --><!-- Show thumb when ScrollViewer (lyrics area) hovered --><!--
-                                                                                    <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" Value="True">
-                                                                                        <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
-                                                                                    </DataTrigger>
-                                                                                </ControlTemplate.Triggers>
-                                                                            </ControlTemplate>
-                                                                        </Setter.Value>
-                                                                    </Setter>
-                                                                </Style>
-                                                            </ScrollBar.Style>
-                                                        </ScrollBar>
-                                                    </Grid>
-
-                                                    --><!-- Make scrollbar visible only on hover --><!--
-                                                    <ControlTemplate.Triggers>
-                                                        <Trigger Property="IsMouseOver" Value="True">
-                                                            <Setter TargetName="PART_VerticalScrollBar" Property="Visibility" Value="Visible"/>
-                                                        </Trigger>
-                                                    </ControlTemplate.Triggers>
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Style>
-                                </ScrollViewer.Style>
-                            </ScrollViewer>
-                        
-                        </Grid>
-                    </Grid>
-                </Border>
-                <UserControl.Style>
-                    <Style TargetType="UserControl">
-                        <Setter Property="Visibility" Value="Collapsed"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsChecked, ElementName=tbYourLibrary}" Value="True">
-                                <Setter Property="Visibility" Value="Visible"></Setter>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding IsChecked, ElementName=tbYourLibrary}" Value="False">
-                                <Setter Property="Visibility" Value="Collapsed"></Setter>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </UserControl.Style>
-            </UserControl>
-
-            <UserControl x:Name="ucExploreView" Grid.Column="1">
-                --><!-- Explore View --><!--
-
-                <Border x:Name="bdExplore" CornerRadius="13" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}" Margin="10, 10, 10, 15">
-                    <Border.Effect>
-                        <DropShadowEffect Color="{Binding CurrentTheme.ComplementGray.Brush}"
-                          Direction="270"
-                          ShadowDepth="4"
-                          Opacity="0.18"
-                          BlurRadius="8"/>
-                    </Border.Effect>
-                    <Grid x:Name="grdExploreViewMain">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="50"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="Auto"></RowDefinition>
-                            <RowDefinition Height="Auto"></RowDefinition>
-                        </Grid.RowDefinitions>
-
-                        --><!-- SearchBox-->
-                        <!--<Border x:Name="SearchBoxExploreView" Height="40" CornerRadius="13" Background="{Binding CurrentTheme.SearchBoxBackground.Brush}" Grid.Row="0" Margin="40, 30, 0, 30" Grid.Column="0" Width="250" HorizontalAlignment="Left" VerticalAlignment="Center">
-                            <StackPanel Orientation="Horizontal" Margin="20, 10, 10, 10" VerticalAlignment="Center">
-                                <Path x:Name="pExploreView" Width="15" Height="15" Stretch="Uniform"
-                                 Fill="{Binding CurrentTheme.WindowPrimaryAnchor.Brush}"
-                                    Data="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"></Path>
-                                <TextBox x:Name="tbExploreView" Text="Search" FontSize="13" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}" Margin="5, 0, 0, 0" VerticalAlignment="Center" Background="Transparent" BorderBrush="Transparent"></TextBox>
-                            </StackPanel>
-                        </Border>-->
-
-                        <!-- Grid Library View --><!--
-                        <Grid x:Name="grdExploreView" Grid.Row="1" Grid.ColumnSpan="2" Margin="40, 0, 40, 0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"></RowDefinition>
-                                <RowDefinition Height="*"></RowDefinition>
-
-                            </Grid.RowDefinitions>
-
-                            --><!-- Heading --><!--
-
-                            <TextBlock x:Name="tbExploreViewHeading" Grid.Row="0" Text="Explore" FontFamily="Bahnschrift" FontSize="18" FontWeight="Black" 
-                             Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}" HorizontalAlignment="Left"/>
-
-                            --><!-- ExploreListBox2 --><!--
-
-                            <ScrollViewer Grid.Row="1" Grid.Column="0" CanContentScroll="True" PreviewMouseWheel="PreviewMouseWheel" >
-
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="1*"></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*"></RowDefinition>
-                                        <RowDefinition Height="*"></RowDefinition>
-                                        <RowDefinition Height="*"></RowDefinition>
-                                        <RowDefinition Height="*"></RowDefinition>
-                                        <RowDefinition Height="*"></RowDefinition>
-                                        <RowDefinition Height="*"></RowDefinition>
-                                        <RowDefinition Height="*"></RowDefinition>
-                                    </Grid.RowDefinitions>
-
-                                    <StackPanel x:Name="spExplore1" Grid.Row="0" Margin="0, 30, 40, 0">
-
-                                        <TextBlock x:Name="tbExplore1" Text="Contemporary Soul" FontSize="16.5" Margin="0, 15, 0, 0" FontWeight="Black" FontStyle="Italic" 
-                                             Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}" HorizontalAlignment="Left"/>
-
-                                        <ListBox x:Name="lbExplore1" Height="150" Margin="0, 10, 0, 20" VerticalAlignment="Center" HorizontalAlignment="Stretch" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
-                                        Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={StaticResource ContemporarySoulAlbums}}" SelectedItem="{Binding MusicPlayerCache.SelectedAlbum, Mode=TwoWay}">
-
-                                            <ListBox.ItemTemplate>
-                                                <DataTemplate>
-                                                    <Grid x:Name="grdlbGenreList1" VerticalAlignment="Center" Margin="0, 10">
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition x:Name="img" Width="Auto"></ColumnDefinition>
-                                                            <ColumnDefinition x:Name="sp" Width="200"></ColumnDefinition>
-                                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                                        </Grid.ColumnDefinitions>
-
-                                                        <Rectangle x:Name="iAlbumCover" RenderOptions.BitmapScalingMode="HighQuality" VerticalAlignment="Top" Margin="15, 0, 0, 0" Grid.Column="0" Width="100" Height="100" RadiusX=" 5" RadiusY="5">
-                                                            <Rectangle.Fill>
-                                                                <ImageBrush ImageSource="{Binding Image}" Stretch="UniformToFill" />
-                                                            </Rectangle.Fill>
-                                                        </Rectangle>
-
-                                                        <StackPanel x:Name="spAlbumName" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Top" Margin="10, 0, 0, 0">
-                                                            <TextBlock Text="{Binding Title}" FontWeight="Bold" FontSize="14" Foreground="{Binding DataContext.CurrentTheme.WindowHeadingForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                            <TextBlock Text="{Binding Artist}" FontSize="12" Foreground="{Binding DataContext.CurrentTheme.CurrentSongArtistForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                            <TextBlock x:Name="tbAlbumYear" Text="{Binding Year}" Foreground="{Binding DataContext.CurrentTheme.CurrentSongArtistForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                                                        </StackPanel>
-
-                                                        <Button x:Name="bDetails" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="Transparent" BorderBrush="Transparent" Margin="0, 0, 30, 0">
-                                                            <Path Data="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z"
-                                                                  Fill="{Binding DataContext.CurrentTheme.ComplementGray.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"
-                                                                  Stretch="Uniform" Width="9" Height="9"></Path>
-                                                        </Button>
-
-                                                    </Grid>
-                                                </DataTemplate>
-                                            </ListBox.ItemTemplate>
-
-                                            <ListBox.ItemContainerStyle>
-                                                <Style TargetType="ListBoxItem">
-                                                    <Setter Property="Background" Value="Transparent"/>
-                                                    <Setter Property="BorderThickness" Value="0"/>
-                                                    <Setter Property="Padding" Value="5"/>
-                                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                                    <Setter Property="Template">
-                                                        <Setter.Value>
-                                                            <ControlTemplate TargetType="ListBoxItem">
-                                                                <Border x:Name="border"
-                                                                Background="{TemplateBinding Background}"
-                                                                CornerRadius="13">
-                                                                    <ContentPresenter />
-                                                                </Border>
-                                                                <ControlTemplate.Triggers>
-                                                                    --><!-- Hover --><!--
-                                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                                        <Setter Property="Cursor" Value="Hand"/>
-                                                                        <Setter TargetName="border"
-                                                    Property="Background"
-                                                    Value="{Binding DataContext.CurrentTheme.ListBoxHover.Brush,
-                                                    RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                                    </Trigger>
-                                                                    --><!-- Selected --><!--
-                                                                    <Trigger Property="IsSelected" Value="True">
-                                                                        <Setter TargetName="border"
-                                                    Property="Background"
-                                                    Value="{Binding DataContext.CurrentTheme.ListBoxSelected.Brush,
-                                                    RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                                    </Trigger>
-                                                                </ControlTemplate.Triggers>
-                                                            </ControlTemplate>
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                </Style>
-                                            </ListBox.ItemContainerStyle>
-                                            
-                                            <ListBox.ItemsPanel>
-                                                <ItemsPanelTemplate>
-                                                    <StackPanel Orientation="Horizontal">
-
-                                                    </StackPanel>
-                                                </ItemsPanelTemplate>
-                                            </ListBox.ItemsPanel>
-
-                                        </ListBox>
-                                    </StackPanel>
-
-                                    <StackPanel x:Name="spExplore2" Grid.Row="1" Margin="0, 0, 40, 0">
-
-                                        <TextBlock x:Name="tbExplore2" Text="Modern Funk Hits" FontSize="16.5" FontWeight="Black" FontStyle="Italic"
-                                                   Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}" HorizontalAlignment="Left"/>
-
-                                        <ListBox x:Name="lbExplore2" Height="150" Margin="0, 10, 0, 20" VerticalAlignment="Center" HorizontalAlignment="Left" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                                 Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={StaticResource ModernFunkHitsAlbums}}" SelectedItem="{Binding MusicPlayerCache.SelectedAlbum, Mode=TwoWay}">
-
-                                            <ListBox.ItemTemplate>
-                                                <DataTemplate>
-                                                    <Grid x:Name="grdlbGenreList2" VerticalAlignment="Center" Margin="0, 10">
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition x:Name="img" Width="Auto"></ColumnDefinition>
-                                                            <ColumnDefinition x:Name="sp" Width="200"></ColumnDefinition>
-                                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                                        </Grid.ColumnDefinitions>
-
-                                                        <Rectangle x:Name="iAlbumCover" RenderOptions.BitmapScalingMode="HighQuality" VerticalAlignment="Top" Margin="15, 0, 0, 0" Grid.Column="0" Width="100" Height="100" RadiusX="5" RadiusY="5">
-                                                            <Rectangle.Fill>
-                                                                <ImageBrush ImageSource="{Binding Image}" Stretch="UniformToFill" />
-                                                            </Rectangle.Fill>
-                                                        </Rectangle>
-
-                                                        <StackPanel x:Name="spAlbumName" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Top" Margin="10, 0, 0, 0">
-                                                            <TextBlock Text="{Binding Title}" FontWeight="Bold" FontSize="14" Foreground="{Binding DataContext.CurrentTheme.WindowHeadingForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                            <TextBlock Text="{Binding Artist}" FontSize="12" Foreground="{Binding DataContext.CurrentTheme.CurrentSongArtistForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                            <TextBlock x:Name="tbAlbumYear" Text="{Binding Year}" Foreground="{Binding DataContext.CurrentTheme.CurrentSongArtistForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                                                        </StackPanel>
-
-                                                        <Button x:Name="bDetails" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="Transparent" BorderBrush="Transparent" Margin="0, 0, 30, 0">
-                                                            <Path Data="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z"
-                                 Fill="{Binding DataContext.CurrentTheme.ComplementGray.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"
-                                 Stretch="Uniform" Width="9" Height="9"></Path>
-                                                        </Button>
-
-                                                    </Grid>
-                                                </DataTemplate>
-                                            </ListBox.ItemTemplate>
-
-                                            <ListBox.ItemContainerStyle>
-                                                <Style TargetType="ListBoxItem">
-                                                    <Setter Property="Background" Value="Transparent"/>
-                                                    <Setter Property="BorderThickness" Value="0"/>
-                                                    <Setter Property="Padding" Value="5"/>
-                                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                                    <Setter Property="Template">
-                                                        <Setter.Value>
-                                                            <ControlTemplate TargetType="ListBoxItem">
-                                                                <Border x:Name="border"
-        Background="{TemplateBinding Background}"
-        CornerRadius="13">
-                                                                    <ContentPresenter />
-                                                                </Border>
-                                                                <ControlTemplate.Triggers>
-                                                                    --><!-- Hover --><!--
-                                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                                        <Setter Property="Cursor" Value="Hand"/>
-                                                                        <Setter TargetName="border"
-Property="Background"
-Value="{Binding DataContext.CurrentTheme.ListBoxHover.Brush,
-RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                                    </Trigger>
-                                                                    --><!-- Selected --><!--
-                                                                    <Trigger Property="IsSelected" Value="True">
-                                                                        <Setter TargetName="border"
-Property="Background"
-Value="{Binding DataContext.CurrentTheme.ListBoxSelected.Brush,
-RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                                    </Trigger>
-                                                                </ControlTemplate.Triggers>
-                                                            </ControlTemplate>
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                </Style>
-                                            </ListBox.ItemContainerStyle>
-                                            <ListBox.ItemsPanel>
-                                                <ItemsPanelTemplate>
-                                                    <StackPanel Orientation="Horizontal">
-
-                                                    </StackPanel>
-                                                </ItemsPanelTemplate>
-                                            </ListBox.ItemsPanel>
-                                        </ListBox>
-                                    </StackPanel>
-
-                                    <StackPanel x:Name="spExplore3" Grid.Row="2" Margin="0, 0, 40, 0">
-
-                                        <TextBlock x:Name="tbExplore3" Text="Heavy Rock" FontSize="16.5" FontWeight="Black" FontStyle="Italic"
-                                             Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}" HorizontalAlignment="Left"/>
-
-                                        <ListBox x:Name="lbExplore3" Height="150" Margin="0, 10, 0, 20" VerticalAlignment="Center" HorizontalAlignment="Left" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                                              Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={StaticResource HeavyRockAlbums}}" SelectedItem="{Binding MusicPlayerCache.SelectedAlbum, Mode=TwoWay}">
-
-                                            <ListBox.ItemTemplate>
-                                                <DataTemplate>
-                                                    <Grid x:Name="grdlbGenreList3" VerticalAlignment="Center" Margin="0, 10">
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition x:Name="img" Width="Auto"></ColumnDefinition>
-                                                            <ColumnDefinition x:Name="sp" Width="200"></ColumnDefinition>
-                                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                                        </Grid.ColumnDefinitions>
-
-                                                        <Rectangle x:Name="iAlbumCover" RenderOptions.BitmapScalingMode="HighQuality" VerticalAlignment="Top" Margin="15, 0, 0, 0" Grid.Column="0" Width="100" Height="100" RadiusX=" 5" RadiusY="5">
-                                                            <Rectangle.Fill>
-                                                                <ImageBrush ImageSource="{Binding Image}" Stretch="UniformToFill" />
-                                                            </Rectangle.Fill>
-                                                        </Rectangle>
-
-                                                        <StackPanel x:Name="spAlbumName" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Top" Margin="10, 0, 0, 0">
-                                                            <TextBlock Text="{Binding Title}" FontWeight="Bold" FontSize="14" Foreground="{Binding DataContext.CurrentTheme.WindowHeadingForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                            <TextBlock Text="{Binding Artist}" FontSize="12" Foreground="{Binding DataContext.CurrentTheme.CurrentSongArtistForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                            <TextBlock x:Name="tbAlbumYear" Text="{Binding Year}" Foreground="{Binding DataContext.CurrentTheme.CurrentSongArtistForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                                                        </StackPanel>
-
-                                                        <Button x:Name="bDetails" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="Transparent" BorderBrush="Transparent" Margin="0, 0, 30, 0">
-                                                            <Path Data="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z"
-                                                             Fill="{Binding DataContext.CurrentTheme.ComplementGray.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"
-                                                             Stretch="Uniform" Width="9" Height="9"></Path>
-                                                        </Button>
-
-                                                    </Grid>
-                                                </DataTemplate>
-                                            </ListBox.ItemTemplate>
-
-                                            <ListBox.ItemContainerStyle>
-                                                <Style TargetType="ListBoxItem">
-                                                    <Setter Property="Background" Value="Transparent"/>
-                                                    <Setter Property="BorderThickness" Value="0"/>
-                                                    <Setter Property="Padding" Value="5"/>
-                                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                                    <Setter Property="Template">
-                                                        <Setter.Value>
-                                                            <ControlTemplate TargetType="ListBoxItem">
-                                                                <Border x:Name="border"
-                                                                Background="{TemplateBinding Background}"
-                                                                CornerRadius="13">
-                                                                    <ContentPresenter />
-                                                                </Border>
-                                                                <ControlTemplate.Triggers>
-                                                                    --><!-- Hover --><!--
-                                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                                        <Setter Property="Cursor" Value="Hand"/>
-                                                                        <Setter TargetName="border"
-                                                                            Property="Background"
-                                                                            Value="{Binding DataContext.CurrentTheme.ListBoxHover.Brush,
-                                                                            RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                                    </Trigger>
-                                                                    --><!-- Selected --><!--
-                                                                    <Trigger Property="IsSelected" Value="True">
-                                                                        <Setter TargetName="border"
-                                                                            Property="Background"
-                                                                            Value="{Binding DataContext.CurrentTheme.ListBoxSelected.Brush,
-                                                                            RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                                    </Trigger>
-                                                                </ControlTemplate.Triggers>
-                                                            </ControlTemplate>
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                </Style>
-                                            </ListBox.ItemContainerStyle>
-                                            <ListBox.ItemsPanel>
-                                                <ItemsPanelTemplate>
-                                                    <StackPanel Orientation="Horizontal">
-
-                                                    </StackPanel>
-                                                </ItemsPanelTemplate>
-                                            </ListBox.ItemsPanel>
-                                        </ListBox>
-                                    </StackPanel>
-
-                                    <StackPanel x:Name="spExplore4" Grid.Row="3" Margin="0, 0, 40, 0">
-
-                                        <TextBlock x:Name="tbExplore4" Text="Proto-Metal Classics" FontSize="16.5" FontWeight="Black" FontStyle="Italic"
-                                         Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}" HorizontalAlignment="Left"/>
-
-                                        <ListBox x:Name="lbExplore4" Height="150" Margin="0, 10, 0, 20" VerticalAlignment="Center" HorizontalAlignment="Stretch" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                                        Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={StaticResource Proto-MetalClassicsAlbums}}" SelectedItem="{Binding MusicPlayerCache.SelectedAlbum, Mode=TwoWay}">
-
-                                            <ListBox.ItemTemplate>
-                                                <DataTemplate>
-                                                    <Grid x:Name="grdlbGenreList4" VerticalAlignment="Center" Margin="0, 10">
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition x:Name="img" Width="Auto"></ColumnDefinition>
-                                                            <ColumnDefinition x:Name="sp" Width="200"></ColumnDefinition>
-                                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                                        </Grid.ColumnDefinitions>
-
-                                                        <Rectangle x:Name="iAlbumCover" RenderOptions.BitmapScalingMode="HighQuality" VerticalAlignment="Top" Margin="15, 0, 0, 0" Grid.Column="0" Width="100" Height="100" RadiusX="5" RadiusY="5">
-                                                            <Rectangle.Fill>
-                                                                <ImageBrush ImageSource="{Binding Image}" Stretch="UniformToFill" />
-                                                            </Rectangle.Fill>
-                                                        </Rectangle>
-
-                                                        <StackPanel x:Name="spAlbumName" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Top" Margin="10, 0, 0, 0">
-                                                            <TextBlock Text="{Binding Title}" FontWeight="Bold" FontSize="14" Foreground="{Binding DataContext.CurrentTheme.WindowHeadingForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                            <TextBlock Text="{Binding Artist}" FontSize="12" Foreground="{Binding DataContext.CurrentTheme.CurrentSongArtistForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                            <TextBlock x:Name="tbAlbumYear" Text="{Binding Year}" Foreground="{Binding DataContext.CurrentTheme.CurrentSongArtistForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                                                        </StackPanel>
-
-                                                        <Button x:Name="bDetails" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="Transparent" BorderBrush="Transparent" Margin="0, 0, 30, 0">
-                                                            <Path Data="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z"
-                                 Fill="{Binding DataContext.CurrentTheme.ComplementGray.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"
-                                 Stretch="Uniform" Width="9" Height="9"></Path>
-                                                        </Button>
-
-                                                    </Grid>
-                                                </DataTemplate>
-                                            </ListBox.ItemTemplate>
-
-                                            <ListBox.ItemContainerStyle>
-                                                <Style TargetType="ListBoxItem">
-                                                    <Setter Property="Background" Value="Transparent"/>
-                                                    <Setter Property="BorderThickness" Value="0"/>
-                                                    <Setter Property="Padding" Value="5"/>
-                                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                                    <Setter Property="Template">
-                                                        <Setter.Value>
-                                                            <ControlTemplate TargetType="ListBoxItem">
-                                                                <Border x:Name="border"
-                                    Background="{TemplateBinding Background}"
-                                    CornerRadius="13">
-                                                                    <ContentPresenter />
-                                                                </Border>
-                                                                <ControlTemplate.Triggers>
-                                                                    --><!-- Hover --><!--
-                                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                                        <Setter Property="Cursor" Value="Hand"/>
-                                                                        <Setter TargetName="border"
-                                            Property="Background"
-                                            Value="{Binding DataContext.CurrentTheme.ListBoxHover.Brush,
-                                            RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                                    </Trigger>
-                                                                    --><!-- Selected --><!--
-                                                                    <Trigger Property="IsSelected" Value="True">
-                                                                        <Setter TargetName="border"
-                                            Property="Background"
-                                            Value="{Binding DataContext.CurrentTheme.ListBoxSelected.Brush,
-                                            RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                                    </Trigger>
-                                                                </ControlTemplate.Triggers>
-                                                            </ControlTemplate>
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                </Style>
-                                            </ListBox.ItemContainerStyle>
-                                            <ListBox.ItemsPanel>
-                                                <ItemsPanelTemplate>
-                                                    <StackPanel Orientation="Horizontal">
-
-                                                    </StackPanel>
-                                                </ItemsPanelTemplate>
-                                            </ListBox.ItemsPanel>
-                                        </ListBox>
-                                    </StackPanel>
-
-                                    <StackPanel x:Name="spExplore5" Grid.Row="4" Margin="0, 0, 40, 0">
-
-                                        <TextBlock x:Name="tbExplore5" Text="Progressive Rock Classics" FontSize="16.5" FontWeight="Black" FontStyle="Italic"
-                                        Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}" HorizontalAlignment="Left"/>
-
-                                        <ListBox x:Name="lbExplore5" Height="150" Margin="0, 10, 0, 20" VerticalAlignment="Center" HorizontalAlignment="Stretch" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                                        Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={StaticResource ProgressiveRockClassicsAlbums}}" SelectedItem="{Binding MusicPlayerCache.SelectedAlbum, Mode=TwoWay}">
-
-                                            <ListBox.ItemTemplate>
-                                                <DataTemplate>
-                                                    <Grid x:Name="grdlbGenreList4" VerticalAlignment="Center" Margin="0, 10">
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition x:Name="img" Width="Auto"></ColumnDefinition>
-                                                            <ColumnDefinition x:Name="sp" Width="200"></ColumnDefinition>
-                                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                                        </Grid.ColumnDefinitions>
-
-                                                        <Rectangle x:Name="iAlbumCover" RenderOptions.BitmapScalingMode="HighQuality" VerticalAlignment="Top" Margin="15, 0, 0, 0" Grid.Column="0" Width="100" Height="100" RadiusX="5" RadiusY="5">
-                                                            <Rectangle.Fill>
-                                                                <ImageBrush ImageSource="{Binding Image}" Stretch="UniformToFill" />
-                                                            </Rectangle.Fill>
-                                                        </Rectangle>
-
-                                                        <StackPanel x:Name="spAlbumName" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Top" Margin="10, 0, 0, 0">
-                                                            <TextBlock Text="{Binding Title}" FontWeight="Bold" FontSize="14" Foreground="{Binding DataContext.CurrentTheme.WindowHeadingForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                            <TextBlock Text="{Binding Artist}" FontSize="12" Foreground="{Binding DataContext.CurrentTheme.CurrentSongArtistForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                            <TextBlock x:Name="tbAlbumYear" Text="{Binding Year}" Foreground="{Binding DataContext.CurrentTheme.CurrentSongArtistForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                                                        </StackPanel>
-
-                                                        <Button x:Name="bDetails" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="Transparent" BorderBrush="Transparent" Margin="0, 0, 30, 0">
-                                                            <Path Data="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z"
-                     Fill="{Binding DataContext.CurrentTheme.ComplementGray.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"
-                     Stretch="Uniform" Width="9" Height="9"></Path>
-                                                        </Button>
-
-                                                    </Grid>
-                                                </DataTemplate>
-                                            </ListBox.ItemTemplate>
-
-                                            <ListBox.ItemContainerStyle>
-                                                <Style TargetType="ListBoxItem">
-                                                    <Setter Property="Background" Value="Transparent"/>
-                                                    <Setter Property="BorderThickness" Value="0"/>
-                                                    <Setter Property="Padding" Value="5"/>
-                                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                                    <Setter Property="Template">
-                                                        <Setter.Value>
-                                                            <ControlTemplate TargetType="ListBoxItem">
-                                                                <Border x:Name="border"
-                        Background="{TemplateBinding Background}"
-                        CornerRadius="13">
-                                                                    <ContentPresenter />
-                                                                </Border>
-                                                                <ControlTemplate.Triggers>
-                                                                    --><!-- Hover --><!--
-                                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                                        <Setter Property="Cursor" Value="Hand"/>
-                                                                        <Setter TargetName="border"
-                                Property="Background"
-                                Value="{Binding DataContext.CurrentTheme.ListBoxHover.Brush,
-                                RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                                    </Trigger>
-                                                                    --><!-- Selected --><!--
-                                                                    <Trigger Property="IsSelected" Value="True">
-                                                                        <Setter TargetName="border"
-                                Property="Background"
-                                Value="{Binding DataContext.CurrentTheme.ListBoxSelected.Brush,
-                                RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                                    </Trigger>
-                                                                </ControlTemplate.Triggers>
-                                                            </ControlTemplate>
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                </Style>
-                                            </ListBox.ItemContainerStyle>
-                                            <ListBox.ItemsPanel>
-                                                <ItemsPanelTemplate>
-                                                    <StackPanel Orientation="Horizontal">
-
-                                                    </StackPanel>
-                                                </ItemsPanelTemplate>
-                                            </ListBox.ItemsPanel>
-                                        </ListBox>
-                                    </StackPanel>
-
-                                    <StackPanel x:Name="spExplore6" Grid.Row="5" Margin="0, 0, 40, 0">
-
-                                        <TextBlock x:Name="tbExplore6" Text="Modern Alternative/Indie" FontSize="16.5" FontWeight="Black" FontStyle="Italic"
-                                        Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}" HorizontalAlignment="Left"/>
-
-                                        <ListBox x:Name="lbExplore6" Height="150" Margin="0, 10, 0, 20" VerticalAlignment="Center" HorizontalAlignment="Stretch" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                                        Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={StaticResource ModernAlternative/IndieAlbums}}" SelectedItem="{Binding MusicPlayerCache.SelectedAlbum, Mode=TwoWay}">
-
-                                            <ListBox.ItemTemplate>
-                                                <DataTemplate>
-                                                    <Grid x:Name="grdlbGenreList4" VerticalAlignment="Center" Margin="0, 10">
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition x:Name="img" Width="Auto"></ColumnDefinition>
-                                                            <ColumnDefinition x:Name="sp" Width="200"></ColumnDefinition>
-                                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                                        </Grid.ColumnDefinitions>
-
-                                                        <Rectangle x:Name="iAlbumCover" RenderOptions.BitmapScalingMode="HighQuality" VerticalAlignment="Top" Margin="15, 0, 0, 0" Grid.Column="0" Width="100" Height="100" RadiusX="5" RadiusY="5">
-                                                            <Rectangle.Fill>
-                                                                <ImageBrush ImageSource="{Binding Image}" Stretch="UniformToFill" />
-                                                            </Rectangle.Fill>
-                                                        </Rectangle>
-
-                                                        <StackPanel x:Name="spAlbumName" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Top" Margin="10, 0, 0, 0">
-                                                            <TextBlock Text="{Binding Title}" FontWeight="Bold" FontSize="14" Foreground="{Binding DataContext.CurrentTheme.WindowHeadingForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                            <TextBlock Text="{Binding Artist}" FontSize="12" Foreground="{Binding DataContext.CurrentTheme.CurrentSongArtistForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                            <TextBlock x:Name="tbAlbumYear" Text="{Binding Year}" Foreground="{Binding DataContext.CurrentTheme.CurrentSongArtistForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                                                        </StackPanel>
-
-                                                        <Button x:Name="bDetails" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="Transparent" BorderBrush="Transparent" Margin="0, 0, 30, 0">
-                                                            <Path Data="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z"
-                     Fill="{Binding DataContext.CurrentTheme.ComplementGray.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"
-                     Stretch="Uniform" Width="9" Height="9"></Path>
-                                                        </Button>
-
-                                                    </Grid>
-                                                </DataTemplate>
-                                            </ListBox.ItemTemplate>
-
-                                            <ListBox.ItemContainerStyle>
-                                                <Style TargetType="ListBoxItem">
-                                                    <Setter Property="Background" Value="Transparent"/>
-                                                    <Setter Property="BorderThickness" Value="0"/>
-                                                    <Setter Property="Padding" Value="5"/>
-                                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                                    <Setter Property="Template">
-                                                        <Setter.Value>
-                                                            <ControlTemplate TargetType="ListBoxItem">
-                                                                <Border x:Name="border"
-                        Background="{TemplateBinding Background}"
-                        CornerRadius="13">
-                                                                    <ContentPresenter />
-                                                                </Border>
-                                                                <ControlTemplate.Triggers>
-                                                                    --><!-- Hover --><!--
-                                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                                        <Setter Property="Cursor" Value="Hand"/>
-                                                                        <Setter TargetName="border"
-                                Property="Background"
-                                Value="{Binding DataContext.CurrentTheme.ListBoxHover.Brush,
-                                RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                                    </Trigger>
-                                                                    --><!-- Selected --><!--
-                                                                    <Trigger Property="IsSelected" Value="True">
-                                                                        <Setter TargetName="border"
-                                Property="Background"
-                                Value="{Binding DataContext.CurrentTheme.ListBoxSelected.Brush,
-                                RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                                    </Trigger>
-                                                                </ControlTemplate.Triggers>
-                                                            </ControlTemplate>
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                </Style>
-                                            </ListBox.ItemContainerStyle>
-                                            <ListBox.ItemsPanel>
-                                                <ItemsPanelTemplate>
-                                                    <StackPanel Orientation="Horizontal">
-
-                                                    </StackPanel>
-                                                </ItemsPanelTemplate>
-                                            </ListBox.ItemsPanel>
-                                        </ListBox>
-                                    </StackPanel>
-
-                                    <StackPanel x:Name="spExplore7" Grid.Row="6" Margin="0, 0, 40, 0">
-
-                                        <TextBlock x:Name="tbExplore7" Text="Pop-Culture Classics" FontSize="16.5" FontWeight="Black" FontStyle="Italic"
-                                        Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}" HorizontalAlignment="Left"/>
-
-                                        <ListBox x:Name="lbExplore7" Height="150" Margin="0, 10, 0, 20" VerticalAlignment="Center" HorizontalAlignment="Stretch" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                                        Background="Transparent" BorderBrush="Black" ItemsSource="{Binding Source={StaticResource Pop-CultureClassicsAlbums}}" SelectedItem="{Binding MusicPlayerCache.SelectedAlbum, Mode=TwoWay}">
-
-                                            <ListBox.ItemTemplate>
-                                                <DataTemplate>
-                                                    <Grid x:Name="grdlbGenreList4" VerticalAlignment="Center" Margin="0, 10">
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition x:Name="img" Width="Auto"></ColumnDefinition>
-                                                            <ColumnDefinition x:Name="sp" Width="200"></ColumnDefinition>
-                                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                                        </Grid.ColumnDefinitions>
-
-                                                        <Rectangle x:Name="iAlbumCover" RenderOptions.BitmapScalingMode="HighQuality" VerticalAlignment="Top" Margin="15, 0, 0, 0" Grid.Column="0" Width="100" Height="100" RadiusX="5" RadiusY="5">
-                                                            <Rectangle.Fill>
-                                                                <ImageBrush ImageSource="{Binding Image}" Stretch="UniformToFill" />
-                                                            </Rectangle.Fill>
-                                                        </Rectangle>
-
-                                                        <StackPanel x:Name="spAlbumName" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Top" Margin="10, 0, 0, 0">
-                                                            <TextBlock Text="{Binding Title}" FontWeight="Bold" FontSize="14" Foreground="{Binding DataContext.CurrentTheme.WindowHeadingForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                            <TextBlock Text="{Binding Artist}" FontSize="12" Foreground="{Binding DataContext.CurrentTheme.CurrentSongArtistForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                            <TextBlock x:Name="tbAlbumYear" Text="{Binding Year}" Foreground="{Binding DataContext.CurrentTheme.CurrentSongArtistForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                                                        </StackPanel>
-
-                                                        <Button x:Name="bDetails" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="Transparent" BorderBrush="Transparent" Margin="0, 0, 30, 0">
-                                                            <Path Data="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z"
-                     Fill="{Binding DataContext.CurrentTheme.ComplementGray.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"
-                     Stretch="Uniform" Width="9" Height="9"></Path>
-                                                        </Button>
-
-                                                    </Grid>
-                                                </DataTemplate>
-                                            </ListBox.ItemTemplate>
-
-                                            <ListBox.ItemContainerStyle>
-                                                <Style TargetType="ListBoxItem">
-                                                    <Setter Property="Background" Value="Transparent"/>
-                                                    <Setter Property="BorderThickness" Value="0"/>
-                                                    <Setter Property="Padding" Value="5"/>
-                                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                                    <Setter Property="Template">
-                                                        <Setter.Value>
-                                                            <ControlTemplate TargetType="ListBoxItem">
-                                                                <Border x:Name="border"
-                        Background="{TemplateBinding Background}"
-                        CornerRadius="13">
-                                                                    <ContentPresenter />
-                                                                </Border>
-                                                                <ControlTemplate.Triggers>
-                                                                    --><!-- Hover --><!--
-                                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                                        <Setter Property="Cursor" Value="Hand"/>
-                                                                        <Setter TargetName="border"
-                                Property="Background"
-                                Value="{Binding DataContext.CurrentTheme.ListBoxHover.Brush,
-                                RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                                    </Trigger>
-                                                                    --><!-- Selected --><!--
-                                                                    <Trigger Property="IsSelected" Value="True">
-                                                                        <Setter TargetName="border"
-                                Property="Background"
-                                Value="{Binding DataContext.CurrentTheme.ListBoxSelected.Brush,
-                                RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                                                                    </Trigger>
-                                                                </ControlTemplate.Triggers>
-                                                            </ControlTemplate>
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                </Style>
-                                            </ListBox.ItemContainerStyle>
-                                            <ListBox.ItemsPanel>
-                                                <ItemsPanelTemplate>
-                                                    <StackPanel Orientation="Horizontal">
-
-                                                    </StackPanel>
-                                                </ItemsPanelTemplate>
-                                            </ListBox.ItemsPanel>
-                                        </ListBox>
-                                    </StackPanel>
-                                </Grid>
-                                <ScrollViewer.Style>
-                                    <Style TargetType="ScrollViewer">
-                                        <Setter Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate TargetType="ScrollViewer">
-                                                    <Grid x:Name="Root" Background="Transparent">
-                                                        --><!-- Scroll content --><!--
-                                                        <ScrollContentPresenter />
-
-                                                        --><!-- Custom vertical scrollbar --><!--
-                                                        <ScrollBar x:Name="PART_VerticalScrollBar"
-   Orientation="Vertical"
-   Width="8"
-   Margin="0"
-   HorizontalAlignment="Right"
-   VerticalAlignment="Stretch"
-   Background="Transparent"
-   Visibility="Collapsed"
-   Minimum="0"
-   Maximum="{TemplateBinding ScrollableHeight}"
-   ViewportSize="{TemplateBinding ViewportHeight}"
-   Value="{TemplateBinding VerticalOffset}"
-   SmallChange="16"
-   LargeChange="64">
-                                                            <ScrollBar.Style>
-                                                                <Style TargetType="ScrollBar">
-                                                                    <Setter Property="Template">
-                                                                        <Setter.Value>
-                                                                            <ControlTemplate TargetType="ScrollBar">
-                                                                                <Grid x:Name="ScrollRoot" Background="Transparent" Width="8">
-                                                                                    <Track x:Name="PART_Track" IsDirectionReversed="True">
-
-                                                                                        --><!-- Hidden arrow buttons --><!--
-                                                                                        <Track.DecreaseRepeatButton>
-                                                                                            <RepeatButton Command="ScrollBar.LineUpCommand"
-                                          Height="10"
-                                          Visibility="Hidden"
-                                          Background="Transparent"
-                                          Focusable="False"
-                                          BorderThickness="0"/>
-                                                                                        </Track.DecreaseRepeatButton>
-
-                                                                                        --><!-- Rounded thumb --><!--
-                                                                                        <Track.Thumb>
-                                                                                            <Thumb x:Name="Thumb" Visibility="Collapsed">
-                                                                                                <Thumb.Template>
-                                                                                                    <ControlTemplate TargetType="Thumb">
-                                                                                                        <Border Background="#c0c0c0"
-                                                CornerRadius="4"
-                                                SnapsToDevicePixels="True"/>
-                                                                                                    </ControlTemplate>
-                                                                                                </Thumb.Template>
-                                                                                            </Thumb>
-                                                                                        </Track.Thumb>
-
-                                                                                        <Track.IncreaseRepeatButton>
-                                                                                            <RepeatButton Command="ScrollBar.LineDownCommand"
-                                          Height="10"
-                                          Visibility="Hidden"
-                                          Background="Transparent"
-                                          Focusable="False"
-                                          BorderThickness="0"/>
-                                                                                        </Track.IncreaseRepeatButton>
-                                                                                    </Track>
-                                                                                </Grid>
-
-                                                                                --><!-- Hover logic --><!--
-                                                                                <ControlTemplate.Triggers>
-                                                                                    --><!-- Show thumb when scrollbar hovered --><!--
-                                                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                                                        <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
-                                                                                    </Trigger>
-
-                                                                                    --><!-- Show thumb when track hovered --><!--
-                                                                                    <Trigger SourceName="PART_Track" Property="IsMouseOver" Value="True">
-                                                                                        <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
-                                                                                    </Trigger>
-
-                                                                                    --><!-- Show thumb when ScrollViewer (lyrics area) hovered --><!--
-                                                                                    <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" Value="True">
-                                                                                        <Setter TargetName="Thumb" Property="Visibility" Value="Visible"/>
-                                                                                    </DataTrigger>
-                                                                                </ControlTemplate.Triggers>
-                                                                            </ControlTemplate>
-                                                                        </Setter.Value>
-                                                                    </Setter>
-                                                                </Style>
-                                                            </ScrollBar.Style>
-                                                        </ScrollBar>
-                                                    </Grid>
-
-                                                    --><!-- Make scrollbar visible only on hover --><!--
-                                                    <ControlTemplate.Triggers>
-                                                        <Trigger Property="IsMouseOver" Value="True">
-                                                            <Setter TargetName="PART_VerticalScrollBar" Property="Visibility" Value="Visible"/>
-                                                        </Trigger>
-                                                    </ControlTemplate.Triggers>
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Style>
-                                </ScrollViewer.Style>
-                            </ScrollViewer>
-                        </Grid>
-                    </Grid>
-                </Border>
-                <UserControl.Style>
-                    <Style TargetType="UserControl">
-                        <Setter Property="Visibility" Value="Collapsed"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsChecked, ElementName=tbExplore}" Value="True">
-                                <Setter Property="Visibility" Value="Visible"></Setter>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding IsChecked, ElementName=tbExplore}" Value="False">
-                                <Setter Property="Visibility" Value="Collapsed"></Setter>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </UserControl.Style>
-            </UserControl>-->
-            
-            <!--#endregion-->
-
             <!-- LOGO -->
             <StackPanel x:Name="spLogoBig" Margin="60,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1">
                 
@@ -2286,47 +813,14 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="50"></RowDefinition>
-                        <RowDefinition Height="Auto"></RowDefinition>
-                        <RowDefinition Height="Auto"></RowDefinition>
-                        <RowDefinition Height="Auto"></RowDefinition>
-                    </Grid.RowDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
 
-                    <!-- SearchBox-->
-                    <!--<Border x:Name="SearchBox" Height="40" CornerRadius="13" Background="{Binding CurrentTheme.SearchBoxBackground.Brush}" Grid.Row="0" Margin="40, 30, 0, 30" Grid.Column="0" Width="250" HorizontalAlignment="Left" VerticalAlignment="Center">
-                        <StackPanel x:Name="spSearchBox" Orientation="Horizontal" Margin="20, 10, 10, 10" VerticalAlignment="Center">
-                            <Path x:Name="pSearch" Width="15" Height="15" Stretch="Uniform"
-                                  Fill="{Binding CurrentTheme.WindowPrimaryAnchor.Brush}"
-                                  Data="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"></Path>
-                                <TextBox x:Name="tbSearch" Width="150" FontSize="13" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}" Margin="5, 0, 0, 0" VerticalAlignment="Center" Background="Transparent" BorderBrush="Transparent">
-                                    <TextBox.Style>
-                                        <Style TargetType="TextBox">
-                                            <Setter Property="Template">
-                                                <Setter.Value>
-                                                    <ControlTemplate TargetType="TextBox">
-                                                        <Grid>
-                                                            <ScrollViewer x:Name="PART_ContentHost"></ScrollViewer>
-                                                            <TextBlock x:Name="Placeholder" Text="" FontSize="13" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}" Margin="5, 0, 0, 0" VerticalAlignment="Center" Background="Transparent"></TextBlock>
-                                                        </Grid>
-                                                        <ControlTemplate.Triggers>
-                                                            <Trigger Property="Text" Value="">
-                                                            <Setter TargetName="Placeholder" Property="Visibility" Value="Visible"></Setter>
-                                                            </Trigger>
-                                                            <Trigger Property="IsKeyboardFocused" Value="True">
-                                                                <Setter TargetName="Placeholder" Property="Visibility" Value="Collapsed"></Setter>
-                                                            </Trigger>
-                                                        </ControlTemplate.Triggers>
-                                                    </ControlTemplate>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </Style>
-                                    </TextBox.Style>
-                                </TextBox>
-                        </StackPanel>
-                    </Border>-->
-
-                    <!-- AlbumsGrid -->
+                        <!-- AlbumsGrid -->
                     <Grid x:Name="grdAlbums" Grid.Row="1" Grid.ColumnSpan="2" Margin="40, 5, 40, 0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -2514,7 +1008,7 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                         <Grid Grid.Row="1" Margin="0, 20, 0, 0">
                             
                             <ListBox x:Name="lbAlbumContents" VerticalAlignment="Stretch" Height="300" ItemsSource="{Binding MusicPlayerCache.SelectedAlbum.Songs}" SelectedItem="{Binding MusicPlayerCache.CurrentSong, Mode=TwoWay}"
-                        Background="Transparent" SelectionChanged="ListBox_SelectionChanged" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+                        Background="Transparent"  BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
                             
                                 <ListBox.ItemTemplate>
                                 <DataTemplate>
@@ -2724,16 +1218,6 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                             <RowDefinition Height="Auto"></RowDefinition>
                         </Grid.RowDefinitions>
 
-                        <!-- SearchBox-->
-                        <!--<Border x:Name="SearchBoxSongsView" Height="40" CornerRadius="13" Background="{Binding CurrentTheme.SearchBoxBackground.Brush}" Grid.Row="0" Margin="40, 30, 0, 30" Grid.Column="0" Width="250" HorizontalAlignment="Left" VerticalAlignment="Center">
-                            <StackPanel Orientation="Horizontal" Margin="20, 10, 10, 10" VerticalAlignment="Center">
-                                <Path x:Name="pSongsView" Width="15" Height="15" Stretch="Uniform"
-                                      Fill="{Binding CurrentTheme.WindowPrimaryAnchor.Brush}"
-                                      Data="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"></Path>      
-                                <TextBox x:Name="tbSongsView" Text="Search" FontSize="13" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}" Margin="5, 0, 0, 0" VerticalAlignment="Center" Background="Transparent" BorderBrush="Transparent"></TextBox>
-                            </StackPanel>
-                        </Border>-->
-
                         <!-- Grid Songs View -->
                         
                         <Grid x:Name="grdSongsView" Grid.Row="1" Grid.ColumnSpan="2" Margin="40, 5, 40, 0">
@@ -2764,7 +1248,7 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                     </Grid.RowDefinitions>
 
                                         <ListBox x:Name="lbAllSongsList" ItemsSource="{Binding MusicPlayerCache.AllSongs}" SelectedItem="{Binding MusicPlayerCache.CurrentSong, Mode=TwoWay}"
-                                         Background="Transparent" SelectionChanged="ListBox_SelectionChanged" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                         Background="Transparent" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                                             
                                             <ListBox.ItemTemplate>
                                                 <DataTemplate>
@@ -2774,7 +1258,6 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                                             <ColumnDefinition Width="*"></ColumnDefinition>
                                                             <ColumnDefinition Width="*"></ColumnDefinition>
                                                             <ColumnDefinition Width="*"></ColumnDefinition>
-                                                            <ColumnDefinition Width="Auto"></ColumnDefinition>
                                                         </Grid.ColumnDefinitions>
 
                                                         <ContentControl x:Name="ccTrackPosition" Grid.Column="0" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -2806,15 +1289,10 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                                             <TextBlock x:Name="tbArtistNames" Text="{Binding Artist}" Foreground="{Binding DataContext.CurrentTheme.CurrentSongArtistForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                                         </StackPanel>
 
-                                                <TextBlock Grid.Column="2" Text="{Binding Album.Title}" VerticalAlignment="Center" Foreground="{Binding DataContext.CurrentTheme.CurrentSongArtistForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"></TextBlock>
+                                                <TextBlock Grid.Column="2" Text="{Binding Album.Title}" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{Binding DataContext.CurrentTheme.CurrentSongArtistForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"></TextBlock>
                                                         
-                                                        <TextBlock x:Name="tbTrackLength" Grid.Column="3" Margin="0, 0, 0, 0" VerticalAlignment="Center" Text="{Binding Length, Converter={StaticResource DurationDisplayConverter}}" HorizontalAlignment="Center" FontWeight="Regular" FontSize="14" Foreground="{Binding DataContext.CurrentTheme.WindowHeadingForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
+                                                        <TextBlock x:Name="tbTrackLength" Grid.Column="3" Margin="0, 0, 45, 0" VerticalAlignment="Center" Text="{Binding Length, Converter={StaticResource DurationDisplayConverter}}" HorizontalAlignment="Right" FontWeight="Regular" FontSize="14" Foreground="{Binding DataContext.CurrentTheme.WindowHeadingForeground.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
 
-                                                        <Button x:Name="bTrackDetails" Grid.Column="4" HorizontalAlignment="Right" VerticalAlignment="Center" Background="Transparent" BorderBrush="Transparent" Margin="0, 0, 30, 0">
-                                                            <Path Data="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z"
-                                                                     Fill="{Binding DataContext.CurrentTheme.ComplementGray.Brush, RelativeSource={RelativeSource AncestorType=ListBox}}"
-                                                                     Stretch="Uniform" Width="10" Height="10"></Path>
-                                                        </Button>
                                                     </Grid>
                                                 </DataTemplate>
                                                 
@@ -3254,7 +1732,7 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                 Grid.Column="0"    
                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
-                <!-- MusicControl -->
+                <!-- Music Control -->
 
                 <Grid x:Name="MusicControl" VerticalAlignment="Center">
                     
@@ -3283,7 +1761,7 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                         </StackPanel>
                     </Grid>
                     
-                    <!-- PlaybackControls (main one) -->
+                    <!-- Playback Controls (main one) -->
                     
                     <Grid x:Name="grdPlaybackControls" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Height="42">
                         <Viewbox Stretch="Uniform">
@@ -3301,64 +1779,51 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
 
-                                    <Button x:Name="tbRepeat" Click="tbRepeat_Click" Grid.Row="0" Grid.Column="0"  Background="Transparent" BorderBrush="Transparent" Width="40" Margin="0, 0, 30, 0">
-                                    <Button.Style>
-                                        <Style TargetType="Button">
-                                                <!-- 0 Repeat Default (Off) -->
+                                    <ToggleButton x:Name="tbRepeat" Click="tbRepeat_Click" IsThreeState="True" ToolTip="Repeat" Grid.Row="0" Grid.Column="0"  Background="Transparent" BorderBrush="Transparent" Width="40" Margin="0, 0, 30, 0">
+                                    <ToggleButton.Style>
+                                        <Style TargetType="ToggleButton">
                                                 <Setter Property="ContentTemplate">
                                                     <Setter.Value>
                                                         <DataTemplate>
                                                                 <Viewbox Width="32" Height="32">
                                                                     <Path x:Name="pRepeatOff"
-                                                                              Data ="M17,17H7V14L3,18L7,22V19H19V13H17M7,7H17V10L21,6L17,2V5H5V11H7V7Z"
-                                                                              Fill="{Binding DataContext.CurrentTheme.ComplementGray.Brush, RelativeSource={RelativeSource AncestorType=Button}}"
-                                                                              Stretch="Uniform"
-                                                                              Stroke="{Binding DataContext.CurrentTheme.ComplementGray.Brush, RelativeSource={RelativeSource AncestorType=Button}}"
-                                                                              StrokeThickness="1.5"/>
+                                                                          Data ="M17,17H7V14L3,18L7,22V19H19V13H17M7,7H17V10L21,6L17,2V5H5V11H7V7Z"
+                                                                          Fill="{Binding DataContext.CurrentTheme.ComplementGray.Brush, RelativeSource={RelativeSource AncestorType=ToggleButton}}"
+                                                                          Stretch="Uniform"
+                                                                          Stroke="{Binding DataContext.CurrentTheme.ComplementGray.Brush, RelativeSource={RelativeSource AncestorType=ToggleButton}}"
+                                                                          StrokeThickness="1.5"/>
                                                                 </Viewbox>
                                                         </DataTemplate>
                                                     </Setter.Value>
                                                 </Setter>
                                                 <Style.Triggers>
-                                                    
-                                                    <!-- 1 Repeat List -->
-                                                    <Trigger Property="IsPressed" Value="True">
+                                                    <!-- Checked or Indeterminate (null) -->
+                                                    <Trigger Property="IsChecked" Value="True">
                                                         <Setter Property="ContentTemplate">
                                                             <Setter.Value>
                                                                 <DataTemplate>
                                                                     <Viewbox Width="32" Height="32">
-                                                                        <Path x:Name="pRepeatSong"
-                                                                              Data ="M17,17H7V14L3,18L7,22V19H19V13H17M7,7H17V10L21,6L17,2V5H5V11H7V7Z"
-                                                                              Fill="{Binding DataContext.CurrentTheme.WindowPrimaryAnchor.Brush, RelativeSource={RelativeSource AncestorType=Button}}"
-                                                                              Stretch="Uniform"
-                                                                              Stroke="{Binding DataContext.CurrentTheme.WindowPrimaryAnchor.Brush, RelativeSource={RelativeSource AncestorType=Button}}"
-                                                                              StrokeThickness="1.5"/>
+                                                                        <Path x:Name="pRepeatList" Data="M17,17H7V14L3,18L7,22V19H19V13H17M7,7H17V10L21,6L17,2V5H5V11H7V7Z" Fill="{Binding DataContext.CurrentTheme.WindowPrimaryAnchor.Brush, RelativeSource={RelativeSource AncestorType=ToggleButton}}" Stretch="Uniform" Stroke="{Binding DataContext.CurrentTheme.WindowPrimaryAnchor.Brush, RelativeSource={RelativeSource AncestorType=ToggleButton}}" StrokeThickness="1.5"/>
                                                                     </Viewbox>
                                                                 </DataTemplate>
                                                             </Setter.Value>
                                                         </Setter>
                                                     </Trigger>
-
-                                                     <!--2 Repeat Song--> 
-                                                    <!--<Trigger Property="IsChecked" Value="{x:Null}">
+                                                    <Trigger Property="IsChecked" Value="{x:Null}">
                                                         <Setter Property="ContentTemplate">
                                                             <Setter.Value>
                                                                 <DataTemplate>
                                                                     <Viewbox Width="32" Height="32">
-                                                                        <Path x:Name="pRepeatSong" Data="M17,17H7V14L3,18L7,22V19H19V13H17M11,9H13V15H11V9Z"
-                                                                      Fill="#1e1e1e"
-                                                                      Stretch="Uniform"
-                                                                      Stroke="#1e1e1e"
-                                                                      StrokeThickness="1.5"/>
+                                                                        <Path x:Name="pRepeatSong" Data="M13,15V9H12L10,10V11H11.5V15M17,17H7V14L3,18L7,22V19H19V13H17M7,7H17V10L21,6L17,2V5H5V11H7V7Z" Fill="{Binding DataContext.CurrentTheme.WindowPrimaryAnchor.Brush, RelativeSource={RelativeSource AncestorType=ToggleButton}}" Stretch="Uniform" Stroke="{Binding DataContext.CurrentTheme.WindowPrimaryAnchor.Brush, RelativeSource={RelativeSource AncestorType=ToggleButton}}" StrokeThickness="1"/>
                                                                     </Viewbox>
                                                                 </DataTemplate>
                                                             </Setter.Value>
                                                         </Setter>
-                                                    </Trigger>-->
+                                                    </Trigger>
                                                 </Style.Triggers>
-                                        </Style>
-                                    </Button.Style>
-                                </Button>
+                                            </Style>
+                                    </ToggleButton.Style>
+                                </ToggleButton>
 
                                     <Button x:Name="tbPrevious" Click="tbPrevious_Click" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" Width="60" Background="Transparent" BorderBrush="Transparent">
                                     <Button.Style>
@@ -3471,36 +1936,39 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                         </Button.Style>
                                     </Button>
 
-                                    <Button x:Name="tbShuffle" Grid.Row="0" Click="tbShuffle_Click" Grid.Column="4" Background="Transparent" BorderBrush="Transparent" Width="40" Margin="30, 0, 0, 0">
-                                    <Button.Style>
-                                            <Style TargetType="Button">
+                                    <ToggleButton x:Name="tbShuffle" Grid.Row="0" Click="tbShuffle_Click" ToolTip="Shuffle" Grid.Column="4" Background="Transparent" BorderBrush="Transparent" Width="40" Margin="30, 0, 0, 0">
+                                    <ToggleButton.Style>
+                                            <Style TargetType="ToggleButton">
                                                 <Setter Property="ContentTemplate">
                                                     <Setter.Value>
                                                         <DataTemplate>
                                                             
-                                                            <!-- Shuffle Default-->
-                                                            <Path x:Name="pShuffleEnabled" Data="M17,3L22.25,7.5L17,12L22.25,16.5L17,21V18H14.26L11.44,15.18L13.56,13.06L15.5,15H17V12L17,9H15.5L6.5,18H2V15H5.26L14.26,6H17V3M2,6H6.5L9.32,8.82L7.2,10.94L5.26,9H2V6Z"
-                                                              Stretch="Uniform" Width="32" Height="32">
-                                                                <Path.Style>
-                                                                    <Style TargetType="Path">
-                                                                        <Setter Property="Fill"
-                                                                         Value="{Binding DataContext.CurrentTheme.ComplementGray.Brush, RelativeSource={RelativeSource AncestorType=Button}}"/>
-                                                                        <Style.Triggers>
-                                                                            <!-- When checked -->
-                                                                            <DataTrigger Binding="{Binding IsPressed, RelativeSource={RelativeSource AncestorType=Button}}" Value="True">
-                                                                                <Setter Property="Fill" Value="{Binding DataContext.CurrentTheme.WindowPrimaryAnchor.Brush, RelativeSource={RelativeSource AncestorType=Button}}"/>
-                                                                            </DataTrigger>
-                                                                        </Style.Triggers>
-                                                                    </Style>
-                                                                </Path.Style>
+                                                            <Path x:Name="pShuffle" Data="M17,3L22.25,7.5L17,12L22.25,16.5L17,21V18H14.26L11.44,15.18L13.56,13.06L15.5,15H17V12L17,9H15.5L6.5,18H2V15H5.26L14.26,6H17V3M2,6H6.5L9.32,8.82L7.2,10.94L5.26,9H2V6Z"
+                                                             Fill="{Binding DataContext.CurrentTheme.ComplementGray.Brush, RelativeSource={RelativeSource AncestorType=ToggleButton}}"
+                                                                  Stretch="Uniform" Width="32" Height="32"
+                                                                  >
                                                             </Path>
                                                             
                                                         </DataTemplate>
                                                     </Setter.Value>
                                                 </Setter>
+                                                <Style.Triggers>
+                                                            <Trigger Property="IsChecked" Value="True">
+                                                                <Setter Property="ContentTemplate">
+                                                                    <Setter.Value>
+                                                                        <DataTemplate>
+                                                                            <Path x:Name="pShuffleEnabled" Data="M17,3L22.25,7.5L17,12L22.25,16.5L17,21V18H14.26L11.44,15.18L13.56,13.06L15.5,15H17V12L17,9H15.5L6.5,18H2V15H5.26L14.26,6H17V3M2,6H6.5L9.32,8.82L7.2,10.94L5.26,9H2V6Z"
+                                                                                  Fill="{Binding DataContext.CurrentTheme.WindowPrimaryAnchor.Brush, RelativeSource={RelativeSource AncestorType=ToggleButton}}"
+                                                                                  Stretch="Uniform" Width="32" Height="32"
+                                                                                 />
+                                                                        </DataTemplate>
+                                                                    </Setter.Value>
+                                                                </Setter>
+                                                            </Trigger>
+                                                        </Style.Triggers>
                                             </Style>
-                                    </Button.Style>
-                                </Button>
+                                    </ToggleButton.Style>
+                                </ToggleButton>
                             </Grid>
                         </Viewbox>
                     </Grid>
@@ -3679,7 +2147,7 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                             </ToggleButton>
                     </StackPanel>
 
-                    <!-- PlaybackSeekbar (main one) -->
+                    <!-- Playback Seekbar (main one) -->
 
                     <StackPanel Grid.Row="1" Grid.Column="1" x:Name="MainSlider" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
 
@@ -3811,19 +2279,34 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
 
                 <Grid x:Name="grdTitleBar">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="160"/>
                         <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition Width="160"/>
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Name="tbWindowTitle" Text="{Binding Path=WindowTitle}" 
-                           Foreground="{Binding Path=CurrentTheme.WindowTitleForeground.Brush}" 
-                           VerticalAlignment="Center" HorizontalAlignment="Center"
-                           Grid.Row="0" Grid.Column="1"/>
+                           Foreground="{Binding Path=CurrentTheme.WindowTitleForeground.Brush}"
+                           VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1"/>
                     
-                    <Border Name="borderWindowMove" Grid.Row="0" Grid.Column="1" Background="Transparent" MouseDown="borderWindowMove_MouseDown"/>
+                    <Border Name="borderWindowMove" Grid.Column="1" Background="Transparent" MouseDown="borderWindowMove_MouseDown"/>
 
                     <StackPanel x:Name="spHeaderItems" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
+
+                    <Grid x:Name="grdThemeDesigner" Width="32" Height="32" HorizontalAlignment="Left">
+                        <Border x:Name="bdrThemeDesigner"
+                                CornerRadius="0"
+                                Background="Transparent"
+                                MouseEnter="bdrThemeDesigner_MouseEnter"
+                                MouseLeave="bdrThemeDesigner_MouseLeave"
+                                MouseLeftButtonUp="bdrThemeDesigner_MouseLeftButtonUp"
+                                ToolTip="ThemeDesigner">
+                            <TextBlock Text="🖌️"
+                                       Foreground="White"
+                                       FontSize="11"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                        </Border>
+                    </Grid>
 
                     <Grid x:Name="grdSettings" Width="32" Height="32" HorizontalAlignment="Right">
                         <Border x:Name="bdrSettings"
@@ -3831,7 +2314,8 @@ RelativeSource={RelativeSource AncestorType=ListBox}}"/>
                                 Background="Transparent"
                                 MouseEnter="bdrSettings_MouseEnter"
                                 MouseLeave="bdrSettings_MouseLeave"
-                                MouseLeftButtonUp="bdrSettings_MouseLeftButtonUp">
+                                MouseLeftButtonUp="bdrSettings_MouseLeftButtonUp"
+                                ToolTip="Settings">
                             <TextBlock Text="⚙"
                                        Foreground="White"
                                        FontSize="11"
