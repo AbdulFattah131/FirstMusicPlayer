@@ -72,7 +72,6 @@ namespace WpfApp3
                 OnPropertyChanged(nameof(CurrentMode));
             }
         }
-
         public bool IsPlaying
         {
             get => Player.IsPlaying;
@@ -241,7 +240,35 @@ namespace WpfApp3
             CurrentIndex = PlaybackQueue.IndexOf(CurrentSong);
         }
 
-        public void RepeatList()
+        private ENMusicPlayerRepeatMode _repeatMode = ENMusicPlayerRepeatMode.None;
+        public ENMusicPlayerRepeatMode RepeatMode
+        {
+            get => _repeatMode;
+            set
+            {
+                _repeatMode = value;
+
+                switch (value)
+                {
+                    case ENMusicPlayerRepeatMode.RepeatList:
+                        if (CurrentIndex == PlaybackQueue.Count - 1)
+                        {
+                            CurrentIndex = 0;
+                            CurrentSong = PlaybackQueue[CurrentIndex];
+                            PlayPause();
+                        }
+                        break;
+                    case ENMusicPlayerRepeatMode.RepeatSong:
+                        CurrentSong = PlaybackQueue[CurrentIndex];
+                        PlayPause();
+                        break;
+                    case ENMusicPlayerRepeatMode.None:
+                        break;
+                }
+            }
+        }
+
+        public void Repeat()
         {
             if (PlaybackQueue == null || PlaybackQueue.Count == 0)
                 return;
@@ -250,7 +277,6 @@ namespace WpfApp3
 
 
 
-            // repeat song
         }
 
         #endregion

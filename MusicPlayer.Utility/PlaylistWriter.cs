@@ -21,13 +21,13 @@ namespace MusicPlayer.Utility
 
         private PlaylistWriter() { }
 
-        public void WriteToFile(List<Playlist> playlists)
+        public void WriteToFile(List<Song> playlist)
         {
             using (MemoryStream ms = new MemoryStream())
             {
                 var writer = new StreamWriter(ms);
                 var serializer = new XmlSerializer(typeof(List<Playlist>));
-                serializer.Serialize(writer, playlists);
+                serializer.Serialize(writer, playlist);
                 writer.Flush();
 
                 string folderPath = "./";

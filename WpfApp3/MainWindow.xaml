@@ -814,7 +814,7 @@
                     </Grid.ColumnDefinitions>
 
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="50"></RowDefinition>
+                            <RowDefinition Height="60"></RowDefinition>
                             <RowDefinition Height="Auto"></RowDefinition>
                             <RowDefinition Height="Auto"></RowDefinition>
                             <RowDefinition Height="Auto"></RowDefinition>
@@ -1703,6 +1703,7 @@
 
         <!-- Row 2 Bottom View -->
         
+        <!-- border for drop shadow-->
         <Border x:Name="bdrPlaybackPanel" Grid.Row="2" Grid.ColumnSpan="3" VerticalAlignment="Bottom">
             <Border.Effect>
                 <DropShadowEffect Color="Black"
@@ -1858,9 +1859,16 @@
 
                                     <ToggleButton x:Name="tbPlayPause" IsChecked="{Binding MusicPlayerCache.IsPlaying}" Grid.Row="0" Grid.Column="2" 
                                   Background="Transparent" BorderBrush="Transparent">
-                                    <ToggleButton.Style>
+                                        <!--<ToggleButton.Template>
+                                            <ControlTemplate TargetType="ToggleButton">
+                                                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </ToggleButton.Template>-->
+                                        <ToggleButton.Style>
                                         <Style TargetType="ToggleButton">
-                                            <Setter Property="ContentTemplate">
+                                                <Setter Property="ContentTemplate">
                                                 <Setter.Value>
                                                     <DataTemplate>
                                                         <!-- Play icon -->
@@ -1873,7 +1881,7 @@
                                             </Setter>
 
                                             <Style.Triggers>
-                                                <Trigger Property="IsChecked" Value="True">
+                                                    <Trigger Property="IsChecked" Value="True">
                                                     <Setter Property="ContentTemplate">
                                                         <Setter.Value>
                                                             <DataTemplate>
@@ -2288,7 +2296,7 @@
                            Foreground="{Binding Path=CurrentTheme.WindowTitleForeground.Brush}"
                            VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1"/>
                     
-                    <Border Name="borderWindowMove" Grid.Column="1" Background="Transparent" MouseDown="borderWindowMove_MouseDown"/>
+                    <Border Name="borderWindowMove" Grid.ColumnSpan="3" Background="Transparent" MouseDown="borderWindowMove_MouseDown"/>
 
                     <StackPanel x:Name="spHeaderItems" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
 

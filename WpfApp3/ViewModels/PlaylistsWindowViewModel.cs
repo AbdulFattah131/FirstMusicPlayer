@@ -24,7 +24,7 @@ namespace MusicPlayer.UIComponents.ViewModels
                 return _instance;
             }
         }
-
+        public bool IsCreatingPlaylist { get; set; }
         public PlaylistsWindowViewModel(MainWindowViewModel mainWindowVM)
         {
             _mainWindowVM = mainWindowVM;
@@ -58,25 +58,7 @@ namespace MusicPlayer.UIComponents.ViewModels
 
         public void CreateNewPlaylist(string name)
         {
-            CreatePlaylist = new Playlist() { Name = name, PlaylistSongs = new ObservableCollection<Song>() };
-        }
-
-        public void SaveCurrentPlaylist()
-        {
-            if (CreatePlaylist == null || string.IsNullOrWhiteSpace(CreatePlaylist.Name))
-                return;
-
-            var playlists = PlaylistReader.Instance.GetPlaylists();
-
-            // Replace existing playlist with same name
-            var existing = playlists.FirstOrDefault(p => p.Name == CreatePlaylist.Name);
-            if (existing != null)
-                playlists.Remove(existing);
-
-            playlists.Add(CreatePlaylist);
-            PlaylistWriter.Instance.WriteToFile(playlists);
-
-            LoadSavedPlaylists();
+            CreatePlaylist = new Playlist() { Name = name, PlaylistSongs = new List<Song>() };
         }
 
         public void LoadSavedPlaylists()

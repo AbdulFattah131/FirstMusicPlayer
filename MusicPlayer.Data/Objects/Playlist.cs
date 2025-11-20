@@ -11,7 +11,7 @@ namespace MusicPlayer.Data.Objects
     public class Playlist : INotifyPropertyChanged
     {
         public string Name { get; set; }
-        public ObservableCollection<Song> PlaylistSongs { get; set; } = new ObservableCollection<Song>();
+        public List<Song> PlaylistSongs { get; set; } = new List<Song>();
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName) =>

@@ -11,7 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using MusicPlayer.Data.Objects;
 using MusicPlayer.UIComponents.ViewModels;
+using MusicPlayer.Utility;
 using WpfApp3;
 
 namespace MusicPlayer.UIComponents
@@ -25,70 +27,36 @@ namespace MusicPlayer.UIComponents
         public PlaylistsWindow()
         {
             InitializeComponent();
+            this.DataContext = new MainWindowViewModel();
         }
 
-        private void Window_Closed(object sender, EventArgs e)
+        private void PlaylistWindow_Closed(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void PlaylistWindow_Loaded(object sender, EventArgs e)
         {
 
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void btnSavePlaylist_Click(object sender, RoutedEventArgs e)
         {
+            PlaylistWriter.Instance.WriteToFile(PlaylistsWindowViewModel.Instance.CreatePlaylist.PlaylistSongs);
+            MessageBox.Show("Theme saved!");
 
         }
 
-        private void borderWindowMove_MouseDown(object sender, MouseButtonEventArgs e)
+        public bool IsCreatingPlaylist { get; set; } = false;
+
+        public List<Song> NewPlaylistSongs { get; set; } = new List<Song>();
+
+        private void btnCreatePlaylist_Click(object sender, RoutedEventArgs e)
         {
-            if (e.ButtonState == e.LeftButton)
-                this.DragMove();
+            IsCreatingPlaylist = true;
+            plSongsListBox.Items.Refresh();
         }
 
-        private void bdrClose_MouseEnter(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void bdrClose_MouseLeave(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void bdrClose_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
-        private void bdrMinimize_MouseEnter(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void bdrMinimize_MouseLeave(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void bdrMinimize_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
-        private void bdrResize_MouseEnter(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void bdrResize_MouseLeave(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void bdrResize_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
-        private void bdrTitleBar_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void AddButton_Click(object sender, RoutedEventArgs e)
         {
 
         }
