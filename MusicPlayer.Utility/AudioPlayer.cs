@@ -1,6 +1,9 @@
 ﻿using System.ComponentModel;
+using System.Diagnostics;
+using System.Numerics;
 using NAudio.CoreAudioApi;
 using NAudio.Wave;
+using TagLib.Mpeg;
 
 namespace MusicPlayer.Utility
 {
@@ -11,16 +14,28 @@ namespace MusicPlayer.Utility
         private MMDevice _defaultDevice;
         private bool _isMuted;
         string _loadedFilePath;
-
+        private WaveOutEvent _waveOutEvent;
         public bool IsPlaying => _player?.PlaybackState == PlaybackState.Playing;
-
-
+        public event Action OnSongEnded;
+        
         public AudioPlayer()
         {
             _player = new WaveOutEvent();
-
+            _player.PlaybackStopped += Player_PlaybackStopped;
         }
+        private void Player_PlaybackStopped(object sender, StoppedEventArgs e)
+        {
+            // This event fires BOTH:
+            // 1) when song naturally ends
+            // 2) when Stop() is called
+            // So we check #1 only
 
+            if (_audioFile != null &&
+                _audioFile.Position >= _audioFile.Length)
+            {
+                OnSongEnded?.Invoke();
+            }
+        }
         public void InitializeVolume()
         {
             var enumerator = new MMDeviceEnumerator();
@@ -66,14 +81,6 @@ namespace MusicPlayer.Utility
             _player.Init(_audioFile);
             _loadedFilePath = filePath;
         }
-
-        WaveOutEvent WaveOut = new WaveOutEvent();
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged(string propertyName) =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-
         public void TogglePlayPause()
         {
             if (IsPlaying)
@@ -85,16 +92,6 @@ namespace MusicPlayer.Utility
                 Play();
             }
         }
-        public void Shuffle(string filePath)
-        {
-
-        }
-
-        public void Repeat(string filePath)
-        {
-
-        }
-
         public void Pause()
         {
             _player?.Pause();
@@ -105,7 +102,18 @@ namespace MusicPlayer.Utility
             if (_player == null)
                 return;
 
-            if (_player.PlaybackState == NAudio.Wave.PlaybackState.Stopped && _audioFile == null)
+            if (_player.PlaybackState == NAudio.Wave.PlaybackState.Stopped)
+            {
+                _player.Play();
+                return;
+            }
+            if (_player.PlaybackState == PlaybackState.Paused)
+            {
+                _player.Play();
+                return;
+            }
+
+            if (_audioFile == null)
                 return;
 
             _player?.Play();
@@ -113,9 +121,10 @@ namespace MusicPlayer.Utility
         
         public void Stop()
         {
-            _player?.Stop();
+            if (_player != null)
+                _player.Stop();
             _audioFile?.Dispose();
-            _audioFile = null;
+            _audioFile = null!;
         }
 
         public void SetOutputDevice(int deviceNumber)
@@ -162,7 +171,11 @@ namespace MusicPlayer.Utility
                 _audioFile.CurrentTime = TimeSpan.FromSeconds(_audioFile.TotalTime.TotalSeconds * progress);
             }
         }
+       
+        public event PropertyChangedEventHandler PropertyChanged;
 
+        protected void OnPropertyChanged(string propertyName) =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
     }
 }

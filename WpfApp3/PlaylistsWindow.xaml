@@ -47,13 +47,13 @@
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="150"/>
-                                        <ColumnDefinition Width="200"/>
-                                        <ColumnDefinition Width="20"/>
-
+                                        <ColumnDefinition Width="250"/>
+                                        <ColumnDefinition Width="195"/>
                                     </Grid.ColumnDefinitions>
+                                    
                                     <TextBlock Grid.Column="0" Text="{Binding Title}"/>
                                     <TextBlock Grid.Column="1" Text="{Binding Artist}" Margin="0,0,0,0" HorizontalAlignment="Left"/>
-                                    <Button Grid.Column="2" x:Name="AddButton" Content="+" Width="25" Height="25" HorizontalAlignment="Right" Visibility="Visible" Click="AddButton_Click" />
+                                    <Button Grid.Column="3" x:Name="AddButton" Content="+" Width="25" Height="25" HorizontalAlignment="Right" Visibility="Visible" Click="AddButton_Click" />
                                 </Grid>
                             </DataTemplate>
                         </ListBox.ItemTemplate>

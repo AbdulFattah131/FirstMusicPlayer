@@ -14,6 +14,7 @@ using System.Windows.Threading;
 using System.Windows.Data;
 using MusicPlayer.UIComponents.Constants;
 using NAudio.CoreAudioApi;
+using System.Diagnostics;
 
 namespace WpfApp3
 {
@@ -212,6 +213,48 @@ namespace WpfApp3
             CurrentSong = PlaybackQueue[CurrentIndex];
         }
 
+        private ENMusicPlayerRepeatMode _repeatMode = ENMusicPlayerRepeatMode.None;
+        public ENMusicPlayerRepeatMode RepeatMode
+        {
+            get => _repeatMode;
+            set
+            {
+                _repeatMode = value;
+            }
+        }
+        public void OnSongEnded()
+        {
+            Player.SongEnded();
+
+            switch (RepeatMode)
+            {
+                case ENMusicPlayerRepeatMode.RepeatSong:
+                    Player.Load(CurrentSong.FilePath);
+                    Player.Play();
+                    break;
+
+                case ENMusicPlayerRepeatMode.RepeatList:
+                    CurrentIndex = (CurrentIndex + 1) % PlaybackQueue.Count;
+                    CurrentSong = PlaybackQueue[CurrentIndex];
+                    Player.Load(CurrentSong.FilePath);
+                    Player.Play();
+                    break;
+
+                default: 
+                    if (CurrentIndex + 1 < PlaybackQueue.Count)
+                    {
+                        CurrentIndex++;
+                        CurrentSong = PlaybackQueue[CurrentIndex];
+                        Player.Load(CurrentSong.FilePath);
+                        Player.Play();
+                    }
+                    else
+                    {
+                        Player.Stop();
+                    }
+                    break;
+            }
+        }
         public void Previous()
         {
             if (PlaybackQueue == null || PlaybackQueue.Count == 0)
@@ -240,44 +283,38 @@ namespace WpfApp3
             CurrentIndex = PlaybackQueue.IndexOf(CurrentSong);
         }
 
-        private ENMusicPlayerRepeatMode _repeatMode = ENMusicPlayerRepeatMode.None;
-        public ENMusicPlayerRepeatMode RepeatMode
-        {
-            get => _repeatMode;
-            set
-            {
-                _repeatMode = value;
-
-                switch (value)
-                {
-                    case ENMusicPlayerRepeatMode.RepeatList:
-                        if (CurrentIndex == PlaybackQueue.Count - 1)
-                        {
-                            CurrentIndex = 0;
-                            CurrentSong = PlaybackQueue[CurrentIndex];
-                            PlayPause();
-                        }
-                        break;
-                    case ENMusicPlayerRepeatMode.RepeatSong:
-                        CurrentSong = PlaybackQueue[CurrentIndex];
-                        PlayPause();
-                        break;
-                    case ENMusicPlayerRepeatMode.None:
-                        break;
-                }
-            }
-        }
-
-        public void Repeat()
-        {
-            if (PlaybackQueue == null || PlaybackQueue.Count == 0)
-                return;
-
-            
 
 
+        //public void Repeat()
+        //{
+        //    if (PlaybackQueue == null || PlaybackQueue.Count == 0)
+        //        return;
+        //    switch (RepeatMode)
+        //    {
+        //        case ENMusicPlayerRepeatMode.RepeatSong:
+        //            CurrentSong = PlaybackQueue[CurrentIndex];
+        //            Player.Play();
+        //            break;
 
-        }
+        //        case ENMusicPlayerRepeatMode.RepeatList:
+        //            if (CurrentIndex == PlaybackQueue.Count - 1)
+        //            {
+        //                CurrentIndex = 0;
+        //            }
+        //            else
+        //            {
+        //                CurrentIndex++;
+        //            }
+                    
+        //            CurrentSong = PlaybackQueue[CurrentIndex];
+        //            Player.Play();
+
+        //            break;
+
+        //        case ENMusicPlayerRepeatMode.None:
+        //            return;
+        //    }
+        //}
 
         #endregion
 
@@ -316,25 +353,25 @@ namespace WpfApp3
         }
         #endregion
 
+
         public MusicPlayerCache()
         {
-            var songFilePaths = FileScanner.Instance.ScanSongs();             // song file paths
+            var songFilePaths = FileScanner.Instance.ScanSongs(); // song file paths
 
             AllSongs = TagReader.Instance.ReadSongsFromFilePaths(songFilePaths); // song objects
 
-            Albums = new ObservableCollection<Album>(TagReader.Instance.GetAlbums());  // albums
+            Albums = new ObservableCollection<Album>(TagReader.Instance.GetAlbums()); // albums
 
-            PlaybackQueue = new ObservableCollection<Song>();                  // playback queue
+            PlaybackQueue = new ObservableCollection<Song>(); // playback queue
 
-            #region Timer
+            // timer
             _timer = new DispatcherTimer
             {
                 Interval = TimeSpan.FromMilliseconds(1000)
             };
             _timer.Tick += Timer_Tick;
             _timer.Start();
-            #endregion
-
+            
         }
 
         // Timer Tick

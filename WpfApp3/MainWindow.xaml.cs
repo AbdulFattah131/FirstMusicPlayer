@@ -1,8 +1,10 @@
-﻿using System.Windows;
+﻿using System.Numerics;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using MusicPlayer.Data.Objects;
 using MusicPlayer.UIComponents;
 using MusicPlayer.UIComponents.Constants;
@@ -20,6 +22,8 @@ namespace WpfApp3
 
         public MainWindowViewModel m_vm;
 
+        private AudioPlayer _player;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -33,6 +37,8 @@ namespace WpfApp3
             LoadThemes();
 
             InitializeUIState();
+
+            _player = new AudioPlayer();
         }
 
         private void LoadPersistence()
@@ -258,19 +264,20 @@ namespace WpfApp3
         }
         private void tbRepeat_Click(object sender, RoutedEventArgs e)
         {
+            m_vm.MusicPlayerCache.OnSongEnded();
+
             if (tbRepeat.IsChecked == true)
             {
                 m_vm.MusicPlayerCache.RepeatMode = ENMusicPlayerRepeatMode.RepeatList;
             }
-            else if (m_vm.MusicPlayerCache.RepeatMode == ENMusicPlayerRepeatMode.RepeatList)
+            else if (tbRepeat.IsChecked == null)
             {
                 m_vm.MusicPlayerCache.RepeatMode = ENMusicPlayerRepeatMode.RepeatSong;
-                tbRepeat.IsChecked = null;
+                
             }
-            else if (m_vm.MusicPlayerCache.RepeatMode == ENMusicPlayerRepeatMode.RepeatSong)
+            else if (tbRepeat.IsChecked == false)
             {
                 m_vm.MusicPlayerCache.RepeatMode = ENMusicPlayerRepeatMode.None;
-                tbRepeat.IsChecked = false;
             }
         }
 
@@ -342,7 +349,6 @@ namespace WpfApp3
             scrollViewer.ScrollToVerticalOffset(scrollViewer.VerticalOffset - e.Delta);
             e.Handled = true;
         }
-
         private void ToggleButton_Checked(object sender, RoutedEventArgs e)
         {
             var clickedToggle = sender as ToggleButton;
@@ -387,7 +393,6 @@ namespace WpfApp3
                 }
             }
         }
-
         private void PlaybackToggle_Checked(object sender, RoutedEventArgs e)
         {
             bool? bValue = (sender as ToggleButton).IsChecked;
