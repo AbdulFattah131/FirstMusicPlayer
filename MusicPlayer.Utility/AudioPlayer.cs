@@ -16,8 +16,8 @@ namespace MusicPlayer.Utility
         string _loadedFilePath;
         private WaveOutEvent _waveOutEvent;
         public bool IsPlaying => _player?.PlaybackState == PlaybackState.Playing;
-        public event Action OnSongEnded;
-        
+        public event Action SongEnded;
+  
         public AudioPlayer()
         {
             _player = new WaveOutEvent();
@@ -25,16 +25,14 @@ namespace MusicPlayer.Utility
         }
         private void Player_PlaybackStopped(object sender, StoppedEventArgs e)
         {
-            // This event fires BOTH:
-            // 1) when song naturally ends
-            // 2) when Stop() is called
-            // So we check #1 only
-
             if (_audioFile != null &&
                 _audioFile.Position >= _audioFile.Length)
             {
-                OnSongEnded?.Invoke();
+                SongEnded?.Invoke();
+                System.Diagnostics.Debug.WriteLine("🔥 SongEnded event FIRED!");
+
             }
+
         }
         public void InitializeVolume()
         {
@@ -99,26 +97,15 @@ namespace MusicPlayer.Utility
 
         public void Play()
         {
-            if (_player == null)
+            if (_player == null || _audioFile == null)
                 return;
 
-            if (_player.PlaybackState == NAudio.Wave.PlaybackState.Stopped)
+            if (_player.PlaybackState != PlaybackState.Playing)
             {
                 _player.Play();
-                return;
             }
-            if (_player.PlaybackState == PlaybackState.Paused)
-            {
-                _player.Play();
-                return;
-            }
-
-            if (_audioFile == null)
-                return;
-
-            _player?.Play();
         }
-        
+
         public void Stop()
         {
             if (_player != null)

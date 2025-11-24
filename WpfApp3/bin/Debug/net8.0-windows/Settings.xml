@@ -2,12 +2,12 @@
 <Settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <CurrentThemeName>Windows 11 (Dark)</CurrentThemeName>
   <LastWindowCoordinates>
-    <X>-1116</X>
-    <Y>158</Y>
+    <X>0</X>
+    <Y>0</Y>
   </LastWindowCoordinates>
   <LastWindowDimensions>
-    <X>800</X>
-    <Y>786</Y>
+    <X>1920</X>
+    <Y>1040</Y>
   </LastWindowDimensions>
-  <LastKnownVolume>0.12495613</LastKnownVolume>
+  <LastKnownVolume>0</LastKnownVolume>
 </Settings>

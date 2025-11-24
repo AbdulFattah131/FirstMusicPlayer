@@ -73,12 +73,14 @@ namespace WpfApp3
                 OnPropertyChanged(nameof(CurrentMode));
             }
         }
+        private bool _isPlaying;
         public bool IsPlaying
         {
-            get => Player.IsPlaying;
-            set
+            get => _isPlaying;
+            private set
             {
-                Player.TogglePlayPause();
+                if (_isPlaying == value) return;
+                _isPlaying = value;
                 OnPropertyChanged(nameof(IsPlaying));
             }
         }
@@ -126,6 +128,7 @@ namespace WpfApp3
                 Player.Stop();
                 _currentSong = value;
                 CurrentPosition = 0;
+                IsPlaying = false;
 
                 if (value == null)
                     return;
@@ -135,7 +138,6 @@ namespace WpfApp3
                 if (_currentSong != null)
                     Player.Load(_currentSong.FilePath);
                 
-
                 OnPropertyChanged(nameof(CurrentSong));
                 OnPropertyChanged(nameof(IsPlaying));
             }
@@ -192,10 +194,13 @@ namespace WpfApp3
                 return;
 
             if (_loadedFilePath != CurrentSong.FilePath)
+            {
                 Player.Load(CurrentSong.FilePath);
                 _loadedFilePath = CurrentSong.FilePath;
+            }
 
             Player.TogglePlayPause();
+            IsPlaying = Player.IsPlaying;
         }
         
         public void Next()
@@ -204,6 +209,7 @@ namespace WpfApp3
                 return;
 
             Player.Stop();
+            IsPlaying = false;
 
             CurrentIndex++;
 
@@ -224,15 +230,8 @@ namespace WpfApp3
         }
         public void OnSongEnded()
         {
-            Player.SongEnded();
-
             switch (RepeatMode)
             {
-                case ENMusicPlayerRepeatMode.RepeatSong:
-                    Player.Load(CurrentSong.FilePath);
-                    Player.Play();
-                    break;
-
                 case ENMusicPlayerRepeatMode.RepeatList:
                     CurrentIndex = (CurrentIndex + 1) % PlaybackQueue.Count;
                     CurrentSong = PlaybackQueue[CurrentIndex];
@@ -240,7 +239,12 @@ namespace WpfApp3
                     Player.Play();
                     break;
 
-                default: 
+                case ENMusicPlayerRepeatMode.RepeatSong:
+                    Player.Load(CurrentSong.FilePath);
+                    Player.Play();
+                    break;
+
+                case ENMusicPlayerRepeatMode.None:
                     if (CurrentIndex + 1 < PlaybackQueue.Count)
                     {
                         CurrentIndex++;
@@ -282,39 +286,6 @@ namespace WpfApp3
             PlaybackQueue = new ObservableCollection<Song>(_arrTempQueue);
             CurrentIndex = PlaybackQueue.IndexOf(CurrentSong);
         }
-
-
-
-        //public void Repeat()
-        //{
-        //    if (PlaybackQueue == null || PlaybackQueue.Count == 0)
-        //        return;
-        //    switch (RepeatMode)
-        //    {
-        //        case ENMusicPlayerRepeatMode.RepeatSong:
-        //            CurrentSong = PlaybackQueue[CurrentIndex];
-        //            Player.Play();
-        //            break;
-
-        //        case ENMusicPlayerRepeatMode.RepeatList:
-        //            if (CurrentIndex == PlaybackQueue.Count - 1)
-        //            {
-        //                CurrentIndex = 0;
-        //            }
-        //            else
-        //            {
-        //                CurrentIndex++;
-        //            }
-                    
-        //            CurrentSong = PlaybackQueue[CurrentIndex];
-        //            Player.Play();
-
-        //            break;
-
-        //        case ENMusicPlayerRepeatMode.None:
-        //            return;
-        //    }
-        //}
 
         #endregion
 
@@ -371,7 +342,9 @@ namespace WpfApp3
             };
             _timer.Tick += Timer_Tick;
             _timer.Start();
-            
+
+            Player.SongEnded += OnSongEnded;
+
         }
 
         // Timer Tick

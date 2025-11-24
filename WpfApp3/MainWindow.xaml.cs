@@ -1,15 +1,13 @@
-﻿using System.Numerics;
+﻿using MusicPlayer.Data.Objects;
+using MusicPlayer.UIComponents;
+using MusicPlayer.UIComponents.Constants;
+using MusicPlayer.UIComponents.ViewModels;
+using MusicPlayer.Utility;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using MusicPlayer.Data.Objects;
-using MusicPlayer.UIComponents;
-using MusicPlayer.UIComponents.Constants;
-using MusicPlayer.UIComponents.ViewModels;
-using MusicPlayer.Utility;
 
 namespace WpfApp3
 {
@@ -38,17 +36,15 @@ namespace WpfApp3
 
             InitializeUIState();
 
+            ApplyRestoreWindow();
+
             _player = new AudioPlayer();
         }
 
         private void LoadPersistence()
         {
-            this.Left = m_vm.Settings.LastWindowCoordinates.X;
-            this.Top = m_vm.Settings.LastWindowCoordinates.Y;
-            this.Width = m_vm.Settings.LastWindowDimensions.X;
-            this.Height = m_vm.Settings.LastWindowDimensions.Y;
-
-            float? fLastKnownVolume = m_vm.Settings.LastKnownVolume;
+        // last volume level
+        float? fLastKnownVolume = m_vm.Settings.LastKnownVolume;
 
             if (fLastKnownVolume == null)
                 m_vm.MusicPlayerCache.Player.InitializeVolume();
@@ -91,14 +87,43 @@ namespace WpfApp3
                 }
             }
         }
-
         private void InitializeUIState()
         { 
             //Initialize UI State
             btnToggleAlbums.IsChecked = true;
         }
 
-        #region Title Bar
+        // Title Bar
+
+        public void ApplyMaximizeWindow()
+        {
+            var workArea = SystemParameters.WorkArea;
+
+            this.WindowState = WindowState.Normal;
+
+            this.Top = workArea.Top;
+            this.Left = workArea.Left;
+            this.Width = workArea.Width;
+            this.Height = workArea.Height;
+        }
+
+        private void ApplyRestoreWindow()
+        {
+            ApplyMaximizeWindow();
+            this.Left = m_vm.Settings.LastWindowCoordinates.X;
+            this.Top = m_vm.Settings.LastWindowCoordinates.Y;
+            this.Width = m_vm.Settings.LastWindowDimensions.X;
+            this.Height = m_vm.Settings.LastWindowDimensions.Y;
+        }
+
+        private void ApplyNormalizeWindow()
+        {
+            ApplyMaximizeWindow();
+            this.Left = 100;
+            this.Top = 100;
+            this.Width = 1500;
+            this.Height = 850;
+        }
 
         #region Theme designer Button
         private void bdrThemeDesigner_MouseEnter(object sender, MouseEventArgs e)
@@ -181,7 +206,7 @@ namespace WpfApp3
 
         #endregion
 
-        #region Resize Button
+        #region Resize
         private void bdrResize_MouseEnter(object sender, MouseEventArgs e)
         {
             grdResize.Background = Brushes.DarkGray;
@@ -192,17 +217,38 @@ namespace WpfApp3
             grdResize.Background = null;
         }
 
+        private bool isCustomMaximized = false;
         private void bdrResize_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if (this.WindowState == WindowState.Maximized)
+            if (!isCustomMaximized)
             {
-                this.WindowState = WindowState.Normal;
-                tbResize.Text = "🗖";
+                ApplyMaximizeWindow();
+                tbResize.Text = "🗗";
+                isCustomMaximized = true;
             }
             else
             {
-                this.WindowState = WindowState.Maximized;
-                tbResize.Text = "🗗";
+                ApplyNormalizeWindow();
+                tbResize.Text = "🗖";
+                isCustomMaximized = false;
+            }
+        }
+
+        // Double Click
+        private void bdrTitleBar_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount == 2)
+            {
+                if (!isCustomMaximized)
+                {
+                    ApplyMaximizeWindow();
+                    isCustomMaximized = true;
+                }
+                else
+                {
+                    ApplyNormalizeWindow();
+                    isCustomMaximized = false;
+                }
             }
         }
 
@@ -221,19 +267,6 @@ namespace WpfApp3
 
         #endregion
 
-        #region Double Click
-        private void bdrTitleBar_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ClickCount == 2)
-            {
-                if (this.WindowState == WindowState.Normal)
-                    this.WindowState = WindowState.Maximized;
-                else if (this.WindowState == WindowState.Maximized)
-                    this.WindowState = WindowState.Normal;
-            }
-        }
-        #endregion
-
         #region Move Window (through title bar)
         private void borderWindowMove_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -243,7 +276,7 @@ namespace WpfApp3
 
         #endregion
 
-        #endregion
+        // Music Control
 
         #region Switch Button
         private void SwitchButton_Click(object sender, RoutedEventArgs e)
@@ -264,8 +297,6 @@ namespace WpfApp3
         }
         private void tbRepeat_Click(object sender, RoutedEventArgs e)
         {
-            m_vm.MusicPlayerCache.OnSongEnded();
-
             if (tbRepeat.IsChecked == true)
             {
                 m_vm.MusicPlayerCache.RepeatMode = ENMusicPlayerRepeatMode.RepeatList;
@@ -273,7 +304,6 @@ namespace WpfApp3
             else if (tbRepeat.IsChecked == null)
             {
                 m_vm.MusicPlayerCache.RepeatMode = ENMusicPlayerRepeatMode.RepeatSong;
-                
             }
             else if (tbRepeat.IsChecked == false)
             {
@@ -392,18 +422,6 @@ namespace WpfApp3
                     }
                 }
             }
-        }
-        private void PlaybackToggle_Checked(object sender, RoutedEventArgs e)
-        {
-            bool? bValue = (sender as ToggleButton).IsChecked;
-
-            if (bValue == null)
-            {
-                m_vm.MusicPlayerCache.IsPlaying = false;
-                return;
-            }
-
-            m_vm.MusicPlayerCache.IsPlaying = (bool)bValue;
         }
         private void ToggleButton_Unchecked(object sender, RoutedEventArgs e)
         {

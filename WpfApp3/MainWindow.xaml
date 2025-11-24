@@ -1705,6 +1705,7 @@
         <!-- Row 2 Bottom View -->
         
         <!-- border for drop shadow-->
+        
         <Border x:Name="bdrPlaybackPanel" Grid.Row="2" Grid.ColumnSpan="3" VerticalAlignment="Bottom">
             <Border.Effect>
                 <DropShadowEffect Color="Black"
@@ -1858,15 +1859,8 @@
                                     </Button.Style>
                                 </Button>
 
-                                    <ToggleButton x:Name="tbPlayPause" IsChecked="{Binding MusicPlayerCache.IsPlaying}" Grid.Row="0" Grid.Column="2" 
+                                    <ToggleButton x:Name="tbPlayPause" IsChecked="{Binding MusicPlayerCache.IsPlaying, Mode=OneWay}" Click="tbPlayPause_Click" Grid.Row="0" Grid.Column="2" 
                                   Background="Transparent" BorderBrush="Transparent">
-                                        <!--<ToggleButton.Template>
-                                            <ControlTemplate TargetType="ToggleButton">
-                                                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
-                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                </Border>
-                                            </ControlTemplate>
-                                        </ToggleButton.Template>-->
                                         <ToggleButton.Style>
                                         <Style TargetType="ToggleButton">
                                                 <Setter Property="ContentTemplate">
@@ -1978,7 +1972,7 @@
                                             </Style>
                                     </ToggleButton.Style>
                                 </ToggleButton>
-                            </Grid>
+                                </Grid>
                         </Viewbox>
                     </Grid>
                     
@@ -2026,7 +2020,7 @@
                                             <Setter.Value>
                                                 <ControlTemplate TargetType="RepeatButton">
                                                     <Border Background="{TemplateBinding Background}"
-                                                    CornerRadius="2" 
+                                                    CornerRadius="2,0,0,2" 
                                                     SnapsToDevicePixels="True"/>
                                                 </ControlTemplate>
                                             </Setter.Value>
@@ -2058,10 +2052,15 @@
                                             <!-- Left/Decrease button -->
                                             <Track.DecreaseRepeatButton>
                                                 <RepeatButton Command="Slider.DecreaseLarge"
-                                                  Background="{Binding CurrentTheme.WindowPrimarySlider.Brush}"
-                                                  BorderBrush="Gray"
-                                                  BorderThickness="0"
-                                                  Height="5"></RepeatButton>
+                                                  >
+                                                        <RepeatButton.Template>
+                                                            <ControlTemplate TargetType="RepeatButton">
+                                                                <Border Background="{Binding CurrentTheme.WindowPrimarySlider.Brush}"
+                                                                        CornerRadius="2,0,0,2"
+                                                                        Height="5"/>
+                                                            </ControlTemplate>
+                                                        </RepeatButton.Template>
+                                                    </RepeatButton>
                                             </Track.DecreaseRepeatButton>
 
                                             <!-- Thumb -->
@@ -2075,12 +2074,17 @@
 
                                             <!-- Right/Increase button -->
                                             <Track.IncreaseRepeatButton>
-                                                <RepeatButton Command="Slider.IncreaseLarge"
-                                                  Background="#C5C5C5"
-                                                  BorderBrush="Gray"
-                                                  BorderThickness="0"
-                                                  Height="5"/>
-                                            </Track.IncreaseRepeatButton>
+                                                    <RepeatButton Command="Slider.IncreaseLarge"
+                                                 >
+                                                        <RepeatButton.Template>
+                                                            <ControlTemplate TargetType="RepeatButton">
+                                                                <Border Background="#C5C5C5"
+                                                                        CornerRadius="0,2,2,0"
+                                                                        Height="5"/>
+                                                            </ControlTemplate>
+                                                        </RepeatButton.Template>
+                                                    </RepeatButton>
+                                                </Track.IncreaseRepeatButton>
 
                                         </Track>
 
@@ -2202,39 +2206,48 @@
                                 <Grid>
                                     
                                     <!-- Track (main bar) -->
-                                    <Track x:Name="PART_Track">
+                                            <Track x:Name="PART_Track">
 
-                                        <!-- Left/Decrease button -->
-                                        <Track.DecreaseRepeatButton>
-                                                <RepeatButton x:Name="DecreaseRepeatButton" Command="Slider.DecreaseLarge"
-                                                      Background="{Binding CurrentTheme.WindowPrimarySlider.Brush}"
-                                                      BorderBrush="Gray"
-                                                      BorderThickness="0"
-                                                      Height="5"></RepeatButton>
-                                        </Track.DecreaseRepeatButton>
+                                                <!-- Left/Decrease button -->
+                                                <Track.DecreaseRepeatButton>
+                                                    <RepeatButton x:Name="DecreaseRepeatButton" Command="Slider.DecreaseLarge"
+                                                     >
+                                                        <RepeatButton.Template>
+                                                            <ControlTemplate TargetType="RepeatButton">
+                                                                <Border Background="{Binding CurrentTheme.WindowPrimarySlider.Brush}"
+                                                                        CornerRadius="2,0,0,2"
+                                                                        Height="5"/>
+                                                            </ControlTemplate>
+                                                        </RepeatButton.Template>
+                                                    </RepeatButton>
+                                                </Track.DecreaseRepeatButton>
 
-                                        <!-- Thumb -->
-                                        <Track.Thumb>
-                                            <Thumb x:Name="Thumb"
+                                                <!-- Thumb -->
+                                                <Track.Thumb>
+                                                    <Thumb x:Name="Thumb"
                                                    Width="12" Height="12"
                                                    Background="{Binding CurrentTheme.WindowPrimaryAnchor.Brush}"
                                                    BorderBrush="#494454"
                                                    BorderThickness="0"
                                                    />
-                                        </Track.Thumb>
+                                                </Track.Thumb>
 
-                                        <!-- Right/Increase button -->
-                                        <Track.IncreaseRepeatButton>
-                                            <RepeatButton x:Name="IncreaseRepeatButton" Command="Slider.IncreaseLarge"
-                                                      Background="#C5C5C5"
-                                                      BorderBrush="Gray"
-                                                      BorderThickness="0"
-                                                      Height="5"/>
-                                        </Track.IncreaseRepeatButton>
+                                                <!-- Right/Increase button -->
+                                                <Track.IncreaseRepeatButton>
+                                                    <RepeatButton x:Name="IncreaseRepeatButton" Command="Slider.IncreaseLarge"
+                                                      >
+                                                        <RepeatButton.Template>
+                                                            <ControlTemplate TargetType="RepeatButton">
+                                                                <Border Background="#C5C5C5"
+                                                                        CornerRadius="0,2,2,0"
+                                                                        Height="5"/>
+                                                            </ControlTemplate>
+                                                        </RepeatButton.Template>
+                                                    </RepeatButton>
+                                                </Track.IncreaseRepeatButton>
 
-                                    </Track>
-                                    
-                                </Grid>
+                                            </Track>
+                                        </Grid>
 
                                 <!-- TRIGGERS -->
                                 <ControlTemplate.Triggers>
