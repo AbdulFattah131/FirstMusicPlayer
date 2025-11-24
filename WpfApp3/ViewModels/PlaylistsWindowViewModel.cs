@@ -36,17 +36,21 @@ namespace MusicPlayer.UIComponents.ViewModels
             LoadSavedPlaylists();
         }
 
-        private Playlist _createPlaylist;
-        public Playlist CreatePlaylist
+        private Playlist _newPlaylist;
+        public Playlist NewPlaylist
         {
-            get { return _createPlaylist; }
+            get { return _newPlaylist; }
             set
             {
-                _createPlaylist = value;
-                OnPropertyChanged(new PropertyChangedEventArgs(nameof(CreatePlaylist)));
+                _newPlaylist = value;
+                OnPropertyChanged(new PropertyChangedEventArgs(nameof(NewPlaylist)));
             }
         }
+        
+        public List<Song> TemporarySongs = new();
 
+        private List<Playlist> Playlists = new();
+        
         public List<Playlist> LoadedPlaylists
         {
             get 
@@ -58,7 +62,7 @@ namespace MusicPlayer.UIComponents.ViewModels
 
         public void CreateNewPlaylist(string name)
         {
-            CreatePlaylist = new Playlist() { Name = name, PlaylistSongs = new List<Song>() };
+            NewPlaylist = new Playlist() { Name = name, PlaylistSongs = new List<Song>() };
         }
 
         public void LoadSavedPlaylists()
@@ -78,20 +82,20 @@ namespace MusicPlayer.UIComponents.ViewModels
 
         public void AddSongToCurrentPlaylist(Song song)
         {
-            if (CreatePlaylist == null)
+            if (NewPlaylist == null)
                 return;
 
-            CreatePlaylist.PlaylistSongs.Add(song);
-            OnPropertyChanged(new PropertyChangedEventArgs(nameof(CreatePlaylist)));
+            NewPlaylist.PlaylistSongs.Add(song);
+            OnPropertyChanged(new PropertyChangedEventArgs(nameof(NewPlaylist)));
         }
 
         public void RemoveSongFromCurrentPlaylist(Song song)
         {
-            if (CreatePlaylist == null)
+            if (NewPlaylist == null)
                 return;
 
-            CreatePlaylist.PlaylistSongs.Remove(song);
-            OnPropertyChanged(new PropertyChangedEventArgs(nameof(CreatePlaylist)));
+            NewPlaylist.PlaylistSongs.Remove(song);
+            OnPropertyChanged(new PropertyChangedEventArgs(nameof(NewPlaylist)));
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

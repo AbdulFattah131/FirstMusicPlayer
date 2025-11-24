@@ -96,7 +96,7 @@ namespace WpfApp3
                     _previousSelectedAlbum = _selectedAlbum;
 
                 _selectedAlbum = value;
-                Player.Stop();
+                Stop();
                 
                 CurrentSong = null;
 
@@ -125,10 +125,9 @@ namespace WpfApp3
                 if (_currentSong == value)
                     return;
 
-                Player.Stop();
-                _currentSong = value;
+                Stop();
                 CurrentPosition = 0;
-                IsPlaying = false;
+                _currentSong = value;
 
                 if (value == null)
                     return;
@@ -173,6 +172,11 @@ namespace WpfApp3
             }
         }
 
+        public PlaybackState PlaybackState
+        {
+            get => Player.PlaybackState;
+        }
+
         public AudioPlayer MMDevice;
 
         private readonly DispatcherTimer _timer;
@@ -199,8 +203,11 @@ namespace WpfApp3
                 _loadedFilePath = CurrentSong.FilePath;
             }
 
-            Player.TogglePlayPause();
-            IsPlaying = Player.IsPlaying;
+
+            if (IsPlaying)
+                Player.Pause();
+            else
+                Play();
         }
         
         public void Next()
@@ -208,8 +215,7 @@ namespace WpfApp3
             if (PlaybackQueue == null || PlaybackQueue.Count == 0)
                 return;
 
-            Player.Stop();
-            IsPlaying = false;
+            Stop();
 
             CurrentIndex++;
 
@@ -230,18 +236,22 @@ namespace WpfApp3
         }
         public void OnSongEnded()
         {
+
+            CurrentPosition = 0;
+
             switch (RepeatMode)
             {
                 case ENMusicPlayerRepeatMode.RepeatList:
+                    IsPlaying = false;
                     CurrentIndex = (CurrentIndex + 1) % PlaybackQueue.Count;
                     CurrentSong = PlaybackQueue[CurrentIndex];
                     Player.Load(CurrentSong.FilePath);
-                    Player.Play();
+                    Play();
+                    IsPlaying = true;
                     break;
 
                 case ENMusicPlayerRepeatMode.RepeatSong:
-                    Player.Load(CurrentSong.FilePath);
-                    Player.Play();
+                    Play();
                     break;
 
                 case ENMusicPlayerRepeatMode.None:
@@ -250,11 +260,13 @@ namespace WpfApp3
                         CurrentIndex++;
                         CurrentSong = PlaybackQueue[CurrentIndex];
                         Player.Load(CurrentSong.FilePath);
-                        Player.Play();
+                        Play();
                     }
                     else
                     {
-                        Player.Stop();
+                        IsPlaying = false;
+                        CurrentSong = PlaybackQueue[0];
+                        Player.Load(CurrentSong.FilePath);
                     }
                     break;
             }
@@ -264,7 +276,7 @@ namespace WpfApp3
             if (PlaybackQueue == null || PlaybackQueue.Count == 0)
                 return;
 
-            Player.Stop();
+            Stop();
 
             CurrentIndex--;
 
@@ -347,13 +359,26 @@ namespace WpfApp3
 
         }
 
+        private void Play()
+        {
+            IsPlaying = true;
+            Player.Seek(CurrentPosition/Player.TotalTime.TotalSeconds);
+            Player.Play();
+        }
+
+        private void Stop()
+        {
+            IsPlaying = false;
+            Player.Stop();
+        }
+
         // Timer Tick
         private void Timer_Tick(object sender, EventArgs e)
         {
             if (!IsPlaying)
                 return;
 
-            CurrentPosition = (int)Player.CurrentTime.TotalSeconds;
+            CurrentPosition = CurrentPosition + 1;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

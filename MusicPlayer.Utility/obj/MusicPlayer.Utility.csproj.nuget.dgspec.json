@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\PC01\\Source\\Repos\\FirstMusicPlayer\\MusicPlayer.Utility\\MusicPlayer.Utility.csproj": {}
+    "C:\\Users\\safalam\\source\\repos\\WPF\\WpfApp3\\MusicPlayer.Utility\\MusicPlayer.Utility.csproj": {}
   },
   "projects": {
-    "C:\\Users\\PC01\\Source\\Repos\\FirstMusicPlayer\\MusicPlayer.Data\\MusicPlayer.Data.csproj": {
+    "C:\\Users\\safalam\\source\\repos\\WPF\\WpfApp3\\MusicPlayer.Data\\MusicPlayer.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\PC01\\Source\\Repos\\FirstMusicPlayer\\MusicPlayer.Data\\MusicPlayer.Data.csproj",
+        "projectUniqueName": "C:\\Users\\safalam\\source\\repos\\WPF\\WpfApp3\\MusicPlayer.Data\\MusicPlayer.Data.csproj",
         "projectName": "MusicPlayer.Data",
-        "projectPath": "C:\\Users\\PC01\\Source\\Repos\\FirstMusicPlayer\\MusicPlayer.Data\\MusicPlayer.Data.csproj",
-        "packagesPath": "C:\\Users\\PC01\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\PC01\\Source\\Repos\\FirstMusicPlayer\\MusicPlayer.Data\\obj\\",
+        "projectPath": "C:\\Users\\safalam\\source\\repos\\WPF\\WpfApp3\\MusicPlayer.Data\\MusicPlayer.Data.csproj",
+        "packagesPath": "C:\\Users\\safalam\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\safalam\\source\\repos\\WPF\\WpfApp3\\MusicPlayer.Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\PC01\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\safalam\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -44,7 +45,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0-windows7.0": {
@@ -68,24 +69,24 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\PC01\\Source\\Repos\\FirstMusicPlayer\\MusicPlayer.Utility\\MusicPlayer.Utility.csproj": {
+    "C:\\Users\\safalam\\source\\repos\\WPF\\WpfApp3\\MusicPlayer.Utility\\MusicPlayer.Utility.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\PC01\\Source\\Repos\\FirstMusicPlayer\\MusicPlayer.Utility\\MusicPlayer.Utility.csproj",
+        "projectUniqueName": "C:\\Users\\safalam\\source\\repos\\WPF\\WpfApp3\\MusicPlayer.Utility\\MusicPlayer.Utility.csproj",
         "projectName": "MusicPlayer.Utility",
-        "projectPath": "C:\\Users\\PC01\\Source\\Repos\\FirstMusicPlayer\\MusicPlayer.Utility\\MusicPlayer.Utility.csproj",
-        "packagesPath": "C:\\Users\\PC01\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\PC01\\Source\\Repos\\FirstMusicPlayer\\MusicPlayer.Utility\\obj\\",
+        "projectPath": "C:\\Users\\safalam\\source\\repos\\WPF\\WpfApp3\\MusicPlayer.Utility\\MusicPlayer.Utility.csproj",
+        "packagesPath": "C:\\Users\\safalam\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\safalam\\source\\repos\\WPF\\WpfApp3\\MusicPlayer.Utility\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\PC01\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\safalam\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -94,14 +95,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0-windows7.0": {
             "targetAlias": "net8.0-windows",
             "projectReferences": {
-              "C:\\Users\\PC01\\Source\\Repos\\FirstMusicPlayer\\MusicPlayer.Data\\MusicPlayer.Data.csproj": {
-                "projectPath": "C:\\Users\\PC01\\Source\\Repos\\FirstMusicPlayer\\MusicPlayer.Data\\MusicPlayer.Data.csproj"
+              "C:\\Users\\safalam\\source\\repos\\WPF\\WpfApp3\\MusicPlayer.Data\\MusicPlayer.Data.csproj": {
+                "projectPath": "C:\\Users\\safalam\\source\\repos\\WPF\\WpfApp3\\MusicPlayer.Data\\MusicPlayer.Data.csproj"
               }
             }
           }
@@ -116,7 +118,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0-windows7.0": {
@@ -147,7 +149,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

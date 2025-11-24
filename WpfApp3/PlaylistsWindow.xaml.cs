@@ -29,36 +29,36 @@ namespace MusicPlayer.UIComponents
             InitializeComponent();
             this.DataContext = new MainWindowViewModel();
         }
-
-        private void PlaylistWindow_Closed(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void PlaylistWindow_Loaded(object sender, EventArgs e)
-        {
-
-        }
+        
         private void btnSavePlaylist_Click(object sender, RoutedEventArgs e)
         {
-            PlaylistWriter.Instance.WriteToFile(PlaylistsWindowViewModel.Instance.CreatePlaylist.PlaylistSongs);
-            MessageBox.Show("Theme saved!");
-
+            PlaylistWriter.Instance.WriteToFile(PlaylistsWindowViewModel.Instance.NewPlaylist.PlaylistSongs);
+            MessageBox.Show("Playlist saved!");
         }
-
-        public bool IsCreatingPlaylist { get; set; } = false;
 
         public List<Song> NewPlaylistSongs { get; set; } = new List<Song>();
 
-        private void btnCreatePlaylist_Click(object sender, RoutedEventArgs e)
-        {
-            IsCreatingPlaylist = true;
-            plSongsListBox.Items.Refresh();
-        }
-
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
+            var selectedSong = plSongsListBox.SelectedItem as Song;
+            if (selectedSong == null) return;
 
+            PlaylistsWindowViewModel.Instance.TemporarySongs.Add(selectedSong);
+            RefreshTemporaryListUI();
+        }
+
+        private void RemoveButton_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedSong = plSongsListBox.SelectedItem as Song;
+            if (selectedSong == null) return;
+
+            PlaylistsWindowViewModel.Instance.TemporarySongs.Remove(selectedSong);
+            RefreshTemporaryListUI();
+        }
+        private void RefreshTemporaryListUI()
+        {
+            plSongsListBox.ItemsSource = null;
+            plSongsListBox.ItemsSource = PlaylistsWindowViewModel.Instance.TemporarySongs;
         }
     }
 }

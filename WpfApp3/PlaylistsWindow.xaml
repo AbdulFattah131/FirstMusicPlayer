@@ -51,12 +51,16 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="150"/>
                                         <ColumnDefinition Width="250"/>
-                                        <ColumnDefinition Width="195"/>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="90"/>
+
                                     </Grid.ColumnDefinitions>
                                     
                                     <TextBlock Grid.Column="0" Text="{Binding Title}"/>
                                     <TextBlock Grid.Column="1" Text="{Binding Artist}" Margin="0,0,0,0" HorizontalAlignment="Left"/>
-                                    <Button Grid.Column="3" x:Name="AddButton" Content="+" Width="25" Height="25" HorizontalAlignment="Right" Visibility="Visible" Click="AddButton_Click" />
+                                    <Button Grid.Column="3" x:Name="AddButton" Content="+" Width="25" Height="25" HorizontalAlignment="Center" Margin="0,0,10,0" Visibility="Visible" Click="AddButton_Click" ToolTip="Add Song"/>
+                                    <Button Grid.Column="4" x:Name="RemoveButton" Content="-" Width="25" Height="25" HorizontalAlignment="Right" Visibility="Visible" Click="RemoveButton_Click" ToolTip="Remove Song"/>
+
                                 </Grid>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
@@ -66,16 +70,16 @@
 
                 <!-- Bottom Left: Remove Playlist -->
             <Border Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch"
-        BorderBrush="Black" BorderThickness="1" CornerRadius="5"
-        Padding="10" Margin="0,0,10,0">
+                    BorderBrush="Black" BorderThickness="1" CornerRadius="5"
+                    Padding="10" Margin="0,0,10,0">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition />
+                        <RowDefinition/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Row="0" Text="Remove Playlist"
-                   FontWeight="Bold" Margin="5,0,0,5"/>
+                   FontWeight="Bold" Margin="0,0,0,5"/>
 
                     <Button Grid.Row="1" Content="Remove Selected Playlist"
                 HorizontalAlignment="Right" Margin="0,0,5,0" Width="150"/>
@@ -92,15 +96,16 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" Text="Create / Save Playlist"
+                    <TextBlock Grid.Row="0" Text="Save Playlist"
                    FontWeight="Bold" Margin="0,0,0,5"/>
+                    
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Grid.Row="1">
+                        <TextBlock Text="Name" Margin="0,0,0,0"></TextBlock>
+                        <TextBox Text="{Binding Path=NewPlaylist.Name, UpdateSourceTrigger=PropertyChanged}" Width="150" Margin="5,0,5,0"></TextBox>
+                    </StackPanel>
 
-                    <StackPanel Grid.Row="1" Orientation="Horizontal"
-                    HorizontalAlignment="Right">
-                        <Button Name="btnCreatePlaylist" Content="Create Playlist"
-                    Width="150" Height="20" Margin="0,0,5,0"/>
-                        <Button Name="btnSavePlaylist" Content="Save Playlist"
-                    Width="150" Height="20"/>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Name="btnSavePlaylist" Content="Save Playlist" Width="150" Height="20"/>
                     </StackPanel>
                 </Grid>
             </Border>

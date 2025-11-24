@@ -9,6 +9,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 
+
 namespace WpfApp3
 {
     /// <summary>
@@ -94,35 +95,12 @@ namespace WpfApp3
         }
 
         // Title Bar
-
-        public void ApplyMaximizeWindow()
-        {
-            var workArea = SystemParameters.WorkArea;
-
-            this.WindowState = WindowState.Normal;
-
-            this.Top = workArea.Top;
-            this.Left = workArea.Left;
-            this.Width = workArea.Width;
-            this.Height = workArea.Height;
-        }
-
         private void ApplyRestoreWindow()
         {
-            ApplyMaximizeWindow();
             this.Left = m_vm.Settings.LastWindowCoordinates.X;
             this.Top = m_vm.Settings.LastWindowCoordinates.Y;
             this.Width = m_vm.Settings.LastWindowDimensions.X;
             this.Height = m_vm.Settings.LastWindowDimensions.Y;
-        }
-
-        private void ApplyNormalizeWindow()
-        {
-            ApplyMaximizeWindow();
-            this.Left = 100;
-            this.Top = 100;
-            this.Width = 1500;
-            this.Height = 850;
         }
 
         #region Theme designer Button
@@ -217,20 +195,17 @@ namespace WpfApp3
             grdResize.Background = null;
         }
 
-        private bool isCustomMaximized = false;
         private void bdrResize_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if (!isCustomMaximized)
+            if (this.WindowState == WindowState.Normal)
             {
-                ApplyMaximizeWindow();
+                this.WindowState = WindowState.Maximized;
                 tbResize.Text = "🗗";
-                isCustomMaximized = true;
             }
             else
             {
-                ApplyNormalizeWindow();
+                this.WindowState = WindowState.Normal;
                 tbResize.Text = "🗖";
-                isCustomMaximized = false;
             }
         }
 
@@ -239,16 +214,15 @@ namespace WpfApp3
         {
             if (e.ClickCount == 2)
             {
-                if (!isCustomMaximized)
+                if (this.WindowState == WindowState.Normal)
                 {
-                    ApplyMaximizeWindow();
-                    isCustomMaximized = true;
+                    this.WindowState = WindowState.Maximized;
                 }
                 else
                 {
-                    ApplyNormalizeWindow();
-                    isCustomMaximized = false;
+                    this.WindowState = WindowState.Normal;
                 }
+                return;
             }
         }
 

@@ -26,7 +26,7 @@ namespace MusicPlayer.Utility
             using (MemoryStream ms = new MemoryStream())
             {
                 var writer = new StreamWriter(ms);
-                var serializer = new XmlSerializer(typeof(List<Playlist>));
+                var serializer = new XmlSerializer(typeof(List<Song>));
                 serializer.Serialize(writer, playlist);
                 writer.Flush();
 

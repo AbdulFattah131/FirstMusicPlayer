@@ -24,9 +24,7 @@ namespace MusicPlayer.UIComponents
     /// </summary>
     public partial class ThemeDesigner : Window
     {
-
         private ThemeDesignerViewModel m_vm;
-
         public ThemeDesigner()
         {
             InitializeComponent();

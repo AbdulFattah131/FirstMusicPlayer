@@ -26,11 +26,9 @@ namespace MusicPlayer.Utility
         private void Player_PlaybackStopped(object sender, StoppedEventArgs e)
         {
             if (_audioFile != null &&
-                _audioFile.Position >= _audioFile.Length)
+                _audioFile.Position >= _audioFile.Length - _audioFile.Length * 0.001)
             {
                 SongEnded?.Invoke();
-                System.Diagnostics.Debug.WriteLine("🔥 SongEnded event FIRED!");
-
             }
 
         }
@@ -52,6 +50,11 @@ namespace MusicPlayer.Utility
                 _player.Volume = value;
                 OnPropertyChanged(nameof(SystemVolume));
             }
+        }
+
+        public PlaybackState PlaybackState
+        {
+            get => _player.PlaybackState;
         }
 
         public bool IsMuted
@@ -79,6 +82,7 @@ namespace MusicPlayer.Utility
             _player.Init(_audioFile);
             _loadedFilePath = filePath;
         }
+
         public void TogglePlayPause()
         {
             if (IsPlaying)
