@@ -6,7 +6,16 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Icons\AppIcon.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Icons\**" />
+    <EmbeddedResource Remove="Icons\**" />
+    <None Remove="Icons\**" />
+    <Page Remove="Icons\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Remove="Images\Adele_-_21.png" />
@@ -26,6 +35,12 @@
     <None Remove="Images\Skynyrd-Sweet-Home-Alabama.jpg" />
     <None Remove="Images\The_Kids_Are_Coming_by_Tones_and_I.png" />
     <None Remove="Images\Who_Needs_Guitars_Anyway_album_cover_by_Alice_DeeJay.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Icons\AppIcon.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
@@ -62,6 +77,7 @@
 
   <ItemGroup>
     <Folder Include="Assets\" />
+    <Folder Include="bin\Debug\net8.0-windows\Icons\" />
   </ItemGroup>
 
 </Project>

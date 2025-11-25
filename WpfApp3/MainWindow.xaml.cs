@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 
 namespace WpfApp3
@@ -51,6 +52,7 @@ namespace WpfApp3
                 m_vm.MusicPlayerCache.Player.InitializeVolume();
             else
                 m_vm.MusicPlayerCache.Player.SystemVolume = (float)m_vm.Settings.LastKnownVolume;
+
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

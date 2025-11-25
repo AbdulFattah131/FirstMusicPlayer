@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,15 +41,22 @@ namespace MusicPlayer.UIComponents
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
+            int index = plSongsListBox.SelectedIndex;
+            if (index < 0) return;
+
             var selectedSong = plSongsListBox.SelectedItem as Song;
             if (selectedSong == null) return;
 
             PlaylistsWindowViewModel.Instance.TemporarySongs.Add(selectedSong);
             RefreshTemporaryListUI();
+            Debug.WriteLine(PlaylistsWindowViewModel.Instance.TemporarySongs.Count);
         }
 
         private void RemoveButton_Click(object sender, RoutedEventArgs e)
         {
+            int index = plSongsListBox.SelectedIndex;
+            if (index < 0) return;
+
             var selectedSong = plSongsListBox.SelectedItem as Song;
             if (selectedSong == null) return;
 
