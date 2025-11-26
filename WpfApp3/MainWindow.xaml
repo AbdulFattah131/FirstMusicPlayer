@@ -2425,7 +2425,7 @@
                                 MouseEnter="bdrThemeDesigner_MouseEnter"
                                 MouseLeave="bdrThemeDesigner_MouseLeave"
                                 MouseLeftButtonUp="bdrThemeDesigner_MouseLeftButtonUp"
-                                ToolTip="ThemeDesigner">
+                                ToolTip="Theme Designer">
                             <TextBlock Text="🖌️"
                                        Foreground="White"
                                        FontSize="11"
@@ -2441,8 +2441,8 @@
                                 MouseEnter="bdrSettings_MouseEnter"
                                 MouseLeave="bdrSettings_MouseLeave"
                                 MouseLeftButtonUp="bdrSettings_MouseLeftButtonUp"
-                                ToolTip="Settings">
-                            <TextBlock Text="⚙"
+                                ToolTip="Refresh Folder">
+                            <TextBlock Text="📁"
                                        Foreground="White"
                                        FontSize="11"
                                        HorizontalAlignment="Center"
