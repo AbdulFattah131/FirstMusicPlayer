@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MusicPlayer.UIComponents"
-        mc:Ignorable="d"
+        mc:Ignorable="d" Loaded="Window_Loaded"
         Title="ThemeDesigner" Height="850" Width="400">
 
 
@@ -16,12 +16,51 @@
         </Grid.RowDefinitions>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*"></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="200"></ColumnDefinition>
+                <ColumnDefinition Width="80"></ColumnDefinition>
+                <ColumnDefinition Width="100"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <ComboBox Name="cbThemes" Grid.Column="0" Height="24" Margin="4, 4, 2, 4" ItemsSource="{Binding Path=LoadedThemes}" DisplayMemberPath="Name"/>
-            <Button Name="btnLoad" Content="Load" Click="btnLoad_Click" Height="24" Margin="4" Grid.Column="1"></Button>
+            <ComboBox Name="cbThemes" Grid.Column="0" Height="24" VerticalAlignment="Center" Margin="0, 4, 2, 4" Width="190" HorizontalAlignment="Left" ItemsSource="{Binding Path=LoadedThemes}" DisplayMemberPath="Name"/>
+            <!-- Theme Switch -->
+            <ToggleButton x:Name="tbSwitchTheme" Margin="0, 0, 0, 0" Visibility="Visible" Grid.Column="1" Click="SwitchButton_Click" Width="35" Height="24" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Transparent" BorderBrush="Transparent">
+                <ToggleButton.Template>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Border x:Name="TemplateRoot"
+                 CornerRadius="5"
+                 Background="{TemplateBinding Background}"
+                 BorderBrush="{TemplateBinding BorderBrush}"
+                 BorderThickness="{TemplateBinding BorderThickness}">
+                            <Grid>
+                                <Border x:Name="Track"
+                         CornerRadius="9"
+                         Background="LightGray"
+                         Margin="1" />
+                                <Border x:Name="Thumb"
+                         CornerRadius="7"
+                         Background="White"
+                         Width="15" Height="15"
+                         HorizontalAlignment="Left"
+                         Margin="2" />
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="Track" Property="Background" Value="#a688e7"/>
+                                <Setter TargetName="Thumb" Property="HorizontalAlignment" Value="Right"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="TemplateRoot" Property="BorderBrush" Value="DarkGray" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="TemplateRoot" Property="Opacity" Value="0.5" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </ToggleButton.Template>
+            </ToggleButton>
+            <Button Name="btnLoad" Content="Load" Click="btnLoad_Click" Height="24" Width="80" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0" Grid.Column="2"></Button>
         </Grid>
         <ScrollViewer Name="svFields" VerticalAlignment="Top" Grid.Row="1">
             <Grid Name="grdFields">

@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp3" xmlns:convertor="clr-namespace:MusicPlayer.UIComponents.Convertor"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" MinWidth="800" MinHeight="600"
+        Title="MainWindow" Height="450" Width="800" MinWidth="900" MinHeight="600"
         WindowStyle="None" ResizeMode="CanResize"
-        Closed="Window_Closed" Loaded="Window_Loaded"
+        Closed="Window_Closed" 
         d:DataContext="{d:DesignInstance local:MainWindowViewModel}"
         AllowsTransparency="True" Background="Transparent"
         Icon="/Icons/AppIcon.ico">
@@ -1818,7 +1818,7 @@
                                   BlurRadius="8"/>
             </Border.Effect>
 
-            <!-- Row 2 MusicControl -->
+            <!-- Row 2 Music Control -->
 
         <Grid x:Name="grdMusicControl">
             <Grid.ColumnDefinitions>
@@ -2081,7 +2081,7 @@
                     
                     <!-- Right Side Controls -->
                     
-                    <StackPanel x:Name="spRightSideMusicControl" Grid.Column="2" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal">
+                    <StackPanel x:Name="spRightSideMusicControl" Margin="0,0,25,0" Grid.Column="2" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal">
                         
                         <!-- Volume Control -->
                             <ToggleButton x:Name="btnVolume" FontSize="16" VerticalContentAlignment="Center" OverridesDefaultStyle="True" HorizontalContentAlignment="Center" Focusable="False" Margin="0, 0, 8, 0" Background="Transparent" BorderBrush="Transparent" Foreground="{Binding CurrentTheme.WindowTextForeground.Brush}" IsChecked="{Binding MusicPlayerCache.Player.IsMuted, Mode=TwoWay}">
@@ -2223,44 +2223,7 @@
                             </Slider.Template>
                         </Slider>
 
-                        <!-- Theme Switch -->
-                            <ToggleButton x:Name="tbSwitchTheme" Margin="0, 0, 20, 0" Visibility="Visible" Click="SwitchButton_Click" Width="30" Height="20" Background="Transparent" BorderBrush="Transparent">
-                                <ToggleButton.Template>
-                                    <ControlTemplate TargetType="{x:Type ToggleButton}">
-                                        <Border x:Name="TemplateRoot"
-                                        CornerRadius="5"
-                                        Background="{TemplateBinding Background}"
-                                        BorderBrush="{TemplateBinding BorderBrush}"
-                                        BorderThickness="{TemplateBinding BorderThickness}">
-                                            <Grid>
-                                                <Border x:Name="Track"
-                                                CornerRadius="6"
-                                                Background="LightGray"
-                                                Margin="2" />
-                                                <Border x:Name="Thumb"
-                                                CornerRadius="7"
-                                                Background="White"
-                                                Width="12" Height="12"
-                                                HorizontalAlignment="Left"
-                                                Margin="2" />
-                                            </Grid>
-                                        </Border>
-                                        <ControlTemplate.Triggers>
-                                            
-                                            <Trigger Property="IsChecked" Value="True">
-                                                <Setter TargetName="Track" Property="Background" Value="{Binding DataContext.CurrentTheme.WindowPrimaryAnchor.Brush, RelativeSource={RelativeSource AncestorType=ToggleButton}}"/>
-                                                <Setter TargetName="Thumb" Property="HorizontalAlignment" Value="Right"/>
-                                            </Trigger>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter TargetName="TemplateRoot" Property="BorderBrush" Value="DarkGray" />
-                                            </Trigger>
-                                            <Trigger Property="IsEnabled" Value="False">
-                                                <Setter TargetName="TemplateRoot" Property="Opacity" Value="0.5" />
-                                            </Trigger>
-                                        </ControlTemplate.Triggers>
-                                    </ControlTemplate>
-                                </ToggleButton.Template>
-                            </ToggleButton>
+                       
                     </StackPanel>
 
                     <!-- Playback Seekbar (main one) -->
@@ -2441,12 +2404,9 @@
                                 MouseEnter="bdrSettings_MouseEnter"
                                 MouseLeave="bdrSettings_MouseLeave"
                                 MouseLeftButtonUp="bdrSettings_MouseLeftButtonUp"
-                                ToolTip="Refresh Folder">
-                            <TextBlock Text="📁"
-                                       Foreground="White"
-                                       FontSize="11"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"/>
+                                ToolTip="Refresh">
+                            <Path Data="M18 14.5C19.11 14.5 20.11 14.95 20.83 15.67L22 14.5V18.5H18L19.77 16.73C19.32 16.28 18.69 16 18 16C16.62 16 15.5 17.12 15.5 18.5C15.5 19.88 16.62 21 18 21C18.82 21 19.54 20.61 20 20H21.71C21.12 21.47 19.68 22.5 18 22.5C15.79 22.5 14 20.71 14 18.5C14 16.29 15.79 14.5 18 14.5M20 8H4V18H12L12 18.5C12 19 12.06 19.5 12.17 20H4C2.89 20 2 19.1 2 18L2 6C2 4.89 2.89 4 4 4H10L12 6H20C21.1 6 22 6.89 22 8V13C21.39 12.63 20.72 12.34 20 12.17V8Z"
+                            Width="13.5" Height="13.5" Margin="0,3,0,0" Fill="White" Stretch="Uniform" VerticalAlignment="Center"/>
                         </Border>
                     </Grid>
 

@@ -8,7 +8,6 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 
 
 namespace WpfApp3
@@ -29,8 +28,6 @@ namespace WpfApp3
             InitializeComponent();
 
             InitializeViewModel();
-
-            InitializeSettings();
 
             LoadPersistence();
 
@@ -55,27 +52,13 @@ namespace WpfApp3
 
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            var theme = m_vm.CurrentTheme;
-            bool isDefault = theme?.Name is "Lavender" or "Lavender Dark";
-
-            tbSwitchTheme.Visibility = isDefault ? Visibility.Visible : Visibility.Hidden;
-            tbSwitchTheme.IsEnabled = isDefault;
-            tbSwitchTheme.IsChecked = theme?.Name == "Lavender Dark";
-        }
+        
 
         private void InitializeViewModel()
         {             
             //Initialize ViewModel
             m_vm = MainWindowViewModel.Instance;
             this.DataContext = m_vm;
-        }
-
-        private void InitializeSettings()
-        {
-            //Initialize settings
-            m_vm.Settings = SettingsReader.Instance.ReadFromFile("./Settings.xml");
         }
 
         private void LoadThemes()
@@ -94,6 +77,7 @@ namespace WpfApp3
         { 
             //Initialize UI State
             btnToggleAlbums.IsChecked = true;
+
         }
 
         // Title Bar
@@ -146,7 +130,25 @@ namespace WpfApp3
 
         private void bdrSettings_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            RefreshSongsAndAlbums();
+        }
 
+        private void RefreshSongsAndAlbums()
+        {
+            var dialog = new System.Windows.Forms.FolderBrowserDialog();
+            var result = dialog.ShowDialog();
+
+            if (result != System.Windows.Forms.DialogResult.OK)
+            {
+                return;
+            }
+            else
+            {
+                m_vm.MusicPlayerCache.Clear();
+                FileScanner.Instance.UpdateFilePath(dialog.SelectedPath);
+            }
+
+            m_vm.Init();
         }
         #endregion
 
@@ -237,6 +239,7 @@ namespace WpfApp3
             m_vm.Settings.LastWindowCoordinates = new Point(this.Left, this.Top);
             m_vm.Settings.LastWindowDimensions = new Point(this.Width, this.Height);
             m_vm.Settings.LastKnownVolume = m_vm.MusicPlayerCache.Player.SystemVolume;
+            m_vm.Settings.MusicLibraryPath = FileScanner.Instance.FilePath;
 
             SettingsWriter.Instance.WriteToFile(m_vm.Settings);
         }
@@ -253,18 +256,6 @@ namespace WpfApp3
         #endregion
 
         // Music Control
-
-        #region Switch Button
-        private void SwitchButton_Click(object sender, RoutedEventArgs e)
-        {
-            var m_vm = (MainWindowViewModel)this.DataContext;
-            m_vm.SwitchTheme();
-        }
-        private void UpdateThemeSwitchVisibility()
-        {
-        }
-
-        #endregion
 
         #region Playback Controls
         private void tbPlayPause_Click(object sender, RoutedEventArgs e)
@@ -304,7 +295,7 @@ namespace WpfApp3
 
         #endregion
 
-        #region MusicPlayerSeekBar
+        #region Music Player Seek Bar
         private void sdrMusicPlayerSeekBar_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             if (DataContext is not MainWindowViewModel m_vm)

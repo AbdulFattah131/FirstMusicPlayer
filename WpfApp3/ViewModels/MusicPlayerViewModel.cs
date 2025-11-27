@@ -5,16 +5,10 @@ using System.ComponentModel;
 using System.Windows.Input;
 using System.IO;
 using MusicPlayer.Data.Objects;
-using MusicPlayer.UIComponents.ViewModels;
 using MusicPlayer.Utility;
-using System.Windows;
 using NAudio.Wave;
-using System.Security.Cryptography.X509Certificates;
 using System.Windows.Threading;
-using System.Windows.Data;
 using MusicPlayer.UIComponents.Constants;
-using NAudio.CoreAudioApi;
-using System.Diagnostics;
 
 namespace WpfApp3
 {
@@ -339,13 +333,13 @@ namespace WpfApp3
 
         public MusicPlayerCache()
         {
-            var songFilePaths = FileScanner.Instance.ScanSongs(); // song file paths
+            var songFilePaths = FileScanner.Instance.ScanSongs();              // song file paths
 
-            AllSongs = TagReader.Instance.ReadSongsFromFilePaths(songFilePaths); // song objects
+            AllSongs = TagReader.Instance.ReadSongsFromFilePaths(songFilePaths);  // song objects
 
-            Albums = new ObservableCollection<Album>(TagReader.Instance.GetAlbums()); // albums
+            Albums = new ObservableCollection<Album>(TagReader.Instance.GetAlbums());   // albums
 
-            PlaybackQueue = new ObservableCollection<Song>(); // playback queue
+            PlaybackQueue = new ObservableCollection<Song>();                   // playback queue
 
             // timer
             _timer = new DispatcherTimer
@@ -356,7 +350,7 @@ namespace WpfApp3
             _timer.Start();
 
             Player.SongEnded += OnSongEnded;
-
+            OnPropertyChanged("");
         }
 
         private void Play()
@@ -380,11 +374,28 @@ namespace WpfApp3
 
             CurrentPosition = CurrentPosition + 1;
         }
+        internal void Clear()
+        {
+            Player.Stop();
+            IsPlaying = false;
+
+            CurrentSong = null;
+            SelectedAlbum = null;
+
+            PlaybackQueue.Clear();
+
+            Songs?.Clear();
+            AllSongs.Clear();
+            Albums.Clear();
+            OnPropertyChanged("");
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(string propertyName) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
+
     }
 }
 

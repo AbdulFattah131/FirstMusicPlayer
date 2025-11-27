@@ -10,6 +10,13 @@ namespace MusicPlayer.Data.Objects
             get;
             set;
         }
+
+        public string MusicLibraryPath
+        {
+            get;
+            set;
+        }   
+
         public Point LastWindowCoordinates 
         { 
             get; 
@@ -26,6 +33,6 @@ namespace MusicPlayer.Data.Objects
         {
             get;
             set;
-        }
+        } = 0.5f;
     }
 }

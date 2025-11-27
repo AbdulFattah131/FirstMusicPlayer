@@ -132,10 +132,15 @@ namespace WpfApp3
             };
 
             CurrentTheme = defaultTheme;
-            //ThemeWriter.Instance.WriteToFile(CurrentTheme);
-
-            MusicPlayerCache = new MusicPlayerCache();
             Settings = new Settings();
+            Settings = SettingsReader.Instance.ReadFromFile("./Settings.xml");
+            FileScanner.Instance.UpdateFilePath(Settings.MusicLibraryPath);
+            Init();
+        }
+
+        public void Init()
+        {
+            MusicPlayerCache = new MusicPlayerCache();
         }
 
         public void SwitchTheme()

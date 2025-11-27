@@ -31,13 +31,22 @@ namespace MusicPlayer.UIComponents
             var mainWindowVM = new MainWindowViewModel();
             m_vm = new ThemeDesignerViewModel(mainWindowVM);
             this.DataContext = m_vm;
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             ThemeWriter.Instance.WriteToFile(m_vm.CustomTheme);
         }
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            var theme = MainWindowViewModel.Instance.CurrentTheme;
+            bool isDefault = theme?.Name is "Lavender" or "Lavender Dark";
 
+            tbSwitchTheme.Visibility = isDefault ? Visibility.Visible : Visibility.Hidden;
+            tbSwitchTheme.IsEnabled = isDefault;
+            tbSwitchTheme.IsChecked = theme?.Name == "Lavender Dark";
+        }
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (e == null || sender == null)
@@ -166,18 +175,34 @@ namespace MusicPlayer.UIComponents
             var mainWindow = Application.Current.MainWindow as MainWindow;
             var td_vm = (ThemeDesignerViewModel)DataContext;
             var theme = cbThemes.SelectedItem as Theme ?? td_vm.CustomTheme;
-            
+
             MainWindowViewModel.Instance.CurrentTheme = theme;
 
             bool isDefault = theme?.Name is "Lavender" or "Lavender Dark";
 
-            mainWindow.tbSwitchTheme.Visibility = isDefault ? Visibility.Visible : Visibility.Hidden;
-            mainWindow.tbSwitchTheme.IsEnabled = isDefault;
+            tbSwitchTheme.Visibility = isDefault ? Visibility.Visible : Visibility.Hidden;
+            tbSwitchTheme.IsEnabled = isDefault;
 
             if (theme?.Name == "Lavender Dark")
-                mainWindow.tbSwitchTheme.IsChecked = true;
+                tbSwitchTheme.IsChecked = true;
             else
-                mainWindow.tbSwitchTheme.IsChecked = false;
+                tbSwitchTheme.IsChecked = false;
+        }
+
+        // Switch Button
+        private void SwitchButton_Click(object sender, RoutedEventArgs e)
+        {
+            var m_vm = MainWindowViewModel.Instance.SwitchTheme;
+            m_vm.Invoke();
+
+            var lavenderDarkTheme = cbThemes.Items
+                .Cast<Theme>()
+                .FirstOrDefault(t => t.Name == "Lavender Dark");
+
+            if (lavenderDarkTheme != null)
+            {
+                cbThemes.SelectedItem = lavenderDarkTheme;
+            }
         }
     }
 }
