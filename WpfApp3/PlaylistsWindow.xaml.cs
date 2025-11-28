@@ -41,15 +41,19 @@ namespace MusicPlayer.UIComponents
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            int index = plSongsListBox.SelectedIndex;
-            if (index < 0) return;
-
             var selectedSong = plSongsListBox.SelectedItem as Song;
             if (selectedSong == null) return;
+            
+            if (!PlaylistsWindowViewModel.Instance.TemporarySongs.Any(s => s.TrackNumber == selectedSong.TrackNumber))
+            {
+                PlaylistsWindowViewModel.Instance.TemporarySongs.Add(selectedSong);
 
-            PlaylistsWindowViewModel.Instance.TemporarySongs.Add(selectedSong);
-            RefreshTemporaryListUI();
-            Debug.WriteLine(PlaylistsWindowViewModel.Instance.TemporarySongs.Count);
+                // Select the song in the ListBox automatically
+                plSongsListBox.SelectedItem = selectedSong;
+                plSongsListBox.ScrollIntoView(selectedSong);
+
+                Debug.WriteLine($"Added '{selectedSong.Title}' to temporary playlist. Total: {PlaylistsWindowViewModel.Instance.TemporarySongs.Count}");
+            }
         }
 
         private void RemoveButton_Click(object sender, RoutedEventArgs e)
@@ -61,7 +65,6 @@ namespace MusicPlayer.UIComponents
             if (selectedSong == null) return;
 
             PlaylistsWindowViewModel.Instance.TemporarySongs.Remove(selectedSong);
-            RefreshTemporaryListUI();
         }
         private void RefreshTemporaryListUI()
         {

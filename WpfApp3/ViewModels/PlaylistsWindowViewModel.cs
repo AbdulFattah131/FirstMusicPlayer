@@ -28,7 +28,9 @@ namespace MusicPlayer.UIComponents.ViewModels
         public PlaylistsWindowViewModel(MainWindowViewModel mainWindowVM)
         {
             _mainWindowVM = mainWindowVM;
+            TemporarySongs.CollectionChanged += (s, e) => SongCount = TemporarySongs.Count;
             LoadSavedPlaylists();
+
         }
 
         public PlaylistsWindowViewModel()
@@ -46,11 +48,24 @@ namespace MusicPlayer.UIComponents.ViewModels
                 OnPropertyChanged(new PropertyChangedEventArgs(nameof(NewPlaylist)));
             }
         }
-        
-        public List<Song> TemporarySongs = new();
+
+        public ObservableCollection<Song> TemporarySongs { get; } = new ObservableCollection<Song>();
+
+        private int _songCount;
+        public int SongCount
+        {
+            get => _songCount;
+            set
+            {
+                if (_songCount != value)
+                {
+                    _songCount = value;
+                    OnPropertyChanged(new PropertyChangedEventArgs(nameof(SongCount)));
+                }
+            }
+        }
 
         private List<Playlist> Playlists = new();
-        
         public List<Playlist> LoadedPlaylists
         {
             get 
@@ -59,19 +74,37 @@ namespace MusicPlayer.UIComponents.ViewModels
             }
            
         }
+        public ObservableCollection<Playlist> SavedPlaylists { get; } = new ObservableCollection<Playlist>();
 
         public void CreateNewPlaylist(string name)
         {
-            NewPlaylist = new Playlist() { Name = name, PlaylistSongs = new List<Song>() };
+            NewPlaylist = new Playlist() { Name = name, PlaylistSongs = new List<Song>() }; 
+            TemporarySongs.Clear();
         }
+        public bool AddSongToTemporaryPlaylist(Song song)
+        {
+            if (song == null) return false;
 
+            if (TemporarySongs.Any(s => s.Index == song.Index))
+                return false;
+
+            TemporarySongs.Add(song);
+            return true;
+        }
+        public void RemoveSongFromTemporaryPlaylist(Song song)
+        {
+            if (song == null) return;
+            TemporarySongs.Remove(song);
+        }
         public void LoadSavedPlaylists()
         {
             var loaded = PlaylistReader.Instance.GetPlaylists();
-            //LoadedPlaylists = new ObservableCollection<Playlist>(loaded);
+            SavedPlaylists.Clear();
+            foreach (var pl in loaded)
+                SavedPlaylists.Add(pl);
         }
 
-        public void PlayPlaylist(Playlist playlist)
+        public void PlayFromPlaylist(Playlist playlist)
         {
             if (playlist == null || playlist.PlaylistSongs.Count == 0)
                 return;
@@ -79,7 +112,25 @@ namespace MusicPlayer.UIComponents.ViewModels
             _mainWindowVM = MainWindowViewModel.Instance;
             _mainWindowVM.MusicPlayerCache.PlayFromPlaylist();
         }
+        public void SaveTemporaryPlaylist()
+        {
+            if (NewPlaylist == null) return;
 
+            NewPlaylist.PlaylistSongs = TemporarySongs.ToList();
+            PlaylistWriter.Instance.WriteToFile(NewPlaylist.PlaylistSongs);
+
+            SavedPlaylists.Add(NewPlaylist);
+
+            TemporarySongs.Clear();
+            NewPlaylist = null;
+        }
+        //public void RemoveSavedPlaylist(Playlist playlist)
+        //{
+        //    if (playlist == null) return;
+
+        //    PlaylistWriter.Instance.DeletePlaylistFile(playlist.Name); // implement file deletion
+        //    SavedPlaylists.Remove(playlist);
+        //}
         public void AddSongToCurrentPlaylist(Song song)
         {
             if (NewPlaylist == null)

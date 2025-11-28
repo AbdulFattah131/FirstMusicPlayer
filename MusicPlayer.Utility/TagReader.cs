@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Diagnostics;
 using MusicPlayer.Data.Objects;
 using NAudio.Wave;
 
@@ -61,7 +62,10 @@ namespace MusicPlayer.Utility
 
             return song;
         }
-
+        public void Reset()
+        {
+            m_dictAlbums.Clear();
+        }
         public ObservableCollection<Song> ReadSongsFromFilePaths(IList<string> lstFilePaths)
         {
             ObservableCollection<Song> lstSongs = new ObservableCollection<Song>();
@@ -87,6 +91,7 @@ namespace MusicPlayer.Utility
         }
         public IEnumerable<Album> GetAlbums()
         {
+            Debug.WriteLine("GetAlbums Called");
             return m_dictAlbums.Values;
         }
         private TagReader()

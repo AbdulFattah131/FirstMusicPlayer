@@ -8,6 +8,7 @@ using System.Xml.Serialization;
 using System.Windows.Controls;
 using System.Windows;
 using MusicPlayer.UIComponents.ViewModels;
+using System.Collections.ObjectModel;
 
 namespace WpfApp3
 {
@@ -141,6 +142,16 @@ namespace WpfApp3
         public void Init()
         {
             MusicPlayerCache = new MusicPlayerCache();
+
+            var filePaths = FileScanner.Instance.ScanSongs();
+            var songs = TagReader.Instance.ReadSongsFromFilePaths(filePaths);
+
+            MusicPlayerCache.Songs = songs;
+            MusicPlayerCache.AllSongs = new ObservableCollection<Song>(songs);
+
+            MusicPlayerCache.Albums = new ObservableCollection<Album>(TagReader.Instance.GetAlbums());
+
+            OnPropertyChanged("");
         }
 
         public void SwitchTheme()

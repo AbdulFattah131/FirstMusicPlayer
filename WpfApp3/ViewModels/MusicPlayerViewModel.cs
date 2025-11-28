@@ -330,9 +330,10 @@ namespace WpfApp3
         }
         #endregion
 
-
         public MusicPlayerCache()
         {
+            TagReader.Instance.Reset();
+
             var songFilePaths = FileScanner.Instance.ScanSongs();              // song file paths
 
             AllSongs = TagReader.Instance.ReadSongsFromFilePaths(songFilePaths);  // song objects

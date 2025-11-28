@@ -35,6 +35,8 @@
                             <ListBoxItem Content="Playlist 2"/>
                             <ListBoxItem Content="Playlist 3"/>
                         </ListBox>
+                        <ListBox x:Name="lbTemporaryPlaylist" ItemsSource="{Binding TemporarySongs}" Height="50" DisplayMemberPath="Title"/>
+
                     </StackPanel>
                    
                 </Grid>
@@ -47,10 +49,10 @@
                     <TextBlock Text="All Songs" FontWeight="Bold" Margin="0,0,0,5"/>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <TextBlock Text="Songs Selected" FontWeight="Bold" Margin="0,0,0,5"/>
-                            <TextBlock Text="{Binding PlaylistsWindowViewModel.TemporarySongs.Count}" FontWeight="Bold" Width="35" Margin="0,0,0,5"/>
+                            <TextBlock Text="{Binding SongCount}" FontWeight="Bold" Width="35" Margin="0,0,0,5"/>
                         </StackPanel>
                     </Grid>
-                    <ListBox x:Name="plSongsListBox" SelectionMode="Multiple" Width="630" Height="200" HorizontalAlignment="Left" ItemsSource="{Binding MusicPlayerCache.AllSongs}" SelectedItem="{Binding MusicPlayerCache.CurrentSong, Mode=TwoWay}">
+                    <ListBox x:Name="plSongsListBox" SelectionMode="Single" Width="630" Height="200" HorizontalAlignment="Left" ItemsSource="{Binding MusicPlayerCache.AllSongs}" SelectedItem="{Binding MusicPlayerCache.CurrentSong, Mode=TwoWay}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Grid>

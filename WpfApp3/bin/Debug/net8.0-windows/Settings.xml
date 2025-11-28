@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <CurrentThemeName>Lavender Dark</CurrentThemeName>
+  <CurrentThemeName>Windows 11 (Dark)</CurrentThemeName>
   <MusicLibraryPath>C:\Users\safalam\source\repos\WPF\WpfApp3\WpfApp3\bin\Debug\net8.0-windows\Songs</MusicLibraryPath>
   <LastWindowCoordinates>
-    <X>-2298</X>
-    <Y>186</Y>
+    <X>-1477</X>
+    <Y>130</Y>
   </LastWindowCoordinates>
   <LastWindowDimensions>
-    <X>1934</X>
-    <Y>1094</Y>
+    <X>1259</X>
+    <Y>859</Y>
   </LastWindowDimensions>
   <LastKnownVolume>0</LastKnownVolume>
 </Settings>
