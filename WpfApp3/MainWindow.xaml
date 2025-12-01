@@ -271,7 +271,7 @@
               
                 </StackPanel>
 
-                <Border x:Name="bdrNewPlaylist">
+                <Border x:Name="bdrNewPlaylist" Visibility="Hidden">
                     <Border.Effect>
                         <DropShadowEffect Color="#B0B8C0"
                            BlurRadius="2"

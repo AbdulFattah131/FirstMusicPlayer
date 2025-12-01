@@ -1,9 +1,7 @@
 ﻿using System.ComponentModel;
-using System.Diagnostics;
-using System.Numerics;
 using NAudio.CoreAudioApi;
+using NAudio.Dsp;
 using NAudio.Wave;
-using TagLib.Mpeg;
 
 namespace MusicPlayer.Utility
 {
@@ -17,11 +15,15 @@ namespace MusicPlayer.Utility
         private WaveOutEvent _waveOutEvent;
         public bool IsPlaying => _player?.PlaybackState == PlaybackState.Playing;
         public event Action SongEnded;
-  
+
+        
         public AudioPlayer()
         {
             _player = new WaveOutEvent();
             _player.PlaybackStopped += Player_PlaybackStopped;
+            
+            var fftBuffer = new NAudio.Dsp.Complex[1024];
+            FastFourierTransform.FFT(true, 10, fftBuffer);
         }
         private void Player_PlaybackStopped(object sender, StoppedEventArgs e)
         {
