@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using MusicPlayer.Data.Objects;
 using MusicPlayer.Utility;
-using MusicPlayer.UIComponents.ViewModels;
-using WpfApp3;
 
 namespace MusicPlayer.UIComponents.ViewModels
 {

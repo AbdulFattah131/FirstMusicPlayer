@@ -1,16 +1,13 @@
 ﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Windows.Media;
 using MusicPlayer.Data.Objects;
 using MusicPlayer.Utility;
 using System.IO;
 using System.Xml.Serialization;
-using System.Windows.Controls;
-using System.Windows;
 using MusicPlayer.UIComponents.ViewModels;
 using System.Collections.ObjectModel;
 
-namespace WpfApp3
+namespace MusicPlayer.UIComponents.ViewModels
 {
     public class MainWindowViewModel : INotifyPropertyChanged
     {

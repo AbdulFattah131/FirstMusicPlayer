@@ -91,7 +91,6 @@ namespace MusicPlayer.Utility
         }
         public IEnumerable<Album> GetAlbums()
         {
-            Debug.WriteLine("GetAlbums Called");
             return m_dictAlbums.Values;
         }
         private TagReader()

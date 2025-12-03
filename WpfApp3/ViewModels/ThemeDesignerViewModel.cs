@@ -1,9 +1,6 @@
 ﻿using System.ComponentModel;
-using System.Drawing;
-using System.Windows;
 using MusicPlayer.Data.Objects;
 using MusicPlayer.Utility;
-using WpfApp3;
 
 namespace MusicPlayer.UIComponents.ViewModels
 {

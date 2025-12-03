@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Windows.Input;
-using System.IO;
 using MusicPlayer.Data.Objects;
 using MusicPlayer.Utility;
 using NAudio.Wave;
 using System.Windows.Threading;
 using MusicPlayer.UIComponents.Constants;
 
-namespace WpfApp3
+namespace MusicPlayer.UIComponents.ViewModels
 {
     public class MusicPlayerCache : INotifyPropertyChanged
     {

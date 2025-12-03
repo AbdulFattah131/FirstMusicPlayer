@@ -1,5 +1,4 @@
 ﻿using MusicPlayer.Data.Objects;
-using MusicPlayer.UIComponents;
 using MusicPlayer.UIComponents.Constants;
 using MusicPlayer.UIComponents.ViewModels;
 using MusicPlayer.Utility;
@@ -10,7 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 
 
-namespace WpfApp3
+namespace MusicPlayer.UIComponents
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

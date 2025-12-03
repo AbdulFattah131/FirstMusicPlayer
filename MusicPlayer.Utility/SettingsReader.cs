@@ -26,9 +26,15 @@ namespace MusicPlayer.Utility
             
             FileStream fs = new FileStream(stFilePath, FileMode.OpenOrCreate);
             TextReader reader = new StreamReader(fs);
-
-            Settings i = (Settings)serializer.Deserialize(reader);
-            return i;
+            try
+            {
+                Settings i = (Settings)serializer.Deserialize(reader);
+                return i;
+            }
+            catch (Exception e)
+            {
+                return new Settings();
+            }
         }
     }
 }

@@ -1,8 +1,6 @@
-﻿using System.Configuration;
-using System.Data;
-using System.Windows;
+﻿using System.Windows;
 
-namespace WpfApp3
+namespace MusicPlayer.UIComponents
 {
     /// <summary>
     /// Interaction logic for App.xaml
