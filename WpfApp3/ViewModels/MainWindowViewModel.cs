@@ -97,8 +97,6 @@ namespace MusicPlayer.UIComponents.ViewModels
                 NowPlayingForeground = new ThemeColor(114, 91, 164), // Now Playing Icon
                 NewPlaylistHover = new ThemeColor(102, 102, 102), // New Playlist Button on Hover
                 PlaylistsToggleSelected = new ThemeColor(140, 140, 140), // Playlists Button when Selected
-
-
             };
 
             defaultTheme2 = new Theme()
@@ -126,7 +124,6 @@ namespace MusicPlayer.UIComponents.ViewModels
                 NowPlayingForeground = new ThemeColor(197, 178, 239),
                 NewPlaylistHover = new ThemeColor(114, 91, 164),
                 PlaylistsToggleSelected = new ThemeColor(114, 91, 164),
-
             };
 
             CurrentTheme = defaultTheme;
@@ -139,15 +136,6 @@ namespace MusicPlayer.UIComponents.ViewModels
         public void Init()
         {
             MusicPlayerCache = new MusicPlayerCache();
-
-            var filePaths = FileScanner.Instance.ScanSongs();
-            var songs = TagReader.Instance.ReadSongsFromFilePaths(filePaths);
-
-            MusicPlayerCache.Songs = songs;
-            MusicPlayerCache.AllSongs = new ObservableCollection<Song>(songs);
-
-            MusicPlayerCache.Albums = new ObservableCollection<Album>(TagReader.Instance.GetAlbums());
-
             OnPropertyChanged("");
         }
 

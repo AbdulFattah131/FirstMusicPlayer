@@ -50,9 +50,7 @@ namespace MusicPlayer.UIComponents
                 m_vm.MusicPlayerCache.Player.SystemVolume = (float)m_vm.Settings.LastKnownVolume;
 
         }
-
         
-
         private void InitializeViewModel()
         {             
             //Initialize ViewModel

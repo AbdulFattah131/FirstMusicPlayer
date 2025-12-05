@@ -16,38 +16,12 @@ namespace MusicPlayer.Utility
         private WaveOutEvent _waveOutEvent;
         public bool IsPlaying => _player?.PlaybackState == PlaybackState.Playing;
         public event Action SongEnded;
-        public AudioPlayer(string filePath)
+        public AudioPlayer()
         {
             _player = new WaveOutEvent();
             _player.PlaybackStopped += Player_PlaybackStopped;
-
-            _audioFile = new AudioFileReader(filePath);
-            var sampleProvider = _audioFile.ToSampleProvider();
-
-            _player.Init(sampleProvider);
         }
-        public void StartPlaybackWithVisualizer()
-        {
-            _audioFile = new AudioFileReader(_loadedFilePath);
-            var sampleProvider = _audioFile.ToSampleProvider();
-
-            // Timer for FFT
-            DispatcherTimer timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(30) };
-            timer.Tick += (s, e) =>
-            {
-                float[] buffer = new float[1024];
-                int read = sampleProvider.Read(buffer, 0, buffer.Length);
-                if (read > 0)
-                {
-                    var fftBuffer = buffer.Select(f => new NAudio.Dsp.Complex { X = f, Y = 0 }).ToArray();
-                    FastFourierTransform.FFT(true, 10, fftBuffer);
-
-                    float[] magnitudes = fftBuffer.Select(c => (float)Math.Sqrt(c.X * c.X + c.Y * c.Y)).ToArray();
-                    // Update your UI here
-                }
-            };
-            timer.Start();
-        }
+        
         private void Player_PlaybackStopped(object sender, StoppedEventArgs e)
         {
             if (_audioFile != null &&

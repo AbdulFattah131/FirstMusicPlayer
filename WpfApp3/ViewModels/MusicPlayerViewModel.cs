@@ -199,12 +199,24 @@ namespace MusicPlayer.UIComponents.ViewModels
             else
                 Play();
         }
-        
+        private void Play()
+        {
+            IsPlaying = true;
+            Player.Seek(CurrentPosition / Player.TotalTime.TotalSeconds);
+            Player.Play();
+        }
+
+        private void Stop()
+        {
+            IsPlaying = false;
+            Player.Stop();
+        }
         public void Next()
         {
             if (PlaybackQueue == null || PlaybackQueue.Count == 0)
                 return;
-
+            
+            bool wasPlaying = IsPlaying;
             Stop();
 
             CurrentIndex++;
@@ -213,6 +225,8 @@ namespace MusicPlayer.UIComponents.ViewModels
                 CurrentIndex = 0;
 
             CurrentSong = PlaybackQueue[CurrentIndex];
+            Play();
+
         }
 
         private ENMusicPlayerRepeatMode _repeatMode = ENMusicPlayerRepeatMode.None;
@@ -266,6 +280,7 @@ namespace MusicPlayer.UIComponents.ViewModels
             if (PlaybackQueue == null || PlaybackQueue.Count == 0)
                 return;
 
+            bool wasPlaying = IsPlaying;
             Stop();
 
             CurrentIndex--;
@@ -274,6 +289,7 @@ namespace MusicPlayer.UIComponents.ViewModels
                 CurrentIndex = PlaybackQueue.Count - 1;
 
             CurrentSong = PlaybackQueue[CurrentIndex];
+            Play();
         }
 
         public void Shuffle()
@@ -348,19 +364,6 @@ namespace MusicPlayer.UIComponents.ViewModels
 
             Player.SongEnded += OnSongEnded;
             OnPropertyChanged("");
-        }
-
-        private void Play()
-        {
-            IsPlaying = true;
-            Player.Seek(CurrentPosition/Player.TotalTime.TotalSeconds);
-            Player.Play();
-        }
-
-        private void Stop()
-        {
-            IsPlaying = false;
-            Player.Stop();
         }
 
         // Timer Tick
